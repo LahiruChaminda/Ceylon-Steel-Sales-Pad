@@ -30,7 +30,6 @@ import org.json.JSONObject;
  */
 abstract class AbstractController {
 
-	//protected static final String webServiceURL = "http://192.168.1.181/Ceylon_Steel/native/";
 	protected static final String webServiceURL = "http://gateway.ceylonlinux.com/Ceylon_Steel/native/";
 
 	protected static final class CategoryURL {

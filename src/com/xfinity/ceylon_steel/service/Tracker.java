@@ -42,11 +42,10 @@ public class Tracker extends Service {
 						lastKnownLocation.getTime(),
 						BatteryService.getBatteryLevel(Tracker.this)
 				);
-				System.out.println(lastKnownLocation);
 				UserController.markRepLocation(getApplicationContext(), userLocation);
 				UserController.syncRepLocations(getApplicationContext());
 			}
-		}, 0, 30 * 1000);//15*60*1000 is the millisecond for 15 minutes
+		}, 0, 15 * 60 * 1000);//15*60*1000 is the millisecond for 15 minutes
 	}
 
 	@Override

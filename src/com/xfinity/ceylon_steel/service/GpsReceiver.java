@@ -19,7 +19,6 @@ import android.os.Looper;
 public class GpsReceiver extends Service {
 
 	private boolean isGPSEnabled = false;
-//	private boolean isNetworkEnabled = false;
 	private static Location lastKnownLocation;
 	private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 1;
 	private static final long MIN_TIME_BW_UPDATES = 500;
@@ -35,22 +34,7 @@ public class GpsReceiver extends Service {
 
 	private GpsReceiver(Context applicationContext) {
 		locationManager = (LocationManager) applicationContext.getSystemService(LOCATION_SERVICE);
-
-//		Criteria criteria = new Criteria();
-//		String bestProvider = locationManager.getBestProvider(criteria, false);
 		isGPSEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
-//		isNetworkEnabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
-
-//		locationManager.requestLocationUpdates(bestProvider, MIN_TIME_BW_UPDATES, MIN_DISTANCE_CHANGE_FOR_UPDATES, LocationListenerImpl.getLocationListener(), Looper.getMainLooper());
-//		if (locationManager != null) {
-//			lastKnownLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-//		}
-//		if (isNetworkEnabled) {
-//			locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, MIN_TIME_BW_UPDATES, MIN_DISTANCE_CHANGE_FOR_UPDATES, LocationListenerImpl.getLocationListener(), Looper.getMainLooper());
-//			if (locationManager != null) {
-//				lastKnownLocation = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-//			}
-//		}
 		if (isGPSEnabled) {
 			if (lastKnownLocation == null) {
 				locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, MIN_TIME_BW_UPDATES, MIN_DISTANCE_CHANGE_FOR_UPDATES, LocationListenerImpl.getLocationListener(), Looper.getMainLooper());

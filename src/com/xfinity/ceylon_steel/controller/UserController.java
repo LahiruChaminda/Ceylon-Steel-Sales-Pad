@@ -453,7 +453,7 @@ public class UserController extends AbstractController {
 				HashMap<String, Object> parameters = new HashMap<String, Object>();
 				parameters.put("data", userLocation.getUserLocationJson());
 				JSONObject responseJson = getJsonObject(markRepLocations, parameters, context);
-				if (responseJson.getBoolean("response")) {
+				if (responseJson!=null && responseJson.getBoolean("response")) {
 					synckedRepLocations.add(userLocation.getRepLocationId());
 				}
 			} catch (IOException ex) {
