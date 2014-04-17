@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" android:layout_margin="5dp">
+        <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Make Sales Order"
+                android:textSize="30dp" android:gravity="center_horizontal"
+                android:layout_margin="5dp"/>
+        <Button
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Consignment Sales Order"
+                android:id="@+id/btnMakeConsignmentSalesOrder" android:layout_margin="5dp" android:textSize="25dp"/>
+        <Button
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Direct Sales Order"
+                android:id="@+id/btnMakeDirectSalesOrder" android:layout_margin="5dp" android:textSize="25dp"/>
+        <Button
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Project Sales Order"
+                android:id="@+id/btnMakeProjectSalesOrder" android:layout_margin="5dp" android:textSize="25dp"/>
+    </LinearLayout>
+</LinearLayout>

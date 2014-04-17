@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp">
+        <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Direct Sales Order"
+                android:layout_margin="5dp"
+                android:textSize="30dp"
+                android:focusableInTouchMode="true"
+                android:gravity="center_horizontal"/>
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp" android:weightSum="100">
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Outlet Name"
+                android:layout_margin="5dp"
+                android:textSize="25dp" android:layout_weight="70"/>
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtViewDirectOutletName"
+                android:layout_margin="5dp"
+                android:textSize="25dp" android:layout_weight="30"/>
+            </LinearLayout>
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp" android:weightSum="100">
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Vehicle"
+                android:layout_margin="5dp"
+                android:textSize="25dp" android:layout_weight="70"/>
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtViewDirectVehicleNo"
+                android:layout_margin="5dp"
+                android:textSize="25dp" android:layout_weight="30"/>
+            </LinearLayout>
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp" android:weightSum="100">
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Driver"
+                android:layout_margin="5dp"
+                android:textSize="25dp" android:layout_weight="70"/>
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtViewDirectDriverName"
+                android:layout_margin="5dp"
+                android:textSize="25dp" android:layout_weight="30"/>
+            </LinearLayout>
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp" android:weightSum="100">
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Driver NIC"
+                android:layout_margin="5dp"
+                android:textSize="25dp" android:layout_weight="70"/>
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtViewDirectDriverNIC" android:layout_margin="5dp" android:textSize="25dp"
+                android:layout_weight="30"/>
+            </LinearLayout>
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp" android:weightSum="100">
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Delivery Date" android:layout_margin="5dp" android:textSize="25dp"
+                android:layout_weight="70"/>
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtViewDirectDeliveryDate" android:layout_margin="5dp" android:textSize="25dp"
+                android:layout_weight="30"/>
+            </LinearLayout>
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp" android:weightSum="100">
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Remarks" android:layout_margin="5dp" android:textSize="25dp" android:layout_weight="70"/>
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtViewDirectRemarks" android:layout_margin="5dp" android:textSize="25dp"
+                android:layout_weight="30"/>
+            </LinearLayout>
+        <ListView
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="5dp"
+                android:id="@+id/directOrderDetailListView"
+                android:layout_height="match_parent">
+        </ListView>
+        <Button
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Sync"
+                android:layout_alignParentBottom="true"
+                android:layout_margin="5dp"
+                android:textSize="25dp"
+                android:id="@+id/btnDirectSync"
+                android:layout_gravity="center_horizontal"/>
+    </LinearLayout>
+</LinearLayout>

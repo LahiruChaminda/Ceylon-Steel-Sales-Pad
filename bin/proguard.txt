@@ -1,0 +1,69 @@
+# view AndroidManifest.xml #generated:25
+-keep class com.xfinity.ceylon_steel.activity.HomeActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:19
+-keep class com.xfinity.ceylon_steel.activity.LoginActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:13
+-keep class com.xfinity.ceylon_steel.activity.StartingActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:31
+-keep class com.xfinity.ceylon_steel.activity.attendence.AttendanceActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:133
+-keep class com.xfinity.ceylon_steel.activity.make_sales_order.EnterItemDetailActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:73
+-keep class com.xfinity.ceylon_steel.activity.make_sales_order.MakeConsignmentSalesOrderActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:79
+-keep class com.xfinity.ceylon_steel.activity.make_sales_order.MakeDirectSalesOrderActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:85
+-keep class com.xfinity.ceylon_steel.activity.make_sales_order.MakeProjectSalesOrderActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:37
+-keep class com.xfinity.ceylon_steel.activity.make_sales_order.MakeSalesOrderActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:127
+-keep class com.xfinity.ceylon_steel.activity.make_sales_order.SelectCategoryActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:61
+-keep class com.xfinity.ceylon_steel.activity.unproductive_call.MadeUnProductiveCallActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:55
+-keep class com.xfinity.ceylon_steel.activity.unproductive_call.MakeUnProductiveCallActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:49
+-keep class com.xfinity.ceylon_steel.activity.unproductive_call.UnProductiveCallActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:67
+-keep class com.xfinity.ceylon_steel.activity.unproductive_call.ViewUnProductiveCallActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:91
+-keep class com.xfinity.ceylon_steel.activity.view_sales_order.MadeConsignmentSalesOrderActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:97
+-keep class com.xfinity.ceylon_steel.activity.view_sales_order.MadeDirectSalesOrderActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:103
+-keep class com.xfinity.ceylon_steel.activity.view_sales_order.MadeProjectSalesOrderActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:109
+-keep class com.xfinity.ceylon_steel.activity.view_sales_order.ViewConsignmentSalesOrderActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:115
+-keep class com.xfinity.ceylon_steel.activity.view_sales_order.ViewDirectSalesOrderActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:139
+-keep class com.xfinity.ceylon_steel.activity.view_sales_order.ViewItemDetailActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:121
+-keep class com.xfinity.ceylon_steel.activity.view_sales_order.ViewProjectSalesOrderActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:43
+-keep class com.xfinity.ceylon_steel.activity.view_sales_order.ViewSalesOrderActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:12
+-keep class com.xfinity.ceylon_steel.service.Tracker { <init>(...); }
+

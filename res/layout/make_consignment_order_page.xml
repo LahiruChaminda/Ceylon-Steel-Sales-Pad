@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <ScrollView android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:layout_margin="5dp">
+            <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Consignment Sales Order" android:layout_margin="5dp" android:textSize="30dp"
+                    android:gravity="center_horizontal"/>
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Outlet Name" android:layout_margin="5dp" android:textSize="25dp"/>
+            <AutoCompleteTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/makeConsignmentOrderOutletAuto" android:layout_margin="5dp"
+                    android:textSize="25dp"/>
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Distributor" android:layout_margin="5dp" android:textSize="25dp"/>
+            <AutoCompleteTextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                                  android:id="@+id/makeConsignmentOrderDistributorAuto"
+                                  android:layout_margin="5dp" android:textSize="25dp"/>
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Vehicle" android:layout_margin="5dp" android:textSize="25dp"/>
+            <AutoCompleteTextView android:layout_width="match_parent"
+                                  android:layout_height="wrap_content"
+                                  android:id="@+id/makeConsignmentOrderVehicleAuto" android:layout_margin="5dp"
+                                  android:textSize="25dp"/>
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Driver" android:layout_margin="5dp" android:textSize="25dp"/>
+            <AutoCompleteTextView android:layout_width="match_parent"
+                                  android:layout_height="wrap_content"
+                                  android:id="@+id/makeConsignmentOrderDriverAuto" android:layout_margin="5dp"
+                                  android:textSize="25dp"/>
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Driver NIC" android:layout_margin="5dp" android:textSize="25dp"/>
+
+            <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/makeConsignmentOrderDriverNIC" android:layout_margin="5dp"
+                    android:textSize="25dp"/>
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Delivery Date" android:layout_margin="5dp" android:textSize="25dp"/>
+            <DatePicker
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/makeConsignmentOrderDeliveryDate" android:layout_margin="5dp"/>
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Remarks" android:layout_margin="5dp" android:textSize="25dp"/>
+            <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textMultiLine"
+                    android:ems="10"
+                    android:id="@+id/makeConsignmentOrderRemarks" android:layout_margin="5dp" android:textSize="25dp"/>
+            <Button
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Next"
+                    android:layout_margin="5dp"
+                    android:textSize="25dp"
+                    android:id="@+id/btnMakeConsignmentOrderNext" android:layout_gravity="center_horizontal"/>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
