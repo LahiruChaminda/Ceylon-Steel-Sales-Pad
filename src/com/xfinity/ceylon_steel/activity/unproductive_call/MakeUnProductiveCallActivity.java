@@ -49,7 +49,7 @@ public class MakeUnProductiveCallActivity extends Activity {
 			do {
 				lastKnownLocation = gpsReceiver.getLastKnownLocation();
 				try {
-					Thread.sleep(2000);//delay 2 sec
+					Thread.sleep(1000);//delay 1 sec
 				} catch (InterruptedException ex) {
 					Logger.getLogger(MakeConsignmentSalesOrderActivity.class.getName()).log(Level.SEVERE, null, ex);
 				}

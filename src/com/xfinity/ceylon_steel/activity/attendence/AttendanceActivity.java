@@ -65,7 +65,7 @@ public class AttendanceActivity extends Activity {
 
 	private void btnCheckInClicked(View view) {
 		AlertDialog.Builder checkInConfirmationDialog = new AlertDialog.Builder(this);
-		checkInConfirmationDialog.setTitle("Please confirm your action");
+		checkInConfirmationDialog.setTitle(R.string.message_title);
 		checkInConfirmationDialog.setMessage("Are you sure?");
 		checkInConfirmationDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface arg0, int arg1) {
@@ -82,7 +82,7 @@ public class AttendanceActivity extends Activity {
 
 	private void btnCheckOutClicked(View view) {
 		AlertDialog.Builder checkOutConfirmationDialog = new AlertDialog.Builder(this);
-		checkOutConfirmationDialog.setTitle("Please confirm your action");
+		checkOutConfirmationDialog.setTitle(R.string.message_title);
 		checkOutConfirmationDialog.setMessage("Are you sure?");
 		checkOutConfirmationDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface arg0, int arg1) {

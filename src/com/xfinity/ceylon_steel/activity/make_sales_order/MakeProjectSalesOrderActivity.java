@@ -64,7 +64,7 @@ public class MakeProjectSalesOrderActivity extends Activity {
 			do {
 				lastKnownLocation = gpsReceiver.getLastKnownLocation();
 				try {
-					Thread.sleep(2000);//delay 2 sec
+					Thread.sleep(1000);//delay 1 sec
 				} catch (InterruptedException ex) {
 					Logger.getLogger(MakeConsignmentSalesOrderActivity.class.getName()).log(Level.SEVERE, null, ex);
 				}
@@ -165,8 +165,8 @@ public class MakeProjectSalesOrderActivity extends Activity {
 	private void btnMakeProjectOrderNextClicked(View view) {
 		AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
 		if (customer == null) {
-			dialogBuilder.setTitle("Ceylon Steel Sales Pad");
-			dialogBuilder.setMessage("Please select a customer");
+			dialogBuilder.setTitle(R.string.message_title);
+			dialogBuilder.setMessage(R.string.no_customer_found);
 			dialogBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
 				public void onClick(DialogInterface arg0, int arg1) {
 					makeProjectOrderCustomerAuto.requestFocus();
@@ -176,12 +176,48 @@ public class MakeProjectSalesOrderActivity extends Activity {
 			return;
 		}
 		if (distributor == null) {
-			dialogBuilder.setTitle("Ceylon Steel Sales Pad");
-			dialogBuilder.setMessage("Please select a distributor");
+			dialogBuilder.setTitle(R.string.message_title);
+			dialogBuilder.setMessage(R.string.no_distributor_found);
 			dialogBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
 
 				public void onClick(DialogInterface arg0, int arg1) {
 					makeProjectOrderDistributorAuto.requestFocus();
+				}
+			});
+			dialogBuilder.show();
+			return;
+		}
+		if (makeProjectOrderVehicleAuto.getText().toString().isEmpty()) {
+			dialogBuilder.setTitle(R.string.message_title);
+			dialogBuilder.setMessage(R.string.no_vehicle_found);
+			dialogBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+
+				public void onClick(DialogInterface arg0, int arg1) {
+					makeProjectOrderVehicleAuto.requestFocus();
+				}
+			});
+			dialogBuilder.show();
+			return;
+		}
+		if (makeProjectOrderDriverAuto.getText().toString().isEmpty()) {
+			dialogBuilder.setTitle(R.string.message_title);
+			dialogBuilder.setMessage(R.string.no_driver_found);
+			dialogBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+
+				public void onClick(DialogInterface arg0, int arg1) {
+					makeProjectOrderDriverAuto.requestFocus();
+				}
+			});
+			dialogBuilder.show();
+			return;
+		}
+		if (makeProjectOrderDriverNIC.getText().toString().isEmpty()) {
+			dialogBuilder.setTitle(R.string.message_title);
+			dialogBuilder.setMessage(R.string.no_driver_nic_found);
+			dialogBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+
+				public void onClick(DialogInterface arg0, int arg1) {
+					makeProjectOrderDriverNIC.requestFocus();
 				}
 			});
 			dialogBuilder.show();

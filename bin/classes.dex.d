@@ -127,6 +127,7 @@ E:\Workspace\Android\ceylon_steel\bin\classes\com\xfinity\ceylon_steel\controlle
 E:\Workspace\Android\ceylon_steel\bin\classes\com\xfinity\ceylon_steel\controller\VehicleController$1.class \
 E:\Workspace\Android\ceylon_steel\bin\classes\com\xfinity\ceylon_steel\controller\VehicleController.class \
 E:\Workspace\Android\ceylon_steel\bin\classes\com\xfinity\ceylon_steel\db\SQLiteDatabaseHelper.class \
+E:\Workspace\Android\ceylon_steel\bin\classes\com\xfinity\ceylon_steel\Manifest.class \
 E:\Workspace\Android\ceylon_steel\bin\classes\com\xfinity\ceylon_steel\model\Category.class \
 E:\Workspace\Android\ceylon_steel\bin\classes\com\xfinity\ceylon_steel\model\Customer.class \
 E:\Workspace\Android\ceylon_steel\bin\classes\com\xfinity\ceylon_steel\model\Driver.class \

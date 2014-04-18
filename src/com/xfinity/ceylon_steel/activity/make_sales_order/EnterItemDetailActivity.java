@@ -6,6 +6,7 @@
 package com.xfinity.ceylon_steel.activity.make_sales_order;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -112,6 +113,13 @@ public class EnterItemDetailActivity extends Activity {
 		double unitPrice = item.getPrice();
 		double eachDiscount = Double.parseDouble(enterTxtEachDiscount.getText().toString().isEmpty() ? "0" : enterTxtEachDiscount.getText().toString());
 		double quantity = Double.parseDouble(enterTxtQuantity.getText().toString().isEmpty() ? "0" : enterTxtQuantity.getText().toString());
+		if (quantity <= 0) {
+			AlertDialog.Builder alertBuilder = new AlertDialog.Builder(this);
+			alertBuilder.setTitle(R.string.message_title);
+			alertBuilder.setMessage("Invalid quantity");
+			alertBuilder.show();
+			return;
+		}
 		OrderDetail orderDetail = new OrderDetail(item.getItemId(), quantity, unitPrice, eachDiscount);
 		Intent intent = new Intent();
 		intent.putExtra("orderDetail", orderDetail);

@@ -58,7 +58,7 @@ public class MakeDirectSalesOrderActivity extends Activity {
 			do {
 				lastKnownLocation = gpsReceiver.getLastKnownLocation();
 				try {
-					Thread.sleep(2000);//delay 2 sec
+					Thread.sleep(1000);//delay 1 sec
 				} catch (InterruptedException ex) {
 					Logger.getLogger(MakeConsignmentSalesOrderActivity.class.getName()).log(Level.SEVERE, null, ex);
 				}
@@ -137,12 +137,48 @@ public class MakeDirectSalesOrderActivity extends Activity {
 	private void btnMakeDirectOrderNextClicked(View view) {
 		AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
 		if (outlet == null) {
-			dialogBuilder.setTitle("Ceylon Steel Sales Pad");
-			dialogBuilder.setMessage("Please select an outlet");
+			dialogBuilder.setTitle(R.string.message_title);
+			dialogBuilder.setMessage(R.string.no_outlet_found);
 			dialogBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
 
 				public void onClick(DialogInterface arg0, int arg1) {
 					makeDirectOrderOutletAuto.requestFocus();
+				}
+			});
+			dialogBuilder.show();
+			return;
+		}
+		if (makeDirectOrderVehicleAuto.getText().toString().isEmpty()) {
+			dialogBuilder.setTitle(R.string.message_title);
+			dialogBuilder.setMessage(R.string.no_vehicle_found);
+			dialogBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+
+				public void onClick(DialogInterface arg0, int arg1) {
+					makeDirectOrderVehicleAuto.requestFocus();
+				}
+			});
+			dialogBuilder.show();
+			return;
+		}
+		if (makeDirectOrderDriverAuto.getText().toString().isEmpty()) {
+			dialogBuilder.setTitle(R.string.message_title);
+			dialogBuilder.setMessage(R.string.no_driver_found);
+			dialogBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+
+				public void onClick(DialogInterface arg0, int arg1) {
+					makeDirectOrderDriverAuto.requestFocus();
+				}
+			});
+			dialogBuilder.show();
+			return;
+		}
+		if (makeDirectOrderDriverNIC.getText().toString().isEmpty()) {
+			dialogBuilder.setTitle(R.string.message_title);
+			dialogBuilder.setMessage(R.string.no_driver_nic_found);
+			dialogBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+
+				public void onClick(DialogInterface arg0, int arg1) {
+					makeDirectOrderDriverNIC.requestFocus();
 				}
 			});
 			dialogBuilder.show();

@@ -63,7 +63,7 @@ public class MakeConsignmentSalesOrderActivity extends Activity {
 			do {
 				lastKnownLocation = gpsReceiver.getLastKnownLocation();
 				try {
-					Thread.sleep(2000);//delay 2 sec
+					Thread.sleep(1000);//delay 1 sec
 				} catch (InterruptedException ex) {
 					Logger.getLogger(MakeConsignmentSalesOrderActivity.class.getName()).log(Level.SEVERE, null, ex);
 				}
@@ -164,8 +164,8 @@ public class MakeConsignmentSalesOrderActivity extends Activity {
 	private void btnMakeConsignmentOrderNextClicked(View view) {
 		AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
 		if (outlet == null) {
-			dialogBuilder.setTitle("Ceylon Steel Sales Pad");
-			dialogBuilder.setMessage("Please select an outlet");
+			dialogBuilder.setTitle(R.string.message_title);
+			dialogBuilder.setMessage(R.string.no_outlet_found);
 			dialogBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
 
 				public void onClick(DialogInterface arg0, int arg1) {
@@ -176,8 +176,8 @@ public class MakeConsignmentSalesOrderActivity extends Activity {
 			return;
 		}
 		if (distributor == null) {
-			dialogBuilder.setTitle("Ceylon Steel Sales Pad");
-			dialogBuilder.setMessage("Please select a distributor");
+			dialogBuilder.setTitle(R.string.message_title);
+			dialogBuilder.setMessage(R.string.no_distributor_found);
 			dialogBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
 
 				public void onClick(DialogInterface arg0, int arg1) {
@@ -188,8 +188,8 @@ public class MakeConsignmentSalesOrderActivity extends Activity {
 			return;
 		}
 		if (makeConsignmentOrderVehicleAuto.getText().toString().isEmpty()) {
-			dialogBuilder.setTitle("Ceylon Steel Sales Pad");
-			dialogBuilder.setMessage("Please insert a vehicle");
+			dialogBuilder.setTitle(R.string.message_title);
+			dialogBuilder.setMessage(R.string.no_vehicle_found);
 			dialogBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
 
 				public void onClick(DialogInterface arg0, int arg1) {
@@ -200,8 +200,8 @@ public class MakeConsignmentSalesOrderActivity extends Activity {
 			return;
 		}
 		if (makeConsignmentOrderDriverAuto.getText().toString().isEmpty()) {
-			dialogBuilder.setTitle("Ceylon Steel Sales Pad");
-			dialogBuilder.setMessage("Please insert a Driver Name");
+			dialogBuilder.setTitle(R.string.message_title);
+			dialogBuilder.setMessage(R.string.no_driver_found);
 			dialogBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
 
 				public void onClick(DialogInterface arg0, int arg1) {
@@ -212,8 +212,8 @@ public class MakeConsignmentSalesOrderActivity extends Activity {
 			return;
 		}
 		if (makeConsignmentOrderDriverNIC.getText().toString().isEmpty()) {
-			dialogBuilder.setTitle("Ceylon Steel Sales Pad");
-			dialogBuilder.setMessage("Please insert Driver NIC");
+			dialogBuilder.setTitle(R.string.message_title);
+			dialogBuilder.setMessage(R.string.no_driver_nic_found);
 			dialogBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
 
 				public void onClick(DialogInterface arg0, int arg1) {

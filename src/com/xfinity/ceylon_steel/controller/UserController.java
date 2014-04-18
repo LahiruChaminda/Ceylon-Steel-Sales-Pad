@@ -156,7 +156,7 @@ public class UserController extends AbstractController {
 
 	public static void authenticate(String userName, String password, final Context context) {
 		new AsyncTask<String, Void, JSONObject>() {
-			ProgressDialog progressDialog;
+			private ProgressDialog progressDialog;
 
 			@Override
 			protected void onPreExecute() {
@@ -263,7 +263,7 @@ public class UserController extends AbstractController {
 				try {
 					int checkIn = result.getInt("response");
 					AlertDialog.Builder responseDialog = new AlertDialog.Builder(context);
-					responseDialog.setTitle("Ceylon Steel Sales Pad");
+					responseDialog.setTitle(com.xfinity.ceylon_steel.R.string.message_title);
 					switch (checkIn) {
 						case -1:
 							responseDialog.setMessage("Please check your system time");
@@ -352,7 +352,7 @@ public class UserController extends AbstractController {
 				try {
 					int checkIn = result.getInt("response");
 					AlertDialog.Builder responseDialog = new AlertDialog.Builder(context);
-					responseDialog.setTitle("Ceylon Steel Sales Pad");
+					responseDialog.setTitle(com.xfinity.ceylon_steel.R.string.message_title);
 					switch (checkIn) {
 						case -1:
 							responseDialog.setMessage("Please check your system time");
@@ -453,7 +453,7 @@ public class UserController extends AbstractController {
 				HashMap<String, Object> parameters = new HashMap<String, Object>();
 				parameters.put("data", userLocation.getUserLocationJson());
 				JSONObject responseJson = getJsonObject(markRepLocations, parameters, context);
-				if (responseJson!=null && responseJson.getBoolean("response")) {
+				if (responseJson != null && responseJson.getBoolean("response")) {
 					synckedRepLocations.add(userLocation.getRepLocationId());
 				}
 			} catch (IOException ex) {

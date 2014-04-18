@@ -51,7 +51,7 @@ public class UnProductiveCallController extends AbstractController {
 		long executeInsert = compileStatement.executeInsert();
 		AlertDialog.Builder builder = new AlertDialog.Builder(context);
 		if (executeInsert != -1) {
-			builder.setTitle("Ceylon Steel");
+			builder.setTitle(com.xfinity.ceylon_steel.R.string.message_title);
 			builder.setMessage("Unproductive Call Recorded");
 			builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
 				public void onClick(DialogInterface arg0, int arg1) {
@@ -60,7 +60,7 @@ public class UnProductiveCallController extends AbstractController {
 				}
 			});
 		} else {
-			builder.setTitle("Ceylon Steel");
+			builder.setTitle(com.xfinity.ceylon_steel.R.string.message_title);
 			builder.setMessage("Unable to place Unproductive Call");
 			builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
 				public void onClick(DialogInterface arg0, int arg1) {
@@ -141,7 +141,7 @@ public class UnProductiveCallController extends AbstractController {
 				} else {
 					AlertDialog.Builder builder = new AlertDialog.Builder(context);
 					builder.setMessage("Unable to sync UnProductive Call");
-					builder.setTitle("Ceylon Steel");
+					builder.setTitle(com.xfinity.ceylon_steel.R.string.message_title);
 					builder.setPositiveButton("Ok", null);
 					builder.show();
 				}

@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<string name="app_name">Ceylon Steel</string>
-    <string name="message_title">Ceylon Steel Sales Pad</string>
+	<string name="message_title">Ceylon Steel Sales Pad</string>
+	<string name="no_outlet_found">Please select an outlet</string>
+	<string name="no_customer_found">Please select a customer</string>
+	<string name="no_distributor_found">Please select a customer</string>
+	<string name="no_vehicle_found">Please insert a vehicle no</string>
+	<string name="no_driver_found">Please insert a driver name</string>
+	<string name="no_driver_nic_found">Please insert a driver nic</string>
 </resources>
