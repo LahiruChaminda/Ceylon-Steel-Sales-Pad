@@ -92,7 +92,7 @@ abstract class AbstractController {
 						StringBody json = new StringBody(paramValue.toString(), ContentType.APPLICATION_JSON);
 						multipartEntityBuilder.addPart(parameter, json);
 					} else {
-						StringBody param = new StringBody(paramValue.toString(), ContentType.TEXT_PLAIN);
+						StringBody param = new StringBody(paramValue.toString(), ContentType.DEFAULT_TEXT);
 						multipartEntityBuilder.addPart(parameter, param);
 					}
 				}
@@ -134,7 +134,7 @@ abstract class AbstractController {
 						StringBody json = new StringBody(paramValue.toString(), ContentType.APPLICATION_JSON);
 						multipartEntityBuilder.addPart(parameter, json);
 					} else {
-						StringBody param = new StringBody(paramValue.toString(), ContentType.TEXT_PLAIN);
+						StringBody param = new StringBody(paramValue.toString(), ContentType.DEFAULT_TEXT);
 						multipartEntityBuilder.addPart(parameter, param);
 					}
 				}
