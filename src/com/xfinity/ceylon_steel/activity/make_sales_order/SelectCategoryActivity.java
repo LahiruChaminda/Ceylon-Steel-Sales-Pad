@@ -9,6 +9,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -43,6 +44,7 @@ public class SelectCategoryActivity extends Activity {
 	private Order order;
 
 	private final ArrayList<OrderDetail> orderDetails = new ArrayList<OrderDetail>();
+	private View clickedView;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -160,6 +162,8 @@ public class SelectCategoryActivity extends Activity {
 
 	private boolean onChildClicked(ExpandableListView parent, View view, int groupPosition, int childPosition, long id) {
 		Item item = categories.get(groupPosition).getItems().get(childPosition);
+		clickedView = view;
+		clickedView.setBackgroundColor(Color.rgb(100, 100, 100));
 		Intent enterItemDetailActivity = new Intent(this, EnterItemDetailActivity.class);
 		enterItemDetailActivity.putExtra("item", item);
 		startActivityForResult(enterItemDetailActivity, 0);
@@ -168,6 +172,7 @@ public class SelectCategoryActivity extends Activity {
 
 	private void btnFinishMakeBillClicked(View view) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setTitle(R.string.message_title);
 		if (orderDetails.size() > 0) {
 			order.setOrderDetails(orderDetails);
 			long placeOrder = -1;
@@ -182,7 +187,6 @@ public class SelectCategoryActivity extends Activity {
 			if (placeOrder != -1) {
 				orderDetails.clear();
 				builder.setMessage("Order Placed Successfully");
-				builder.setTitle("Ceylon Steel");
 				builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface arg0, int arg1) {
 						Intent makeSalesOrderActivity = new Intent(SelectCategoryActivity.this, MakeSalesOrderActivity.class);
@@ -192,12 +196,10 @@ public class SelectCategoryActivity extends Activity {
 				});
 			} else {
 				builder.setMessage("Unable to make order");
-				builder.setTitle("Ceylon Steel");
 				builder.setPositiveButton("Ok", null);
 			}
 		} else {
 			builder.setMessage("In order to proceed, You need to select at least one item");
-			builder.setTitle("Ceylon Steel");
 			builder.setPositiveButton("Ok", null);
 		}
 		builder.show();
@@ -205,7 +207,7 @@ public class SelectCategoryActivity extends Activity {
 
 	private void btnQuickSyncClicked(View view) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setTitle("Ceylon Steel");
+		builder.setTitle(R.string.message_title);
 		if (orderDetails.size() > 0) {
 			order.setOrderDetails((ArrayList<OrderDetail>) orderDetails.clone());
 			long placeOrder = -1;
