@@ -8,17 +8,19 @@ package com.xfinity.ceylon_steel.controller;
 import android.content.Context;
 import com.xfinity.ceylon_steel.service.InternetObserver;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.HashMap;
+import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.ContentType;
+import org.apache.http.entity.mime.MultipartEntityBuilder;
+import org.apache.http.entity.mime.content.FileBody;
+import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -79,12 +81,23 @@ abstract class AbstractController {
 		if (InternetObserver.isConnectedToInternet(context)) {
 			HttpClient httpClient = new DefaultHttpClient();
 			HttpPost postRequest = new HttpPost(url);
-			ArrayList<NameValuePair> httpPostParameters = new ArrayList<NameValuePair>();
 			if (parameters != null) {
+				MultipartEntityBuilder multipartEntityBuilder = MultipartEntityBuilder.create();
 				for (String parameter : parameters.keySet()) {
-					httpPostParameters.add(new BasicNameValuePair(parameter, parameters.get(parameter).toString()));
+					Object paramValue = parameters.get(parameter);
+					if (paramValue instanceof File) {
+						FileBody fileContent = new FileBody((File) paramValue, ContentType.DEFAULT_BINARY);
+						multipartEntityBuilder.addPart(parameter, fileContent);
+					} else if (paramValue instanceof JSONObject) {
+						StringBody json = new StringBody(paramValue.toString(), ContentType.APPLICATION_JSON);
+						multipartEntityBuilder.addPart(parameter, json);
+					} else {
+						StringBody param = new StringBody(paramValue.toString(), ContentType.TEXT_PLAIN);
+						multipartEntityBuilder.addPart(parameter, param);
+					}
 				}
-				postRequest.setEntity(new UrlEncodedFormEntity(httpPostParameters));
+				HttpEntity httpPostParameters = multipartEntityBuilder.build();
+				postRequest.setEntity(httpPostParameters);
 			}
 			HttpResponse response = httpClient.execute(postRequest);
 			BufferedReader bufferedReader = null;
@@ -110,12 +123,23 @@ abstract class AbstractController {
 		if (InternetObserver.isConnectedToInternet(context)) {
 			HttpClient httpClient = new DefaultHttpClient();
 			HttpPost postRequest = new HttpPost(url);
-			ArrayList<NameValuePair> httpPostParameters = new ArrayList<NameValuePair>();
 			if (parameters != null) {
+				MultipartEntityBuilder multipartEntityBuilder = MultipartEntityBuilder.create();
 				for (String parameter : parameters.keySet()) {
-					httpPostParameters.add(new BasicNameValuePair(parameter, parameters.get(parameter).toString()));
+					Object paramValue = parameters.get(parameter);
+					if (paramValue instanceof File) {
+						FileBody fileContent = new FileBody((File) paramValue, ContentType.DEFAULT_BINARY);
+						multipartEntityBuilder.addPart(parameter, fileContent);
+					} else if (paramValue instanceof JSONObject) {
+						StringBody json = new StringBody(paramValue.toString(), ContentType.APPLICATION_JSON);
+						multipartEntityBuilder.addPart(parameter, json);
+					} else {
+						StringBody param = new StringBody(paramValue.toString(), ContentType.TEXT_PLAIN);
+						multipartEntityBuilder.addPart(parameter, param);
+					}
 				}
-				postRequest.setEntity(new UrlEncodedFormEntity(httpPostParameters));
+				HttpEntity httpPostParameters = multipartEntityBuilder.build();
+				postRequest.setEntity(httpPostParameters);
 			}
 			HttpResponse response = httpClient.execute(postRequest);
 			BufferedReader bufferedReader = null;

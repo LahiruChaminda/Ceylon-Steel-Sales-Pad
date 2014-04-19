@@ -8,6 +8,8 @@
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 	<application android:label="@string/app_name" android:icon="@drawable/icon" android:theme="@android:style/Theme.Light">
 		<service android:name=".service.Tracker" />
 		<activity android:name=".activity.StartingActivity" android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen" android:screenOrientation="portrait">
@@ -58,12 +60,12 @@
 				<category android:name="android.intent.category.DEFAULT"/>
 			</intent-filter>
 		</activity>
-        <activity android:name=".activity.unproductive_call.MadeUnProductiveCallActivity" android:label="Select Un Productive Call" android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="com.xfinity.ceylon_steel.activity.SELECT_UNPRODUCTIVE_CALL"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-            </intent-filter>
-        </activity>
+		<activity android:name=".activity.unproductive_call.MadeUnProductiveCallActivity" android:label="Select Un Productive Call" android:screenOrientation="portrait">
+			<intent-filter>
+				<action android:name="com.xfinity.ceylon_steel.activity.SELECT_UNPRODUCTIVE_CALL"/>
+				<category android:name="android.intent.category.DEFAULT"/>
+			</intent-filter>
+		</activity>
 		<activity android:name=".activity.unproductive_call.ViewUnProductiveCallActivity" android:label="View Un Productive Call" android:screenOrientation="portrait">
 			<intent-filter>
 				<action android:name="com.xfinity.ceylon_steel.activity.VIEW_UNPRODUCTIVE_CALL"/>
@@ -118,12 +120,12 @@
 				<category android:name="android.intent.category.DEFAULT"/>
 			</intent-filter>
 		</activity>
-        <activity android:name=".activity.view_sales_order.ViewProjectSalesOrderActivity" android:label="View Project Sales Order" android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="com.xfinity.ceylon_steel.activity.VIEW_PROJECT_ORDER"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-            </intent-filter>
-        </activity>
+		<activity android:name=".activity.view_sales_order.ViewProjectSalesOrderActivity" android:label="View Project Sales Order" android:screenOrientation="portrait">
+			<intent-filter>
+				<action android:name="com.xfinity.ceylon_steel.activity.VIEW_PROJECT_ORDER"/>
+				<category android:name="android.intent.category.DEFAULT"/>
+			</intent-filter>
+		</activity>
 		<activity android:name=".activity.make_sales_order.SelectCategoryActivity" android:label="Select Items" android:screenOrientation="portrait">
 			<intent-filter>
 				<action android:name="com.xfinity.ceylon_steel.activity.CATEGORIES_AND_ITEMS"/>
@@ -136,11 +138,11 @@
 				<category android:name="android.intent.category.DEFAULT"/>
 			</intent-filter>
 		</activity>
-        <activity android:name=".activity.view_sales_order.ViewItemDetailActivity" android:label="View Item Details" android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="com.xfinity.ceylon_steel.activity.VIEW_ITEM_DETAIL"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-            </intent-filter>
-        </activity>
+		<activity android:name=".activity.view_sales_order.ViewItemDetailActivity" android:label="View Item Details" android:screenOrientation="portrait">
+			<intent-filter>
+				<action android:name="com.xfinity.ceylon_steel.activity.VIEW_ITEM_DETAIL"/>
+				<category android:name="android.intent.category.DEFAULT"/>
+			</intent-filter>
+		</activity>
 	</application>
 </manifest>
