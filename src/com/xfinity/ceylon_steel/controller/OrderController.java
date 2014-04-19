@@ -13,7 +13,7 @@ import android.database.sqlite.SQLiteStatement;
 import android.os.AsyncTask;
 import android.widget.Toast;
 import com.xfinity.ceylon_steel.activity.HomeActivity;
-import static com.xfinity.ceylon_steel.controller.AbstractController.OrderURL.placeSalesOrder;
+import static com.xfinity.ceylon_steel.controller.WebServiceURL.OrderURL.placeSalesOrder;
 import com.xfinity.ceylon_steel.db.SQLiteDatabaseHelper;
 import com.xfinity.ceylon_steel.model.Order;
 import com.xfinity.ceylon_steel.model.OrderDetail;

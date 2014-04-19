@@ -30,51 +30,10 @@ import org.json.JSONObject;
  * @mobile +94711290392
  * @email supunlakshan.xfinity@gmail.com
  */
-abstract class AbstractController {
+abstract class AbstractController extends WebServiceURL {
 
-	protected static final String webServiceURL = "http://gateway.ceylonlinux.com/Ceylon_Steel/native/";
+	protected AbstractController() {
 
-	protected static final class CategoryURL {
-
-		public static final String getItemsAndCategories = webServiceURL + "getItemsAndCategories";
-	}
-
-	protected static final class CustomerURL {
-
-		public static final String getCustomersOfUser = webServiceURL + "getCustomersOfUser";
-	}
-
-	protected static final class DriverURL {
-
-		public static final String getDriversOfUser = webServiceURL + "getDriversOfUser";
-	}
-
-	protected static final class OrderURL {
-
-		public static final String placeSalesOrder = webServiceURL + "placeSalesOrder";
-	}
-
-	protected static final class OutletURL {
-
-		public static final String getOutletsOfUser = webServiceURL + "getOutletsOfUser";
-	}
-
-	protected static final class UnProductiveCallURL {
-
-		public static final String recordUnProductiveCall = webServiceURL + "recordUnProductiveCall";
-	}
-
-	protected static final class UserURL {
-
-		public static final String getUserDetails = webServiceURL + "getUserDetails";
-		public static final String checkInCheckOut = webServiceURL + "checkInCheckOut";
-		public static final String getDistributorsOfUser = webServiceURL + "getDistributorsOfUser";
-		public static final String markRepLocations = webServiceURL + "markRepLocations";
-	}
-
-	protected static final class VehicleURL {
-
-		public static final String getVehiclesOfUser = webServiceURL + "getVehiclesOfUser";
 	}
 
 	protected final static JSONObject getJsonObject(String url, HashMap<String, Object> parameters, Context context) throws IOException, JSONException {

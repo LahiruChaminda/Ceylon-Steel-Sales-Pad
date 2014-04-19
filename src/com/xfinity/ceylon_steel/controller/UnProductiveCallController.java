@@ -16,7 +16,7 @@ import android.os.AsyncTask;
 import android.widget.Toast;
 import com.xfinity.ceylon_steel.activity.HomeActivity;
 import com.xfinity.ceylon_steel.activity.unproductive_call.MadeUnProductiveCallActivity;
-import static com.xfinity.ceylon_steel.controller.AbstractController.UnProductiveCallURL.recordUnProductiveCall;
+import static com.xfinity.ceylon_steel.controller.WebServiceURL.UnProductiveCallURL.recordUnProductiveCall;
 import com.xfinity.ceylon_steel.db.SQLiteDatabaseHelper;
 import com.xfinity.ceylon_steel.model.UnProductiveCall;
 import java.io.IOException;

@@ -11,7 +11,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
 import android.os.AsyncTask;
 import android.widget.Toast;
-import static com.xfinity.ceylon_steel.controller.AbstractController.CustomerURL.getCustomersOfUser;
+import static com.xfinity.ceylon_steel.controller.WebServiceURL.CustomerURL.getCustomersOfUser;
 import com.xfinity.ceylon_steel.db.SQLiteDatabaseHelper;
 import com.xfinity.ceylon_steel.model.Customer;
 import com.xfinity.ceylon_steel.model.User;

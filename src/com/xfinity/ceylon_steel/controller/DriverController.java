@@ -11,7 +11,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
 import android.os.AsyncTask;
 import android.widget.Toast;
-import static com.xfinity.ceylon_steel.controller.AbstractController.DriverURL.getDriversOfUser;
+import static com.xfinity.ceylon_steel.controller.WebServiceURL.DriverURL.getDriversOfUser;
 import com.xfinity.ceylon_steel.db.SQLiteDatabaseHelper;
 import com.xfinity.ceylon_steel.model.Driver;
 import com.xfinity.ceylon_steel.model.User;
