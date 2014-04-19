@@ -189,17 +189,28 @@ public class UserController extends AbstractController {
 				if (progressDialog != null && progressDialog.isShowing()) {
 					progressDialog.dismiss();
 				}
-				if (result != null) {
-					try {
-						setAuthorizedUser(context, result.getInt("userId"), result.getString("name"), result.getString("type"), new Date().getTime());
-						loadDataFromServer(context);
-						Intent homeActivity = new Intent(context, HomeActivity.class);
-						context.startActivity(homeActivity);
-					} catch (JSONException ex) {
-						Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+				AlertDialog.Builder builder = new AlertDialog.Builder(context);
+				builder.setTitle(com.xfinity.ceylon_steel.R.string.message_title);
+				try {
+					builder.setPositiveButton("OK", null);
+					if (result != null) {
+						if (result.getBoolean("response")) {
+							setAuthorizedUser(context, result.getInt("userId"), result.getString("name"), result.getString("type"), new Date().getTime());
+							loadDataFromServer(context);
+							Intent homeActivity = new Intent(context, HomeActivity.class);
+							context.startActivity(homeActivity);
+						} else {
+							builder.setMessage("Incorrect Username Password combination");
+							builder.show();
+						}
+					} else {
+						builder.setMessage("No Active Internet Connection Found");
+						builder.show();
 					}
-				} else {
-					Toast.makeText(context, "Invalid Username password Combination", Toast.LENGTH_LONG).show();
+				} catch (JSONException ex) {
+					Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+					builder.setMessage("Json Parse Error.\nPlease Contact Ceylon Linux Developer Team!");
+					builder.show();
 				}
 			}
 
