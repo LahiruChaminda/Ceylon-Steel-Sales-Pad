@@ -134,6 +134,12 @@ public class UserController extends AbstractController {
 		if ((loginTime = userData.getLong("loginTime", -1)) == -1) {
 			return null;
 		}
+		Date lastLoginDate = new Date(loginTime);
+		Date currentDate = new Date();
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("y-M-d");
+		if (!simpleDateFormat.format(lastLoginDate).equalsIgnoreCase(simpleDateFormat.format(currentDate))) {
+			return null;
+		}
 		if ((userId = userData.getInt("userId", -1)) == -1) {
 			return null;
 		}

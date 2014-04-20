@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import com.xfinity.ceylon_steel.R;
+import com.xfinity.ceylon_steel.controller.UserController;
+import com.xfinity.ceylon_steel.model.User;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -31,9 +33,16 @@ public class StartingActivity extends Activity {
 				} catch (InterruptedException ex) {
 					Logger.getLogger(StartingActivity.class.getName()).log(Level.SEVERE, null, ex);
 				} finally {
-					Intent loginActivity = new Intent(StartingActivity.this, LoginActivity.class);
-					startActivity(loginActivity);
-					finish();
+					User authorizedUser = UserController.getAuthorizedUser(StartingActivity.this);
+					if (authorizedUser == null) {
+						Intent loginActivity = new Intent(StartingActivity.this, LoginActivity.class);
+						startActivity(loginActivity);
+						finish();
+					} else {
+						Intent homeActivity = new Intent(StartingActivity.this, HomeActivity.class);
+						startActivity(homeActivity);
+						finish();
+					}
 				}
 			}
 		};
