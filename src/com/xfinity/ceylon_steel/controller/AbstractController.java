@@ -45,7 +45,7 @@ abstract class AbstractController extends WebServiceURL {
 				for (String parameter : parameters.keySet()) {
 					Object paramValue = parameters.get(parameter);
 					if (paramValue instanceof File) {
-						FileBody fileContent = new FileBody((File) paramValue, ContentType.DEFAULT_BINARY);
+						FileBody fileContent = new FileBody((File) paramValue, ContentType.MULTIPART_FORM_DATA);
 						multipartEntityBuilder.addPart(parameter, fileContent);
 					} else if (paramValue instanceof JSONObject) {
 						StringBody json = new StringBody(paramValue.toString(), ContentType.APPLICATION_JSON);
@@ -68,7 +68,8 @@ abstract class AbstractController extends WebServiceURL {
 				while ((currentLine = bufferedReader.readLine()) != null) {
 					responseString = responseString + currentLine + lineSeparator;
 				}
-				return new JSONObject(responseString);
+                System.out.println("response"+responseString);
+                return new JSONObject(responseString);
 			} finally {
 				if (bufferedReader != null) {
 					bufferedReader.close();
@@ -87,7 +88,7 @@ abstract class AbstractController extends WebServiceURL {
 				for (String parameter : parameters.keySet()) {
 					Object paramValue = parameters.get(parameter);
 					if (paramValue instanceof File) {
-						FileBody fileContent = new FileBody((File) paramValue, ContentType.DEFAULT_BINARY);
+						FileBody fileContent = new FileBody((File) paramValue, ContentType.MULTIPART_FORM_DATA);
 						multipartEntityBuilder.addPart(parameter, fileContent);
 					} else if (paramValue instanceof JSONObject) {
 						StringBody json = new StringBody(paramValue.toString(), ContentType.APPLICATION_JSON);

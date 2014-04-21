@@ -5,13 +5,15 @@
  */
 package com.xfinity.ceylon_steel.controller;
 
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
 import android.os.AsyncTask;
-import android.widget.Toast;
 import com.xfinity.ceylon_steel.activity.HomeActivity;
 import static com.xfinity.ceylon_steel.controller.WebServiceURL.OrderURL.placeSalesOrder;
 import com.xfinity.ceylon_steel.db.SQLiteDatabaseHelper;
@@ -342,6 +344,15 @@ public class OrderController extends AbstractController {
 
 	public static void syncOrder(final Context context, final Order order) {
 		new AsyncTask<Order, Void, Boolean>() {
+			private ProgressDialog progressDialog;
+
+			@Override
+			protected void onPreExecute() {
+				progressDialog = new ProgressDialog(context);
+				progressDialog.setMessage("Syncking Order");
+				progressDialog.show();
+			}
+
 			@Override
 			protected Boolean doInBackground(Order... orders) {
 				try {
@@ -360,6 +371,11 @@ public class OrderController extends AbstractController {
 
 			@Override
 			protected void onPostExecute(Boolean result) {
+				if (progressDialog != null && progressDialog.isShowing()) {
+					progressDialog.dismiss();
+				}
+				AlertDialog.Builder builder = new AlertDialog.Builder(context);
+				builder.setTitle(com.xfinity.ceylon_steel.R.string.message_title);
 				if (result) {
 					SQLiteDatabaseHelper databaseInstance = SQLiteDatabaseHelper.getDatabaseInstance(context);
 					SQLiteDatabase database = databaseInstance.getWritableDatabase();
@@ -371,12 +387,18 @@ public class OrderController extends AbstractController {
 					orderDetailDeleteSql.executeUpdateDelete();
 					orderDeleteSql.executeUpdateDelete();
 					database.close();
-					Toast.makeText(context, "Sales Order syncked successfully", Toast.LENGTH_LONG).show();
-					Intent homeActivity = new Intent(context, HomeActivity.class);
-					context.startActivity(homeActivity);
+					builder.setMessage("Sales Order syncked successfully");
+					builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface arg0, int arg1) {
+							Intent homeActivity = new Intent(context, HomeActivity.class);
+							context.startActivity(homeActivity);
+						}
+					});
 				} else {
-					Toast.makeText(context, "Unable to sync sales Order", Toast.LENGTH_LONG).show();
+					builder.setMessage("Unable to sync order");
+					builder.setPositiveButton("OK", null);
 				}
+				builder.show();
 			}
 
 		}.execute(order);
