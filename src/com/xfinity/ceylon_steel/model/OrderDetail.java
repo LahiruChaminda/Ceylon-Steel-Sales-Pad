@@ -131,10 +131,7 @@ public class OrderDetail implements Serializable {
 			return false;
 		}
 		final OrderDetail other = (OrderDetail) obj;
-		if (this.itemId != other.itemId) {
-			return false;
-		}
-		return true;
+		return this.itemId == other.itemId;
 	}
 
 	public JSONObject getOrderDetailAsJSON() {
