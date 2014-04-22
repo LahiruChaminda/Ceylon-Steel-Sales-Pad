@@ -15,6 +15,8 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.Looper;
+import android.provider.Settings;
+import java.util.Date;
 
 public class GpsReceiver extends Service {
 
@@ -22,7 +24,7 @@ public class GpsReceiver extends Service {
 	private static Location lastKnownLocation;
 	private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 1;
 	private static final long MIN_TIME_BW_UPDATES = 500;
-	protected LocationManager locationManager;
+	protected static LocationManager locationManager;
 	private static GpsReceiver gpsReceiver;
 
 	public static GpsReceiver getGpsReceiver(Context applicationContext) {
@@ -42,16 +44,30 @@ public class GpsReceiver extends Service {
 					lastKnownLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 				}
 			}
+		} else {
+			Intent gpsSettings = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+			applicationContext.startActivity(gpsSettings);
 		}
 	}
 
-	public void stopUsingGPS() {
+	public static void stopUsingGPS() {
 		if (locationManager != null) {
 			locationManager.removeUpdates(LocationListenerImpl.getLocationListener());
 		}
 	}
 
 	public Location getLastKnownLocation() {
+		lastKnownLocation = null;
+		while (lastKnownLocation == null) {
+		}
+		if (lastKnownLocation != null && lastKnownLocation.getLatitude() != 0 && lastKnownLocation.getLongitude() != 0) {
+			long time = lastKnownLocation.getTime();
+			Date date = new Date();
+			long timeDifference = Math.abs(time - date.getTime());
+			if (timeDifference > 30 * 60 * 1000) {
+				return null;
+			}
+		}
 		return lastKnownLocation;
 	}
 

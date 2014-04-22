@@ -7,6 +7,7 @@ package com.xfinity.ceylon_steel.activity.make_sales_order;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.Location;
@@ -57,6 +58,14 @@ public class MakeConsignmentSalesOrderActivity extends Activity {
 	private Location lastKnownLocation;
 	private GpsReceiver gpsReceiver;
 	private final AsyncTask<Void, Void, Void> GPS_CHECKER = new AsyncTask<Void, Void, Void>() {
+		private ProgressDialog progressDialog;
+
+		@Override
+		protected void onPreExecute() {
+			progressDialog = new ProgressDialog(MakeConsignmentSalesOrderActivity.this);
+			progressDialog.setMessage("Waiting for GPS Location...");
+			progressDialog.show();
+		}
 
 		@Override
 		protected Void doInBackground(Void... arg0) {
@@ -73,6 +82,9 @@ public class MakeConsignmentSalesOrderActivity extends Activity {
 
 		@Override
 		protected void onPostExecute(Void result) {
+			if (progressDialog != null && progressDialog.isShowing()) {
+				progressDialog.dismiss();
+			}
 			btnMakeConsignmentOrderNext.setEnabled(true);
 		}
 	};
@@ -226,9 +238,6 @@ public class MakeConsignmentSalesOrderActivity extends Activity {
 		Order order = new Order();
 		long dateInMilliSeconds = makeConsignmentOrderDeliveryDate.getCalendarView().getDate();
 		order.setOrderType(Order.CONSIGNMENT);
-		do {
-			lastKnownLocation = gpsReceiver.getLastKnownLocation();
-		} while (lastKnownLocation == null);
 		order.setOrderMadeTimeStamp(lastKnownLocation.getTime());
 		order.setLatitude(lastKnownLocation.getLatitude());
 		order.setLongitude(lastKnownLocation.getLongitude());

@@ -6,8 +6,10 @@
 package com.xfinity.ceylon_steel.activity.unproductive_call;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.location.Location;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -43,9 +45,18 @@ public class MakeUnProductiveCallActivity extends Activity {
 	private Location lastKnownLocation;
 	private GpsReceiver gpsReceiver;
 
-	private final Thread GPS_CHECKER = new Thread() {
+	private final AsyncTask<Void, Void, Void> GPS_CHECKER = new AsyncTask<Void, Void, Void>() {
+		private ProgressDialog progressDialog;
+
 		@Override
-		public void run() {
+		protected void onPreExecute() {
+			progressDialog = new ProgressDialog(MakeUnProductiveCallActivity.this);
+			progressDialog.setMessage("Waiting for GPS Location...");
+			progressDialog.show();
+		}
+
+		@Override
+		protected Void doInBackground(Void... arg0) {
 			do {
 				lastKnownLocation = gpsReceiver.getLastKnownLocation();
 				try {
@@ -54,6 +65,15 @@ public class MakeUnProductiveCallActivity extends Activity {
 					Logger.getLogger(MakeConsignmentSalesOrderActivity.class.getName()).log(Level.SEVERE, null, ex);
 				}
 			} while (lastKnownLocation == null);
+			return null;
+		}
+
+		@Override
+		protected void onPostExecute(Void result) {
+			if (progressDialog != null && progressDialog.isShowing()) {
+				progressDialog.dismiss();
+			}
+			btnUnProductiveCallSubmit.setEnabled(true);
 		}
 	};
 
@@ -77,6 +97,7 @@ public class MakeUnProductiveCallActivity extends Activity {
 		unProductiveCallOutletAuto = (AutoCompleteTextView) findViewById(R.id.unProductiveCallOutletAuto);
 		txtMakeUnProductiveCallReason = (EditText) findViewById(R.id.txtMakeUnProductiveCallReason);
 		btnUnProductiveCallSubmit = (Button) findViewById(R.id.btnUnProductiveCallSubmit);
+		btnUnProductiveCallSubmit.setEnabled(false);
 
 		unProductiveCallOutletAuto.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
@@ -94,8 +115,7 @@ public class MakeUnProductiveCallActivity extends Activity {
 				btnUnProductiveCallSubmitClicked(view);
 			}
 		});
-
-		GPS_CHECKER.start();
+		GPS_CHECKER.execute();
 	}
 	// </editor-fold>
 
@@ -105,9 +125,6 @@ public class MakeUnProductiveCallActivity extends Activity {
 	}
 
 	private void btnUnProductiveCallSubmitClicked(View view) {
-		do {
-			lastKnownLocation = gpsReceiver.getLastKnownLocation();
-		} while (lastKnownLocation == null);
 		UnProductiveCall unProductiveCall = new UnProductiveCall(
 				outletId,
 				txtMakeUnProductiveCallReason.getText().toString(),

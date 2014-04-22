@@ -229,7 +229,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/res/values/styles.xml" />
         <option value="$PROJECT_DIR$/src/com/xfinity/ceylon_steel/activity/SampleActivity.java" />
         <option value="$PROJECT_DIR$/res/layout/sample.xml" />
         <option value="$PROJECT_DIR$/res/menu/preferences_menu.xml" />
@@ -240,7 +239,6 @@
         <option value="$PROJECT_DIR$/src/com/xfinity/ceylon_steel/controller/CustomerController.java" />
         <option value="$PROJECT_DIR$/res/layout/make_direct_order_page.xml" />
         <option value="$PROJECT_DIR$/res/layout/make_project_order_page.xml" />
-        <option value="$PROJECT_DIR$/src/com/xfinity/ceylon_steel/activity/StartingActivity.java" />
         <option value="$PROJECT_DIR$/assets/database.sql" />
         <option value="$PROJECT_DIR$/src/com/xfinity/ceylon_steel/db/SQLiteDatabaseHelper.java" />
         <option value="$PROJECT_DIR$/src/com/xfinity/ceylon_steel/controller/OutletController.java" />
@@ -267,19 +265,21 @@
         <option value="$PROJECT_DIR$/src/com/xfinity/ceylon_steel/service/GPS.java" />
         <option value="$PROJECT_DIR$/src/com/xfinity/ceylon_steel/activity/make_sales_order/EnterItemDetailActivity.java" />
         <option value="$PROJECT_DIR$/src/com/xfinity/ceylon_steel/activity/make_sales_order/MakeConsignmentSalesOrderActivity.java" />
-        <option value="$PROJECT_DIR$/src/com/xfinity/ceylon_steel/activity/make_sales_order/SelectCategoryActivity.java" />
-        <option value="$PROJECT_DIR$/src/com/xfinity/ceylon_steel/activity/unproductive_call/MakeUnProductiveCallActivity.java" />
         <option value="$PROJECT_DIR$/src/com/xfinity/ceylon_steel/activity/unproductive_call/ViewUnProductiveCallActivity.java" />
         <option value="$PROJECT_DIR$/src/com/xfinity/ceylon_steel/controller/UnProductiveCallController.java" />
-        <option value="$PROJECT_DIR$/src/com/xfinity/ceylon_steel/service/GpsReceiver.java" />
         <option value="$PROJECT_DIR$/src/com/xfinity/ceylon_steel/service/Tracker.java" />
         <option value="$PROJECT_DIR$/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/src/com/xfinity/ceylon_steel/activity/attendence/AttendanceActivity.java" />
         <option value="$PROJECT_DIR$/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/src/com/xfinity/ceylon_steel/controller/UserController.java" />
         <option value="$PROJECT_DIR$/src/com/xfinity/ceylon_steel/controller/CategoryController.java" />
-        <option value="$PROJECT_DIR$/src/com/xfinity/ceylon_steel/controller/WebServiceURL.java" />
         <option value="$PROJECT_DIR$/src/com/xfinity/ceylon_steel/controller/AbstractController.java" />
+        <option value="$PROJECT_DIR$/res/layout/home_page.xml" />
+        <option value="$PROJECT_DIR$/src/com/xfinity/ceylon_steel/activity/make_sales_order/SelectCategoryActivity.java" />
+        <option value="$PROJECT_DIR$/src/com/xfinity/ceylon_steel/activity/StartingActivity.java" />
+        <option value="$PROJECT_DIR$/src/com/xfinity/ceylon_steel/controller/WebServiceURL.java" />
+        <option value="$PROJECT_DIR$/src/com/xfinity/ceylon_steel/service/GpsReceiver.java" />
+        <option value="$PROJECT_DIR$/src/com/xfinity/ceylon_steel/activity/unproductive_call/MakeUnProductiveCallActivity.java" />
       </list>
     </option>
   </component>
@@ -331,6 +331,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
@@ -350,9 +351,74 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ceylon_steel_native_android" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ceylon_steel_native_android" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ceylon_steel" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ceylon_steel_native_android" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ceylon_steel_native_android" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ceylon_steel" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="activity" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ceylon_steel_native_android" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ceylon_steel_native_android" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ceylon_steel" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="activity" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="unproductive_call" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -420,20 +486,17 @@
       <option name="PORT" value="5005" />
       <method />
     </configuration>
-    <configuration default="true" type="XSLT" factoryName="XSLT">
-      <option name="myOutputFile" />
-      <option name="myOpenOutputFile" value="false" />
-      <option name="myOpenInBrowser" value="false" />
-      <option name="mySmartErrorHandling" value="true" />
-      <option name="myRunnerPort" value="34873" />
-      <option name="myVmArguments" />
-      <option name="myWorkingDirectory" />
-      <option name="myModule" />
-      <option name="myJdk" />
-      <parameters />
-      <OutputType value="CONSOLE" save-to-file="false" />
-      <FileType name="XML" />
-      <JdkChoice value="FROM_MODULE" />
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
       <method />
     </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
@@ -463,17 +526,20 @@
       <listeners />
       <method />
     </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
+    <configuration default="true" type="XSLT" factoryName="XSLT">
+      <option name="myOutputFile" />
+      <option name="myOpenOutputFile" value="false" />
+      <option name="myOpenInBrowser" value="false" />
+      <option name="mySmartErrorHandling" value="true" />
+      <option name="myRunnerPort" value="34873" />
+      <option name="myVmArguments" />
+      <option name="myWorkingDirectory" />
+      <option name="myModule" />
+      <option name="myJdk" />
+      <parameters />
+      <OutputType value="CONSOLE" save-to-file="false" />
+      <FileType name="XML" />
+      <JdkChoice value="FROM_MODULE" />
       <method />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -715,11 +781,6 @@
         <state line="39" column="13" selection-start="1467" selection-end="1467" vertical-scroll-proportion="-2.254025" vertical-offset="1350" max-vertical-offset="2040" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/xfinity/ceylon_steel/activity/StartingActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="33" column="38" selection-start="833" selection-end="833" vertical-scroll-proportion="0.0" vertical-offset="170" max-vertical-offset="780" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/xfinity/ceylon_steel/controller/OutletController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="50" column="23" selection-start="1894" selection-end="1894" vertical-scroll-proportion="0.0" vertical-offset="530" max-vertical-offset="1320" />
@@ -743,14 +804,6 @@
         <state line="22" column="54" selection-start="1108" selection-end="1108" vertical-scroll-proportion="0.0" vertical-offset="330" max-vertical-offset="465" />
       </provider>
       <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/home_page.xml">
-      <provider editor-type-id="text-editor">
-        <state line="19" column="47" selection-start="889" selection-end="889" vertical-scroll-proportion="0.0" vertical-offset="21" max-vertical-offset="570" />
-      </provider>
-      <provider selected="true" editor-type-id="android-designer">
         <state />
       </provider>
     </entry>
@@ -902,16 +955,6 @@
         <state line="235" column="72" selection-start="9934" selection-end="9934" vertical-scroll-proportion="0.0" vertical-offset="2608" max-vertical-offset="3180" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/xfinity/ceylon_steel/activity/make_sales_order/SelectCategoryActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="36" column="13" selection-start="1277" selection-end="1277" vertical-scroll-proportion="0.0" vertical-offset="495" max-vertical-offset="2955" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/xfinity/ceylon_steel/activity/unproductive_call/MakeUnProductiveCallActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="71" column="17" selection-start="2454" selection-end="2454" vertical-scroll-proportion="0.1958042" vertical-offset="473" max-vertical-offset="1335" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/xfinity/ceylon_steel/activity/unproductive_call/ViewUnProductiveCallActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="51" column="0" selection-start="1702" selection-end="1702" vertical-scroll-proportion="0.0" vertical-offset="208" max-vertical-offset="780" />
@@ -935,11 +978,6 @@
     <entry file="file://$PROJECT_DIR$/src/com/xfinity/ceylon_steel/activity/attendence/AttendanceActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="83" column="87" selection-start="2579" selection-end="2579" vertical-scroll-proportion="0.16083916" vertical-offset="583" max-vertical-offset="1170" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/xfinity/ceylon_steel/service/GpsReceiver.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="59" column="13" selection-start="2669" selection-end="2669" vertical-scroll-proportion="1.0733453" vertical-offset="90" max-vertical-offset="1485" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/xfinity/ceylon_steel/service/Tracker.java">
@@ -972,16 +1010,61 @@
         <state line="83" column="0" selection-start="3189" selection-end="3189" vertical-scroll-proportion="0.1842576" vertical-offset="767" max-vertical-offset="1650" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/xfinity/ceylon_steel/controller/AbstractController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="32" column="51" selection-start="1163" selection-end="1163" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1560">
+    <entry file="file://$PROJECT_DIR$/res/layout/home_page.xml">
+      <provider editor-type-id="text-editor">
+        <state line="19" column="47" selection-start="889" selection-end="889" vertical-scroll-proportion="0.0" vertical-offset="21" max-vertical-offset="570">
           <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/xfinity/ceylon_steel/activity/make_sales_order/SelectCategoryActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="121" column="56" selection-start="4453" selection-end="4453" vertical-scroll-proportion="0.39335665" vertical-offset="1140" max-vertical-offset="3030">
+          <folding>
+            <element signature="e#6672#6694#0" expanded="true" />
+            <element signature="e#8031#8053#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/xfinity/ceylon_steel/controller/WebServiceURL.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="15" selection-start="298" selection-end="298" vertical-scroll-proportion="0.10489511" vertical-offset="0" max-vertical-offset="900">
+        <state line="34" column="0" selection-start="901" selection-end="901" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="900">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/xfinity/ceylon_steel/activity/StartingActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="35" column="46" selection-start="1007" selection-end="1007" vertical-scroll-proportion="0.0" vertical-offset="13" max-vertical-offset="600">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/xfinity/ceylon_steel/controller/AbstractController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="32" column="49" selection-start="1161" selection-end="1161" vertical-scroll-proportion="0.0" vertical-offset="90" max-vertical-offset="1560">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/xfinity/ceylon_steel/activity/unproductive_call/MakeUnProductiveCallActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="76" column="9" selection-start="2645" selection-end="2645" vertical-scroll-proportion="0.62153846" vertical-offset="473" max-vertical-offset="1665">
+          <folding>
+            <element signature="e#3894#3902#0" expanded="true" />
+            <element signature="e#4068#4185#0" expanded="true" />
+            <element signature="e#4180#4181#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/xfinity/ceylon_steel/service/GpsReceiver.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="105" column="5" selection-start="3274" selection-end="3274" vertical-scroll-proportion="1.0733453" vertical-offset="750" max-vertical-offset="1485">
           <folding />
         </state>
       </provider>

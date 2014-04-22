@@ -243,8 +243,12 @@ public class UserController extends AbstractController {
 	public static void checkIn(final Context context) {
 		final GpsReceiver gpsReceiver = GpsReceiver.getGpsReceiver(context);
 		new AsyncTask<User, Void, JSONObject>() {
+			private ProgressDialog progressDialog;
+
 			@Override
 			protected void onPreExecute() {
+				progressDialog = new ProgressDialog(context);
+				progressDialog.show();
 			}
 
 			@Override
@@ -276,6 +280,9 @@ public class UserController extends AbstractController {
 
 			@Override
 			protected void onPostExecute(JSONObject result) {
+				if (progressDialog != null && progressDialog.isShowing()) {
+					progressDialog.dismiss();
+				}
 				try {
 					int checkIn = result.getInt("response");
 					AlertDialog.Builder responseDialog = new AlertDialog.Builder(context);
@@ -332,8 +339,12 @@ public class UserController extends AbstractController {
 	public static void checkOut(final Context context) {
 		final GpsReceiver gpsReceiver = GpsReceiver.getGpsReceiver(context);
 		new AsyncTask<User, Void, JSONObject>() {
+			private ProgressDialog progressDialog;
+
 			@Override
 			protected void onPreExecute() {
+				progressDialog = new ProgressDialog(context);
+				progressDialog.show();
 			}
 
 			@Override
@@ -365,6 +376,9 @@ public class UserController extends AbstractController {
 
 			@Override
 			protected void onPostExecute(JSONObject result) {
+				if (progressDialog != null && progressDialog.isShowing()) {
+					progressDialog.dismiss();
+				}
 				try {
 					int checkIn = result.getInt("response");
 					AlertDialog.Builder responseDialog = new AlertDialog.Builder(context);

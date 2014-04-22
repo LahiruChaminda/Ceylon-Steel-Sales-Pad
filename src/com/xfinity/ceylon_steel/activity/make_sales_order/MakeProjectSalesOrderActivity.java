@@ -7,6 +7,7 @@ package com.xfinity.ceylon_steel.activity.make_sales_order;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.Location;
@@ -58,6 +59,14 @@ public class MakeProjectSalesOrderActivity extends Activity {
 	private GpsReceiver gpsReceiver;
 
 	private final AsyncTask<Void, Void, Void> GPS_CHECKER = new AsyncTask<Void, Void, Void>() {
+		private ProgressDialog progressDialog;
+
+		@Override
+		protected void onPreExecute() {
+			progressDialog = new ProgressDialog(MakeProjectSalesOrderActivity.this);
+			progressDialog.setMessage("Waiting for GPS Location...");
+			progressDialog.show();
+		}
 
 		@Override
 		protected Void doInBackground(Void... arg0) {
@@ -74,6 +83,9 @@ public class MakeProjectSalesOrderActivity extends Activity {
 
 		@Override
 		protected void onPostExecute(Void result) {
+			if (progressDialog != null && progressDialog.isShowing()) {
+				progressDialog.dismiss();
+			}
 			btnMakeProjectOrderNext.setEnabled(true);
 		}
 	};
@@ -225,9 +237,6 @@ public class MakeProjectSalesOrderActivity extends Activity {
 		}
 		Order order = new Order();
 		long dateInMilliSeconds = makeProjectOrderDeliveryDate.getCalendarView().getDate();
-		do {
-			lastKnownLocation = gpsReceiver.getLastKnownLocation();
-		} while (lastKnownLocation == null);
 		order.setOrderType(Order.PROJECT);
 		order.setOrderMadeTimeStamp(lastKnownLocation.getTime());
 		order.setLatitude(lastKnownLocation.getLatitude());
