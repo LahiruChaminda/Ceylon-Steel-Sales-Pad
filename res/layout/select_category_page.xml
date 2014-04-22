@@ -27,4 +27,12 @@
 		android:id="@+id/btnQuickSync"
 		android:layout_margin="5dp"
 		android:textSize="25dp"/>
+    <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Return To Home"
+            android:layout_alignParentBottom="true"
+            android:id="@+id/btnReturnToHome"
+            android:layout_margin="5dp"
+            android:textSize="25dp"/>
 </LinearLayout>

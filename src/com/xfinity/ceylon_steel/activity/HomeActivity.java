@@ -6,11 +6,10 @@
 package com.xfinity.ceylon_steel.activity;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import com.xfinity.ceylon_steel.R;
@@ -18,6 +17,7 @@ import com.xfinity.ceylon_steel.activity.attendence.AttendanceActivity;
 import com.xfinity.ceylon_steel.activity.make_sales_order.MakeSalesOrderActivity;
 import com.xfinity.ceylon_steel.activity.unproductive_call.UnProductiveCallActivity;
 import com.xfinity.ceylon_steel.activity.view_sales_order.ViewSalesOrderActivity;
+import com.xfinity.ceylon_steel.controller.UserController;
 
 /**
  * @author Supun Lakshan Wanigarathna Dissanayake
@@ -30,6 +30,7 @@ public class HomeActivity extends Activity {
 	private Button btnViewSalesOrder;
 	private Button btnAttendence;
 	private Button btnUnProductiveCall;
+	private Button btnLogout;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -39,16 +40,8 @@ public class HomeActivity extends Activity {
 	}
 
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		super.onCreateOptionsMenu(menu);
-		MenuInflater menuInflater = getMenuInflater();
-		menuInflater.inflate(R.menu.menu_page, menu);
-		return true;
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		return super.onOptionsItemSelected(item);
+	public void onBackPressed() {
+		btnLogout.performClick();
 	}
 
 	// <editor-fold defaultstate="collapsed" desc="Initialize">
@@ -57,6 +50,8 @@ public class HomeActivity extends Activity {
 		btnViewSalesOrder = (Button) findViewById(R.id.btnViewSalesOrder);
 		btnAttendence = (Button) findViewById(R.id.btnAttendence);
 		btnUnProductiveCall = (Button) findViewById(R.id.btnUnProductiveCall);
+		btnLogout = (Button) findViewById(R.id.btnLogout);
+
 		btnMakeSalesOrder.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View view) {
 				btnMakeSalesOrderClicked(view);
@@ -75,6 +70,11 @@ public class HomeActivity extends Activity {
 		btnUnProductiveCall.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View view) {
 				btnUnProductiveCallClicked(view);
+			}
+		});
+		btnLogout.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View view) {
+				btnLogoutClicked(view);
 			}
 		});
 	}
@@ -102,6 +102,24 @@ public class HomeActivity extends Activity {
 		Intent unProductiveCall = new Intent(this, UnProductiveCallActivity.class);
 		startActivity(unProductiveCall);
 		finish();
+	}
+
+	private void btnLogoutClicked(View view) {
+		AlertDialog.Builder alert = new AlertDialog.Builder(this);
+		alert.setTitle(com.xfinity.ceylon_steel.R.string.message_title);
+		alert.setMessage("You're about to sign out from sales pad.\nIf you logout your unsyncked data will be deleted.\nAre you sure you want to continue?");
+		alert.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface arg0, int arg1) {
+				boolean clearAuthentication = UserController.clearAuthentication(HomeActivity.this);
+				if (clearAuthentication) {
+					Intent loginActivity = new Intent(HomeActivity.this, LoginActivity.class);
+					startActivity(loginActivity);
+					finish();
+				}
+			}
+		});
+		alert.setNegativeButton("No", null);
+		alert.show();
 	}
 
 }

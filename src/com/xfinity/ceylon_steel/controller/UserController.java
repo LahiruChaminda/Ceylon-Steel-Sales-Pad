@@ -501,4 +501,14 @@ public class UserController extends AbstractController {
 		}
 		database.close();
 	}
+
+	public static boolean clearAuthentication(Context context) {
+		SharedPreferences userData = context.getSharedPreferences("userData", Context.MODE_PRIVATE);
+		SharedPreferences.Editor editor = userData.edit();
+		editor.putInt("userId", -1);
+		editor.putString("userName", "");
+		editor.putString("type", "");
+		editor.putLong("loginTime", -1);
+		return editor.commit();
+	}
 }

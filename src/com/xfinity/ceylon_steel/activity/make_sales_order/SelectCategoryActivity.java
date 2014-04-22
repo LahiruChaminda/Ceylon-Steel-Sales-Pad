@@ -22,6 +22,7 @@ import android.widget.ExpandableListView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.xfinity.ceylon_steel.R;
+import com.xfinity.ceylon_steel.activity.HomeActivity;
 import com.xfinity.ceylon_steel.controller.CategoryController;
 import com.xfinity.ceylon_steel.controller.OrderController;
 import com.xfinity.ceylon_steel.model.Category;
@@ -39,6 +40,7 @@ public class SelectCategoryActivity extends Activity {
 
 	private Button btnFinishMakeBill;
 	private Button btnQuickSync;
+	private Button btnReturnToHome;
 	private ExpandableListView expandableListView;
 	private ArrayList<Category> categories;
 	private Order order;
@@ -56,7 +58,20 @@ public class SelectCategoryActivity extends Activity {
 
 	@Override
 	public void onBackPressed() {
-		super.onBackPressed();
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setTitle(R.string.message_title);
+		if (orderDetails.size() > 0) {
+			builder.setMessage("You are about to cancel this order\nAre you sure you want to continue?");
+			builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface arg0, int arg1) {
+					SelectCategoryActivity.super.onBackPressed();
+				}
+			});
+			builder.setNegativeButton("No", null);
+			builder.show();
+		} else {
+			super.onBackPressed();
+		}
 	}
 
 	@Override
@@ -175,6 +190,13 @@ public class SelectCategoryActivity extends Activity {
 				btnQuickSyncClicked(view);
 			}
 		});
+		btnReturnToHome = (Button) findViewById(R.id.btnReturnToHome);
+		btnReturnToHome.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View view) {
+				btnReturnToHomeClicked(view);
+			}
+		});
+		itemIds.clear();
 	}
 	// </editor-fold>
 
@@ -248,6 +270,27 @@ public class SelectCategoryActivity extends Activity {
 			builder.setMessage("In order to proceed, You need to select at least one item");
 			builder.setPositiveButton("Ok", null);
 			builder.show();
+		}
+	}
+
+	private void btnReturnToHomeClicked(View view) {
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setTitle(R.string.message_title);
+		if (orderDetails.size() > 0) {
+			builder.setMessage("You are about to cancel this order\nAre you sure you want to continue?");
+			builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface arg0, int arg1) {
+					Intent homeActivity = new Intent(SelectCategoryActivity.this, HomeActivity.class);
+					startActivity(homeActivity);
+					finish();
+				}
+			});
+			builder.setNegativeButton("No", null);
+			builder.show();
+		} else {
+			Intent homeActivity = new Intent(SelectCategoryActivity.this, HomeActivity.class);
+			startActivity(homeActivity);
+			finish();
 		}
 	}
 }

@@ -156,9 +156,6 @@
       </layout>
     </layouts>
   </component>
-  <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="getChil" />
-  </component>
   <component name="ChangeListManager">
     <list default="true" id="705bd5aa-854f-4790-a9d6-20c6e04e4b10" name="Default" comment="" />
     <ignored path="ceylon_steel.iws" />
@@ -222,34 +219,7 @@
     <favorites_list name="ceylon_steel" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="MakeConsignmentSalesOrderActivity.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/com/xfinity/ceylon_steel/activity/make_sales_order/MakeConsignmentSalesOrderActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="242" column="61" selection-start="9854" selection-end="9854" vertical-scroll-proportion="2.4947553" vertical-offset="1078" max-vertical-offset="2835">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SelectCategoryActivity.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/xfinity/ceylon_steel/activity/make_sales_order/SelectCategoryActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="121" column="59" selection-start="4267" selection-end="4267" vertical-scroll-proportion="0.0" vertical-offset="1845" max-vertical-offset="3690">
-              <folding>
-                <element signature="e#0#9523#0" expanded="true" />
-                <element signature="imports" expanded="true" />
-                <element signature="docComment;class#SelectCategoryActivity#0" expanded="true" />
-                <element signature="e#1594#1607#0" expanded="true" />
-                <element signature="e#1668#1677#0" expanded="true" />
-                <element signature="e#7177#7199#0" expanded="true" />
-                <element signature="e#8536#8558#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -269,7 +239,6 @@
         <option value="$PROJECT_DIR$/res/layout/make_direct_order_page.xml" />
         <option value="$PROJECT_DIR$/res/layout/make_project_order_page.xml" />
         <option value="$PROJECT_DIR$/assets/database.sql" />
-        <option value="$PROJECT_DIR$/src/com/xfinity/ceylon_steel/db/SQLiteDatabaseHelper.java" />
         <option value="$PROJECT_DIR$/src/com/xfinity/ceylon_steel/controller/OutletController.java" />
         <option value="$PROJECT_DIR$/res/layout/made_consignment_page.xml" />
         <option value="$PROJECT_DIR$/res/layout/made_project_page.xml" />
@@ -285,7 +254,6 @@
         <option value="$PROJECT_DIR$/res/layout/item_list_page.xml" />
         <option value="$PROJECT_DIR$/src/com/xfinity/ceylon_steel/activity/view_sales_order/ViewConsignmentSalesOrderActivity.java" />
         <option value="$PROJECT_DIR$/src/com/xfinity/ceylon_steel/activity/view_sales_order/ViewItemDetailActivity.java" />
-        <option value="$PROJECT_DIR$/res/layout/select_category_page.xml" />
         <option value="$PROJECT_DIR$/res/layout/made_unproductive_call_page.xml" />
         <option value="$PROJECT_DIR$/res/layout/view_consignment_order_page.xml" />
         <option value="$PROJECT_DIR$/res/layout/view_project_order_page.xml" />
@@ -302,7 +270,6 @@
         <option value="$PROJECT_DIR$/src/com/xfinity/ceylon_steel/controller/UserController.java" />
         <option value="$PROJECT_DIR$/src/com/xfinity/ceylon_steel/controller/CategoryController.java" />
         <option value="$PROJECT_DIR$/src/com/xfinity/ceylon_steel/controller/AbstractController.java" />
-        <option value="$PROJECT_DIR$/res/layout/home_page.xml" />
         <option value="$PROJECT_DIR$/src/com/xfinity/ceylon_steel/activity/StartingActivity.java" />
         <option value="$PROJECT_DIR$/src/com/xfinity/ceylon_steel/controller/WebServiceURL.java" />
         <option value="$PROJECT_DIR$/src/com/xfinity/ceylon_steel/service/GpsReceiver.java" />
@@ -310,6 +277,9 @@
         <option value="$PROJECT_DIR$/res/layout/group_row.xml" />
         <option value="$PROJECT_DIR$/src/com/xfinity/ceylon_steel/activity/make_sales_order/SelectCategoryActivity.java" />
         <option value="$PROJECT_DIR$/src/com/xfinity/ceylon_steel/activity/make_sales_order/MakeConsignmentSalesOrderActivity.java" />
+        <option value="$PROJECT_DIR$/res/layout/home_page.xml" />
+        <option value="$PROJECT_DIR$/res/layout/select_category_page.xml" />
+        <option value="$PROJECT_DIR$/src/com/xfinity/ceylon_steel/db/SQLiteDatabaseHelper.java" />
       </list>
     </option>
   </component>
@@ -361,6 +331,8 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -407,28 +379,8 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ceylon_steel_native_android" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ceylon_steel_native_android" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="layout" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -453,7 +405,7 @@
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager2.WIDTH" value="291" />
+    <property name="UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager2.WIDTH" value="409" />
     <property name="LayoutCode.rearrangeEntriesJava" value="false" />
   </component>
   <component name="RecentsManager">
@@ -496,20 +448,17 @@
       <option name="PORT" value="5005" />
       <method />
     </configuration>
-    <configuration default="true" type="XSLT" factoryName="XSLT">
-      <option name="myOutputFile" />
-      <option name="myOpenOutputFile" value="false" />
-      <option name="myOpenInBrowser" value="false" />
-      <option name="mySmartErrorHandling" value="true" />
-      <option name="myRunnerPort" value="34873" />
-      <option name="myVmArguments" />
-      <option name="myWorkingDirectory" />
-      <option name="myModule" />
-      <option name="myJdk" />
-      <parameters />
-      <OutputType value="CONSOLE" save-to-file="false" />
-      <FileType name="XML" />
-      <JdkChoice value="FROM_MODULE" />
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
       <method />
     </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
@@ -539,17 +488,20 @@
       <listeners />
       <method />
     </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
+    <configuration default="true" type="XSLT" factoryName="XSLT">
+      <option name="myOutputFile" />
+      <option name="myOpenOutputFile" value="false" />
+      <option name="myOpenInBrowser" value="false" />
+      <option name="mySmartErrorHandling" value="true" />
+      <option name="myRunnerPort" value="34873" />
+      <option name="myVmArguments" />
+      <option name="myWorkingDirectory" />
+      <option name="myModule" />
+      <option name="myJdk" />
+      <parameters />
+      <OutputType value="CONSOLE" save-to-file="false" />
+      <FileType name="XML" />
+      <JdkChoice value="FROM_MODULE" />
       <method />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -709,11 +661,12 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.23564954" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2549168" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32993197" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -729,12 +682,11 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22960725" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" x="582" y="165" width="201" height="397" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22885196" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" x="582" y="165" width="201" height="397" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32943144" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" x="92" y="92" width="1182" height="554" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2549168" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32833335" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -791,25 +743,20 @@
         <state line="50" column="23" selection-start="1894" selection-end="1894" vertical-scroll-proportion="0.0" vertical-offset="530" max-vertical-offset="1320" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/xfinity/ceylon_steel/db/SQLiteDatabaseHelper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="41" selection-start="879" selection-end="879" vertical-scroll-proportion="-0.2543554" vertical-offset="281" max-vertical-offset="855" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/res/layout/made_consignment_page.xml">
-      <provider editor-type-id="text-editor">
-        <state line="11" column="17" selection-start="491" selection-end="491" vertical-scroll-proportion="0.0" vertical-offset="165" max-vertical-offset="420" />
-      </provider>
       <provider selected="true" editor-type-id="android-designer">
         <state />
       </provider>
+      <provider editor-type-id="text-editor">
+        <state line="11" column="17" selection-start="491" selection-end="491" vertical-scroll-proportion="0.0" vertical-offset="165" max-vertical-offset="420" />
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/res/layout/made_direct_page.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="54" selection-start="1108" selection-end="1108" vertical-scroll-proportion="0.0" vertical-offset="330" max-vertical-offset="465" />
-      </provider>
       <provider editor-type-id="android-designer">
         <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="22" column="54" selection-start="1108" selection-end="1108" vertical-scroll-proportion="0.0" vertical-offset="330" max-vertical-offset="465" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/xfinity/ceylon_steel/model/Order.java">
@@ -842,28 +789,20 @@
         <state line="62" column="0" selection-start="1891" selection-end="1891" vertical-scroll-proportion="0.0" vertical-offset="600" max-vertical-offset="1350" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/select_category_page.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="15" selection-start="790" selection-end="790" vertical-scroll-proportion="0.57586837" vertical-offset="0" max-vertical-offset="547" />
-      </provider>
-      <provider editor-type-id="android-designer">
+    <entry file="file://$PROJECT_DIR$/res/layout/made_project_page.xml">
+      <provider selected="true" editor-type-id="android-designer">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/made_project_page.xml">
       <provider editor-type-id="text-editor">
         <state line="21" column="57" selection-start="1100" selection-end="1100" vertical-scroll-proportion="0.0" vertical-offset="315" max-vertical-offset="450" />
       </provider>
-      <provider selected="true" editor-type-id="android-designer">
-        <state />
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/res/layout/made_unproductive_call_page.xml">
-      <provider editor-type-id="text-editor">
-        <state line="14" column="38" selection-start="619" selection-end="619" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="405" />
-      </provider>
       <provider selected="true" editor-type-id="android-designer">
         <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state line="14" column="38" selection-start="619" selection-end="619" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="405" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/xfinity/ceylon_steel/controller/OrderController.java">
@@ -877,67 +816,67 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/res/layout/view_project_order_page.xml">
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
+      </provider>
       <provider editor-type-id="text-editor">
         <state line="29" column="42" selection-start="1031" selection-end="1031" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2775" />
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/view_consignment_order_page.xml">
       <provider selected="true" editor-type-id="android-designer">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/view_consignment_order_page.xml">
       <provider editor-type-id="text-editor">
         <state line="26" column="12" selection-start="934" selection-end="934" vertical-scroll-proportion="0.0" vertical-offset="208" max-vertical-offset="2595" />
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/view_direct_order_page.xml">
       <provider selected="true" editor-type-id="android-designer">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/view_direct_order_page.xml">
       <provider editor-type-id="text-editor">
         <state line="127" column="27" selection-start="6310" selection-end="6310" vertical-scroll-proportion="0.0" vertical-offset="1598" max-vertical-offset="2265" />
       </provider>
-      <provider selected="true" editor-type-id="android-designer">
-        <state />
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/res/layout/view_item_detail_page.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state line="86" column="12" selection-start="4432" selection-end="4432" vertical-scroll-proportion="0.49726775" vertical-offset="1017" max-vertical-offset="1605" />
       </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/res/layout/make_project_order_page.xml">
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
+      </provider>
       <provider editor-type-id="text-editor">
         <state line="12" column="54" selection-start="627" selection-end="627" vertical-scroll-proportion="0.0" vertical-offset="180" max-vertical-offset="1455" />
       </provider>
-      <provider selected="true" editor-type-id="android-designer">
-        <state />
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/res/layout/make_consignment_order_page.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="12" selection-start="1260" selection-end="1260" vertical-scroll-proportion="-7.32" vertical-offset="147" max-vertical-offset="1485" />
-      </provider>
       <provider editor-type-id="android-designer">
         <state />
       </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="22" column="12" selection-start="1260" selection-end="1260" vertical-scroll-proportion="-7.32" vertical-offset="147" max-vertical-offset="1485" />
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/res/layout/make_direct_order_page.xml">
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
+      </provider>
       <provider editor-type-id="text-editor">
         <state line="71" column="53" selection-start="4360" selection-end="4360" vertical-scroll-proportion="0.0" vertical-offset="750" max-vertical-offset="1335" />
       </provider>
-      <provider selected="true" editor-type-id="android-designer">
-        <state />
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/res/layout/enter_item_detail_page.xml">
-      <provider editor-type-id="text-editor">
-        <state line="35" column="12" selection-start="1665" selection-end="1665" vertical-scroll-proportion="0.0" vertical-offset="525" max-vertical-offset="1470" />
-      </provider>
       <provider selected="true" editor-type-id="android-designer">
         <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state line="35" column="12" selection-start="1665" selection-end="1665" vertical-scroll-proportion="0.0" vertical-offset="525" max-vertical-offset="1470" />
       </provider>
     </entry>
     <entry file="jar://E:/adt-bundle-windows-x86-20131030/sdk/platforms/android-19/android.jar!/android/os/AsyncTask.class">
@@ -1005,21 +944,6 @@
         <state line="57" column="12" selection-start="1559" selection-end="1559" vertical-scroll-proportion="0.0" vertical-offset="221" max-vertical-offset="795" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/xfinity/ceylon_steel/controller/CategoryController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="83" column="0" selection-start="3189" selection-end="3189" vertical-scroll-proportion="0.1842576" vertical-offset="767" max-vertical-offset="1650" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/home_page.xml">
-      <provider editor-type-id="text-editor">
-        <state line="19" column="47" selection-start="889" selection-end="889" vertical-scroll-proportion="0.0" vertical-offset="21" max-vertical-offset="570">
-          <folding />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/xfinity/ceylon_steel/controller/WebServiceURL.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="34" column="0" selection-start="901" selection-end="901" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="900" />
@@ -1054,21 +978,54 @@
     <entry file="file://$PROJECT_DIR$/src/com/xfinity/ceylon_steel/activity/make_sales_order/SelectCategoryActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="121" column="59" selection-start="4267" selection-end="4267" vertical-scroll-proportion="0.0" vertical-offset="1845" max-vertical-offset="3690">
-          <folding>
-            <element signature="e#0#9523#0" expanded="true" />
-            <element signature="imports" expanded="true" />
-            <element signature="docComment;class#SelectCategoryActivity#0" expanded="true" />
-            <element signature="e#1594#1607#0" expanded="true" />
-            <element signature="e#1668#1677#0" expanded="true" />
-            <element signature="e#7177#7199#0" expanded="true" />
-            <element signature="e#8536#8558#0" expanded="true" />
-          </folding>
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/home_page.xml">
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state line="7" column="4" selection-start="238" selection-end="238" vertical-scroll-proportion="0.0" vertical-offset="113" max-vertical-offset="660">
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/xfinity/ceylon_steel/activity/make_sales_order/MakeConsignmentSalesOrderActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="242" column="61" selection-start="9854" selection-end="9854" vertical-scroll-proportion="2.4947553" vertical-offset="1078" max-vertical-offset="2835">
+        <state line="224" column="9" selection-start="9100" selection-end="9100" vertical-scroll-proportion="1.3811189" vertical-offset="1520" max-vertical-offset="2835">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/select_category_page.xml">
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state line="34" column="44" selection-start="1164" selection-end="1179" vertical-scroll-proportion="0.0" vertical-offset="68" max-vertical-offset="645">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/xfinity/ceylon_steel/controller/CategoryController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="84" column="66" selection-start="3338" selection-end="3338" vertical-scroll-proportion="0.0" vertical-offset="720" max-vertical-offset="1650">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://E:/adt-bundle-windows-x86-20131030/sdk/platforms/android-19/android.jar!/android/database/sqlite/SQLiteOpenHelper.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="50" selection-start="821" selection-end="821" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="525">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/xfinity/ceylon_steel/db/SQLiteDatabaseHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="35" column="0" selection-start="1098" selection-end="1098" vertical-scroll-proportion="-0.15384616" vertical-offset="358" max-vertical-offset="930">
           <folding />
         </state>
       </provider>

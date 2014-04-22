@@ -33,7 +33,7 @@ public class LoginActivity extends Activity {
 
 	@Override
 	public void onBackPressed() {
-		//
+		System.exit(0);
 	}
 
 	// <editor-fold defaultstate="collapsed" desc="Initialize">
