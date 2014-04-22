@@ -44,13 +44,19 @@ public class SelectCategoryActivity extends Activity {
 	private Order order;
 
 	private final ArrayList<OrderDetail> orderDetails = new ArrayList<OrderDetail>();
-	private View clickedView;
+	private final ArrayList<Integer> itemIds = new ArrayList<Integer>();
+	private int categoryPosition;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.select_category_page);
 		initialize();
+	}
+
+	@Override
+	public void onBackPressed() {
+		super.onBackPressed();
 	}
 
 	@Override
@@ -67,6 +73,12 @@ public class SelectCategoryActivity extends Activity {
 				}
 			}
 		}
+		itemIds.clear();
+		for (OrderDetail orderDetail : orderDetails) {
+			itemIds.add(orderDetail.getItemId());
+		}
+		expandableListView.collapseGroup(categoryPosition);
+		expandableListView.expandGroup(categoryPosition);
 	}
 
 	// <editor-fold defaultstate="collapsed" desc="Initialize">
@@ -101,7 +113,7 @@ public class SelectCategoryActivity extends Activity {
 			}
 
 			public boolean hasStableIds() {
-				return false;
+				return true;
 			}
 
 			public View getGroupView(int categoryPosition, boolean isExpanded, View convertView, ViewGroup parent) {
@@ -121,6 +133,7 @@ public class SelectCategoryActivity extends Activity {
 				return linearLayout;
 			}
 
+			@Override
 			public View getChildView(int categoryPosition, int itemPosition, boolean isLastChild, View convertView, ViewGroup parent) {
 				String itemText = this.getChild(categoryPosition, itemPosition).toString();
 				AbsListView.LayoutParams lp = new AbsListView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -129,6 +142,10 @@ public class SelectCategoryActivity extends Activity {
 				item.setLayoutParams(lp);
 				item.setTextSize(1, 20);
 				item.setText(itemText);
+				if (itemIds.contains(categories.get(categoryPosition).getItems().get(itemPosition).getItemId())) {
+					item.setBackgroundColor(Color.rgb(79, 130, 180));
+					item.setTextColor(Color.WHITE);
+				}
 				return item;
 			}
 
@@ -136,6 +153,7 @@ public class SelectCategoryActivity extends Activity {
 				return true;
 			}
 		};
+
 		expandableListView.setAdapter(expandableListAdapter);
 		expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
 			@Override
@@ -162,9 +180,8 @@ public class SelectCategoryActivity extends Activity {
 
 	private boolean onChildClicked(ExpandableListView parent, View view, int groupPosition, int childPosition, long id) {
 		Item item = categories.get(groupPosition).getItems().get(childPosition);
-		clickedView = view;
-		clickedView.setBackgroundColor(Color.rgb(100, 100, 100));
 		Intent enterItemDetailActivity = new Intent(this, EnterItemDetailActivity.class);
+		categoryPosition = groupPosition;
 		enterItemDetailActivity.putExtra("item", item);
 		startActivityForResult(enterItemDetailActivity, 0);
 		return true;
