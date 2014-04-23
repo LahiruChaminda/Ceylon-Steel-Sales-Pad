@@ -64,6 +64,7 @@ public class MakeConsignmentSalesOrderActivity extends Activity {
 		protected void onPreExecute() {
 			progressDialog = new ProgressDialog(MakeConsignmentSalesOrderActivity.this);
 			progressDialog.setMessage("Waiting for GPS Location...");
+            progressDialog.setCanceledOnTouchOutside(false);
 			progressDialog.show();
 		}
 

@@ -65,4 +65,8 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
 		onCreate(db);
 	}
 
+	public static boolean dropDatabase(Context context) {
+		return context.deleteDatabase(DATABASE_NAME);
+	}
+
 }

@@ -52,6 +52,7 @@ public class MakeUnProductiveCallActivity extends Activity {
 		protected void onPreExecute() {
 			progressDialog = new ProgressDialog(MakeUnProductiveCallActivity.this);
 			progressDialog.setMessage("Waiting for GPS Location...");
+            progressDialog.setCanceledOnTouchOutside(false);
 			progressDialog.show();
 		}
 

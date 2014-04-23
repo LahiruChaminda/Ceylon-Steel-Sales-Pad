@@ -64,6 +64,7 @@ public class MakeProjectSalesOrderActivity extends Activity {
 		@Override
 		protected void onPreExecute() {
 			progressDialog = new ProgressDialog(MakeProjectSalesOrderActivity.this);
+            progressDialog.setCanceledOnTouchOutside(false);
 			progressDialog.setMessage("Waiting for GPS Location...");
 			progressDialog.show();
 		}

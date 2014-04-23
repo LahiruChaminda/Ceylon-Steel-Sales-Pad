@@ -59,6 +59,7 @@ public class MakeDirectSalesOrderActivity extends Activity {
 		protected void onPreExecute() {
 			progressDialog = new ProgressDialog(MakeDirectSalesOrderActivity.this);
 			progressDialog.setMessage("Waiting for GPS Location...");
+            progressDialog.setCanceledOnTouchOutside(false);
 			progressDialog.show();
 		}
 

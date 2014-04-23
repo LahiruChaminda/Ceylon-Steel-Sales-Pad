@@ -204,6 +204,8 @@ public class UserController extends AbstractController {
 							loadDataFromServer(context);
 							Intent homeActivity = new Intent(context, HomeActivity.class);
 							context.startActivity(homeActivity);
+                            Intent tracker = new Intent(context, Tracker.class);
+                            context.startService(tracker);
 						} else {
 							builder.setMessage("Incorrect Username Password combination");
 							builder.show();
@@ -248,6 +250,8 @@ public class UserController extends AbstractController {
 			@Override
 			protected void onPreExecute() {
 				progressDialog = new ProgressDialog(context);
+                progressDialog.setMessage("Waiting for GPS Location...");
+                progressDialog.setCanceledOnTouchOutside(false);
 				progressDialog.show();
 			}
 
@@ -314,8 +318,6 @@ public class UserController extends AbstractController {
 									context.startActivity(homeActivity);
 								}
 							});
-							Intent tracker = new Intent(context, Tracker.class);
-							context.startService(tracker);
 							break;
 						case 2:
 							responseDialog.setMessage("Already checked in");
@@ -344,6 +346,8 @@ public class UserController extends AbstractController {
 			@Override
 			protected void onPreExecute() {
 				progressDialog = new ProgressDialog(context);
+                progressDialog.setMessage("Waiting for GPS Location...");
+                progressDialog.setCanceledOnTouchOutside(false);
 				progressDialog.show();
 			}
 

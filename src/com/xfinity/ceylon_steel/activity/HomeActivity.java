@@ -18,6 +18,8 @@ import com.xfinity.ceylon_steel.activity.make_sales_order.MakeSalesOrderActivity
 import com.xfinity.ceylon_steel.activity.unproductive_call.UnProductiveCallActivity;
 import com.xfinity.ceylon_steel.activity.view_sales_order.ViewSalesOrderActivity;
 import com.xfinity.ceylon_steel.controller.UserController;
+import com.xfinity.ceylon_steel.db.SQLiteDatabaseHelper;
+import com.xfinity.ceylon_steel.service.Tracker;
 
 /**
  * @author Supun Lakshan Wanigarathna Dissanayake
@@ -41,7 +43,7 @@ public class HomeActivity extends Activity {
 
 	@Override
 	public void onBackPressed() {
-		btnLogout.performClick();
+		System.exit(0);
 	}
 
 	// <editor-fold defaultstate="collapsed" desc="Initialize">
@@ -107,11 +109,14 @@ public class HomeActivity extends Activity {
 	private void btnLogoutClicked(View view) {
 		AlertDialog.Builder alert = new AlertDialog.Builder(this);
 		alert.setTitle(com.xfinity.ceylon_steel.R.string.message_title);
-		alert.setMessage("You're about to sign out from sales pad.\nIf you logout your unsyncked data will be deleted.\nAre you sure you want to continue?");
+		alert.setMessage("You're about to sign-out from sales pad.\nIf you sign-out your un synchronized data will be deleted.\nAre you sure you want to continue?");
 		alert.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface arg0, int arg1) {
+                Intent tracker = new Intent(HomeActivity.this, Tracker.class);
+                HomeActivity.this.stopService(tracker);
 				boolean clearAuthentication = UserController.clearAuthentication(HomeActivity.this);
 				if (clearAuthentication) {
+					SQLiteDatabaseHelper.dropDatabase(HomeActivity.this);
 					Intent loginActivity = new Intent(HomeActivity.this, LoginActivity.class);
 					startActivity(loginActivity);
 					finish();
