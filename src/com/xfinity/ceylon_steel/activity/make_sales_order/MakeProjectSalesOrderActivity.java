@@ -64,7 +64,7 @@ public class MakeProjectSalesOrderActivity extends Activity {
 		@Override
 		protected void onPreExecute() {
 			progressDialog = new ProgressDialog(MakeProjectSalesOrderActivity.this);
-            progressDialog.setCanceledOnTouchOutside(false);
+			progressDialog.setCanceledOnTouchOutside(false);
 			progressDialog.setMessage("Waiting for GPS Location...");
 			progressDialog.show();
 		}
@@ -239,6 +239,9 @@ public class MakeProjectSalesOrderActivity extends Activity {
 		Order order = new Order();
 		long dateInMilliSeconds = makeProjectOrderDeliveryDate.getCalendarView().getDate();
 		order.setOrderType(Order.PROJECT);
+		do {
+			lastKnownLocation = gpsReceiver.getLastKnownLocation();
+		} while (lastKnownLocation == null);
 		order.setOrderMadeTimeStamp(lastKnownLocation.getTime());
 		order.setLatitude(lastKnownLocation.getLatitude());
 		order.setLongitude(lastKnownLocation.getLongitude());

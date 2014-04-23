@@ -64,7 +64,7 @@ public class MakeConsignmentSalesOrderActivity extends Activity {
 		protected void onPreExecute() {
 			progressDialog = new ProgressDialog(MakeConsignmentSalesOrderActivity.this);
 			progressDialog.setMessage("Waiting for GPS Location...");
-            progressDialog.setCanceledOnTouchOutside(false);
+			progressDialog.setCanceledOnTouchOutside(false);
 			progressDialog.show();
 		}
 
@@ -239,6 +239,9 @@ public class MakeConsignmentSalesOrderActivity extends Activity {
 		Order order = new Order();
 		long dateInMilliSeconds = makeConsignmentOrderDeliveryDate.getCalendarView().getDate();
 		order.setOrderType(Order.CONSIGNMENT);
+		do {
+			lastKnownLocation = gpsReceiver.getLastKnownLocation();
+		} while (lastKnownLocation == null);
 		order.setOrderMadeTimeStamp(lastKnownLocation.getTime());
 		order.setLatitude(lastKnownLocation.getLatitude());
 		order.setLongitude(lastKnownLocation.getLongitude());

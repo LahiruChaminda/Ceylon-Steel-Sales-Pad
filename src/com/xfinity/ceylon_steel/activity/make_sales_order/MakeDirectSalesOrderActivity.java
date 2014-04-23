@@ -59,7 +59,7 @@ public class MakeDirectSalesOrderActivity extends Activity {
 		protected void onPreExecute() {
 			progressDialog = new ProgressDialog(MakeDirectSalesOrderActivity.this);
 			progressDialog.setMessage("Waiting for GPS Location...");
-            progressDialog.setCanceledOnTouchOutside(false);
+			progressDialog.setCanceledOnTouchOutside(false);
 			progressDialog.show();
 		}
 
@@ -200,6 +200,9 @@ public class MakeDirectSalesOrderActivity extends Activity {
 		Order order = new Order();
 		long dateInMilliSeconds = makeDirectOrderDeliveryDate.getCalendarView().getDate();
 		order.setOrderType(Order.DIRECT);
+		do {
+			lastKnownLocation = gpsReceiver.getLastKnownLocation();
+		} while (lastKnownLocation == null);
 		order.setOrderMadeTimeStamp(lastKnownLocation.getTime());
 		order.setLatitude(lastKnownLocation.getLatitude());
 		order.setLongitude(lastKnownLocation.getLongitude());
