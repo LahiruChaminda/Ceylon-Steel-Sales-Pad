@@ -219,7 +219,30 @@
     <favorites_list name="ceylon_steel" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="AttendanceActivity.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/xfinity/ceylon_steel/activity/attendence/AttendanceActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="100" column="26" selection-start="3191" selection-end="3191" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1170">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UserController.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/xfinity/ceylon_steel/controller/UserController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="364" column="39" selection-start="14093" selection-end="14093" vertical-scroll-proportion="0.75174826" vertical-offset="4220" max-vertical-offset="6930">
+              <folding>
+                <element signature="e#7570#7617#0" expanded="true" />
+                <element signature="e#11325#11372#0" expanded="true" />
+                <element signature="e#15170#15217#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -268,7 +291,6 @@
         <option value="$PROJECT_DIR$/src/com/xfinity/ceylon_steel/controller/AbstractController.java" />
         <option value="$PROJECT_DIR$/src/com/xfinity/ceylon_steel/activity/StartingActivity.java" />
         <option value="$PROJECT_DIR$/src/com/xfinity/ceylon_steel/controller/WebServiceURL.java" />
-        <option value="$PROJECT_DIR$/src/com/xfinity/ceylon_steel/service/GpsReceiver.java" />
         <option value="$PROJECT_DIR$/res/layout/group_row.xml" />
         <option value="$PROJECT_DIR$/src/com/xfinity/ceylon_steel/activity/make_sales_order/SelectCategoryActivity.java" />
         <option value="$PROJECT_DIR$/res/layout/home_page.xml" />
@@ -279,6 +301,7 @@
         <option value="$PROJECT_DIR$/src/com/xfinity/ceylon_steel/activity/make_sales_order/MakeDirectSalesOrderActivity.java" />
         <option value="$PROJECT_DIR$/src/com/xfinity/ceylon_steel/activity/make_sales_order/MakeProjectSalesOrderActivity.java" />
         <option value="$PROJECT_DIR$/src/com/xfinity/ceylon_steel/activity/unproductive_call/MakeUnProductiveCallActivity.java" />
+        <option value="$PROJECT_DIR$/src/com/xfinity/ceylon_steel/service/GpsReceiver.java" />
         <option value="$PROJECT_DIR$/src/com/xfinity/ceylon_steel/controller/UserController.java" />
       </list>
     </option>
@@ -331,8 +354,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -368,72 +389,6 @@
               <option name="myItemId" value="ceylon_steel" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="service" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ceylon_steel_native_android" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ceylon_steel_native_android" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ceylon_steel" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ceylon_steel_native_android" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ceylon_steel_native_android" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ceylon_steel" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="db" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ceylon_steel_native_android" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ceylon_steel_native_android" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ceylon_steel" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="controller" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -454,32 +409,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="activity" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ceylon_steel_native_android" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ceylon_steel_native_android" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ceylon_steel" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="activity" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="unproductive_call" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -509,22 +438,10 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ceylon_steel_native_android" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ceylon_steel_native_android" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -535,7 +452,7 @@
     <property name="MemberChooser.showClasses" value="true" />
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="recentsLimit" value="5" />
-    <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="0123456789ABCDEF" />
+    <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="emulator-5554" />
     <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_AVD" value="1280x720_3.2" />
     <property name="FullScreen" value="false" />
     <property name="options.lastSelected" value="reference.idesettings.quicklists" />
@@ -592,17 +509,20 @@
       <option name="PORT" value="5005" />
       <method />
     </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
+    <configuration default="true" type="XSLT" factoryName="XSLT">
+      <option name="myOutputFile" />
+      <option name="myOpenOutputFile" value="false" />
+      <option name="myOpenInBrowser" value="false" />
+      <option name="mySmartErrorHandling" value="true" />
+      <option name="myRunnerPort" value="34873" />
+      <option name="myVmArguments" />
+      <option name="myWorkingDirectory" />
+      <option name="myModule" />
+      <option name="myJdk" />
+      <parameters />
+      <OutputType value="CONSOLE" save-to-file="false" />
+      <FileType name="XML" />
+      <JdkChoice value="FROM_MODULE" />
       <method />
     </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
@@ -632,20 +552,17 @@
       <listeners />
       <method />
     </configuration>
-    <configuration default="true" type="XSLT" factoryName="XSLT">
-      <option name="myOutputFile" />
-      <option name="myOpenOutputFile" value="false" />
-      <option name="myOpenInBrowser" value="false" />
-      <option name="mySmartErrorHandling" value="true" />
-      <option name="myRunnerPort" value="34873" />
-      <option name="myVmArguments" />
-      <option name="myWorkingDirectory" />
-      <option name="myModule" />
-      <option name="myJdk" />
-      <parameters />
-      <OutputType value="CONSOLE" save-to-file="false" />
-      <FileType name="XML" />
-      <JdkChoice value="FROM_MODULE" />
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
       <method />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -804,8 +721,8 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
-    <editor active="false" />
+    <frame x="-8" y="-8" width="1382" height="754" extended-state="7" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.23564954" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -1063,16 +980,9 @@
         <state line="35" column="46" selection-start="1007" selection-end="1007" vertical-scroll-proportion="0.0" vertical-offset="13" max-vertical-offset="600" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/xfinity/ceylon_steel/service/GpsReceiver.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="105" column="5" selection-start="3274" selection-end="3274" vertical-scroll-proportion="1.0733453" vertical-offset="750" max-vertical-offset="1485" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/res/layout/home_page.xml">
       <provider editor-type-id="text-editor">
-        <state line="7" column="4" selection-start="238" selection-end="238" vertical-scroll-proportion="0.0" vertical-offset="113" max-vertical-offset="660">
-          <folding />
-        </state>
+        <state line="7" column="4" selection-start="238" selection-end="238" vertical-scroll-proportion="0.0" vertical-offset="113" max-vertical-offset="660" />
       </provider>
       <provider selected="true" editor-type-id="android-designer">
         <state />
@@ -1080,9 +990,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/res/layout/select_category_page.xml">
       <provider editor-type-id="text-editor">
-        <state line="34" column="44" selection-start="1164" selection-end="1179" vertical-scroll-proportion="0.0" vertical-offset="68" max-vertical-offset="645">
-          <folding />
-        </state>
+        <state line="34" column="44" selection-start="1164" selection-end="1179" vertical-scroll-proportion="0.0" vertical-offset="68" max-vertical-offset="645" />
       </provider>
       <provider selected="true" editor-type-id="android-designer">
         <state />
@@ -1121,9 +1029,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/xfinity/ceylon_steel/activity/make_sales_order/SelectCategoryActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="157" column="40" selection-start="6056" selection-end="6056" vertical-scroll-proportion="-1.3850174" vertical-offset="2610" max-vertical-offset="3705">
-          <folding />
-        </state>
+        <state line="157" column="40" selection-start="6056" selection-end="6056" vertical-scroll-proportion="-1.3850174" vertical-offset="2610" max-vertical-offset="3705" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/xfinity/ceylon_steel/activity/HomeActivity.java">
@@ -1195,13 +1101,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/xfinity/ceylon_steel/activity/attendence/AttendanceActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="100" column="26" selection-start="3191" selection-end="3191" vertical-scroll-proportion="0.0" vertical-offset="596" max-vertical-offset="1170">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/xfinity/ceylon_steel/activity/LoginActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="62" column="32" selection-start="1729" selection-end="1729" vertical-scroll-proportion="0.7674825" vertical-offset="221" max-vertical-offset="795">
@@ -1209,13 +1108,27 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/xfinity/ceylon_steel/service/GpsReceiver.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="58" column="43" selection-start="2109" selection-end="2132" vertical-scroll-proportion="0.033989266" vertical-offset="626" max-vertical-offset="1635">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/xfinity/ceylon_steel/activity/attendence/AttendanceActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="100" column="26" selection-start="3191" selection-end="3191" vertical-scroll-proportion="0.0" vertical-offset="596" max-vertical-offset="1170">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/xfinity/ceylon_steel/controller/UserController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="207" column="58" selection-start="8167" selection-end="8167" vertical-scroll-proportion="0.54195803" vertical-offset="2105" max-vertical-offset="6930">
+        <state line="364" column="39" selection-start="14093" selection-end="14093" vertical-scroll-proportion="0.75174826" vertical-offset="4220" max-vertical-offset="6930">
           <folding>
             <element signature="e#7570#7617#0" expanded="true" />
-            <element signature="e#11322#11369#0" expanded="true" />
-            <element signature="e#15164#15211#0" expanded="true" />
+            <element signature="e#11325#11372#0" expanded="true" />
+            <element signature="e#15170#15217#0" expanded="true" />
           </folding>
         </state>
       </provider>

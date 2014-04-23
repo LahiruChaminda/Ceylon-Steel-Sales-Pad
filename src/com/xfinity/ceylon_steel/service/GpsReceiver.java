@@ -56,7 +56,7 @@ public class GpsReceiver extends Service {
 		}
 	}
 
-	public Location getLastKnownLocation() {
+	public Location getHighAccurateLocation() {
 		lastKnownLocation = null;
 		while (lastKnownLocation == null) {
 		}
@@ -70,7 +70,17 @@ public class GpsReceiver extends Service {
 		}
 		return lastKnownLocation;
 	}
-
+    public Location getLastKnownLocation() {
+        if (lastKnownLocation != null && lastKnownLocation.getLatitude() != 0 && lastKnownLocation.getLongitude() != 0) {
+            long time = lastKnownLocation.getTime();
+            Date date = new Date();
+            long timeDifference = Math.abs(time - date.getTime());
+            if (timeDifference > 30 * 60 * 1000) {
+                return null;
+            }
+        }
+        return lastKnownLocation;
+    }
 	private static class LocationListenerImpl implements LocationListener {
 
 		private static LocationListenerImpl locationListener;

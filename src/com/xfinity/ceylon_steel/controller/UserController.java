@@ -262,7 +262,7 @@ public class UserController extends AbstractController {
 					HashMap<String, Object> checkIn = new HashMap<String, Object>();
 					Location lastKnownLocation;
 					do {
-						lastKnownLocation = gpsReceiver.getLastKnownLocation();
+						lastKnownLocation = gpsReceiver.getHighAccurateLocation();
 					} while (lastKnownLocation == null);
 					checkIn.put("time", new SimpleDateFormat("HH:mm:ss").format(date));
 					checkIn.put("userId", UserController.getAuthorizedUser(context).getUserId());
@@ -358,7 +358,7 @@ public class UserController extends AbstractController {
 					HashMap<String, Object> checkOut = new HashMap<String, Object>();
 					Location lastKnownLocation;
 					do {
-						lastKnownLocation = gpsReceiver.getLastKnownLocation();
+						lastKnownLocation = gpsReceiver.getHighAccurateLocation();
 					} while (lastKnownLocation == null);
 					checkOut.put("time", new SimpleDateFormat("HH:mm:ss").format(date));
 					checkOut.put("userId", UserController.getAuthorizedUser(context).getUserId());
