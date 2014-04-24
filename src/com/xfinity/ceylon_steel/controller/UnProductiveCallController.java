@@ -6,6 +6,7 @@
 package com.xfinity.ceylon_steel.controller;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -20,7 +21,6 @@ import static com.xfinity.ceylon_steel.controller.WebServiceURL.UnProductiveCall
 import com.xfinity.ceylon_steel.db.SQLiteDatabaseHelper;
 import com.xfinity.ceylon_steel.model.UnProductiveCall;
 import java.io.IOException;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.logging.Level;
@@ -42,9 +42,9 @@ public class UnProductiveCallController extends AbstractController {
 		compileStatement.bindAllArgsAsStrings(new String[]{
 			Integer.toString(unProductiveCall.getOutletId()),
 			unProductiveCall.getReason(),
-			new Timestamp(unProductiveCall.getTimestamp()).toString(),
+			Long.toString(unProductiveCall.getTimestamp()),
 			Double.toString(unProductiveCall.getLongitude()),
-			Double.toString(unProductiveCall.getLongitude()),
+			Double.toString(unProductiveCall.getLatitude()),
 			Integer.toString(unProductiveCall.getBatteryLevel()),
 			Integer.toString(unProductiveCall.getRepId())
 		});
@@ -87,6 +87,7 @@ public class UnProductiveCallController extends AbstractController {
 		int latitudeIndex = cursor.getColumnIndex("latitude");
 		int repIdIndex = cursor.getColumnIndex("repId");
 		int batteryLevelIndex = cursor.getColumnIndex("batteryLevel");
+
 		for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
 			UnProductiveCall unProductiveCall = new UnProductiveCall(
 					cursor.getInt(unProductiveCallIdIndex),
@@ -99,7 +100,6 @@ public class UnProductiveCallController extends AbstractController {
 					cursor.getInt(batteryLevelIndex),
 					cursor.getInt(repIdIndex)
 			);
-			System.out.println(unProductiveCall.getUnProductiveCallAsJson());
 			unProductiveCalls.add(unProductiveCall);
 		}
 		cursor.close();
@@ -109,6 +109,15 @@ public class UnProductiveCallController extends AbstractController {
 
 	public static void syncUnproductiveCall(final UnProductiveCall unProductiveCall, final Context context) {
 		new AsyncTask<UnProductiveCall, Void, Boolean>() {
+			private ProgressDialog progressDialog;
+
+			@Override
+			protected void onPreExecute() {
+				progressDialog = new ProgressDialog(context);
+				progressDialog.setMessage("Syncking Unproductive Call");
+				progressDialog.setCanceledOnTouchOutside(false);
+				progressDialog.show();
+			}
 
 			@Override
 			protected Boolean doInBackground(UnProductiveCall... unProductiveCalls) {
@@ -128,6 +137,9 @@ public class UnProductiveCallController extends AbstractController {
 
 			@Override
 			protected void onPostExecute(Boolean result) {
+				if (progressDialog != null && progressDialog.isShowing()) {
+					progressDialog.dismiss();
+				}
 				if (result) {
 					SQLiteDatabaseHelper databaseInstance = SQLiteDatabaseHelper.getDatabaseInstance(context);
 					SQLiteDatabase database = databaseInstance.getWritableDatabase();

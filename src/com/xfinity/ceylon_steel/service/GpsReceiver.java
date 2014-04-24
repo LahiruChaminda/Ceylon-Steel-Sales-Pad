@@ -16,14 +16,13 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.os.Looper;
 import android.provider.Settings;
-import java.util.Date;
 
 public class GpsReceiver extends Service {
 
 	private boolean isGPSEnabled = false;
 	private static Location lastKnownLocation;
-	private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 1;
-	private static final long MIN_TIME_BW_UPDATES = 500;
+	private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 0;
+	private static final long MIN_TIME_BW_UPDATES = 20;
 	protected static LocationManager locationManager;
 	private static GpsReceiver gpsReceiver;
 
@@ -62,25 +61,27 @@ public class GpsReceiver extends Service {
 		}
 		if (lastKnownLocation != null && lastKnownLocation.getLatitude() != 0 && lastKnownLocation.getLongitude() != 0) {
 			long time = lastKnownLocation.getTime();
-			Date date = new Date();
-			long timeDifference = Math.abs(time - date.getTime());
+			long currentTimeMillis = System.currentTimeMillis();
+			long timeDifference = Math.abs(time - currentTimeMillis);
 			if (timeDifference > 30 * 60 * 1000) {
 				return null;
 			}
 		}
 		return lastKnownLocation;
 	}
-    public Location getLastKnownLocation() {
-        if (lastKnownLocation != null && lastKnownLocation.getLatitude() != 0 && lastKnownLocation.getLongitude() != 0) {
-            long time = lastKnownLocation.getTime();
-            Date date = new Date();
-            long timeDifference = Math.abs(time - date.getTime());
-            if (timeDifference > 30 * 60 * 1000) {
-                return null;
-            }
-        }
-        return lastKnownLocation;
-    }
+
+	public Location getLastKnownLocation() {
+		if (lastKnownLocation != null && lastKnownLocation.getLatitude() != 0 && lastKnownLocation.getLongitude() != 0) {
+			long time = lastKnownLocation.getTime();
+			long currentTimeMillis = System.currentTimeMillis();
+			long timeDifference = Math.abs(time - currentTimeMillis);
+			if (timeDifference > 30 * 60 * 1000) {
+				return null;
+			}
+		}
+		return lastKnownLocation;
+	}
+
 	private static class LocationListenerImpl implements LocationListener {
 
 		private static LocationListenerImpl locationListener;
