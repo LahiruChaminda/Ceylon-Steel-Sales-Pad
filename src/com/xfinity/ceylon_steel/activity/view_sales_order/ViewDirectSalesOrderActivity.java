@@ -44,6 +44,17 @@ public class ViewDirectSalesOrderActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.view_direct_order_page);
 		initialize();
+
+		receivedOrder = (Order) getIntent().getExtras().get("order");
+		txtViewDirectOutletName.setText(receivedOrder.getOutletName());
+		txtViewDirectVehicleNo.setText(receivedOrder.getVehicle());
+		txtViewDirectDriverName.setText(receivedOrder.getDriver());
+		txtViewDirectDriverNIC.setText(receivedOrder.getDriverNIC());
+		txtViewDirectDeliveryDate.setText(new SimpleDateFormat("yyyy-MM-dd").format(new Date(receivedOrder.getDeliveryDate())));
+		txtViewDirectRemarks.setText(receivedOrder.getRemarks());
+
+		ArrayAdapter<OrderDetail> orderDetails = new ArrayAdapter<OrderDetail>(this, android.R.layout.simple_list_item_1, receivedOrder.getOrderDetails());
+		directOrderDetailListView.setAdapter(orderDetails);
 	}
 
 	@Override
@@ -55,8 +66,6 @@ public class ViewDirectSalesOrderActivity extends Activity {
 
 	// <editor-fold defaultstate="collapsed" desc="Initialize">
 	private void initialize() {
-		receivedOrder = (Order) getIntent().getExtras().get("order");
-
 		txtViewDirectOutletName = (TextView) findViewById(R.id.txtViewDirectOutletName);
 		txtViewDirectVehicleNo = (TextView) findViewById(R.id.txtViewDirectVehicleNo);
 		txtViewDirectDriverName = (TextView) findViewById(R.id.txtViewDirectDriverName);
@@ -66,15 +75,6 @@ public class ViewDirectSalesOrderActivity extends Activity {
 		directOrderDetailListView = (ListView) findViewById(R.id.directOrderDetailListView);
 		btnDirectSync = (Button) findViewById(R.id.btnDirectSync);
 
-		txtViewDirectOutletName.setText(receivedOrder.getOutletName());
-		txtViewDirectVehicleNo.setText(receivedOrder.getVehicle());
-		txtViewDirectDriverName.setText(receivedOrder.getDriver());
-		txtViewDirectDriverNIC.setText(receivedOrder.getDriverNIC());
-		txtViewDirectDeliveryDate.setText(new SimpleDateFormat("yyyy-MM-dd").format(new Date(receivedOrder.getDeliveryDate())));
-		txtViewDirectRemarks.setText(receivedOrder.getRemarks());
-
-		ArrayAdapter<OrderDetail> orderDetails = new ArrayAdapter<OrderDetail>(this, android.R.layout.simple_list_item_1, receivedOrder.getOrderDetails());
-		directOrderDetailListView.setAdapter(orderDetails);
 		directOrderDetailListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
 				orderDetailClicked(adapterView, view, position, id);

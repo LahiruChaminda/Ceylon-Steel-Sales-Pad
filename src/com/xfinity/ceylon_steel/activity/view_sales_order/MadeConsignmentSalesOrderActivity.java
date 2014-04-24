@@ -30,6 +30,10 @@ public class MadeConsignmentSalesOrderActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.made_consignment_page);
 		initialize();
+
+		ArrayList<Order> consignmentOrders = OrderController.getConsignmentOrders(this);
+		ArrayAdapter<Order> orderAdapter = new ArrayAdapter<Order>(this, android.R.layout.simple_list_item_1, consignmentOrders);
+		consignmentOrderListView.setAdapter(orderAdapter);
 	}
 
 	@Override
@@ -42,16 +46,11 @@ public class MadeConsignmentSalesOrderActivity extends Activity {
 	// <editor-fold defaultstate="collapsed" desc="Initialize">
 	private void initialize() {
 		consignmentOrderListView = (ListView) findViewById(R.id.consignmentOrderListView);
-		ArrayList<Order> consignmentOrders = OrderController.getConsignmentOrders(this);
-		ArrayAdapter<Order> orderAdapter = new ArrayAdapter<Order>(this, android.R.layout.simple_list_item_1, consignmentOrders);
-		consignmentOrderListView.setAdapter(orderAdapter);
 
 		consignmentOrderListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
 			public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
 				onItemClicked(adapterView, view, position, id);
 			}
-
 		});
 	}
 	// </editor-fold>

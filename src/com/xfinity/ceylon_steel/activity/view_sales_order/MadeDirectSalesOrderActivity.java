@@ -30,6 +30,10 @@ public class MadeDirectSalesOrderActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.made_direct_page);
 		initialize();
+
+		ArrayList<Order> directOrders = OrderController.getDirectOrders(this);
+		ArrayAdapter<Order> orderAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, directOrders);
+		directOrderListView.setAdapter(orderAdapter);
 	}
 
 	@Override
@@ -42,12 +46,7 @@ public class MadeDirectSalesOrderActivity extends Activity {
 	// <editor-fold defaultstate="collapsed" desc="Initialize">
 	private void initialize() {
 		directOrderListView = (ListView) findViewById(R.id.directOrderListView);
-		ArrayList<Order> directOrders = OrderController.getDirectOrders(this);
-		ArrayAdapter<Order> orderAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, directOrders);
-		directOrderListView.setAdapter(orderAdapter);
-
 		directOrderListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
 			public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
 				onItemClicked(adapterView, view, position, id);
 			}

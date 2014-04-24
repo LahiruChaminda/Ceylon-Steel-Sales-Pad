@@ -97,6 +97,24 @@ public class MakeProjectSalesOrderActivity extends Activity {
 		setContentView(R.layout.make_project_order_page);
 		gpsReceiver = GpsReceiver.getGpsReceiver(getApplicationContext());
 		initialize();
+
+		ArrayList<Customer> customers = CustomerController.getCustomers(this);
+		ArrayAdapter<Customer> customerAdapter = new ArrayAdapter<Customer>(this, android.R.layout.simple_dropdown_item_1line, customers);
+		makeProjectOrderCustomerAuto.setAdapter(customerAdapter);
+
+		ArrayList<User> distributors = UserController.getDistributors(this);
+		ArrayAdapter<User> distributorAdapter = new ArrayAdapter<User>(this, android.R.layout.simple_dropdown_item_1line, distributors);
+		makeProjectOrderDistributorAuto.setAdapter(distributorAdapter);
+
+		ArrayList<Vehicle> vehicles = VehicleController.getVehicles(this);
+		ArrayAdapter<Vehicle> vehicleAdapter = new ArrayAdapter<Vehicle>(this, android.R.layout.simple_dropdown_item_1line, vehicles);
+		makeProjectOrderVehicleAuto.setAdapter(vehicleAdapter);
+
+		ArrayList<Driver> drivers = DriverController.getDrivers(this);
+		ArrayAdapter<Driver> driverAdapter = new ArrayAdapter<Driver>(this, android.R.layout.simple_dropdown_item_1line, drivers);
+		makeProjectOrderDriverAuto.setAdapter(driverAdapter);
+
+		GPS_CHECKER.execute();
 	}
 
 	@Override
@@ -141,24 +159,6 @@ public class MakeProjectSalesOrderActivity extends Activity {
 				makeProjectOrderDriverAutoItemSelected(adapterView, view, position, id);
 			}
 		});
-
-		ArrayList<Customer> customers = CustomerController.getCustomers(this);
-		ArrayAdapter<Customer> customerAdapter = new ArrayAdapter<Customer>(this, android.R.layout.simple_dropdown_item_1line, customers);
-		makeProjectOrderCustomerAuto.setAdapter(customerAdapter);
-
-		ArrayList<User> distributors = UserController.getDistributors(this);
-		ArrayAdapter<User> distributorAdapter = new ArrayAdapter<User>(this, android.R.layout.simple_dropdown_item_1line, distributors);
-		makeProjectOrderDistributorAuto.setAdapter(distributorAdapter);
-
-		ArrayList<Vehicle> vehicles = VehicleController.getVehicles(this);
-		ArrayAdapter<Vehicle> vehicleAdapter = new ArrayAdapter<Vehicle>(this, android.R.layout.simple_dropdown_item_1line, vehicles);
-		makeProjectOrderVehicleAuto.setAdapter(vehicleAdapter);
-
-		ArrayList<Driver> drivers = DriverController.getDrivers(this);
-		ArrayAdapter<Driver> driverAdapter = new ArrayAdapter<Driver>(this, android.R.layout.simple_dropdown_item_1line, drivers);
-		makeProjectOrderDriverAuto.setAdapter(driverAdapter);
-
-		GPS_CHECKER.execute();
 	}
 	// </editor-fold>
 

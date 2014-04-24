@@ -45,6 +45,18 @@ public class ViewConsignmentSalesOrderActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.view_consignment_order_page);
 		initialize();
+
+		receivedOrder = (Order) getIntent().getExtras().get("order");
+		txtViewConsignmentOutletName.setText(receivedOrder.getOutletName());
+		txtViewConsignmentDistributorName.setText(receivedOrder.getDistributorName());
+		txtViewConsignmentVehicleNo.setText(receivedOrder.getVehicle());
+		txtViewConsignmentDriverName.setText(receivedOrder.getDriver());
+		txtViewConsignmentDriverNIC.setText(receivedOrder.getDriverNIC());
+		txtViewConsignmentDeliveryDate.setText(new SimpleDateFormat("yyyy-MM-dd").format(new Date(receivedOrder.getDeliveryDate())));
+		txtViewConsignmentRemarks.setText(receivedOrder.getRemarks());
+
+		ArrayAdapter<OrderDetail> orderDetails = new ArrayAdapter<OrderDetail>(this, android.R.layout.simple_list_item_1, receivedOrder.getOrderDetails());
+		consignmentOrderDetailListView.setAdapter(orderDetails);
 	}
 
 	@Override
@@ -56,8 +68,6 @@ public class ViewConsignmentSalesOrderActivity extends Activity {
 
 	// <editor-fold defaultstate="collapsed" desc="Initialize">
 	private void initialize() {
-		receivedOrder = (Order) getIntent().getExtras().get("order");
-
 		txtViewConsignmentOutletName = (TextView) findViewById(R.id.txtViewConsignmentOutletName);
 		txtViewConsignmentDistributorName = (TextView) findViewById(R.id.txtViewConsignmentDistributorName);
 		txtViewConsignmentVehicleNo = (TextView) findViewById(R.id.txtViewConsignmentVehicleNo);
@@ -67,24 +77,11 @@ public class ViewConsignmentSalesOrderActivity extends Activity {
 		txtViewConsignmentRemarks = (TextView) findViewById(R.id.txtViewConsignmentRemarks);
 		consignmentOrderDetailListView = (ListView) findViewById(R.id.consignmentOrderDetailListView);
 		btnConsignmentSync = (Button) findViewById(R.id.btnConsignmentSync);
-
-		txtViewConsignmentOutletName.setText(receivedOrder.getOutletName());
-		txtViewConsignmentDistributorName.setText(receivedOrder.getDistributorName());
-		txtViewConsignmentVehicleNo.setText(receivedOrder.getVehicle());
-		txtViewConsignmentDriverName.setText(receivedOrder.getDriver());
-		txtViewConsignmentDriverNIC.setText(receivedOrder.getDriverNIC());
-		txtViewConsignmentDeliveryDate.setText(new SimpleDateFormat("yyyy-MM-dd").format(new Date(receivedOrder.getDeliveryDate())));
-		txtViewConsignmentRemarks.setText(receivedOrder.getRemarks());
-
-		ArrayAdapter<OrderDetail> orderDetails = new ArrayAdapter<OrderDetail>(this, android.R.layout.simple_list_item_1, receivedOrder.getOrderDetails());
-		consignmentOrderDetailListView.setAdapter(orderDetails);
 		consignmentOrderDetailListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
 			public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
 				orderDetailClicked(adapterView, view, position, id);
 			}
 		});
-
 		btnConsignmentSync.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View view) {
 				btnConsignmentSyncClicked(view);

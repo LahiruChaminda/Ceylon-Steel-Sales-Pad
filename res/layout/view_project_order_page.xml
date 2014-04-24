@@ -29,7 +29,7 @@
 				android:layout_height="wrap_content"
 				android:layout_weight="70"
 				android:textAppearance="?android:attr/textAppearanceLarge"
-				android:text="Customer Name"
+				android:text="Customer"
 				android:layout_margin="5dp"
 				android:textSize="25dp"/>
 			<TextView
@@ -162,6 +162,19 @@
 				android:layout_height="wrap_content"
 				android:id="@+id/txtViewProjectRemarks" android:layout_margin="5dp" android:textSize="25dp"/>
 		</LinearLayout>
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp">
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Ordered Items"
+                    android:gravity="center"
+                    android:layout_margin="5dp"
+                    android:textSize="25dp" android:layout_weight="30"/>
+        </LinearLayout>
 		<ListView
 			android:layout_width="match_parent"
 			android:layout_weight="1"

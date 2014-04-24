@@ -96,6 +96,24 @@ public class MakeConsignmentSalesOrderActivity extends Activity {
 		setContentView(R.layout.make_consignment_order_page);
 		gpsReceiver = GpsReceiver.getGpsReceiver(getApplicationContext());
 		initialize();
+
+		ArrayList<Outlet> outlets = OutletController.getOutlets(this);
+		ArrayAdapter<Outlet> outletAdapter = new ArrayAdapter<Outlet>(this, android.R.layout.simple_dropdown_item_1line, outlets);
+		makeConsignmentOrderOutletAuto.setAdapter(outletAdapter);
+
+		ArrayList<User> distributors = UserController.getDistributors(this);
+		ArrayAdapter<User> distributorAdapter = new ArrayAdapter<User>(this, android.R.layout.simple_dropdown_item_1line, distributors);
+		makeConsignmentOrderDistributorAuto.setAdapter(distributorAdapter);
+
+		ArrayList<Vehicle> vehicles = VehicleController.getVehicles(this);
+		ArrayAdapter<Vehicle> vehicleAdapter = new ArrayAdapter<Vehicle>(this, android.R.layout.simple_dropdown_item_1line, vehicles);
+		makeConsignmentOrderVehicleAuto.setAdapter(vehicleAdapter);
+
+		ArrayList<Driver> drivers = DriverController.getDrivers(this);
+		ArrayAdapter<Driver> driverAdapter = new ArrayAdapter<Driver>(this, android.R.layout.simple_dropdown_item_1line, drivers);
+		makeConsignmentOrderDriverAuto.setAdapter(driverAdapter);
+
+		GPS_CHECKER.execute();
 	}
 
 	@Override
@@ -140,24 +158,6 @@ public class MakeConsignmentSalesOrderActivity extends Activity {
 				makeConsignmentOrderDriverAutoItemSelected(adapterView, view, position, id);
 			}
 		});
-
-		ArrayList<Outlet> outlets = OutletController.getOutlets(this);
-		ArrayAdapter<Outlet> outletAdapter = new ArrayAdapter<Outlet>(this, android.R.layout.simple_dropdown_item_1line, outlets);
-		makeConsignmentOrderOutletAuto.setAdapter(outletAdapter);
-
-		ArrayList<User> distributors = UserController.getDistributors(this);
-		ArrayAdapter<User> distributorAdapter = new ArrayAdapter<User>(this, android.R.layout.simple_dropdown_item_1line, distributors);
-		makeConsignmentOrderDistributorAuto.setAdapter(distributorAdapter);
-
-		ArrayList<Vehicle> vehicles = VehicleController.getVehicles(this);
-		ArrayAdapter<Vehicle> vehicleAdapter = new ArrayAdapter<Vehicle>(this, android.R.layout.simple_dropdown_item_1line, vehicles);
-		makeConsignmentOrderVehicleAuto.setAdapter(vehicleAdapter);
-
-		ArrayList<Driver> drivers = DriverController.getDrivers(this);
-		ArrayAdapter<Driver> driverAdapter = new ArrayAdapter<Driver>(this, android.R.layout.simple_dropdown_item_1line, drivers);
-		makeConsignmentOrderDriverAuto.setAdapter(driverAdapter);
-
-		GPS_CHECKER.execute();
 	}
 // </editor-fold>
 

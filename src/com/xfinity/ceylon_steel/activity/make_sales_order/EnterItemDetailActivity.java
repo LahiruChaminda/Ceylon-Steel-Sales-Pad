@@ -47,6 +47,7 @@ public class EnterItemDetailActivity extends Activity {
 		currencyFormat.setMaximumFractionDigits(2);
 		currencyFormat.setGroupingUsed(true);
 
+		this.item = (Item) getIntent().getExtras().get("item");
 		initialize();
 	}
 
@@ -59,8 +60,6 @@ public class EnterItemDetailActivity extends Activity {
 
 	// <editor-fold defaultstate="collapsed" desc="Initialize">
 	private void initialize() {
-		this.item = (Item) getIntent().getExtras().get("item");
-
 		enterItem = (TextView) findViewById(R.id.enterItem);
 		enterItemUnitPrice = (TextView) findViewById(R.id.enterItemUnitPrice);
 		enterTxtQuantity = (EditText) findViewById(R.id.enterTxtQuantity);
@@ -71,7 +70,6 @@ public class EnterItemDetailActivity extends Activity {
 		enterItem.setText(item.getDescription());
 		enterItemUnitPrice.setText("Rs " + currencyFormat.format(item.getPrice()));
 		enterTxtQuantity.addTextChangedListener(new TextWatcher() {
-
 			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 			}
 
@@ -84,7 +82,6 @@ public class EnterItemDetailActivity extends Activity {
 		});
 
 		enterTxtEachDiscount.addTextChangedListener(new TextWatcher() {
-
 			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 			}
 

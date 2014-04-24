@@ -52,7 +52,7 @@ public class MakeUnProductiveCallActivity extends Activity {
 		protected void onPreExecute() {
 			progressDialog = new ProgressDialog(MakeUnProductiveCallActivity.this);
 			progressDialog.setMessage("Waiting for GPS Location...");
-            progressDialog.setCanceledOnTouchOutside(false);
+			progressDialog.setCanceledOnTouchOutside(false);
 			progressDialog.show();
 		}
 
@@ -84,6 +84,11 @@ public class MakeUnProductiveCallActivity extends Activity {
 		gpsReceiver = GpsReceiver.getGpsReceiver(getApplicationContext());
 		setContentView(R.layout.make_unproductive_call_page);
 		initialize();
+
+		ArrayList<Outlet> outlets = OutletController.getOutlets(this);
+		ArrayAdapter<Outlet> outletAdapter = new ArrayAdapter<Outlet>(this, android.R.layout.simple_dropdown_item_1line, outlets);
+		unProductiveCallOutletAuto.setAdapter(outletAdapter);
+		GPS_CHECKER.execute();
 	}
 
 	@Override
@@ -99,24 +104,17 @@ public class MakeUnProductiveCallActivity extends Activity {
 		txtMakeUnProductiveCallReason = (EditText) findViewById(R.id.txtMakeUnProductiveCallReason);
 		btnUnProductiveCallSubmit = (Button) findViewById(R.id.btnUnProductiveCallSubmit);
 		btnUnProductiveCallSubmit.setEnabled(false);
-
 		unProductiveCallOutletAuto.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
 				unProductiveCallOutletAutoItemSelected(adapterView, view, position, id);
 			}
 		});
-
-		ArrayList<Outlet> outlets = OutletController.getOutlets(this);
-		ArrayAdapter<Outlet> outletAdapter = new ArrayAdapter<Outlet>(this, android.R.layout.simple_dropdown_item_1line, outlets);
-		unProductiveCallOutletAuto.setAdapter(outletAdapter);
-
 		btnUnProductiveCallSubmit.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View view) {
 				btnUnProductiveCallSubmitClicked(view);
 			}
 		});
-		GPS_CHECKER.execute();
 	}
 	// </editor-fold>
 

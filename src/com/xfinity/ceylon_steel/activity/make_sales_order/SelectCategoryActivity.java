@@ -17,7 +17,6 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.Button;
-import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -54,6 +53,9 @@ public class SelectCategoryActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.select_category_page);
 		initialize();
+		order = (Order) getIntent().getExtras().get("order");
+		categories = CategoryController.getCategories(this);
+		itemIds.clear();
 	}
 
 	@Override
@@ -98,92 +100,70 @@ public class SelectCategoryActivity extends Activity {
 
 	// <editor-fold defaultstate="collapsed" desc="Initialize">
 	private void initialize() {
-		order = (Order) getIntent().getExtras().get("order");
 		expandableListView = (ExpandableListView) findViewById(R.id.categoryExpandableListView);
-		categories = CategoryController.getCategories(this);
-		ExpandableListAdapter expandableListAdapter = new BaseExpandableListAdapter() {
-
+		expandableListView.setAdapter(new BaseExpandableListAdapter() {
+			@Override
 			public int getGroupCount() {
-				return categories.size();
+				return expandableListViewGetGroupCount();
 			}
 
+			@Override
 			public int getChildrenCount(int categoryPosition) {
-				return categories.get(categoryPosition).getItems().size();
+				return expandableListViewGetChildrenCount(categoryPosition);
 			}
 
+			@Override
 			public Object getGroup(int categoryPosition) {
-				return categories.get(categoryPosition);
+				return expandableListViewGetGroup(categoryPosition);
 			}
 
+			@Override
 			public Object getChild(int categoryPosition, int itemPosition) {
-				return categories.get(categoryPosition).getItems().get(itemPosition);
+				return expandableListViewGetChild(categoryPosition, itemPosition);
 			}
 
+			@Override
 			public long getGroupId(int categoryPosition) {
-				return categoryPosition;
+				return expandableListViewGetGroupId(categoryPosition);
 			}
 
+			@Override
 			public long getChildId(int categoryPosition, int itemPosition) {
-				return itemPosition;
+				return expandableListViewGetChildId(categoryPosition, itemPosition);
 			}
 
+			@Override
 			public boolean hasStableIds() {
-				return true;
+				return expandableListViewHasStableIds();
 			}
 
+			@Override
 			public View getGroupView(int categoryPosition, boolean isExpanded, View convertView, ViewGroup parent) {
-				String categoryDescription = this.getGroup(categoryPosition).toString();
-				AbsListView.LayoutParams lp = new AbsListView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-				LinearLayout linearLayout = new LinearLayout(SelectCategoryActivity.this);
-				TextView category = new TextView(SelectCategoryActivity.this);
-				category.setTextSize(1, 25);
-				category.setGravity(Gravity.CENTER_VERTICAL | Gravity.LEFT | Gravity.CENTER_HORIZONTAL);
-				category.setPadding(36, 0, 0, 0);
-				linearLayout.setLayoutParams(lp);
-				linearLayout.addView(category);
-				category.setText(categoryDescription);
-				ViewGroup.MarginLayoutParams marginLayoutParams = (ViewGroup.MarginLayoutParams) category.getLayoutParams();
-				marginLayoutParams.setMargins(5, 5, 5, 5);
-				category.setLayoutParams(marginLayoutParams);
-				return linearLayout;
+				return expandableListViewGetGroupView(categoryPosition, isExpanded, convertView, parent);
 			}
 
 			@Override
 			public View getChildView(int categoryPosition, int itemPosition, boolean isLastChild, View convertView, ViewGroup parent) {
-				String itemText = this.getChild(categoryPosition, itemPosition).toString();
-				AbsListView.LayoutParams lp = new AbsListView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-				TextView item = new TextView(SelectCategoryActivity.this);
-				item.setGravity(Gravity.CENTER_VERTICAL | Gravity.LEFT | Gravity.CENTER_HORIZONTAL);
-				item.setLayoutParams(lp);
-				item.setTextSize(1, 20);
-				item.setText(itemText);
-				if (itemIds.contains(categories.get(categoryPosition).getItems().get(itemPosition).getItemId())) {
-					item.setBackgroundColor(Color.rgb(79, 130, 180));
-					item.setTextColor(Color.WHITE);
-				}
-				return item;
+				return expandableListViewGetChildView(categoryPosition, itemPosition, isLastChild, convertView, parent);
 			}
 
+			@Override
 			public boolean isChildSelectable(int arg0, int arg1) {
-				return true;
+				return expandableListViewIsChildSelectable(arg0, arg1);
 			}
-		};
-
-		expandableListView.setAdapter(expandableListAdapter);
+		});
 		expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
 			@Override
 			public boolean onChildClick(ExpandableListView parent, View view, int groupPosition, int childPosition, long id) {
 				return onChildClicked(parent, view, groupPosition, childPosition, id);
 			}
 		});
-
 		btnFinishMakeBill = (Button) findViewById(R.id.btnFinishMakeBill);
 		btnFinishMakeBill.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View view) {
 				btnFinishMakeBillClicked(view);
 			}
 		});
-
 		btnQuickSync = (Button) findViewById(R.id.btnQuickSync);
 		btnQuickSync.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View view) {
@@ -196,7 +176,6 @@ public class SelectCategoryActivity extends Activity {
 				btnReturnToHomeClicked(view);
 			}
 		});
-		itemIds.clear();
 	}
 	// </editor-fold>
 
@@ -292,5 +271,69 @@ public class SelectCategoryActivity extends Activity {
 			startActivity(homeActivity);
 			finish();
 		}
+	}
+
+	private int expandableListViewGetGroupCount() {
+		return categories.size();
+	}
+
+	private int expandableListViewGetChildrenCount(int categoryPosition) {
+		return categories.get(categoryPosition).getItems().size();
+	}
+
+	private Object expandableListViewGetGroup(int categoryPosition) {
+		return categories.get(categoryPosition);
+	}
+
+	private Object expandableListViewGetChild(int categoryPosition, int itemPosition) {
+		return categories.get(categoryPosition).getItems().get(itemPosition);
+	}
+
+	private long expandableListViewGetGroupId(int categoryPosition) {
+		return categoryPosition;
+	}
+
+	private long expandableListViewGetChildId(int categoryPosition, int itemPosition) {
+		return itemPosition;
+	}
+
+	private boolean expandableListViewHasStableIds() {
+		return true;
+	}
+
+	private View expandableListViewGetGroupView(int categoryPosition, boolean isExpanded, View convertView, ViewGroup parent) {
+		String categoryDescription = this.expandableListViewGetGroup(categoryPosition).toString();
+		AbsListView.LayoutParams lp = new AbsListView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+		LinearLayout linearLayout = new LinearLayout(SelectCategoryActivity.this);
+		TextView category = new TextView(SelectCategoryActivity.this);
+		category.setTextSize(1, 25);
+		category.setGravity(Gravity.CENTER_VERTICAL | Gravity.LEFT | Gravity.CENTER_HORIZONTAL);
+		category.setPadding(36, 0, 0, 0);
+		linearLayout.setLayoutParams(lp);
+		linearLayout.addView(category);
+		category.setText(categoryDescription);
+		ViewGroup.MarginLayoutParams marginLayoutParams = (ViewGroup.MarginLayoutParams) category.getLayoutParams();
+		marginLayoutParams.setMargins(5, 5, 5, 5);
+		category.setLayoutParams(marginLayoutParams);
+		return linearLayout;
+	}
+
+	private View expandableListViewGetChildView(int categoryPosition, int itemPosition, boolean isLastChild, View convertView, ViewGroup parent) {
+		String itemText = this.expandableListViewGetChild(categoryPosition, itemPosition).toString();
+		AbsListView.LayoutParams lp = new AbsListView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+		TextView item = new TextView(SelectCategoryActivity.this);
+		item.setGravity(Gravity.CENTER_VERTICAL | Gravity.LEFT | Gravity.CENTER_HORIZONTAL);
+		item.setLayoutParams(lp);
+		item.setTextSize(1, 20);
+		item.setText(itemText);
+		if (itemIds.contains(categories.get(categoryPosition).getItems().get(itemPosition).getItemId())) {
+			item.setBackgroundColor(Color.rgb(79, 130, 180));
+			item.setTextColor(Color.WHITE);
+		}
+		return item;
+	}
+
+	private boolean expandableListViewIsChildSelectable(int arg0, int arg1) {
+		return true;
 	}
 }

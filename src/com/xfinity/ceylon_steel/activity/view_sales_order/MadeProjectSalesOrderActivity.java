@@ -30,6 +30,10 @@ public class MadeProjectSalesOrderActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.made_project_page);
 		initialize();
+
+		ArrayList<Order> projectOrders = OrderController.getProjectOrders(this);
+		ArrayAdapter<Order> orderAdapter = new ArrayAdapter<Order>(this, android.R.layout.simple_list_item_1, projectOrders);
+		projectOrderListView.setAdapter(orderAdapter);
 	}
 
 	@Override
@@ -42,10 +46,6 @@ public class MadeProjectSalesOrderActivity extends Activity {
 	// <editor-fold defaultstate="collapsed" desc="Initialize">
 	private void initialize() {
 		projectOrderListView = (ListView) findViewById(R.id.projectOrderListView);
-
-		ArrayList<Order> projectOrders = OrderController.getProjectOrders(this);
-		ArrayAdapter<Order> orderAdapter = new ArrayAdapter<Order>(this, android.R.layout.simple_list_item_1, projectOrders);
-		projectOrderListView.setAdapter(orderAdapter);
 
 		projectOrderListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 

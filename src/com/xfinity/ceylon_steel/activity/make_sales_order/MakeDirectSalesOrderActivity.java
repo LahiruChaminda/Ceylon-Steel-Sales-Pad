@@ -93,6 +93,20 @@ public class MakeDirectSalesOrderActivity extends Activity {
 		setContentView(R.layout.make_direct_order_page);
 		gpsReceiver = GpsReceiver.getGpsReceiver(getApplicationContext());
 		initialize();
+
+		ArrayList<Outlet> outlets = OutletController.getOutlets(this);
+		ArrayAdapter<Outlet> outletAdapter = new ArrayAdapter<Outlet>(this, android.R.layout.simple_dropdown_item_1line, outlets);
+		makeDirectOrderOutletAuto.setAdapter(outletAdapter);
+
+		ArrayList<Vehicle> vehicles = VehicleController.getVehicles(this);
+		ArrayAdapter<Vehicle> vehicleAdapter = new ArrayAdapter<Vehicle>(this, android.R.layout.simple_dropdown_item_1line, vehicles);
+		makeDirectOrderVehicleAuto.setAdapter(vehicleAdapter);
+
+		ArrayList<Driver> drivers = DriverController.getDrivers(this);
+		ArrayAdapter<Driver> driverAdapter = new ArrayAdapter<Driver>(this, android.R.layout.simple_dropdown_item_1line, drivers);
+		makeDirectOrderDriverAuto.setAdapter(driverAdapter);
+
+		GPS_CHECKER.execute();
 	}
 
 	@Override
@@ -130,20 +144,6 @@ public class MakeDirectSalesOrderActivity extends Activity {
 				makeDirectOrderDriverAutoItemSelected(adapterView, view, position, id);
 			}
 		});
-
-		ArrayList<Outlet> outlets = OutletController.getOutlets(this);
-		ArrayAdapter<Outlet> outletAdapter = new ArrayAdapter<Outlet>(this, android.R.layout.simple_dropdown_item_1line, outlets);
-		makeDirectOrderOutletAuto.setAdapter(outletAdapter);
-
-		ArrayList<Vehicle> vehicles = VehicleController.getVehicles(this);
-		ArrayAdapter<Vehicle> vehicleAdapter = new ArrayAdapter<Vehicle>(this, android.R.layout.simple_dropdown_item_1line, vehicles);
-		makeDirectOrderVehicleAuto.setAdapter(vehicleAdapter);
-
-		ArrayList<Driver> drivers = DriverController.getDrivers(this);
-		ArrayAdapter<Driver> driverAdapter = new ArrayAdapter<Driver>(this, android.R.layout.simple_dropdown_item_1line, drivers);
-		makeDirectOrderDriverAuto.setAdapter(driverAdapter);
-
-		GPS_CHECKER.execute();
 	}
 	// </editor-fold>
 

@@ -34,6 +34,10 @@ public class ViewUnProductiveCallActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.view_unproductive_call_page);
 		initialize();
+
+		receivedUnProductiveCall = (UnProductiveCall) getIntent().getExtras().getSerializable("unProductiveCall");
+		unProductiveCallOutlet.setText(receivedUnProductiveCall.getOutletName());
+		txtViewUnProductiveCallReason.setText(receivedUnProductiveCall.getReason());
 	}
 
 	@Override
@@ -48,11 +52,6 @@ public class ViewUnProductiveCallActivity extends Activity {
 		unProductiveCallOutlet = (TextView) findViewById(R.id.unProductiveCallOutlet);
 		txtViewUnProductiveCallReason = (EditText) findViewById(R.id.txtViewUnProductiveCallReason);
 		btnUnProductiveCallSync = (Button) findViewById(R.id.btnUnProductiveCallSync);
-
-		receivedUnProductiveCall = (UnProductiveCall) getIntent().getExtras().getSerializable("unProductiveCall");
-		unProductiveCallOutlet.setText(receivedUnProductiveCall.getOutletName());
-		txtViewUnProductiveCallReason.setText(receivedUnProductiveCall.getReason());
-
 		btnUnProductiveCallSync.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View view) {
 				btnUnProductiveCallSyncClicked(view);

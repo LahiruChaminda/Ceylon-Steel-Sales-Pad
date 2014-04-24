@@ -20,8 +20,8 @@ import com.xfinity.ceylon_steel.activity.HomeActivity;
  */
 public class UnProductiveCallActivity extends Activity {
 
-	Button btnMakeUnProductiveCall;
-	Button btnViewUnProductiveCall;
+	private Button btnMakeUnProductiveCall;
+	private Button btnViewUnProductiveCall;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

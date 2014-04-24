@@ -45,6 +45,18 @@ public class ViewProjectSalesOrderActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.view_project_order_page);
 		initialize();
+
+		receivedOrder = (Order) getIntent().getExtras().get("order");
+		txtViewProjectCustomerName.setText(receivedOrder.getCustomerName());
+		txtViewProjectDistributorName.setText(receivedOrder.getDistributorName());
+		txtViewProjectVehicleNo.setText(receivedOrder.getVehicle());
+		txtViewProjectDriverName.setText(receivedOrder.getDriver());
+		txtViewProjectDriverNIC.setText(receivedOrder.getDriverNIC());
+		txtViewProjectDeliveryDate.setText(new SimpleDateFormat("yyyy-MM-dd").format(new Date(receivedOrder.getDeliveryDate())));
+		txtViewProjectRemarks.setText(receivedOrder.getRemarks());
+
+		ArrayAdapter<OrderDetail> orderDetails = new ArrayAdapter<OrderDetail>(this, android.R.layout.simple_list_item_1, receivedOrder.getOrderDetails());
+		projectOrderDetailListView.setAdapter(orderDetails);
 	}
 
 	@Override
@@ -56,8 +68,6 @@ public class ViewProjectSalesOrderActivity extends Activity {
 
 	// <editor-fold defaultstate="collapsed" desc="Initialize">
 	private void initialize() {
-		receivedOrder = (Order) getIntent().getExtras().get("order");
-
 		txtViewProjectCustomerName = (TextView) findViewById(R.id.txtViewProjectCustomerName);
 		txtViewProjectDistributorName = (TextView) findViewById(R.id.txtViewProjectDistributorName);
 		txtViewProjectVehicleNo = (TextView) findViewById(R.id.txtViewProjectVehicleNo);
@@ -68,16 +78,6 @@ public class ViewProjectSalesOrderActivity extends Activity {
 		projectOrderDetailListView = (ListView) findViewById(R.id.projectOrderDetailListView);
 		btnProjectSync = (Button) findViewById(R.id.btnProjectSync);
 
-		txtViewProjectCustomerName.setText(receivedOrder.getCustomerName());
-		txtViewProjectDistributorName.setText(receivedOrder.getDistributorName());
-		txtViewProjectVehicleNo.setText(receivedOrder.getVehicle());
-		txtViewProjectDriverName.setText(receivedOrder.getDriver());
-		txtViewProjectDriverNIC.setText(receivedOrder.getDriverNIC());
-		txtViewProjectDeliveryDate.setText(new SimpleDateFormat("yyyy-MM-dd").format(new Date(receivedOrder.getDeliveryDate())));
-		txtViewProjectRemarks.setText(receivedOrder.getRemarks());
-
-		ArrayAdapter<OrderDetail> orderDetails = new ArrayAdapter<OrderDetail>(this, android.R.layout.simple_list_item_1, receivedOrder.getOrderDetails());
-		projectOrderDetailListView.setAdapter(orderDetails);
 		projectOrderDetailListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
 				orderDetailClicked(adapterView, view, position, id);

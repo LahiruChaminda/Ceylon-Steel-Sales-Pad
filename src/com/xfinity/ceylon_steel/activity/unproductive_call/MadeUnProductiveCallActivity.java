@@ -31,6 +31,9 @@ public class MadeUnProductiveCallActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.made_unproductive_call_page);
 		initialize();
+		ArrayList<UnProductiveCall> unProductiveCalls = UnProductiveCallController.getUnProductiveCalls(this);
+		ArrayAdapter<UnProductiveCall> unProductiveCallAdapter = new ArrayAdapter<UnProductiveCall>(this, android.R.layout.simple_list_item_1, unProductiveCalls);
+		unProductiveCallsListView.setAdapter(unProductiveCallAdapter);
 	}
 
 	@Override
@@ -44,13 +47,7 @@ public class MadeUnProductiveCallActivity extends Activity {
 	// <editor-fold defaultstate="collapsed" desc="Initialize">
 	private void initialize() {
 		unProductiveCallsListView = (ListView) findViewById(R.id.unProductiveCallsListView);
-
-		ArrayList<UnProductiveCall> unProductiveCalls = UnProductiveCallController.getUnProductiveCalls(this);
-		ArrayAdapter<UnProductiveCall> unProductiveCallAdapter = new ArrayAdapter<UnProductiveCall>(this, android.R.layout.simple_list_item_1, unProductiveCalls);
-		unProductiveCallsListView.setAdapter(unProductiveCallAdapter);
-
 		unProductiveCallsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
 			public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
 				onItemClicked(adapterView, view, position, id);
 			}
