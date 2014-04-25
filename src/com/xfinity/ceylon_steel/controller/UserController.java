@@ -83,7 +83,6 @@ public class UserController extends AbstractController {
 				if (result != null) {
 					SQLiteDatabaseHelper databaseInstance = SQLiteDatabaseHelper.getDatabaseInstance(context);
 					SQLiteDatabase database = databaseInstance.getWritableDatabase();
-					System.out.println("database-distributor-open");
 					String userInsertQuery = "insert or ignore into tbl_distributor(distributorId, distributorName) values (?,?)";
 					SQLiteStatement compiledStatement = database.compileStatement(userInsertQuery);
 					try {
