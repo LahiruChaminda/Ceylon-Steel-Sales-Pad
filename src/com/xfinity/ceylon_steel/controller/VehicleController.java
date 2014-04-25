@@ -42,7 +42,7 @@ public class VehicleController extends AbstractController {
 			vehicles.add(vehicle);
 		}
 		cursor.close();
-		writableDatabase.close();
+		databaseInstance.close();
 		return vehicles;
 	}
 
@@ -94,7 +94,7 @@ public class VehicleController extends AbstractController {
 						Toast.makeText(context, "Unable parse vehicles", Toast.LENGTH_SHORT).show();
 					} finally {
 						database.endTransaction();
-						database.close();
+						databaseInstance.close();
 					}
 				} else {
 					Toast.makeText(context, "Unable to download vehicles", Toast.LENGTH_SHORT).show();

@@ -49,6 +49,7 @@ public class UnProductiveCallController extends AbstractController {
 			Integer.toString(unProductiveCall.getRepId())
 		});
 		long executeInsert = compileStatement.executeInsert();
+		databaseInstance.close();
 		AlertDialog.Builder builder = new AlertDialog.Builder(context);
 		if (executeInsert != -1) {
 			builder.setTitle(com.xfinity.ceylon_steel.R.string.message_title);
@@ -103,7 +104,7 @@ public class UnProductiveCallController extends AbstractController {
 			unProductiveCalls.add(unProductiveCall);
 		}
 		cursor.close();
-		database.close();
+		databaseInstance.close();
 		return unProductiveCalls;
 	}
 
@@ -146,7 +147,7 @@ public class UnProductiveCallController extends AbstractController {
 					SQLiteStatement compiledStatement = database.compileStatement("delete from tbl_unproductive_call where unProductiveCallId=?");
 					compiledStatement.bindAllArgsAsStrings(new String[]{Integer.toString(unProductiveCall.getUnProductiveCallId())});
 					compiledStatement.executeUpdateDelete();
-					database.close();
+					databaseInstance.close();
 					Intent madeUnProductiveCallActivity = new Intent(context, MadeUnProductiveCallActivity.class);
 					context.startActivity(madeUnProductiveCallActivity);
 					Toast.makeText(context, "Unproductive Call Successfully syncked", Toast.LENGTH_SHORT).show();

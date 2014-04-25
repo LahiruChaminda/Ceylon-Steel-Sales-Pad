@@ -79,7 +79,7 @@ public class OrderController extends AbstractController {
 			writableDatabase.setTransactionSuccessful();
 		} finally {
 			writableDatabase.endTransaction();
-			writableDatabase.close();
+			databaseInstance.close();
 		}
 		return orderId;
 	}
@@ -128,7 +128,7 @@ public class OrderController extends AbstractController {
 			writableDatabase.setTransactionSuccessful();
 		} finally {
 			writableDatabase.endTransaction();
-			writableDatabase.close();
+			databaseInstance.close();
 		}
 		return orderId;
 	}
@@ -178,7 +178,7 @@ public class OrderController extends AbstractController {
 			writableDatabase.setTransactionSuccessful();
 		} finally {
 			writableDatabase.endTransaction();
-			writableDatabase.close();
+			databaseInstance.close();
 		}
 		return orderId;
 	}
@@ -228,7 +228,7 @@ public class OrderController extends AbstractController {
 			orders.add(order);
 		}
 		orderCursor.close();
-		database.close();
+		databaseInstance.close();
 		return orders;
 	}
 
@@ -273,7 +273,7 @@ public class OrderController extends AbstractController {
 			orders.add(order);
 		}
 		orderCursor.close();
-		database.close();
+		databaseInstance.close();
 		return orders;
 	}
 
@@ -322,7 +322,7 @@ public class OrderController extends AbstractController {
 			orders.add(order);
 		}
 		orderCursor.close();
-		database.close();
+		databaseInstance.close();
 		return orders;
 	}
 
@@ -386,7 +386,7 @@ public class OrderController extends AbstractController {
 					orderDeleteSql.bindAllArgsAsStrings(parameter);
 					orderDetailDeleteSql.executeUpdateDelete();
 					orderDeleteSql.executeUpdateDelete();
-					database.close();
+					databaseInstance.close();
 					builder.setMessage("Sales Order syncked successfully");
 					builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
 						public void onClick(DialogInterface arg0, int arg1) {

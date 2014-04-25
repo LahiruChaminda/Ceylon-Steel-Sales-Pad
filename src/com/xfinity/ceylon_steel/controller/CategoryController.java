@@ -55,7 +55,7 @@ public class CategoryController extends AbstractController {
 			categories.add(category);
 		}
 		categoryCursor.close();
-		database.close();
+		databaseInstance.close();
 		return categories;
 	}
 
@@ -121,7 +121,7 @@ public class CategoryController extends AbstractController {
 					Logger.getLogger(CategoryController.class.getName()).log(Level.SEVERE, null, ex);
 				} finally {
 					database.endTransaction();
-					database.close();
+					databaseInstance.close();
 				}
 			}
 		}.execute();

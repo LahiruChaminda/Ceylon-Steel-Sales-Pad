@@ -43,7 +43,7 @@ public class CustomerController extends AbstractController {
 			customers.add(driver);
 		}
 		customerCursor.close();
-		database.close();
+		databaseInstance.close();
 		return customers;
 	}
 
@@ -96,7 +96,7 @@ public class CustomerController extends AbstractController {
 						Toast.makeText(context, "Unable parse customers", Toast.LENGTH_SHORT).show();
 					} finally {
 						database.endTransaction();
-						database.close();
+						databaseInstance.close();
 					}
 				} else {
 					Toast.makeText(context, "Unable to download customers", Toast.LENGTH_SHORT).show();

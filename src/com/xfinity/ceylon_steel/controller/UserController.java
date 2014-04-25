@@ -83,6 +83,7 @@ public class UserController extends AbstractController {
 				if (result != null) {
 					SQLiteDatabaseHelper databaseInstance = SQLiteDatabaseHelper.getDatabaseInstance(context);
 					SQLiteDatabase database = databaseInstance.getWritableDatabase();
+					System.out.println("database-distributor-open");
 					String userInsertQuery = "insert or ignore into tbl_distributor(distributorId, distributorName) values (?,?)";
 					SQLiteStatement compiledStatement = database.compileStatement(userInsertQuery);
 					try {
@@ -101,7 +102,8 @@ public class UserController extends AbstractController {
 						database.setTransactionSuccessful();
 					} finally {
 						database.endTransaction();
-						database.close();
+						databaseInstance.close();
+						System.out.println("database-distributor-closed");
 					}
 					Toast.makeText(context, "Distributors downloaded successfully", Toast.LENGTH_SHORT).show();
 				} else {
@@ -122,7 +124,7 @@ public class UserController extends AbstractController {
 			users.add(user);
 		}
 		cursor.close();
-		database.close();
+		databaseInstance.close();
 		return users;
 	}
 
@@ -463,6 +465,7 @@ public class UserController extends AbstractController {
 		final ArrayList<UserLocation> userLocations = new ArrayList<UserLocation>();
 		SQLiteDatabaseHelper databaseInstance = SQLiteDatabaseHelper.getDatabaseInstance(context);
 		SQLiteDatabase database = databaseInstance.getWritableDatabase();
+		SQLiteStatement compiledStatement = database.compileStatement("delete from tbl_rep_location where repLocationId=?");
 		Cursor cursor = database.rawQuery("select repId, longitude, latitude, gpsTime, repLocationId, batteryLevel from tbl_rep_location", null);
 		int repIdIndex = cursor.getColumnIndex("repId");
 		int longitudeIndex = cursor.getColumnIndex("longitude");
@@ -497,14 +500,13 @@ public class UserController extends AbstractController {
 				Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
 			}
 		}
-		SQLiteStatement compiledStatement = database.compileStatement("delete from tbl_rep_location where repLocationId=?");
 		for (Object repLocationId : synckedRepLocations) {
 			compiledStatement.bindAllArgsAsStrings(new String[]{
 				Integer.toString((Integer) repLocationId)
 			});
 			compiledStatement.executeUpdateDelete();
 		}
-		database.close();
+		databaseInstance.close();
 	}
 
 	public static boolean clearAuthentication(Context context) {

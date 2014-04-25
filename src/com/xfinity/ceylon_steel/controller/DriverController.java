@@ -44,7 +44,7 @@ public class DriverController extends AbstractController {
 			drivers.add(driver);
 		}
 		driversCursor.close();
-		database.close();
+		databaseInstance.close();
 		return drivers;
 	}
 
@@ -96,7 +96,7 @@ public class DriverController extends AbstractController {
 						Toast.makeText(context, "Unable parse drivers", Toast.LENGTH_SHORT).show();
 					} finally {
 						database.endTransaction();
-						database.close();
+						databaseInstance.close();
 					}
 				} else {
 					Toast.makeText(context, "Unable to retrieve drivers", Toast.LENGTH_SHORT).show();

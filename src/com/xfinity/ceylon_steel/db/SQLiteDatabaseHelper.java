@@ -13,6 +13,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -23,6 +24,7 @@ import java.util.logging.Logger;
  */
 public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
 
+	private AtomicInteger atomicInteger;
 	private static final String DATABASE_NAME = "ceylon_steel";
 	private static final int VERSION = 22;
 	private static SQLiteDatabaseHelper database;
@@ -69,4 +71,19 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
 		return context.deleteDatabase(DATABASE_NAME);
 	}
 
+	@Override
+	public SQLiteDatabase getWritableDatabase() {
+		if (atomicInteger == null) {
+			atomicInteger = new AtomicInteger();
+		}
+		atomicInteger.incrementAndGet();
+		return super.getWritableDatabase();
+	}
+
+	@Override
+	public synchronized void close() {
+		if (atomicInteger != null && atomicInteger.decrementAndGet() == 0) {
+			super.close();
+		}
+	}
 }

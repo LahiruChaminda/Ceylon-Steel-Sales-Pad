@@ -32,8 +32,8 @@ import org.json.JSONObject;
 public class OutletController extends AbstractController {
 
 	public static ArrayList<Outlet> getOutlets(Context context) {
-		SQLiteDatabaseHelper database = SQLiteDatabaseHelper.getDatabaseInstance(context);
-		SQLiteDatabase writableDatabase = database.getWritableDatabase();
+		SQLiteDatabaseHelper databaseInstance = SQLiteDatabaseHelper.getDatabaseInstance(context);
+		SQLiteDatabase writableDatabase = databaseInstance.getWritableDatabase();
 		Cursor cursor = writableDatabase.rawQuery("select * from tbl_outlet", null);
 		int outletIdIndex = cursor.getColumnIndex("outletId");
 		int outletNameIndex = cursor.getColumnIndex("outletName");
@@ -43,7 +43,7 @@ public class OutletController extends AbstractController {
 			outlets.add(outlet);
 		}
 		cursor.close();
-		writableDatabase.close();
+		databaseInstance.close();
 		return outlets;
 	}
 
@@ -71,8 +71,8 @@ public class OutletController extends AbstractController {
 			@Override
 			protected void onPostExecute(JSONArray result) {
 				if (result != null) {
-					SQLiteDatabaseHelper database = SQLiteDatabaseHelper.getDatabaseInstance(context);
-					SQLiteDatabase writableDatabase = database.getWritableDatabase();
+					SQLiteDatabaseHelper databaseInstance = SQLiteDatabaseHelper.getDatabaseInstance(context);
+					SQLiteDatabase writableDatabase = databaseInstance.getWritableDatabase();
 					try {
 						writableDatabase.beginTransaction();
 						SQLiteStatement compiledStatement = writableDatabase.compileStatement("insert or ignore into tbl_outlet(outletId, outletName) values(?,?)");
@@ -89,7 +89,7 @@ public class OutletController extends AbstractController {
 						Logger.getLogger(OutletController.class.getName()).log(Level.SEVERE, null, ex);
 					} finally {
 						writableDatabase.endTransaction();
-						writableDatabase.close();
+						databaseInstance.close();
 						Toast.makeText(context, "Outlets downloaded succesfully", Toast.LENGTH_SHORT).show();
 					}
 				} else {
