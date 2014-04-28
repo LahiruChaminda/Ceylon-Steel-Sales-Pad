@@ -45,6 +45,7 @@ public class GpsReceiver extends Service {
 			}
 		} else {
 			Intent gpsSettings = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+            gpsSettings.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 			applicationContext.startActivity(gpsSettings);
 		}
 	}
