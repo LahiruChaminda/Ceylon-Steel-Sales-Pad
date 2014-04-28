@@ -39,6 +39,7 @@ import java.util.Date;
 import java.util.Formatter;
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.json.JSONArray;
@@ -52,6 +53,9 @@ import org.json.JSONObject;
  */
 public class UserController extends AbstractController {
 
+	public static volatile ProgressDialog progressDialog;
+	public static volatile AtomicInteger atomicInteger;
+
 	private UserController() {
 	}
 
@@ -60,7 +64,14 @@ public class UserController extends AbstractController {
 
 			@Override
 			protected void onPreExecute() {
-				Toast.makeText(context, "Downloading distributors from remote server", Toast.LENGTH_SHORT).show();
+				if (UserController.progressDialog == null) {
+					UserController.progressDialog = new ProgressDialog(context);
+					UserController.progressDialog.setMessage("Downloading Data");
+					UserController.progressDialog.setCanceledOnTouchOutside(false);
+				}
+				if (!UserController.progressDialog.isShowing()) {
+					UserController.progressDialog.show();
+				}
 			}
 
 			@Override
@@ -80,6 +91,14 @@ public class UserController extends AbstractController {
 
 			@Override
 			protected void onPostExecute(JSONArray result) {
+				if (UserController.atomicInteger.decrementAndGet() == 0 && UserController.progressDialog != null && UserController.progressDialog.isShowing()) {
+					UserController.progressDialog.dismiss();
+					UserController.progressDialog = null;
+					Intent homeActivity = new Intent(context, HomeActivity.class);
+					context.startActivity(homeActivity);
+					Intent tracker = new Intent(context, Tracker.class);
+					context.startService(tracker);
+				}
 				if (result != null) {
 					SQLiteDatabaseHelper databaseInstance = SQLiteDatabaseHelper.getDatabaseInstance(context);
 					SQLiteDatabase database = databaseInstance.getWritableDatabase();
@@ -102,7 +121,6 @@ public class UserController extends AbstractController {
 					} finally {
 						database.endTransaction();
 						databaseInstance.close();
-						System.out.println("database-distributor-closed");
 					}
 					Toast.makeText(context, "Distributors downloaded successfully", Toast.LENGTH_SHORT).show();
 				} else {
@@ -203,10 +221,6 @@ public class UserController extends AbstractController {
 						if (result.getBoolean("response")) {
 							setAuthorizedUser(context, result.getInt("userId"), result.getString("name"), result.getString("type"), new Date().getTime());
 							loadDataFromServer(context);
-							Intent homeActivity = new Intent(context, HomeActivity.class);
-							context.startActivity(homeActivity);
-							Intent tracker = new Intent(context, Tracker.class);
-							context.startService(tracker);
 						} else {
 							builder.setMessage("Incorrect Username Password combination");
 							builder.show();
@@ -437,10 +451,17 @@ public class UserController extends AbstractController {
 		}.execute(new User());
 	}
 
-	private static void loadDataFromServer(Context context) {
+	public static void loadDataFromServer(Context context) {
+		if (UserController.atomicInteger == null) {
+			UserController.atomicInteger = new AtomicInteger();
+		}
+		UserController.atomicInteger.incrementAndGet();
 		CategoryController.downLoadItemsAndCategories(context);
+		UserController.atomicInteger.incrementAndGet();
 		OutletController.downloadOutletsOfUser(context);
+		UserController.atomicInteger.incrementAndGet();
 		UserController.downloadDistributors(context);
+		UserController.atomicInteger.incrementAndGet();
 		CustomerController.downloadCustomers(context);
 	}
 

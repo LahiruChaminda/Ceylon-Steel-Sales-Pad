@@ -5,16 +5,20 @@
  */
 package com.xfinity.ceylon_steel.controller;
 
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
 import android.os.AsyncTask;
 import android.widget.Toast;
+import com.xfinity.ceylon_steel.activity.HomeActivity;
 import static com.xfinity.ceylon_steel.controller.WebServiceURL.OutletURL.getOutletsOfUser;
 import com.xfinity.ceylon_steel.db.SQLiteDatabaseHelper;
 import com.xfinity.ceylon_steel.model.Outlet;
 import com.xfinity.ceylon_steel.model.User;
+import com.xfinity.ceylon_steel.service.Tracker;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -52,7 +56,14 @@ public class OutletController extends AbstractController {
 
 			@Override
 			protected void onPreExecute() {
-				Toast.makeText(context, "Downloading outlets from remote server", Toast.LENGTH_SHORT).show();
+				if (UserController.progressDialog == null) {
+					UserController.progressDialog = new ProgressDialog(context);
+					UserController.progressDialog.setMessage("Downloading Data");
+					UserController.progressDialog.setCanceledOnTouchOutside(false);
+				}
+				if (!UserController.progressDialog.isShowing()) {
+					UserController.progressDialog.show();
+				}
 			}
 
 			protected JSONArray doInBackground(User... users) {
@@ -70,6 +81,14 @@ public class OutletController extends AbstractController {
 
 			@Override
 			protected void onPostExecute(JSONArray result) {
+				if (UserController.atomicInteger.decrementAndGet() == 0 && UserController.progressDialog != null && UserController.progressDialog.isShowing()) {
+					UserController.progressDialog.dismiss();
+					UserController.progressDialog = null;
+					Intent homeActivity = new Intent(context, HomeActivity.class);
+					context.startActivity(homeActivity);
+					Intent tracker = new Intent(context, Tracker.class);
+					context.startService(tracker);
+				}
 				if (result != null) {
 					SQLiteDatabaseHelper databaseInstance = SQLiteDatabaseHelper.getDatabaseInstance(context);
 					SQLiteDatabase writableDatabase = databaseInstance.getWritableDatabase();

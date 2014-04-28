@@ -5,17 +5,21 @@
  */
 package com.xfinity.ceylon_steel.controller;
 
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
 import android.os.AsyncTask;
 import android.widget.Toast;
+import com.xfinity.ceylon_steel.activity.HomeActivity;
 import static com.xfinity.ceylon_steel.controller.WebServiceURL.CategoryURL.getItemsAndCategories;
 import com.xfinity.ceylon_steel.db.SQLiteDatabaseHelper;
 import com.xfinity.ceylon_steel.model.Category;
 import com.xfinity.ceylon_steel.model.Item;
+import com.xfinity.ceylon_steel.service.Tracker;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -64,11 +68,18 @@ public class CategoryController extends AbstractController {
 
 			@Override
 			protected void onPreExecute() {
-				Toast.makeText(context, "Downloading categories and items from remote server", Toast.LENGTH_SHORT).show();
+				if (UserController.progressDialog == null) {
+					UserController.progressDialog = new ProgressDialog(context);
+					UserController.progressDialog.setMessage("Downloading Data");
+					UserController.progressDialog.setCanceledOnTouchOutside(false);
+				}
+				if (!UserController.progressDialog.isShowing()) {
+					UserController.progressDialog.show();
+				}
 			}
 
 			@Override
-			protected JSONArray doInBackground(Void... arg0) {
+			protected JSONArray doInBackground(Void... arg0) {;
 				try {
 					return getJsonArray(getItemsAndCategories, null, context);
 				} catch (IOException ex) {
@@ -81,6 +92,14 @@ public class CategoryController extends AbstractController {
 
 			@Override
 			protected void onPostExecute(JSONArray result) {
+				if (UserController.atomicInteger.decrementAndGet() == 0 && UserController.progressDialog != null && UserController.progressDialog.isShowing()) {
+					UserController.progressDialog.dismiss();
+					UserController.progressDialog = null;
+					Intent homeActivity = new Intent(context, HomeActivity.class);
+					context.startActivity(homeActivity);
+					Intent tracker = new Intent(context, Tracker.class);
+					context.startService(tracker);
+				}
 				SQLiteDatabaseHelper databaseInstance = SQLiteDatabaseHelper.getDatabaseInstance(context);
 				SQLiteDatabase database = databaseInstance.getWritableDatabase();
 				try {
