@@ -32,6 +32,7 @@ public class HomeActivity extends Activity {
 	private Button btnViewSalesOrder;
 	private Button btnAttendence;
 	private Button btnUnProductiveCall;
+	private Button btnReloadData;
 	private Button btnLogout;
 
 	@Override
@@ -52,6 +53,7 @@ public class HomeActivity extends Activity {
 		btnViewSalesOrder = (Button) findViewById(R.id.btnViewSalesOrder);
 		btnAttendence = (Button) findViewById(R.id.btnAttendence);
 		btnUnProductiveCall = (Button) findViewById(R.id.btnUnProductiveCall);
+		btnReloadData = (Button) findViewById(R.id.btnReloadData);
 		btnLogout = (Button) findViewById(R.id.btnLogout);
 
 		btnMakeSalesOrder.setOnClickListener(new View.OnClickListener() {
@@ -72,6 +74,11 @@ public class HomeActivity extends Activity {
 		btnUnProductiveCall.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View view) {
 				btnUnProductiveCallClicked(view);
+			}
+		});
+		btnReloadData.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View view) {
+				btnReloadDataClicked(view);
 			}
 		});
 		btnLogout.setOnClickListener(new View.OnClickListener() {
@@ -106,14 +113,18 @@ public class HomeActivity extends Activity {
 		finish();
 	}
 
+	private void btnReloadDataClicked(View view) {
+		UserController.loadDataFromServer(this);
+	}
+
 	private void btnLogoutClicked(View view) {
 		AlertDialog.Builder alert = new AlertDialog.Builder(this);
 		alert.setTitle(com.xfinity.ceylon_steel.R.string.message_title);
 		alert.setMessage("You're about to sign-out from sales pad.\nIf you sign-out your un synchronized data will be deleted.\nAre you sure you want to continue?");
 		alert.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface arg0, int arg1) {
-                Intent tracker = new Intent(HomeActivity.this, Tracker.class);
-                HomeActivity.this.stopService(tracker);
+				Intent tracker = new Intent(HomeActivity.this, Tracker.class);
+				HomeActivity.this.stopService(tracker);
 				boolean clearAuthentication = UserController.clearAuthentication(HomeActivity.this);
 				if (clearAuthentication) {
 					SQLiteDatabaseHelper.dropDatabase(HomeActivity.this);
