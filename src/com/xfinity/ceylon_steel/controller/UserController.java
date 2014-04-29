@@ -176,13 +176,14 @@ public class UserController extends AbstractController {
 
 	public static void authenticate(String userName, String password, final Context context) {
 		new AsyncTask<String, Void, JSONObject>() {
-			private ProgressDialog progressDialog;
+			private ProgressDialog authenticatingProgressDialog;
 
 			@Override
 			protected void onPreExecute() {
-				progressDialog = new ProgressDialog(context);
-				progressDialog.setMessage("Waiting for Authenticating...");
-				progressDialog.show();
+				authenticatingProgressDialog = new ProgressDialog(context);
+				authenticatingProgressDialog.setMessage("Waiting for Authenticating...");
+				authenticatingProgressDialog.setCanceledOnTouchOutside(false);
+				authenticatingProgressDialog.show();
 			}
 
 			@Override
@@ -206,8 +207,8 @@ public class UserController extends AbstractController {
 
 			@Override
 			protected void onPostExecute(JSONObject result) {
-				if (progressDialog != null && progressDialog.isShowing()) {
-					progressDialog.dismiss();
+				if (authenticatingProgressDialog != null && authenticatingProgressDialog.isShowing()) {
+					authenticatingProgressDialog.dismiss();
 				}
 				AlertDialog.Builder builder = new AlertDialog.Builder(context);
 				builder.setTitle(com.xfinity.ceylon_steel.R.string.message_title);
