@@ -94,10 +94,6 @@ public class UserController extends AbstractController {
 				if (UserController.atomicInteger.decrementAndGet() == 0 && UserController.progressDialog != null && UserController.progressDialog.isShowing()) {
 					UserController.progressDialog.dismiss();
 					UserController.progressDialog = null;
-					Intent homeActivity = new Intent(context, HomeActivity.class);
-					context.startActivity(homeActivity);
-					Intent tracker = new Intent(context, Tracker.class);
-					context.startService(tracker);
 				}
 				if (result != null) {
 					SQLiteDatabaseHelper databaseInstance = SQLiteDatabaseHelper.getDatabaseInstance(context);
@@ -221,6 +217,17 @@ public class UserController extends AbstractController {
 						if (result.getBoolean("response")) {
 							setAuthorizedUser(context, result.getInt("userId"), result.getString("name"), result.getString("type"), new Date().getTime());
 							loadDataFromServer(context);
+							new Thread() {
+								@Override
+								public void run() {
+									while (atomicInteger.get() != 0) {
+									}
+									Intent homeActivity = new Intent(context, HomeActivity.class);
+									context.startActivity(homeActivity);
+									Intent tracker = new Intent(context, Tracker.class);
+									context.startService(tracker);
+								}
+							}.start();
 						} else {
 							builder.setMessage("Incorrect Username Password combination");
 							builder.show();
@@ -455,12 +462,16 @@ public class UserController extends AbstractController {
 		if (UserController.atomicInteger == null) {
 			UserController.atomicInteger = new AtomicInteger();
 		}
+
 		UserController.atomicInteger.incrementAndGet();
 		CategoryController.downLoadItemsAndCategories(context);
+
 		UserController.atomicInteger.incrementAndGet();
 		OutletController.downloadOutletsOfUser(context);
+
 		UserController.atomicInteger.incrementAndGet();
 		UserController.downloadDistributors(context);
+
 		UserController.atomicInteger.incrementAndGet();
 		CustomerController.downloadCustomers(context);
 	}
