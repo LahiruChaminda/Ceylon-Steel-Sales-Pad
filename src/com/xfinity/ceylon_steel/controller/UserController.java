@@ -145,6 +145,7 @@ public class UserController extends AbstractController {
 		SharedPreferences userData = context.getSharedPreferences("userData", Context.MODE_PRIVATE);
 		Integer userId;
 		String userName;
+		String userType;
 		long loginTime;
 		if ((loginTime = userData.getLong("loginTime", -1)) == -1) {
 			return null;
@@ -161,7 +162,10 @@ public class UserController extends AbstractController {
 		if ((userName = userData.getString("userName", "")).isEmpty()) {
 			return null;
 		}
-		return new User(userId, userName);
+		if ((userType = userData.getString("type", "")).isEmpty()) {
+			return null;
+		}
+		return new User(userId, userName, userType);
 	}
 
 	public static boolean setAuthorizedUser(Context context, int userId, String name, String type, long loginTime) {
