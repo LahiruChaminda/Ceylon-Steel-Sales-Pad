@@ -61,7 +61,7 @@ public class ViewSalesOrderActivity extends Activity {
 			}
 		});
 
-		if (UserController.getAuthorizedUser(this).getUserType().equals("REP_COMPANY")) {
+		if (UserController.getAuthorizedUser(this).getUserType().equalsIgnoreCase("REP_COMPANY")) {
 			btnViewConsignmentSalesOrder.setEnabled(false);
 			btnViewProjectSalesOrder.setEnabled(false);
 		}

@@ -60,7 +60,7 @@ public class MakeSalesOrderActivity extends Activity {
 				btnMakeProjectSalesOrderClicked(view);
 			}
 		});
-		if (UserController.getAuthorizedUser(this).getUserType().equals("REP_COMPANY")) {
+		if (UserController.getAuthorizedUser(this).getUserType().equalsIgnoreCase("REP_COMPANY")) {
 			btnMakeConsignmentSalesOrder.setEnabled(false);
 			btnMakeProjectSalesOrder.setEnabled(false);
 		}
