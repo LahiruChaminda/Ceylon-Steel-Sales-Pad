@@ -102,7 +102,7 @@ public class OutletController extends AbstractController {
 					} finally {
 						writableDatabase.endTransaction();
 						databaseInstance.close();
-						Toast.makeText(context, "Outlets downloaded succesfully", Toast.LENGTH_SHORT).show();
+						Toast.makeText(context, "Outlets downloaded successfully", Toast.LENGTH_SHORT).show();
 					}
 				} else {
 					Toast.makeText(context, "No outlets Found", Toast.LENGTH_SHORT).show();
