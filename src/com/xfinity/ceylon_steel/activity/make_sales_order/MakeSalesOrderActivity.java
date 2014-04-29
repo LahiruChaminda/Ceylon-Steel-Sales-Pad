@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import com.xfinity.ceylon_steel.R;
 import com.xfinity.ceylon_steel.activity.HomeActivity;
+import com.xfinity.ceylon_steel.controller.UserController;
 
 /**
  * @author Supun Lakshan Wanigarathna Dissanayake
@@ -59,6 +60,10 @@ public class MakeSalesOrderActivity extends Activity {
 				btnMakeProjectSalesOrderClicked(view);
 			}
 		});
+		if (UserController.getAuthorizedUser(this).getUserType().equals("REP_COMPANY")) {
+			btnMakeConsignmentSalesOrder.setEnabled(false);
+			btnMakeProjectSalesOrder.setEnabled(false);
+		}
 	}
 	// </editor-fold>
 
