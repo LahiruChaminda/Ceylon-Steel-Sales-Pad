@@ -10,10 +10,9 @@ import com.xfinity.ceylon_steel.service.InternetObserver;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.HashMap;
-import java.util.zip.GZIPInputStream;
-
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -42,7 +41,7 @@ abstract class AbstractController extends WebServiceURL {
 		if (InternetObserver.isConnectedToInternet(context)) {
 			HttpClient httpClient = new DefaultHttpClient();
 			HttpPost postRequest = new HttpPost(url);
-            postRequest.addHeader("Accept-Encoding", "gzip");
+			//postRequest.addHeader("Accept-Encoding", "gzip");
 			if (parameters != null) {
 				MultipartEntityBuilder multipartEntityBuilder = MultipartEntityBuilder.create();
 				for (String parameter : parameters.keySet()) {
@@ -66,13 +65,17 @@ abstract class AbstractController extends WebServiceURL {
 			String lineSeparator = System.getProperty("line.separator");
 			String responseString = "";
 			try {
-				bufferedReader = new BufferedReader(new InputStreamReader(new GZIPInputStream(response.getEntity().getContent())));
+				InputStream content;
+				if ((content = response.getEntity().getContent()) == null) {
+					return null;
+				}
+				//bufferedReader = new BufferedReader(new InputStreamReader(new GZIPInputStream(content)));
+				bufferedReader = new BufferedReader(new InputStreamReader(content));
 				String currentLine;
 				while ((currentLine = bufferedReader.readLine()) != null) {
 					responseString = responseString + currentLine + lineSeparator;
 				}
-                System.out.println("response"+responseString);
-                return new JSONObject(responseString);
+				return new JSONObject(responseString);
 			} finally {
 				if (bufferedReader != null) {
 					bufferedReader.close();
@@ -86,7 +89,7 @@ abstract class AbstractController extends WebServiceURL {
 		if (InternetObserver.isConnectedToInternet(context)) {
 			HttpClient httpClient = new DefaultHttpClient();
 			HttpPost postRequest = new HttpPost(url);
-            postRequest.addHeader("Accept-Encoding", "gzip");
+			//postRequest.addHeader("Accept-Encoding", "gzip");
 			if (parameters != null) {
 				MultipartEntityBuilder multipartEntityBuilder = MultipartEntityBuilder.create();
 				for (String parameter : parameters.keySet()) {
@@ -110,7 +113,12 @@ abstract class AbstractController extends WebServiceURL {
 			String lineSeparator = System.getProperty("line.separator");
 			String responseString = "";
 			try {
-				bufferedReader = new BufferedReader(new InputStreamReader(new GZIPInputStream(response.getEntity().getContent())));
+				InputStream content;
+				if ((content = response.getEntity().getContent()) == null) {
+					return null;
+				}
+//				bufferedReader = new BufferedReader(new InputStreamReader(new GZIPInputStream(content)));
+				bufferedReader = new BufferedReader(new InputStreamReader(content));
 				String currentLine;
 				while ((currentLine = bufferedReader.readLine()) != null) {
 					responseString = responseString + currentLine + lineSeparator;
