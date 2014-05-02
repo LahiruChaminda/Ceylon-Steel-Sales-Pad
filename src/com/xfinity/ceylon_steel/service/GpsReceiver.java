@@ -15,14 +15,13 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.Looper;
-import android.provider.Settings;
 
 public class GpsReceiver extends Service {
 
 	private boolean isGPSEnabled = false;
 	private static Location lastKnownLocation;
 	private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 0;
-	private static final long MIN_TIME_BW_UPDATES = 20;
+	private static final long MIN_TIME_BW_UPDATES = 0;
 	protected static LocationManager locationManager;
 	private static GpsReceiver gpsReceiver;
 
@@ -43,10 +42,6 @@ public class GpsReceiver extends Service {
 					lastKnownLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 				}
 			}
-		} else {
-			Intent gpsSettings = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-            gpsSettings.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-			applicationContext.startActivity(gpsSettings);
 		}
 	}
 
@@ -60,7 +55,7 @@ public class GpsReceiver extends Service {
 		lastKnownLocation = null;
 		while (lastKnownLocation == null) {
 		}
-		if (lastKnownLocation != null && lastKnownLocation.getLatitude() != 0 && lastKnownLocation.getLongitude() != 0) {
+		if (lastKnownLocation != null && lastKnownLocation.getLatitude() != 0 && lastKnownLocation.getLongitude() != 0 && locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
 			long time = lastKnownLocation.getTime();
 			long currentTimeMillis = System.currentTimeMillis();
 			long timeDifference = Math.abs(time - currentTimeMillis);
@@ -72,7 +67,7 @@ public class GpsReceiver extends Service {
 	}
 
 	public Location getLastKnownLocation() {
-		if (lastKnownLocation != null && lastKnownLocation.getLatitude() != 0 && lastKnownLocation.getLongitude() != 0) {
+		if (lastKnownLocation != null && lastKnownLocation.getLatitude() != 0 && lastKnownLocation.getLongitude() != 0 && locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
 			long time = lastKnownLocation.getTime();
 			long currentTimeMillis = System.currentTimeMillis();
 			long timeDifference = Math.abs(time - currentTimeMillis);
