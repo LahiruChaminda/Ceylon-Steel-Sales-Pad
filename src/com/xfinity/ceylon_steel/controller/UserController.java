@@ -226,6 +226,11 @@ public class UserController extends AbstractController {
 								@Override
 								public void run() {
 									while (atomicInteger.get() != 0) {
+										try {
+											Thread.sleep(200);
+										} catch (InterruptedException ex) {
+											Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+										}
 									}
 									Intent homeActivity = new Intent(context, HomeActivity.class);
 									context.startActivity(homeActivity);
