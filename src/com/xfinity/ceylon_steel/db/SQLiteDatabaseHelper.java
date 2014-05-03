@@ -26,7 +26,7 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
 
 	private AtomicInteger atomicInteger;
 	private static final String DATABASE_NAME = "ceylon_steel";
-	private static final int VERSION = 22;
+	private static final int VERSION = 23;
 	private static SQLiteDatabaseHelper database;
 	private final AssetManager assets;
 
@@ -57,6 +57,7 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
 					db.execSQL(sql.trim());
 				}
 			}
+			db.execSQL("PRAGMA foreign_keys = ON;");
 		} catch (IOException ex) {
 			Logger.getLogger(SQLiteDatabaseHelper.class.getName()).log(Level.SEVERE, null, ex);
 		}
@@ -77,7 +78,9 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
 			atomicInteger = new AtomicInteger();
 		}
 		atomicInteger.incrementAndGet();
-		return super.getWritableDatabase();
+		SQLiteDatabase writableDatabase = super.getWritableDatabase();
+		writableDatabase.execSQL("PRAGMA foreign_keys = ON;");
+		return writableDatabase;
 	}
 
 	@Override
