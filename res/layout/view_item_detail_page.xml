@@ -96,7 +96,7 @@
         <Button
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="Update"
+                android:text="Update And Back"
                 android:id="@+id/btnViewItemUpdate" android:layout_margin="5dp" android:textSize="25dp"/>
         <Button
                 android:layout_width="fill_parent"
