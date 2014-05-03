@@ -405,7 +405,6 @@ public class OrderController extends AbstractController {
 	}
 
 	public static long updateConsignmentOrder(Context context, Order order) {
-		System.out.println("aaaa" + order.getOrderAsJSON());
 		SQLiteDatabaseHelper databaseInstance = SQLiteDatabaseHelper.getDatabaseInstance(context);
 		SQLiteDatabase writableDatabase = databaseInstance.getWritableDatabase();
 		SQLiteStatement orderDeleteStatement = writableDatabase.compileStatement("delete from tbl_order where orderId=?");
