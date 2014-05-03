@@ -403,4 +403,170 @@ public class OrderController extends AbstractController {
 
 		}.execute(order);
 	}
+
+	public static long updateConsignmentOrder(Context context, Order order) {
+		System.out.println("aaaa" + order.getOrderAsJSON());
+		SQLiteDatabaseHelper databaseInstance = SQLiteDatabaseHelper.getDatabaseInstance(context);
+		SQLiteDatabase writableDatabase = databaseInstance.getWritableDatabase();
+		SQLiteStatement orderDeleteStatement = writableDatabase.compileStatement("delete from tbl_order where orderId=?");
+		SQLiteStatement orderStatement = writableDatabase.compileStatement("insert into tbl_order(distributorId,outletId,orderDate,deliveryDate,batteryLevel,longitude,latitude,type,remarks,driverName,driverNIC,vehicleNo,total) values (?,?,?,?,?,?,?,?,?,?,?,?,?)");
+		SQLiteStatement orderDetailStatement = writableDatabase.compileStatement("insert into tbl_order_detail(orderId,itemId,price,quantity,discount) values (?,?,?,?,?)");
+		long orderId = -1;
+		try {
+			writableDatabase.beginTransaction();
+			orderDeleteStatement.bindAllArgsAsStrings(new String[]{
+				Long.toString(order.getOrderId())
+			});
+			orderDeleteStatement.executeUpdateDelete();
+			String orderParamaters[] = {
+				Integer.toString(order.getDistributorId()),
+				Integer.toString(order.getOutletId()),
+				Long.toString(order.getOrderMadeTimeStamp()),
+				Long.toString(order.getDeliveryDate()),
+				Integer.toString(order.getBatteryLevel()),
+				Double.toString(order.getLongitude()),
+				Double.toString(order.getLatitude()),
+				order.getOrderType(),
+				order.getRemarks(),
+				order.getDriver(),
+				order.getDriverNIC(),
+				order.getVehicle(),
+				Double.toString(order.getTotal())
+			};
+			orderStatement.bindAllArgsAsStrings(orderParamaters);
+			orderId = orderStatement.executeInsert();
+			if (orderId == -1) {
+				return -1;
+			}
+			for (OrderDetail orderDetail : order.getOrderDetails()) {
+				String orderDetailParamaters[] = {
+					Long.toString(orderId),
+					Integer.toString(orderDetail.getItemId()),
+					Double.toString(orderDetail.getUnitPrice()),
+					Double.toString(orderDetail.getQuantity()),
+					Double.toString(orderDetail.getEachDiscount())
+				};
+				orderDetailStatement.bindAllArgsAsStrings(orderDetailParamaters);
+				long orderDetailId = orderDetailStatement.executeInsert();
+				if (orderDetailId == -1) {
+					return -1;
+				}
+			}
+			writableDatabase.setTransactionSuccessful();
+		} finally {
+			writableDatabase.endTransaction();
+			databaseInstance.close();
+		}
+		return orderId;
+	}
+
+	public static long updateDirectOrder(Context context, Order order) {
+		SQLiteDatabaseHelper databaseInstance = SQLiteDatabaseHelper.getDatabaseInstance(context);
+		SQLiteDatabase writableDatabase = databaseInstance.getWritableDatabase();
+		SQLiteStatement orderDeleteStatement = writableDatabase.compileStatement("delete from tbl_order where orderId=?");
+		SQLiteStatement orderStatement = writableDatabase.compileStatement("insert into tbl_order(outletId,orderDate,deliveryDate,batteryLevel,longitude,latitude,type,remarks,driverName,driverNIC,vehicleNo,total) values (?,?,?,?,?,?,?,?,?,?,?,?)");
+		SQLiteStatement orderDetailStatement = writableDatabase.compileStatement("insert into tbl_order_detail(orderId,itemId,price,quantity,discount) values (?,?,?,?,?)");
+		long orderId = -1;
+		try {
+			writableDatabase.beginTransaction();
+			orderDeleteStatement.bindAllArgsAsStrings(new String[]{
+				Long.toString(order.getOrderId())
+			});
+			orderDeleteStatement.executeUpdateDelete();
+			String orderParamaters[] = {
+				Integer.toString(order.getOutletId()),
+				Long.toString(order.getOrderMadeTimeStamp()),
+				Long.toString(order.getDeliveryDate()),
+				Integer.toString(order.getBatteryLevel()),
+				Double.toString(order.getLongitude()),
+				Double.toString(order.getLatitude()),
+				order.getOrderType(),
+				order.getRemarks(),
+				order.getDriver(),
+				order.getDriverNIC(),
+				order.getVehicle(),
+				Double.toString(order.getTotal())
+			};
+			orderStatement.bindAllArgsAsStrings(orderParamaters);
+			orderId = orderStatement.executeInsert();
+			if (orderId == -1) {
+				return -1;
+			}
+			for (OrderDetail orderDetail : order.getOrderDetails()) {
+				String orderDetailParamaters[] = {
+					Long.toString(orderId),
+					Integer.toString(orderDetail.getItemId()),
+					Double.toString(orderDetail.getUnitPrice()),
+					Double.toString(orderDetail.getQuantity()),
+					Double.toString(orderDetail.getEachDiscount())
+				};
+				orderDetailStatement.bindAllArgsAsStrings(orderDetailParamaters);
+				long orderDetailId = orderDetailStatement.executeInsert();
+				if (orderDetailId == -1) {
+					return -1;
+				}
+			}
+			writableDatabase.setTransactionSuccessful();
+		} finally {
+			writableDatabase.endTransaction();
+			databaseInstance.close();
+		}
+		return orderId;
+	}
+
+	public static long updateProjectOrder(Context context, Order order) {
+		SQLiteDatabaseHelper databaseInstance = SQLiteDatabaseHelper.getDatabaseInstance(context);
+		SQLiteDatabase writableDatabase = databaseInstance.getWritableDatabase();
+		SQLiteStatement orderDeleteStatement = writableDatabase.compileStatement("delete from tbl_order where orderId=?");
+		SQLiteStatement orderStatement = writableDatabase.compileStatement("insert into tbl_order(distributorId,customerId,orderDate,deliveryDate,batteryLevel,longitude,latitude,type,remarks,driverName,driverNIC,vehicleNo) values (?,?,?,?,?,?,?,?,?,?,?,?)");
+		SQLiteStatement orderDetailStatement = writableDatabase.compileStatement("insert into tbl_order_detail(orderId,itemId,price,quantity,discount) values (?,?,?,?,?)");
+		long orderId = -1;
+		try {
+			writableDatabase.beginTransaction();
+			orderDeleteStatement.bindAllArgsAsStrings(new String[]{
+				Long.toString(order.getOrderId())
+			});
+			orderDeleteStatement.executeUpdateDelete();
+			String orderParamaters[] = {
+				Integer.toString(order.getDistributorId()),
+				Integer.toString(order.getCustomerId()),
+				Long.toString(order.getOrderMadeTimeStamp()),
+				Long.toString(order.getDeliveryDate()),
+				Integer.toString(order.getBatteryLevel()),
+				Double.toString(order.getLongitude()),
+				Double.toString(order.getLatitude()),
+				order.getOrderType(),
+				order.getRemarks(),
+				order.getDriver(),
+				order.getDriverNIC(),
+				order.getVehicle(),
+				Double.toString(order.getTotal())
+			};
+			orderStatement.bindAllArgsAsStrings(orderParamaters);
+			orderId = orderStatement.executeInsert();
+			if (orderId == -1) {
+				return -1;
+			}
+			for (OrderDetail orderDetail : order.getOrderDetails()) {
+				String orderDetailParamaters[] = {
+					Long.toString(orderId),
+					Integer.toString(orderDetail.getItemId()),
+					Double.toString(orderDetail.getUnitPrice()),
+					Double.toString(orderDetail.getQuantity()),
+					Double.toString(orderDetail.getEachDiscount())
+				};
+				orderDetailStatement.bindAllArgsAsStrings(orderDetailParamaters);
+				long orderDetailId = orderDetailStatement.executeInsert();
+				if (orderDetailId == -1) {
+					return -1;
+				}
+			}
+			writableDatabase.setTransactionSuccessful();
+		} finally {
+			writableDatabase.endTransaction();
+			databaseInstance.close();
+		}
+		return orderId;
+	}
+
 }
