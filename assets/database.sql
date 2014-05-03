@@ -16,7 +16,7 @@ create table tbl_category(
 );
 create table tbl_item(
 	itemId integer primary key,
-	categoryId integer not null references tbl_category(categoryId),
+	categoryId integer not null references tbl_category(categoryId) on update cascade,
 	itemCode text not null,
 	itemDescription text check(itemDescription!=''),
 	price real
@@ -42,9 +42,9 @@ create table tbl_outlet(
 );
 create table tbl_order(
 	orderId integer not null primary key autoincrement,
-	distributorId integer references tbl_distributor(distributorId),
-	outletId integer references tbl_outlet(outletId),
-	customerId integer references tbl_customer(customerId),
+	distributorId integer references tbl_distributor(distributorId) on update cascade,
+	outletId integer references tbl_outlet(outletId) on update cascade,
+	customerId integer references tbl_customer(customerId) on update cascade,
 	orderDate long,
 	deliveryDate long,
 	driverName text check(driverName!=''),
@@ -58,8 +58,8 @@ create table tbl_order(
     remarks text
 );
 create table tbl_order_detail(
-	orderId integer not null references tbl_order(orderId),
-	itemId integer not null references tbl_item(itemId),
+	orderId integer not null references tbl_order(orderId) on update cascade on delete cascade,
+	itemId integer not null references tbl_item(itemId) on update cascade,
 	price real not null,
 	discount real,
 	quantity real
@@ -74,7 +74,7 @@ create table tbl_rep_location(
 );
 create table tbl_unproductive_call(
     unProductiveCallId integer not null primary key autoincrement,
-    outletId int not null references tbl_outlet(outletId),
+    outletId int not null references tbl_outlet(outletId) on update cascade,
 	batteryLevel int not null,
 	repId integer not null,
 	reason real not null,
