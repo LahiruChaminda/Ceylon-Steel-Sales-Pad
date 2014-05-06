@@ -15,17 +15,18 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.Looper;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class GpsReceiver extends Service {
 
-	private boolean isGPSEnabled = false;
-	private static Location lastKnownLocation;
+	private volatile static Location lastKnownLocation;
 	private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 0;
 	private static final long MIN_TIME_BW_UPDATES = 0;
 	protected static LocationManager locationManager;
-	private static GpsReceiver gpsReceiver;
+	private volatile static GpsReceiver gpsReceiver;
 
-	public static GpsReceiver getGpsReceiver(Context applicationContext) {
+	public synchronized static GpsReceiver getGpsReceiver(Context applicationContext) {
 		if (gpsReceiver == null) {
 			gpsReceiver = new GpsReceiver(applicationContext);
 		}
@@ -34,15 +35,7 @@ public class GpsReceiver extends Service {
 
 	private GpsReceiver(Context applicationContext) {
 		locationManager = (LocationManager) applicationContext.getSystemService(LOCATION_SERVICE);
-		isGPSEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
-		if (isGPSEnabled) {
-			if (lastKnownLocation == null) {
-				locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, MIN_TIME_BW_UPDATES, MIN_DISTANCE_CHANGE_FOR_UPDATES, LocationListenerImpl.getLocationListener(), Looper.getMainLooper());
-				if (locationManager != null) {
-					lastKnownLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-				}
-			}
-		}
+		locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, MIN_TIME_BW_UPDATES, MIN_DISTANCE_CHANGE_FOR_UPDATES, LocationListenerImpl.getLocationListener(), Looper.getMainLooper());
 	}
 
 	public static void stopUsingGPS() {
@@ -54,6 +47,11 @@ public class GpsReceiver extends Service {
 	public synchronized Location getHighAccurateLocation() {
 		lastKnownLocation = null;
 		while (lastKnownLocation == null) {
+			try {
+				Thread.sleep(100);
+			} catch (InterruptedException ex) {
+				Logger.getLogger(GpsReceiver.class.getName()).log(Level.SEVERE, null, ex);
+			}
 		}
 		if (lastKnownLocation != null && lastKnownLocation.getLatitude() != 0 && lastKnownLocation.getLongitude() != 0 && locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
 			long time = lastKnownLocation.getTime();
