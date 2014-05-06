@@ -74,7 +74,7 @@ public class VehicleController extends AbstractController {
 				if (result != null) {
 					SQLiteDatabaseHelper databaseInstance = SQLiteDatabaseHelper.getDatabaseInstance(context);
 					SQLiteDatabase database = databaseInstance.getWritableDatabase();
-					SQLiteStatement compiledStatement = database.compileStatement("insert ignore into tbl_vehicle(vehicleNo) values(?)");
+					SQLiteStatement compiledStatement = database.compileStatement("insert or ignore into tbl_vehicle(vehicleNo) values(?)");
 					try {
 						database.beginTransaction();
 						for (int i = 0; i < result.length(); i++) {
