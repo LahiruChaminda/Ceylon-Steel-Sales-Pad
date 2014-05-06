@@ -27,7 +27,7 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
 	private AtomicInteger atomicInteger;
 	private static final String DATABASE_NAME = "ceylon_steel";
 	private static final int VERSION = 23;
-	private static SQLiteDatabaseHelper database;
+	private static volatile SQLiteDatabaseHelper database;
 	private final AssetManager assets;
 
 	private SQLiteDatabaseHelper(Context context) {
@@ -53,8 +53,9 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
 				databaseDeclaration = databaseDeclaration + line.replace("\t", "");
 			}
 			for (String sql : databaseDeclaration.split(";")) {
-				if (!sql.trim().isEmpty()) {
-					db.execSQL(sql.trim());
+				String trimmedQuery;
+				if (!(trimmedQuery = sql.trim()).isEmpty()) {
+					db.execSQL(trimmedQuery);
 				}
 			}
 			db.execSQL("PRAGMA foreign_keys = ON;");
