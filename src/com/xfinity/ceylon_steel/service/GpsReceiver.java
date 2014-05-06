@@ -51,7 +51,7 @@ public class GpsReceiver extends Service {
 		}
 	}
 
-	public Location getHighAccurateLocation() {
+	public synchronized Location getHighAccurateLocation() {
 		lastKnownLocation = null;
 		while (lastKnownLocation == null) {
 		}
@@ -66,7 +66,7 @@ public class GpsReceiver extends Service {
 		return lastKnownLocation;
 	}
 
-	public Location getLastKnownLocation() {
+	public synchronized Location getLastKnownLocation() {
 		if (lastKnownLocation != null && lastKnownLocation.getLatitude() != 0 && lastKnownLocation.getLongitude() != 0 && locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
 			long time = lastKnownLocation.getTime();
 			long currentTimeMillis = System.currentTimeMillis();
