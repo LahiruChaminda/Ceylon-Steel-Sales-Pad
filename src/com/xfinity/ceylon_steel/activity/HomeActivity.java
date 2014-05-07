@@ -40,6 +40,10 @@ public class HomeActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.home_page);
 		initialize();
+
+		//starts Rep tracking function
+		Intent tracker = new Intent(this, Tracker.class);
+		startService(tracker);
 	}
 
 	@Override
