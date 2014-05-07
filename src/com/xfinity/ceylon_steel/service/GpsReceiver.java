@@ -7,22 +7,20 @@ package com.xfinity.ceylon_steel.service;
 
 import android.app.Service;
 import android.content.Context;
-import static android.content.Context.LOCATION_SERVICE;
 import android.content.Intent;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.os.Looper;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class GpsReceiver extends Service {
 
 	private volatile static Location lastKnownLocation;
-	private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 0;
-	private static final long MIN_TIME_BW_UPDATES = 0;
+	private static final long MINIMUM_DISTANCE_CHANGE = 0;
+	private static final long MINIMUM_TIME_DIFFERENCE = 0;
 	protected static LocationManager locationManager;
 	private volatile static GpsReceiver gpsReceiver;
 
@@ -34,14 +32,9 @@ public class GpsReceiver extends Service {
 	}
 
 	private GpsReceiver(Context applicationContext) {
-		locationManager = (LocationManager) applicationContext.getSystemService(LOCATION_SERVICE);
-		locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, MIN_TIME_BW_UPDATES, MIN_DISTANCE_CHANGE_FOR_UPDATES, LocationListenerImpl.getLocationListener(), Looper.getMainLooper());
-	}
-
-	public static void stopUsingGPS() {
-		if (locationManager != null) {
-			locationManager.removeUpdates(LocationListenerImpl.getLocationListener());
-		}
+		locationManager = (LocationManager) applicationContext.getSystemService(Context.LOCATION_SERVICE);
+		lastKnownLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+		locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, MINIMUM_TIME_DIFFERENCE, MINIMUM_DISTANCE_CHANGE, new LocationListenerImpl());
 	}
 
 	public synchronized Location getHighAccurateLocation() {
@@ -77,15 +70,6 @@ public class GpsReceiver extends Service {
 	}
 
 	private static class LocationListenerImpl implements LocationListener {
-
-		private static LocationListenerImpl locationListener;
-
-		private LocationListenerImpl() {
-		}
-
-		public static LocationListenerImpl getLocationListener() {
-			return (locationListener != null) ? locationListener : new LocationListenerImpl();
-		}
 
 		@Override
 		public void onLocationChanged(Location location) {
