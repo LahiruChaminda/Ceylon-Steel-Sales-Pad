@@ -234,8 +234,6 @@ public class UserController extends AbstractController {
 									}
 									Intent homeActivity = new Intent(context, HomeActivity.class);
 									context.startActivity(homeActivity);
-									Intent tracker = new Intent(context, Tracker.class);
-									context.startService(tracker);
 								}
 							}.start();
 						} else {
@@ -499,7 +497,7 @@ public class UserController extends AbstractController {
 			Integer.toString(userLocation.getBatteryLevel())
 		});
 		compiledStatement.executeInsert();
-		database.close();
+		databaseInstance.close();
 	}
 
 	public static void syncRepLocations(final Context context) {
