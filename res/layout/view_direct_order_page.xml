@@ -23,109 +23,110 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp" android:weightSum="100">
-        <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Outlet"
-                android:layout_margin="5dp"
-                android:textSize="25dp" android:layout_weight="70"/>
-        <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/txtViewDirectOutletName"
-                android:layout_margin="5dp"
-                android:textSize="25dp" android:layout_weight="30"/>
-            </LinearLayout>
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Outlet"
+                    android:layout_margin="5dp"
+                    android:textSize="25dp" android:layout_weight="70"/>
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/txtViewDirectOutletName"
+                    android:layout_margin="5dp"
+                    android:textSize="25dp" android:layout_weight="30"/>
+        </LinearLayout>
         <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp" android:weightSum="100">
-        <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Vehicle"
-                android:layout_margin="5dp"
-                android:textSize="25dp" android:layout_weight="70"/>
-        <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/txtViewDirectVehicleNo"
-                android:layout_margin="5dp"
-                android:textSize="25dp" android:layout_weight="30"/>
-            </LinearLayout>
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Vehicle"
+                    android:layout_margin="5dp"
+                    android:textSize="25dp" android:layout_weight="70"/>
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/txtViewDirectVehicleNo"
+                    android:layout_margin="5dp"
+                    android:textSize="25dp" android:layout_weight="30"/>
+        </LinearLayout>
         <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp" android:weightSum="100">
-        <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Driver"
-                android:layout_margin="5dp"
-                android:textSize="25dp" android:layout_weight="70"/>
-        <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/txtViewDirectDriverName"
-                android:layout_margin="5dp"
-                android:textSize="25dp" android:layout_weight="30"/>
-            </LinearLayout>
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Driver"
+                    android:layout_margin="5dp"
+                    android:textSize="25dp" android:layout_weight="70"/>
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/txtViewDirectDriverName"
+                    android:layout_margin="5dp"
+                    android:textSize="25dp" android:layout_weight="30"/>
+        </LinearLayout>
         <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp" android:weightSum="100">
-        <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Driver NIC"
-                android:layout_margin="5dp"
-                android:textSize="25dp" android:layout_weight="70"/>
-        <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/txtViewDirectDriverNIC" android:layout_margin="5dp" android:textSize="25dp"
-                android:layout_weight="30"/>
-            </LinearLayout>
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Driver NIC"
+                    android:layout_margin="5dp"
+                    android:textSize="25dp" android:layout_weight="70"/>
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/txtViewDirectDriverNIC" android:layout_margin="5dp" android:textSize="25dp"
+                    android:layout_weight="30"/>
+        </LinearLayout>
         <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp" android:weightSum="100">
-        <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Delivery Date" android:layout_margin="5dp" android:textSize="25dp"
-                android:layout_weight="70"/>
-        <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/txtViewDirectDeliveryDate" android:layout_margin="5dp" android:textSize="25dp"
-                android:layout_weight="30"/>
-            </LinearLayout>
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Delivery Date" android:layout_margin="5dp" android:textSize="25dp"
+                    android:layout_weight="70"/>
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/txtViewDirectDeliveryDate" android:layout_margin="5dp" android:textSize="25dp"
+                    android:layout_weight="30"/>
+        </LinearLayout>
         <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp" android:weightSum="100">
-        <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Remarks" android:layout_margin="5dp" android:textSize="25dp" android:layout_weight="70"/>
-        <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/txtViewDirectRemarks" android:layout_margin="5dp" android:textSize="25dp"
-                android:layout_weight="30"/>
-            </LinearLayout>
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Remarks" android:layout_margin="5dp" android:textSize="25dp"
+                    android:layout_weight="70"/>
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/txtViewDirectRemarks" android:layout_margin="5dp" android:textSize="25dp"
+                    android:layout_weight="30"/>
+        </LinearLayout>
         <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
@@ -135,6 +136,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Ordered Items"
+                    android:textColor="@android:color/white"
+                    android:background="#4F82B4"
                     android:gravity="center"
                     android:layout_margin="5dp"
                     android:textSize="25dp"
@@ -145,6 +148,8 @@
                 android:layout_weight="1"
                 android:layout_margin="5dp"
                 android:id="@+id/directOrderDetailListView"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:layout_height="match_parent">
         </ListView>
         <Button
