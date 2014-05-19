@@ -78,9 +78,9 @@ public class VehicleController extends AbstractController {
 					try {
 						database.beginTransaction();
 						for (int i = 0; i < result.length(); i++) {
-							JSONObject customer = result.getJSONObject(i);
+							JSONObject vehicle = result.getJSONObject(i);
 							compiledStatement.bindAllArgsAsStrings(new String[]{
-								customer.getString("vehicleNo")
+								vehicle.getString("vehicleNo")
 							});
 							long response = compiledStatement.executeInsert();
 							if (response == -1) {

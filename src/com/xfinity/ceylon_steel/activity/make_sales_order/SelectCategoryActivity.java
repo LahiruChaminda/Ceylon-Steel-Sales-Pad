@@ -25,6 +25,7 @@ import com.xfinity.ceylon_steel.R;
 import com.xfinity.ceylon_steel.activity.HomeActivity;
 import com.xfinity.ceylon_steel.controller.CategoryController;
 import com.xfinity.ceylon_steel.controller.OrderController;
+import com.xfinity.ceylon_steel.controller.UserController;
 import com.xfinity.ceylon_steel.model.Category;
 import com.xfinity.ceylon_steel.model.Item;
 import com.xfinity.ceylon_steel.model.Order;
@@ -254,6 +255,7 @@ public class SelectCategoryActivity extends Activity {
 				placeOrder = OrderController.placeProjectOrder(this, order);
 			}
 			order.setOrderId(placeOrder);
+			order.setRepId(UserController.getAuthorizedUser(this).getUserId());
 			OrderController.syncOrder(this, order);
 			if (placeOrder != -1) {
 				orderDetails.clear();

@@ -22,6 +22,7 @@ import java.util.TimerTask;
 public class Tracker extends Service {
 
 	private Timer timer;
+	private static boolean status;
 	private GpsReceiver gpsReceiver;
 
 	@Override
@@ -29,9 +30,14 @@ public class Tracker extends Service {
 		super.onCreate();
 		gpsReceiver = GpsReceiver.getGpsReceiver(getApplicationContext());
 		timer = new Timer("Tracker");
+		status = true;
 		timer.schedule(new TimerTask() {
 			@Override
 			public void run() {
+				if (!status) {
+					timer.cancel();
+					stopSelf();
+				}
 				Location lastKnownLocation = null;
 				do {
 					lastKnownLocation = gpsReceiver.getLastKnownLocation();
@@ -45,7 +51,11 @@ public class Tracker extends Service {
 				UserController.markRepLocation(getApplicationContext(), userLocation);
 				UserController.syncRepLocations(getApplicationContext());
 			}
-		}, 0, 15 * 60 * 1000);//15*60*1000 is the millisecond for 15 minutes
+		}, 0, 500);//15*60*1000 is the millisecond for 15 minutes
+	}
+
+	public static void stopTracking() {
+		status = false;
 	}
 
 	@Override
