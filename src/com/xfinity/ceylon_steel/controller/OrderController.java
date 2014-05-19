@@ -266,7 +266,7 @@ public class OrderController extends AbstractController {
 			order.setLongitude(orderCursor.getLong(longitudeIndex));
 			order.setLatitude(orderCursor.getLong(latitudeIndex));
 			order.setBatteryLevel(orderCursor.getInt(batteryLevelIndex));
-			order.setOrderType(Order.CONSIGNMENT);
+			order.setOrderType(Order.DIRECT);
 			order.setRemarks(orderCursor.getString(remarksIndex));
 			order.setOrderDetails(getOrderDetails(database, orderId));
 			order.setTotal(orderCursor.getDouble(totalIndex));
@@ -315,7 +315,7 @@ public class OrderController extends AbstractController {
 			order.setLongitude(orderCursor.getLong(longitudeIndex));
 			order.setLatitude(orderCursor.getLong(latitudeIndex));
 			order.setBatteryLevel(orderCursor.getInt(batteryLevelIndex));
-			order.setOrderType(Order.CONSIGNMENT);
+			order.setOrderType(Order.PROJECT);
 			order.setRemarks(orderCursor.getString(remarksIndex));
 			order.setOrderDetails(getOrderDetails(database, orderId));
 			order.setTotal(orderCursor.getDouble(totalIndex));
