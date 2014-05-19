@@ -40,10 +40,12 @@ public class HomeActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.home_page);
 		initialize();
+	}
 
-		//starts Rep tracking function
-		Intent tracker = new Intent(this, Tracker.class);
-		startService(tracker);
+	@Override
+	protected void onResume() {
+		super.onResume();
+		startRepTracking();
 	}
 
 	@Override
@@ -127,8 +129,7 @@ public class HomeActivity extends Activity {
 		alert.setMessage("You're about to sign-out from sales pad.\nIf you sign-out your un synchronized data will be deleted.\nAre you sure you want to continue?");
 		alert.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface arg0, int arg1) {
-				Intent tracker = new Intent(HomeActivity.this, Tracker.class);
-				HomeActivity.this.stopService(tracker);
+				Tracker.stopTracking();
 				boolean clearAuthentication = UserController.clearAuthentication(HomeActivity.this);
 				if (clearAuthentication) {
 					SQLiteDatabaseHelper.dropDatabase(HomeActivity.this);
@@ -140,6 +141,12 @@ public class HomeActivity extends Activity {
 		});
 		alert.setNegativeButton("No", null);
 		alert.show();
+	}
+
+	private void startRepTracking() {
+		//starts Rep tracking function
+		Intent tracker = new Intent(this, Tracker.class);
+		startService(tracker);
 	}
 
 }
