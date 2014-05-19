@@ -36,7 +36,7 @@ public class DriverController extends AbstractController {
 		SQLiteDatabaseHelper databaseInstance = SQLiteDatabaseHelper.getDatabaseInstance(context);
 		SQLiteDatabase database = databaseInstance.getWritableDatabase();
 		Cursor driversCursor = database.rawQuery("select driverName, driverNIC from tbl_driver", null);
-		for (driversCursor.moveToFirst(); !driversCursor.isAfterLast(); driversCursor.moveToFirst()) {
+		for (driversCursor.moveToFirst(); !driversCursor.isAfterLast(); driversCursor.moveToNext()) {
 			Driver driver = new Driver(
 					driversCursor.getString(0),
 					driversCursor.getString(1)

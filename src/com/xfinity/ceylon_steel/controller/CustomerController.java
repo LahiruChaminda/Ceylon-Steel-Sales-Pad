@@ -36,12 +36,14 @@ public class CustomerController extends AbstractController {
 		SQLiteDatabaseHelper databaseInstance = SQLiteDatabaseHelper.getDatabaseInstance(context);
 		SQLiteDatabase database = databaseInstance.getWritableDatabase();
 		Cursor customerCursor = database.rawQuery("select customerId, customerName from tbl_customer", null);
-		for (customerCursor.moveToFirst(); !customerCursor.isAfterLast(); customerCursor.moveToFirst()) {
-			Customer driver = new Customer(
-					customerCursor.getInt(0),
-					customerCursor.getString(1)
+		int customerIdIndex = customerCursor.getColumnIndex("customerId");
+		int customerNameIndex = customerCursor.getColumnIndex("customerName");
+		for (customerCursor.moveToFirst(); !customerCursor.isAfterLast(); customerCursor.moveToNext()) {
+			Customer customer = new Customer(
+					customerCursor.getInt(customerIdIndex),
+					customerCursor.getString(customerNameIndex)
 			);
-			customers.add(driver);
+			customers.add(customer);
 		}
 		customerCursor.close();
 		databaseInstance.close();
