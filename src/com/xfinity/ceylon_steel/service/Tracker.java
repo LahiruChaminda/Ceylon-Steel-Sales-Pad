@@ -51,7 +51,7 @@ public class Tracker extends Service {
 				UserController.markRepLocation(getApplicationContext(), userLocation);
 				UserController.syncRepLocations(getApplicationContext());
 			}
-		}, 0, 500);//15*60*1000 is the millisecond for 15 minutes
+		}, 0, 15 * 60 * 1000);//15*60*1000 is the millisecond for 15 minutes
 	}
 
 	public static void stopTracking() {
