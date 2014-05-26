@@ -276,6 +276,7 @@ public class UserController extends AbstractController {
 		final GpsReceiver gpsReceiver = GpsReceiver.getGpsReceiver(context);
 		new AsyncTask<User, Void, JSONObject>() {
 			private ProgressDialog progressDialog;
+			private String checkinDateTime;
 
 			@Override
 			protected void onPreExecute() {
@@ -303,6 +304,7 @@ public class UserController extends AbstractController {
 					checkIn.put("date", new SimpleDateFormat("yyyy-MM-dd").format(date));
 					HashMap<String, Object> parameters = new HashMap<String, Object>();
 					parameters.put("data", new JSONObject(checkIn));
+					checkinDateTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date);
 					return getJsonObject(checkInCheckOut, parameters, context);
 				} catch (JSONException ex) {
 					Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
@@ -341,7 +343,7 @@ public class UserController extends AbstractController {
 							});
 							break;
 						case 1:
-							responseDialog.setMessage("Checked in successful");
+							responseDialog.setMessage("Checked in successful\n" + checkinDateTime);
 							responseDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
 								public void onClick(DialogInterface arg0, int arg1) {
 									Intent homeActivity = new Intent(context, HomeActivity.class);
@@ -364,7 +366,6 @@ public class UserController extends AbstractController {
 					Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
 				}
 			}
-
 		}.execute(new User());
 	}
 
@@ -372,6 +373,7 @@ public class UserController extends AbstractController {
 		final GpsReceiver gpsReceiver = GpsReceiver.getGpsReceiver(context);
 		new AsyncTask<User, Void, JSONObject>() {
 			private ProgressDialog progressDialog;
+			private String checkoutDateTime;
 
 			@Override
 			protected void onPreExecute() {
@@ -397,6 +399,7 @@ public class UserController extends AbstractController {
 					checkOut.put("latitude", lastKnownLocation.getLatitude());
 					checkOut.put("batteryLevel", BatteryService.getBatteryLevel(context));
 					checkOut.put("date", new SimpleDateFormat("yyyy-MM-dd").format(date));
+					checkoutDateTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date);
 					HashMap<String, Object> parameters = new HashMap<String, Object>();
 					parameters.put("data", new JSONObject(checkOut));
 					return getJsonObject(checkInCheckOut, parameters, context);
@@ -437,7 +440,7 @@ public class UserController extends AbstractController {
 							});
 							break;
 						case 1:
-							responseDialog.setMessage("Checkout successful");
+							responseDialog.setMessage("Checkout successful\n" + checkoutDateTime);
 							responseDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
 								public void onClick(DialogInterface arg0, int arg1) {
 									Intent homeActivity = new Intent(context, HomeActivity.class);
@@ -485,12 +488,17 @@ public class UserController extends AbstractController {
 	}
 
 	public static void markRepLocation(Context context, UserLocation userLocation) {
+		User user;
+		if ((user = UserController.getAuthorizedUser(context)) == null) {
+			Tracker.stopTracking();
+			return;
+		}
 		SQLiteDatabaseHelper databaseInstance = SQLiteDatabaseHelper.getDatabaseInstance(context);
 		SQLiteDatabase database = databaseInstance.getWritableDatabase();
 		String sql = "insert into tbl_rep_location(repId,longitude,latitude,gpsTime,batteryLevel) values(?,?,?,?,?)";
 		SQLiteStatement compiledStatement = database.compileStatement(sql);
 		compiledStatement.bindAllArgsAsStrings(new String[]{
-			Integer.toString(UserController.getAuthorizedUser(context).getUserId()),
+			Integer.toString(user.getUserId()),
 			Double.toString(userLocation.getLongitude()),
 			Double.toString(userLocation.getLatitude()),
 			Long.toString(userLocation.getTimestamp()),
