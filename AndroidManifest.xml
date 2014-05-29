@@ -88,6 +88,12 @@
 				<category android:name="android.intent.category.DEFAULT"/>
 			</intent-filter>
 		</activity>
+		<activity android:name=".activity.make_sales_order.MakeDirectProjectSalesOrderActivity" android:label="Make Direct Project Sales Order" android:screenOrientation="portrait">
+			<intent-filter>
+				<action android:name="com.xfinity.ceylon_steel.activity.MAKE_DIRECT_PROJECT_ORDER"/>
+				<category android:name="android.intent.category.DEFAULT"/>
+			</intent-filter>
+		</activity>
 		<activity android:name=".activity.view_sales_order.MadeConsignmentSalesOrderActivity" android:label="Select Consignment Sales Order" android:screenOrientation="portrait">
 			<intent-filter>
 				<action android:name="com.xfinity.ceylon_steel.activity.MADE_CONSIGNMENT_ORDER"/>

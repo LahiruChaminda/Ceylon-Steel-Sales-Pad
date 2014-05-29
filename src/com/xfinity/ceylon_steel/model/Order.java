@@ -41,6 +41,7 @@ public class Order implements Serializable {
 	private double total;
 	public static final String CONSIGNMENT = "CONSIGNMENT";
 	public static final String DIRECT = "DIRECT";
+	public static final String DIRECT_PROJECT = "DIRECT_PROJECT";
 	public static final String PROJECT = "PROJECT";
 
 	public Order() {

@@ -23,12 +23,10 @@ import android.widget.EditText;
 import com.xfinity.ceylon_steel.R;
 import com.xfinity.ceylon_steel.controller.CustomerController;
 import com.xfinity.ceylon_steel.controller.DriverController;
-import com.xfinity.ceylon_steel.controller.UserController;
 import com.xfinity.ceylon_steel.controller.VehicleController;
 import com.xfinity.ceylon_steel.model.Customer;
 import com.xfinity.ceylon_steel.model.Driver;
 import com.xfinity.ceylon_steel.model.Order;
-import com.xfinity.ceylon_steel.model.User;
 import com.xfinity.ceylon_steel.model.Vehicle;
 import com.xfinity.ceylon_steel.service.BatteryService;
 import com.xfinity.ceylon_steel.service.GpsReceiver;
@@ -41,19 +39,15 @@ import java.util.logging.Logger;
  * @mobile +94711290392
  * @email supunlakshan.xfinity@gmail.com
  */
-public class MakeProjectSalesOrderActivity extends Activity {
+public class MakeDirectProjectSalesOrderActivity extends Activity {
 
-	private AutoCompleteTextView makeProjectOrderCustomerAuto;
-	private AutoCompleteTextView makeProjectOrderDistributorAuto;
-	private AutoCompleteTextView makeProjectOrderVehicleAuto;
-	private AutoCompleteTextView makeProjectOrderDriverAuto;
-	private EditText makeProjectOrderDriverNIC;
-	private DatePicker makeProjectOrderDeliveryDate;
-	private EditText makeProjectOrderRemarks;
-	private Button btnMakeProjectOrderNext;
-
-	private Customer customer;
-	private User distributor;
+	private AutoCompleteTextView makeDirectProjectOrderCustomerAuto;
+	private AutoCompleteTextView makeDirectProjectOrderVehicleAuto;
+	private AutoCompleteTextView makeDirectProjectOrderDriverAuto;
+	private EditText makeDirectProjectOrderDriverNIC;
+	private DatePicker makeDirectProjectOrderDeliveryDate;
+	private EditText makeDirectProjectOrderRemarks;
+	private Button btnMakeDirectProjectOrderNext;
 
 	private Location lastKnownLocation;
 	private GpsReceiver gpsReceiver;
@@ -63,9 +57,9 @@ public class MakeProjectSalesOrderActivity extends Activity {
 
 		@Override
 		protected void onPreExecute() {
-			progressDialog = new ProgressDialog(MakeProjectSalesOrderActivity.this);
-			progressDialog.setCanceledOnTouchOutside(false);
+			progressDialog = new ProgressDialog(MakeDirectProjectSalesOrderActivity.this);
 			progressDialog.setMessage("Waiting for GPS Location...");
+			progressDialog.setCanceledOnTouchOutside(false);
 			progressDialog.show();
 		}
 
@@ -76,7 +70,7 @@ public class MakeProjectSalesOrderActivity extends Activity {
 				try {
 					Thread.sleep(1000);//delay 1 sec
 				} catch (InterruptedException ex) {
-					Logger.getLogger(MakeProjectSalesOrderActivity.class.getName()).log(Level.SEVERE, null, ex);
+					Logger.getLogger(MakeDirectProjectSalesOrderActivity.class.getName()).log(Level.SEVERE, null, ex);
 				}
 			} while (lastKnownLocation == null);
 			return null;
@@ -87,32 +81,30 @@ public class MakeProjectSalesOrderActivity extends Activity {
 			if (progressDialog != null && progressDialog.isShowing()) {
 				progressDialog.dismiss();
 			}
-			btnMakeProjectOrderNext.setEnabled(true);
+			btnMakeDirectProjectOrderNext.setEnabled(true);
 		}
 	};
+
+	private Customer customer;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.make_project_order_page);
+		setContentView(R.layout.make_direct_project_order_page);
 		gpsReceiver = GpsReceiver.getGpsReceiver(getApplicationContext());
 		initialize();
 
 		ArrayList<Customer> customers = CustomerController.getCustomers(this);
-		ArrayAdapter<Customer> customerAdapter = new ArrayAdapter<Customer>(this, android.R.layout.simple_dropdown_item_1line, customers);
-		makeProjectOrderCustomerAuto.setAdapter(customerAdapter);
-
-		ArrayList<User> distributors = UserController.getDistributors(this);
-		ArrayAdapter<User> distributorAdapter = new ArrayAdapter<User>(this, android.R.layout.simple_dropdown_item_1line, distributors);
-		makeProjectOrderDistributorAuto.setAdapter(distributorAdapter);
+		ArrayAdapter<Customer> outletAdapter = new ArrayAdapter<Customer>(this, android.R.layout.simple_dropdown_item_1line, customers);
+		makeDirectProjectOrderCustomerAuto.setAdapter(outletAdapter);
 
 		ArrayList<Vehicle> vehicles = VehicleController.getVehicles(this);
 		ArrayAdapter<Vehicle> vehicleAdapter = new ArrayAdapter<Vehicle>(this, android.R.layout.simple_dropdown_item_1line, vehicles);
-		makeProjectOrderVehicleAuto.setAdapter(vehicleAdapter);
+		makeDirectProjectOrderVehicleAuto.setAdapter(vehicleAdapter);
 
 		ArrayList<Driver> drivers = DriverController.getDrivers(this);
 		ArrayAdapter<Driver> driverAdapter = new ArrayAdapter<Driver>(this, android.R.layout.simple_dropdown_item_1line, drivers);
-		makeProjectOrderDriverAuto.setAdapter(driverAdapter);
+		makeDirectProjectOrderDriverAuto.setAdapter(driverAdapter);
 
 		GPS_CHECKER.execute();
 	}
@@ -126,132 +118,99 @@ public class MakeProjectSalesOrderActivity extends Activity {
 
 	// <editor-fold defaultstate="collapsed" desc="Initialize">
 	private void initialize() {
-		makeProjectOrderCustomerAuto = (AutoCompleteTextView) findViewById(R.id.makeProjectOrderCustomerAuto);
-		makeProjectOrderDistributorAuto = (AutoCompleteTextView) findViewById(R.id.makeProjectOrderDistributorAuto);
-		makeProjectOrderVehicleAuto = (AutoCompleteTextView) findViewById(R.id.makeProjectOrderVehicleAuto);
-		makeProjectOrderDriverAuto = (AutoCompleteTextView) findViewById(R.id.makeProjectOrderDriverAuto);
-		makeProjectOrderDriverNIC = (EditText) findViewById(R.id.makeProjectOrderDriverNIC);
-		makeProjectOrderDeliveryDate = (DatePicker) findViewById(R.id.makeProjectOrderDeliveryDate);
-		makeProjectOrderRemarks = (EditText) findViewById(R.id.makeProjectOrderRemarks);
-		btnMakeProjectOrderNext = (Button) findViewById(R.id.btnMakeProjectOrderNext);
-		btnMakeProjectOrderNext.setEnabled(true);
+		makeDirectProjectOrderCustomerAuto = (AutoCompleteTextView) findViewById(R.id.makeDirectProjectOrderCustomerAuto);
+		makeDirectProjectOrderVehicleAuto = (AutoCompleteTextView) findViewById(R.id.makeDirectProjectOrderVehicleAuto);
+		makeDirectProjectOrderDriverAuto = (AutoCompleteTextView) findViewById(R.id.makeDirectProjectOrderDriverAuto);
+		makeDirectProjectOrderDriverNIC = (EditText) findViewById(R.id.makeDirectProjectOrderDriverNIC);
+		makeDirectProjectOrderDeliveryDate = (DatePicker) findViewById(R.id.makeDirectProjectOrderDeliveryDate);
+		makeDirectProjectOrderRemarks = (EditText) findViewById(R.id.makeDirectProjectOrderRemarks);
+		btnMakeDirectProjectOrderNext = (Button) findViewById(R.id.btnMakeDirectProjectOrderNext);
+		btnMakeDirectProjectOrderNext.setEnabled(true);
 
-		btnMakeProjectOrderNext.setOnClickListener(new View.OnClickListener() {
+		btnMakeDirectProjectOrderNext.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View view) {
-				btnMakeProjectOrderNextClicked(view);
+				btnMakeDirectProjectOrderNextClicked(view);
 			}
 		});
-		makeProjectOrderCustomerAuto.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+		makeDirectProjectOrderCustomerAuto.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-				makeProjectOrderCustomerAutoItemSelected(adapterView, view, position, id);
+				makeDirectProjectOrderCustomerAutoItemSelected(adapterView, view, position, id);
 			}
 		});
-		makeProjectOrderDistributorAuto.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+		makeDirectProjectOrderDriverAuto.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-				makeProjectOrderDistributorAutoItemSelected(adapterView, view, position, id);
-			}
-		});
-		makeProjectOrderDriverAuto.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-				makeProjectOrderDriverAutoItemSelected(adapterView, view, position, id);
+				makeDirectProjectOrderDriverAutoItemSelected(adapterView, view, position, id);
 			}
 		});
 	}
 	// </editor-fold>
 
-	private void makeProjectOrderCustomerAutoItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
-		customer = (Customer) adapterView.getAdapter().getItem(position);
-	}
-
-	private void makeProjectOrderDistributorAutoItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
-		distributor = (User) adapterView.getAdapter().getItem(position);
-	}
-
-	private void makeProjectOrderDriverAutoItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
-		Driver driver = (Driver) adapterView.getAdapter().getItem(position);
-		makeProjectOrderDriverNIC.setText(driver.toString());
-	}
-
-	private void btnMakeProjectOrderNextClicked(View view) {
+	private void btnMakeDirectProjectOrderNextClicked(View view) {
 		AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
 		if (customer == null) {
 			dialogBuilder.setTitle(R.string.message_title);
 			dialogBuilder.setMessage(R.string.no_customer_found);
 			dialogBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
 				public void onClick(DialogInterface arg0, int arg1) {
-					makeProjectOrderCustomerAuto.requestFocus();
+					makeDirectProjectOrderCustomerAuto.requestFocus();
 				}
 			});
 			dialogBuilder.show();
 			return;
 		}
-		if (distributor == null) {
-			dialogBuilder.setTitle(R.string.message_title);
-			dialogBuilder.setMessage(R.string.no_distributor_found);
-			dialogBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-
-				public void onClick(DialogInterface arg0, int arg1) {
-					makeProjectOrderDistributorAuto.requestFocus();
-				}
-			});
-			dialogBuilder.show();
-			return;
-		}
-		if (makeProjectOrderVehicleAuto.getText().toString().isEmpty()) {
+		if (makeDirectProjectOrderVehicleAuto.getText().toString().isEmpty()) {
 			dialogBuilder.setTitle(R.string.message_title);
 			dialogBuilder.setMessage(R.string.no_vehicle_found);
 			dialogBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-
 				public void onClick(DialogInterface arg0, int arg1) {
-					makeProjectOrderVehicleAuto.requestFocus();
+					makeDirectProjectOrderVehicleAuto.requestFocus();
 				}
 			});
 			dialogBuilder.show();
 			return;
 		}
-		if (makeProjectOrderDriverAuto.getText().toString().isEmpty()) {
+		if (makeDirectProjectOrderDriverAuto.getText().toString().isEmpty()) {
 			dialogBuilder.setTitle(R.string.message_title);
 			dialogBuilder.setMessage(R.string.no_driver_found);
 			dialogBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
 
 				public void onClick(DialogInterface arg0, int arg1) {
-					makeProjectOrderDriverAuto.requestFocus();
+					makeDirectProjectOrderDriverAuto.requestFocus();
 				}
 			});
 			dialogBuilder.show();
 			return;
 		}
-		if (makeProjectOrderDriverNIC.getText().toString().isEmpty()) {
+		if (makeDirectProjectOrderDriverNIC.getText().toString().isEmpty()) {
 			dialogBuilder.setTitle(R.string.message_title);
 			dialogBuilder.setMessage(R.string.no_driver_nic_found);
 			dialogBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
 
 				public void onClick(DialogInterface arg0, int arg1) {
-					makeProjectOrderDriverNIC.requestFocus();
+					makeDirectProjectOrderDriverNIC.requestFocus();
 				}
 			});
 			dialogBuilder.show();
 			return;
 		}
 		Order order = new Order();
-		long dateInMilliSeconds = makeProjectOrderDeliveryDate.getCalendarView().getDate();
-		order.setOrderType(Order.PROJECT);
+		long dateInMilliSeconds = makeDirectProjectOrderDeliveryDate.getCalendarView().getDate();
+		order.setOrderType(Order.DIRECT_PROJECT);
 		do {
 			lastKnownLocation = gpsReceiver.getLastKnownLocation();
 		} while (lastKnownLocation == null);
 		order.setOrderMadeTimeStamp(lastKnownLocation.getTime());
+		order.setCustomerId(customer.getCustomerId());
 		order.setLatitude(lastKnownLocation.getLatitude());
 		order.setLongitude(lastKnownLocation.getLongitude());
 		order.setDeliveryDate(dateInMilliSeconds);
-		order.setCustomerId(customer.getCustomerId());
-		order.setDistributorId(distributor.getUserId());
-		order.setVehicle(makeProjectOrderVehicleAuto.getText().toString());
-		order.setDriver(makeProjectOrderDistributorAuto.getText().toString());
-		order.setDriverNIC(makeProjectOrderDriverNIC.getText().toString());
-		order.setRemarks(makeProjectOrderRemarks.getText().toString());
+		order.setOutletId(customer.getCustomerId());
+		order.setVehicle(makeDirectProjectOrderVehicleAuto.getText().toString());
+		order.setDriver(makeDirectProjectOrderDriverAuto.getText().toString());
+		order.setDriverNIC(makeDirectProjectOrderDriverNIC.getText().toString());
+		order.setRemarks(makeDirectProjectOrderRemarks.getText().toString());
 		order.setBatteryLevel(BatteryService.getBatteryLevel(this));
 		Intent categoriesAndItems = new Intent(this, SelectCategoryActivity.class);
 		categoriesAndItems.putExtra("order", order);
@@ -259,4 +218,12 @@ public class MakeProjectSalesOrderActivity extends Activity {
 		finish();
 	}
 
+	private void makeDirectProjectOrderCustomerAutoItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
+		customer = (Customer) adapterView.getAdapter().getItem(position);
+	}
+
+	private void makeDirectProjectOrderDriverAutoItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
+		Driver driver = (Driver) adapterView.getAdapter().getItem(position);
+		makeDirectProjectOrderDriverNIC.setText(driver.toString());
+	}
 }

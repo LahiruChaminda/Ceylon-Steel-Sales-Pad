@@ -136,26 +136,53 @@ public class OrderController extends AbstractController {
 	public static long placeProjectOrder(Context context, Order order) {
 		SQLiteDatabaseHelper databaseInstance = SQLiteDatabaseHelper.getDatabaseInstance(context);
 		SQLiteDatabase writableDatabase = databaseInstance.getWritableDatabase();
-		SQLiteStatement orderStatement = writableDatabase.compileStatement("insert into tbl_order(distributorId,customerId,orderDate,deliveryDate,batteryLevel,longitude,latitude,type,remarks,driverName,driverNIC,vehicleNo) values (?,?,?,?,?,?,?,?,?,?,?,?)");
+		String sql;
+		if (order.getOrderType().equalsIgnoreCase(Order.PROJECT)) {
+			sql = "insert into tbl_order(distributorId,customerId,orderDate,deliveryDate,batteryLevel,longitude,latitude,type,remarks,driverName,driverNIC,vehicleNo,total) values (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		} else {
+			sql = "insert into tbl_order(customerId,orderDate,deliveryDate,batteryLevel,longitude,latitude,type,remarks,driverName,driverNIC,vehicleNo,total) values (?,?,?,?,?,?,?,?,?,?,?,?)";
+		}
+		SQLiteStatement orderStatement = writableDatabase.compileStatement(sql);
 		SQLiteStatement orderDetailStatement = writableDatabase.compileStatement("insert into tbl_order_detail(orderId,itemId,price,quantity,discount) values (?,?,?,?,?)");
 		long orderId = -1;
 		try {
 			writableDatabase.beginTransaction();
-			String orderParamaters[] = {
-				Integer.toString(order.getDistributorId()),
-				Integer.toString(order.getCustomerId()),
-				Long.toString(order.getOrderMadeTimeStamp()),
-				Long.toString(order.getDeliveryDate()),
-				Integer.toString(order.getBatteryLevel()),
-				Double.toString(order.getLongitude()),
-				Double.toString(order.getLatitude()),
-				order.getOrderType(),
-				order.getRemarks(),
-				order.getDriver(),
-				order.getDriverNIC(),
-				order.getVehicle(),
-				Double.toString(order.getTotal())
-			};
+			String[] orderParamaters;
+			if (order.getOrderType().equalsIgnoreCase(Order.PROJECT)) {
+				orderParamaters = new String[]{
+					Integer.toString(order.getDistributorId()),
+					Integer.toString(order.getCustomerId()),
+					Long.toString(order.getOrderMadeTimeStamp()),
+					Long.toString(order.getDeliveryDate()),
+					Integer.toString(order.getBatteryLevel()),
+					Double.toString(order.getLongitude()),
+					Double.toString(order.getLatitude()),
+					order.getOrderType(),
+					order.getRemarks(),
+					order.getDriver(),
+					order.getDriverNIC(),
+					order.getVehicle(),
+					Double.toString(order.getTotal())
+				};
+			} else {
+				orderParamaters = new String[]{
+					Integer.toString(order.getCustomerId()),
+					Long.toString(order.getOrderMadeTimeStamp()),
+					Long.toString(order.getDeliveryDate()),
+					Integer.toString(order.getBatteryLevel()),
+					Double.toString(order.getLongitude()),
+					Double.toString(order.getLatitude()),
+					order.getOrderType(),
+					order.getRemarks(),
+					order.getDriver(),
+					order.getDriverNIC(),
+					order.getVehicle(),
+					Double.toString(order.getTotal())
+				};
+			}
+			for (String a : orderParamaters) {
+				System.out.println(a);
+			}
 			orderStatement.bindAllArgsAsStrings(orderParamaters);
 			orderId = orderStatement.executeInsert();
 			if (orderId == -1) {
