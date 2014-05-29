@@ -11,15 +11,13 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.Button;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.xfinity.ceylon_steel.R;
 import com.xfinity.ceylon_steel.activity.HomeActivity;
@@ -100,6 +98,16 @@ public class SelectCategoryActivity extends Activity {
 		expandableListView.expandGroup(categoryPosition);
 	}
 
+	private class ChildViewHolder {
+
+		TextView childViewHolder;
+	}
+
+	private class GroupViewHolder {
+
+		TextView categoryTextView;
+	}
+
 	// <editor-fold defaultstate="collapsed" desc="Initialize">
 	private void initialize() {
 		expandableListView = (ExpandableListView) findViewById(R.id.categoryExpandableListView);
@@ -134,35 +142,46 @@ public class SelectCategoryActivity extends Activity {
 			}
 
 			public View getGroupView(int categoryPosition, boolean isExpanded, View convertView, ViewGroup parent) {
-				String categoryDescription = this.getGroup(categoryPosition).toString();
-				AbsListView.LayoutParams lp = new AbsListView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-				LinearLayout linearLayout = new LinearLayout(SelectCategoryActivity.this);
-				TextView category = new TextView(SelectCategoryActivity.this);
-				category.setTextSize(1, 25);
-				category.setGravity(Gravity.CENTER_VERTICAL | Gravity.LEFT | Gravity.CENTER_HORIZONTAL);
-				category.setPadding(36, 0, 0, 0);
-				linearLayout.setLayoutParams(lp);
-				linearLayout.addView(category);
-				category.setText(categoryDescription);
-				ViewGroup.MarginLayoutParams marginLayoutParams = (ViewGroup.MarginLayoutParams) category.getLayoutParams();
-				marginLayoutParams.setMargins(5, 5, 5, 5);
-				category.setLayoutParams(marginLayoutParams);
-				return linearLayout;
+				GroupViewHolder groupViewHolder;
+				TextView categoryTextView;
+				if (convertView == null) {
+					LayoutInflater mInflater = (LayoutInflater) SelectCategoryActivity.this.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
+					convertView = mInflater.inflate(R.layout.category_list, null);
+					categoryTextView = (TextView) convertView.findViewById(R.id.category);
+					groupViewHolder = new GroupViewHolder();
+					groupViewHolder.categoryTextView = categoryTextView;
+					convertView.setTag(groupViewHolder);
+				} else {
+					groupViewHolder = (GroupViewHolder) convertView.getTag();
+					categoryTextView = groupViewHolder.categoryTextView;
+				}
+				categoryTextView.setText(categories.get(categoryPosition).toString());
+				return convertView;
 			}
 
 			public View getChildView(int categoryPosition, int itemPosition, boolean isLastChild, View convertView, ViewGroup parent) {
-				String itemText = this.getChild(categoryPosition, itemPosition).toString();
-				AbsListView.LayoutParams lp = new AbsListView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-				TextView item = new TextView(SelectCategoryActivity.this);
-				item.setGravity(Gravity.CENTER_VERTICAL | Gravity.LEFT | Gravity.CENTER_HORIZONTAL);
-				item.setLayoutParams(lp);
-				item.setTextSize(1, 20);
-				item.setText(itemText);
-				if (itemIds.contains(categories.get(categoryPosition).getItems().get(itemPosition).getItemId())) {
-					item.setBackgroundColor(Color.rgb(79, 130, 180));
-					item.setTextColor(Color.WHITE);
+				ChildViewHolder childViewHolder;
+				TextView itemTextView;
+				if (convertView == null) {
+					LayoutInflater mInflater = (LayoutInflater) SelectCategoryActivity.this.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
+					convertView = mInflater.inflate(R.layout.item_list, null);
+					itemTextView = (TextView) convertView.findViewById(R.id.item);
+					childViewHolder = new ChildViewHolder();
+					childViewHolder.childViewHolder = itemTextView;
+					convertView.setTag(childViewHolder);
+				} else {
+					childViewHolder = (ChildViewHolder) convertView.getTag();
+					itemTextView = childViewHolder.childViewHolder;
 				}
-				return item;
+				itemTextView.setText(categories.get(categoryPosition).getItems().get(itemPosition).toString());
+				if (itemIds.contains(categories.get(categoryPosition).getItems().get(itemPosition).getItemId())) {
+					itemTextView.setBackgroundColor(Color.rgb(79, 130, 180));
+					itemTextView.setTextColor(Color.WHITE);
+				} else {
+					itemTextView.setBackgroundColor(Color.TRANSPARENT);
+					itemTextView.setTextColor(Color.BLACK);
+				}
+				return convertView;
 			}
 
 			public boolean isChildSelectable(int arg0, int arg1) {
@@ -218,6 +237,8 @@ public class SelectCategoryActivity extends Activity {
 				placeOrder = OrderController.placeDirectOrder(this, order);
 			} else if (order.getOrderType().equalsIgnoreCase(Order.PROJECT)) {
 				placeOrder = OrderController.placeProjectOrder(this, order);
+			} else if (order.getOrderType().equalsIgnoreCase(Order.DIRECT_PROJECT)) {
+				placeOrder = OrderController.placeProjectOrder(this, order);
 			}
 
 			if (placeOrder != -1) {
@@ -252,6 +273,8 @@ public class SelectCategoryActivity extends Activity {
 			} else if (order.getOrderType().equalsIgnoreCase(Order.DIRECT)) {
 				placeOrder = OrderController.placeDirectOrder(this, order);
 			} else if (order.getOrderType().equalsIgnoreCase(Order.PROJECT)) {
+				placeOrder = OrderController.placeProjectOrder(this, order);
+			} else if (order.getOrderType().equalsIgnoreCase(Order.DIRECT_PROJECT)) {
 				placeOrder = OrderController.placeProjectOrder(this, order);
 			}
 			order.setOrderId(placeOrder);
