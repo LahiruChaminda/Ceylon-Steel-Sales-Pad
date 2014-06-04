@@ -8,14 +8,19 @@ package com.xfinity.ceylon_steel.activity.view_sales_order;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import com.xfinity.ceylon_steel.R;
 import com.xfinity.ceylon_steel.controller.OrderController;
 import com.xfinity.ceylon_steel.model.Order;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  *
@@ -24,6 +29,13 @@ import java.util.ArrayList;
 public class MadeProjectSalesOrderActivity extends Activity {
 
 	private ListView projectOrderListView;
+	private ArrayList<Order> projectOrders;
+
+	private static class OrderItemViewHolder {
+
+		TextView txtOrderOwner;
+		TextView txtDateTime;
+	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -31,8 +43,29 @@ public class MadeProjectSalesOrderActivity extends Activity {
 		setContentView(R.layout.made_project_page);
 		initialize();
 
-		ArrayList<Order> projectOrders = OrderController.getProjectOrders(this);
-		ArrayAdapter<Order> orderAdapter = new ArrayAdapter<Order>(this, android.R.layout.simple_list_item_1, projectOrders);
+		projectOrders = OrderController.getProjectOrders(this);
+		ArrayAdapter<Order> orderAdapter = new ArrayAdapter<Order>(this, android.R.layout.simple_list_item_1, projectOrders) {
+			private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEEE, dd MMMM, yyyy hh:mm:ss aa");
+
+			@Override
+			public View getView(int position, View convertView, ViewGroup parent) {
+				OrderItemViewHolder orderItemViewHolder;
+				if (convertView == null) {
+					LayoutInflater inflater = (LayoutInflater) MadeProjectSalesOrderActivity.this.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
+					convertView = inflater.inflate(R.layout.order_list_item_view, null);
+					orderItemViewHolder = new OrderItemViewHolder();
+					orderItemViewHolder.txtOrderOwner = (TextView) convertView.findViewById(R.id.txtOrderOwner);
+					orderItemViewHolder.txtDateTime = (TextView) convertView.findViewById(R.id.txtDateTime);
+					convertView.setTag(orderItemViewHolder);
+				} else {
+					orderItemViewHolder = (OrderItemViewHolder) convertView.getTag();
+				}
+				Order order = projectOrders.get(position);
+				orderItemViewHolder.txtOrderOwner.setText(order.toString());
+				orderItemViewHolder.txtDateTime.setText(simpleDateFormat.format(new Date(order.getOrderMadeTimeStamp())));
+				return convertView;
+			}
+		};
 		projectOrderListView.setAdapter(orderAdapter);
 	}
 
@@ -57,7 +90,7 @@ public class MadeProjectSalesOrderActivity extends Activity {
 	// </editor-fold>
 
 	private void onItemClicked(AdapterView<?> adapterView, View view, int position, long id) {
-		Order order = (Order) adapterView.getAdapter().getItem(position);
+		Order order = projectOrders.get(position);
 		Intent viewConsignmentSalesOrderActivity = new Intent(this, ViewProjectSalesOrderActivity.class);
 		viewConsignmentSalesOrderActivity.putExtra("order", order);
 		startActivity(viewConsignmentSalesOrderActivity);
