@@ -8,7 +8,9 @@ package com.xfinity.ceylon_steel.activity.view_sales_order;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -40,6 +42,13 @@ public class ViewConsignmentSalesOrderActivity extends Activity {
 	private ListView consignmentOrderDetailListView;
 	private Button btnConsignmentSync;
 
+	private static class OrderedItemViewHolder {
+
+		TextView txtItemDescription;
+		TextView txtQuantity;
+		TextView txtEachDiscount;
+	}
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -55,7 +64,28 @@ public class ViewConsignmentSalesOrderActivity extends Activity {
 		txtViewConsignmentDeliveryDate.setText(new SimpleDateFormat("yyyy-MM-dd").format(new Date(receivedOrder.getDeliveryDate())));
 		txtViewConsignmentRemarks.setText(receivedOrder.getRemarks());
 
-		ArrayAdapter<OrderDetail> orderDetails = new ArrayAdapter<OrderDetail>(this, android.R.layout.simple_list_item_1, receivedOrder.getOrderDetails());
+		ArrayAdapter<OrderDetail> orderDetails = new ArrayAdapter<OrderDetail>(this, android.R.layout.simple_list_item_1, receivedOrder.getOrderDetails()) {
+			@Override
+			public View getView(int position, View convertView, ViewGroup parent) {
+				OrderedItemViewHolder orderedItemViewHolder;
+				if (convertView == null) {
+					LayoutInflater inflater = (LayoutInflater) ViewConsignmentSalesOrderActivity.this.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
+					convertView = inflater.inflate(R.layout.ordered_item, null);
+					orderedItemViewHolder = new OrderedItemViewHolder();
+					orderedItemViewHolder.txtItemDescription = (TextView) convertView.findViewById(R.id.txtItemDescription);
+					orderedItemViewHolder.txtQuantity = (TextView) convertView.findViewById(R.id.txtQuantity);
+					orderedItemViewHolder.txtEachDiscount = (TextView) convertView.findViewById(R.id.txtEachDiscount);
+					convertView.setTag(orderedItemViewHolder);
+				} else {
+					orderedItemViewHolder = (OrderedItemViewHolder) convertView.getTag();
+				}
+				OrderDetail orderDetail = receivedOrder.getOrderDetails().get(position);
+				orderedItemViewHolder.txtItemDescription.setText(orderDetail.getItemDescription());
+				orderedItemViewHolder.txtQuantity.setText("Quantity " + orderDetail.getQuantity());
+				orderedItemViewHolder.txtEachDiscount.setText("Discount " + orderDetail.getEachDiscount());
+				return convertView;
+			}
+		};
 		consignmentOrderDetailListView.setAdapter(orderDetails);
 	}
 
@@ -92,7 +122,7 @@ public class ViewConsignmentSalesOrderActivity extends Activity {
 
 	private void orderDetailClicked(AdapterView<?> adapterView, View view, int position, long id) {
 		Intent viewItemDetailActivity = new Intent(this, ViewItemDetailActivity.class);
-		OrderDetail orderDetail = (OrderDetail) adapterView.getAdapter().getItem(position);
+		OrderDetail orderDetail = receivedOrder.getOrderDetails().get(position);
 		viewItemDetailActivity.putExtra("orderDetail", orderDetail);
 		viewItemDetailActivity.putExtra("order", receivedOrder);
 		viewItemDetailActivity.putExtra("referer", getClass());
