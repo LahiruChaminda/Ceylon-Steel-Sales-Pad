@@ -47,12 +47,12 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
 		try {
 			InputStream databaseStream = assets.open("database.sql");
 			BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(databaseStream));
-			String databaseDeclaration = "";
+			StringBuilder databaseDeclaration = new StringBuilder();
 			String line;
 			while ((line = bufferedReader.readLine()) != null) {
-				databaseDeclaration = databaseDeclaration + line.replace("\t", "");
+				databaseDeclaration.append(line.replace("\t", ""));
 			}
-			for (String sql : databaseDeclaration.split(";")) {
+			for (String sql : databaseDeclaration.toString().split(";")) {
 				String trimmedQuery;
 				if (!(trimmedQuery = sql.trim()).isEmpty()) {
 					db.execSQL(trimmedQuery);
