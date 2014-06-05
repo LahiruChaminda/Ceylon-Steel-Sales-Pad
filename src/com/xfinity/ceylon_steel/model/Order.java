@@ -5,12 +5,13 @@
  */
 package com.xfinity.ceylon_steel.model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 /**
  * @author Supun Lakshan Wanigarathna Dissanayake
@@ -19,6 +20,10 @@ import org.json.JSONObject;
  */
 public class Order implements Serializable {
 
+	public static final String CONSIGNMENT = "CONSIGNMENT";
+	public static final String DIRECT = "DIRECT";
+	public static final String DIRECT_PROJECT = "DIRECT_PROJECT";
+	public static final String PROJECT = "PROJECT";
 	private long orderId;
 	private int repId;
 	private int distributorId;
@@ -39,10 +44,6 @@ public class Order implements Serializable {
 	private String remarks;
 	private ArrayList<OrderDetail> orderDetails;
 	private double total;
-	public static final String CONSIGNMENT = "CONSIGNMENT";
-	public static final String DIRECT = "DIRECT";
-	public static final String DIRECT_PROJECT = "DIRECT_PROJECT";
-	public static final String PROJECT = "PROJECT";
 
 	public Order() {
 	}

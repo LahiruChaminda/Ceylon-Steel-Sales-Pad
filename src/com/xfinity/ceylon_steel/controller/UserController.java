@@ -19,32 +19,27 @@ import android.os.AsyncTask;
 import android.provider.Settings;
 import android.widget.Toast;
 import com.xfinity.ceylon_steel.activity.HomeActivity;
-import static com.xfinity.ceylon_steel.controller.WebServiceURL.UserURL.checkInCheckOut;
-import static com.xfinity.ceylon_steel.controller.WebServiceURL.UserURL.getDistributorsOfUser;
-import static com.xfinity.ceylon_steel.controller.WebServiceURL.UserURL.getUserDetails;
-import static com.xfinity.ceylon_steel.controller.WebServiceURL.UserURL.markRepLocations;
 import com.xfinity.ceylon_steel.db.SQLiteDatabaseHelper;
 import com.xfinity.ceylon_steel.model.User;
 import com.xfinity.ceylon_steel.model.UserLocation;
 import com.xfinity.ceylon_steel.service.BatteryService;
 import com.xfinity.ceylon_steel.service.GpsReceiver;
 import com.xfinity.ceylon_steel.service.Tracker;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Formatter;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+
+import static com.xfinity.ceylon_steel.controller.WebServiceURL.UserURL.*;
 
 /**
  * @author Supun Lakshan Wanigarathna Dissanayake
@@ -522,12 +517,12 @@ public class UserController extends AbstractController {
 		int batteryLevelIndex = cursor.getColumnIndex("batteryLevel");
 		for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
 			UserLocation userLocation = new UserLocation(
-					cursor.getDouble(longitudeIndex),
-					cursor.getDouble(latitudeIndex),
-					cursor.getLong(gpsTimeIndex),
-					cursor.getInt(repIdIndex),
-					cursor.getInt(repLocationIdIndex),
-					cursor.getInt(batteryLevelIndex)
+				cursor.getDouble(longitudeIndex),
+				cursor.getDouble(latitudeIndex),
+				cursor.getLong(gpsTimeIndex),
+				cursor.getInt(repIdIndex),
+				cursor.getInt(repLocationIdIndex),
+				cursor.getInt(batteryLevelIndex)
 			);
 			userLocations.add(userLocation);
 		}

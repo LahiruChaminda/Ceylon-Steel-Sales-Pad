@@ -37,31 +37,17 @@ public class Item implements Serializable {
 	}
 
 	/**
-	 * @return the itemCode
-	 */
-	public String getItemCode() {
-		return itemCode;
-	}
-
-	/**
-	 * @return the description
-	 */
-	public String getDescription() {
-		return description;
-	}
-
-	/**
-	 * @return the price
-	 */
-	public double getPrice() {
-		return price;
-	}
-
-	/**
 	 * @param itemId the itemId to set
 	 */
 	public void setItemId(int itemId) {
 		this.itemId = itemId;
+	}
+
+	/**
+	 * @return the itemCode
+	 */
+	public String getItemCode() {
+		return itemCode;
 	}
 
 	/**
@@ -72,10 +58,24 @@ public class Item implements Serializable {
 	}
 
 	/**
+	 * @return the description
+	 */
+	public String getDescription() {
+		return description;
+	}
+
+	/**
 	 * @param description the description to set
 	 */
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	/**
+	 * @return the price
+	 */
+	public double getPrice() {
+		return price;
 	}
 
 	/**

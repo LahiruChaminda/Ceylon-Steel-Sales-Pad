@@ -13,17 +13,19 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
 import android.os.AsyncTask;
 import android.widget.Toast;
-import static com.xfinity.ceylon_steel.controller.WebServiceURL.CategoryURL.getItemsAndCategories;
 import com.xfinity.ceylon_steel.db.SQLiteDatabaseHelper;
 import com.xfinity.ceylon_steel.model.Category;
 import com.xfinity.ceylon_steel.model.Item;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+
+import static com.xfinity.ceylon_steel.controller.WebServiceURL.CategoryURL.getItemsAndCategories;
 
 /**
  * @author Supun Lakshan Wanigarathna Dissanayake
@@ -44,10 +46,10 @@ public class CategoryController extends AbstractController {
 			ArrayList<Item> items = new ArrayList<Item>();
 			for (itemCursor.moveToFirst(); !itemCursor.isAfterLast(); itemCursor.moveToNext()) {
 				Item item = new Item(
-						itemCursor.getInt(0),
-						itemCursor.getString(1),
-						itemCursor.getString(2),
-						itemCursor.getDouble(3)
+					itemCursor.getInt(0),
+					itemCursor.getString(1),
+					itemCursor.getString(2),
+					itemCursor.getDouble(3)
 				);
 				items.add(item);
 			}
@@ -76,7 +78,8 @@ public class CategoryController extends AbstractController {
 			}
 
 			@Override
-			protected JSONArray doInBackground(Void... arg0) {;
+			protected JSONArray doInBackground(Void... arg0) {
+				;
 				try {
 					return getJsonArray(getItemsAndCategories, null, context);
 				} catch (IOException ex) {

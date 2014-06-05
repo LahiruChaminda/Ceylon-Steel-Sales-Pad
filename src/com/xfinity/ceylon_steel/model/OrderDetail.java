@@ -5,9 +5,10 @@
  */
 package com.xfinity.ceylon_steel.model;
 
+import org.json.JSONObject;
+
 import java.io.Serializable;
 import java.util.HashMap;
-import org.json.JSONObject;
 
 /**
  * @author Supun Lakshan Wanigarathna Dissanayake
@@ -48,31 +49,17 @@ public class OrderDetail implements Serializable {
 	}
 
 	/**
-	 * @return the quantity
-	 */
-	public double getQuantity() {
-		return quantity;
-	}
-
-	/**
-	 * @return the unitPrice
-	 */
-	public double getUnitPrice() {
-		return unitPrice;
-	}
-
-	/**
-	 * @return the eachDiscount
-	 */
-	public double getEachDiscount() {
-		return eachDiscount;
-	}
-
-	/**
 	 * @param itemId the itemId to set
 	 */
 	public void setItemId(int itemId) {
 		this.itemId = itemId;
+	}
+
+	/**
+	 * @return the quantity
+	 */
+	public double getQuantity() {
+		return quantity;
 	}
 
 	/**
@@ -83,10 +70,24 @@ public class OrderDetail implements Serializable {
 	}
 
 	/**
+	 * @return the unitPrice
+	 */
+	public double getUnitPrice() {
+		return unitPrice;
+	}
+
+	/**
 	 * @param unitPrice the unitPrice to set
 	 */
 	public void setUnitPrice(double unitPrice) {
 		this.unitPrice = unitPrice;
+	}
+
+	/**
+	 * @return the eachDiscount
+	 */
+	public double getEachDiscount() {
+		return eachDiscount;
 	}
 
 	/**

@@ -6,7 +6,6 @@
 package com.xfinity.ceylon_steel.model;
 
 /**
- *
  * @author Supun Lakshan
  */
 public class Customer {

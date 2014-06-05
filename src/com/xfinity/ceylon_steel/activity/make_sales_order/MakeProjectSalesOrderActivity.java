@@ -14,24 +14,16 @@ import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
-import android.widget.Button;
-import android.widget.DatePicker;
-import android.widget.EditText;
+import android.widget.*;
 import com.xfinity.ceylon_steel.R;
 import com.xfinity.ceylon_steel.controller.CustomerController;
 import com.xfinity.ceylon_steel.controller.DriverController;
 import com.xfinity.ceylon_steel.controller.UserController;
 import com.xfinity.ceylon_steel.controller.VehicleController;
-import com.xfinity.ceylon_steel.model.Customer;
-import com.xfinity.ceylon_steel.model.Driver;
-import com.xfinity.ceylon_steel.model.Order;
-import com.xfinity.ceylon_steel.model.User;
-import com.xfinity.ceylon_steel.model.Vehicle;
+import com.xfinity.ceylon_steel.model.*;
 import com.xfinity.ceylon_steel.service.BatteryService;
 import com.xfinity.ceylon_steel.service.GpsReceiver;
+
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -56,8 +48,6 @@ public class MakeProjectSalesOrderActivity extends Activity {
 	private User distributor;
 
 	private Location lastKnownLocation;
-	private GpsReceiver gpsReceiver;
-
 	private final AsyncTask<Void, Void, Void> GPS_CHECKER = new AsyncTask<Void, Void, Void>() {
 		private ProgressDialog progressDialog;
 
@@ -90,6 +80,7 @@ public class MakeProjectSalesOrderActivity extends Activity {
 			btnMakeProjectOrderNext.setEnabled(true);
 		}
 	};
+	private GpsReceiver gpsReceiver;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

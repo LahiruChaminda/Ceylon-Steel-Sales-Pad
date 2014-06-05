@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.xfinity.ceylon_steel.R;
 import com.xfinity.ceylon_steel.model.Item;
 import com.xfinity.ceylon_steel.model.OrderDetail;
+
 import java.text.NumberFormat;
 
 /**
@@ -28,6 +29,7 @@ import java.text.NumberFormat;
  */
 public class EnterItemDetailActivity extends Activity {
 
+	private final NumberFormat currencyFormat = NumberFormat.getInstance();
 	private TextView enterItem;
 	private TextView enterItemUnitPrice;
 	private EditText enterTxtQuantity;
@@ -35,7 +37,6 @@ public class EnterItemDetailActivity extends Activity {
 	private TextView enterItemAmount;
 	private Button btnEnterItem;
 	private Button btnCancelItem;
-	private final NumberFormat currencyFormat = NumberFormat.getInstance();
 	private Item item;
 
 	@Override

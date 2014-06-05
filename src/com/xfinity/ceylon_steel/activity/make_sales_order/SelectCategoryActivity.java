@@ -14,11 +14,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseExpandableListAdapter;
-import android.widget.Button;
-import android.widget.ExpandableListAdapter;
-import android.widget.ExpandableListView;
-import android.widget.TextView;
+import android.widget.*;
 import com.xfinity.ceylon_steel.R;
 import com.xfinity.ceylon_steel.activity.HomeActivity;
 import com.xfinity.ceylon_steel.controller.CategoryController;
@@ -28,6 +24,7 @@ import com.xfinity.ceylon_steel.model.Category;
 import com.xfinity.ceylon_steel.model.Item;
 import com.xfinity.ceylon_steel.model.Order;
 import com.xfinity.ceylon_steel.model.OrderDetail;
+
 import java.util.ArrayList;
 
 /**
@@ -37,15 +34,14 @@ import java.util.ArrayList;
  */
 public class SelectCategoryActivity extends Activity {
 
+	private final ArrayList<OrderDetail> orderDetails = new ArrayList<OrderDetail>();
+	private final ArrayList<Integer> itemIds = new ArrayList<Integer>();
 	private Button btnFinishMakeBill;
 	private Button btnQuickSync;
 	private Button btnReturnToHome;
 	private ExpandableListView expandableListView;
 	private ArrayList<Category> categories;
 	private Order order;
-
-	private final ArrayList<OrderDetail> orderDetails = new ArrayList<OrderDetail>();
-	private final ArrayList<Integer> itemIds = new ArrayList<Integer>();
 	private int categoryPosition;
 
 	@Override
@@ -96,16 +92,6 @@ public class SelectCategoryActivity extends Activity {
 		}
 		expandableListView.collapseGroup(categoryPosition);
 		expandableListView.expandGroup(categoryPosition);
-	}
-
-	private class ChildViewHolder {
-
-		TextView childViewHolder;
-	}
-
-	private class GroupViewHolder {
-
-		TextView categoryTextView;
 	}
 
 	// <editor-fold defaultstate="collapsed" desc="Initialize">
@@ -214,7 +200,6 @@ public class SelectCategoryActivity extends Activity {
 			}
 		});
 	}
-	// </editor-fold>
 
 	private boolean onChildClicked(ExpandableListView parent, View view, int groupPosition, int childPosition, long id) {
 		Item item = categories.get(groupPosition).getItems().get(childPosition);
@@ -261,6 +246,7 @@ public class SelectCategoryActivity extends Activity {
 		}
 		builder.show();
 	}
+	// </editor-fold>
 
 	private void btnQuickSyncClicked(View view) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -313,5 +299,15 @@ public class SelectCategoryActivity extends Activity {
 			startActivity(homeActivity);
 			finish();
 		}
+	}
+
+	private class ChildViewHolder {
+
+		TextView childViewHolder;
+	}
+
+	private class GroupViewHolder {
+
+		TextView categoryTextView;
 	}
 }

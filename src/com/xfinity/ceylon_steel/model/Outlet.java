@@ -31,17 +31,17 @@ public class Outlet {
 	}
 
 	/**
-	 * @return the outletName
-	 */
-	public String getOutletName() {
-		return outletName;
-	}
-
-	/**
 	 * @param outletId the outletId to set
 	 */
 	public void setOutletId(int outletId) {
 		this.outletId = outletId;
+	}
+
+	/**
+	 * @return the outletName
+	 */
+	public String getOutletName() {
+		return outletName;
 	}
 
 	/**

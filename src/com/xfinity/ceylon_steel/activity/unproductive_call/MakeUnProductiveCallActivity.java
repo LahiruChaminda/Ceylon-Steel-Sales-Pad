@@ -12,11 +12,7 @@ import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
-import android.widget.Button;
-import android.widget.EditText;
+import android.widget.*;
 import com.xfinity.ceylon_steel.R;
 import com.xfinity.ceylon_steel.activity.make_sales_order.MakeConsignmentSalesOrderActivity;
 import com.xfinity.ceylon_steel.controller.OutletController;
@@ -26,6 +22,7 @@ import com.xfinity.ceylon_steel.model.Outlet;
 import com.xfinity.ceylon_steel.model.UnProductiveCall;
 import com.xfinity.ceylon_steel.service.BatteryService;
 import com.xfinity.ceylon_steel.service.GpsReceiver;
+
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -43,8 +40,6 @@ public class MakeUnProductiveCallActivity extends Activity {
 	private int outletId;
 
 	private Location lastKnownLocation;
-	private GpsReceiver gpsReceiver;
-
 	private final AsyncTask<Void, Void, Void> GPS_CHECKER = new AsyncTask<Void, Void, Void>() {
 		private ProgressDialog progressDialog;
 
@@ -77,6 +72,7 @@ public class MakeUnProductiveCallActivity extends Activity {
 			btnUnProductiveCallSubmit.setEnabled(true);
 		}
 	};
+	private GpsReceiver gpsReceiver;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -125,13 +121,13 @@ public class MakeUnProductiveCallActivity extends Activity {
 
 	private void btnUnProductiveCallSubmitClicked(View view) {
 		UnProductiveCall unProductiveCall = new UnProductiveCall(
-				outletId,
-				txtMakeUnProductiveCallReason.getText().toString(),
-				lastKnownLocation.getTime(),
-				lastKnownLocation.getLongitude(),
-				lastKnownLocation.getLatitude(),
-				BatteryService.getBatteryLevel(this),
-				UserController.getAuthorizedUser(this).getUserId()
+			outletId,
+			txtMakeUnProductiveCallReason.getText().toString(),
+			lastKnownLocation.getTime(),
+			lastKnownLocation.getLongitude(),
+			lastKnownLocation.getLatitude(),
+			BatteryService.getBatteryLevel(this),
+			UserController.getAuthorizedUser(this).getUserId()
 		);
 		UnProductiveCallController.makeUnProductiveCall(unProductiveCall, this);
 	}

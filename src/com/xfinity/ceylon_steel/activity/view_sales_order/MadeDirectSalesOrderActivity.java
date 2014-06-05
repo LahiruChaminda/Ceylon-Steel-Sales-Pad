@@ -18,24 +18,18 @@ import android.widget.TextView;
 import com.xfinity.ceylon_steel.R;
 import com.xfinity.ceylon_steel.controller.OrderController;
 import com.xfinity.ceylon_steel.model.Order;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
 /**
- *
  * @author Supun Lakshan
  */
 public class MadeDirectSalesOrderActivity extends Activity {
 
 	private ListView directOrderListView;
 	private ArrayList<Order> directOrders;
-
-	private static class OrderItemViewHolder {
-
-		TextView txtOrderOwner;
-		TextView txtDateTime;
-	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -85,7 +79,6 @@ public class MadeDirectSalesOrderActivity extends Activity {
 			}
 		});
 	}
-	// </editor-fold>
 
 	private void onItemClicked(AdapterView<?> adapterView, View view, int position, long id) {
 		Order order = directOrders.get(position);
@@ -93,5 +86,12 @@ public class MadeDirectSalesOrderActivity extends Activity {
 		viewConsignmentSalesOrderActivity.putExtra("order", order);
 		startActivity(viewConsignmentSalesOrderActivity);
 		finish();
+	}
+	// </editor-fold>
+
+	private static class OrderItemViewHolder {
+
+		TextView txtOrderOwner;
+		TextView txtDateTime;
 	}
 }

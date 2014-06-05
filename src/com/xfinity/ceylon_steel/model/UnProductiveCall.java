@@ -5,10 +5,11 @@
  */
 package com.xfinity.ceylon_steel.model;
 
+import org.json.JSONObject;
+
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.HashMap;
-import org.json.JSONObject;
 
 /**
  * @author Supun Lakshan Wanigarathna Dissanayake

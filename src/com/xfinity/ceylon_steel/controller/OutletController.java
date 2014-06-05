@@ -12,18 +12,20 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
 import android.os.AsyncTask;
 import android.widget.Toast;
-import static com.xfinity.ceylon_steel.controller.WebServiceURL.OutletURL.getOutletsOfUser;
 import com.xfinity.ceylon_steel.db.SQLiteDatabaseHelper;
 import com.xfinity.ceylon_steel.model.Outlet;
 import com.xfinity.ceylon_steel.model.User;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+
+import static com.xfinity.ceylon_steel.controller.WebServiceURL.OutletURL.getOutletsOfUser;
 
 /**
  * @author Supun Lakshan Wanigarathna Dissanayake

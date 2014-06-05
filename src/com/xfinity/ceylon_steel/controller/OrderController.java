@@ -15,17 +15,19 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
 import android.os.AsyncTask;
 import com.xfinity.ceylon_steel.activity.HomeActivity;
-import static com.xfinity.ceylon_steel.controller.WebServiceURL.OrderURL.placeSalesOrder;
 import com.xfinity.ceylon_steel.db.SQLiteDatabaseHelper;
 import com.xfinity.ceylon_steel.model.Order;
 import com.xfinity.ceylon_steel.model.OrderDetail;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.json.JSONException;
-import org.json.JSONObject;
+
+import static com.xfinity.ceylon_steel.controller.WebServiceURL.OrderURL.placeSalesOrder;
 
 /**
  * @author Supun Lakshan Wanigarathna Dissanayake
@@ -358,11 +360,11 @@ public class OrderController extends AbstractController {
 		ArrayList<OrderDetail> orderDetails = new ArrayList<OrderDetail>();
 		for (orderDetailCursor.moveToFirst(); !orderDetailCursor.isAfterLast(); orderDetailCursor.moveToNext()) {
 			OrderDetail orderDetail = new OrderDetail(
-					orderDetailCursor.getInt(0),
-					orderDetailCursor.getDouble(1),
-					orderDetailCursor.getDouble(2),
-					orderDetailCursor.getDouble(3),
-					orderDetailCursor.getString(4));
+				orderDetailCursor.getInt(0),
+				orderDetailCursor.getDouble(1),
+				orderDetailCursor.getDouble(2),
+				orderDetailCursor.getDouble(3),
+				orderDetailCursor.getString(4));
 			orderDetails.add(orderDetail);
 		}
 		orderDetailCursor.close();

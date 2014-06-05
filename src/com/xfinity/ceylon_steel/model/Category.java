@@ -35,20 +35,6 @@ public class Category {
 	}
 
 	/**
-	 * @return the description
-	 */
-	public String getDescription() {
-		return description;
-	}
-
-	/**
-	 * @return the items
-	 */
-	public ArrayList<Item> getItems() {
-		return items;
-	}
-
-	/**
 	 * @param categoryId the categoryId to set
 	 */
 	public void setCategoryId(int categoryId) {
@@ -56,10 +42,24 @@ public class Category {
 	}
 
 	/**
+	 * @return the description
+	 */
+	public String getDescription() {
+		return description;
+	}
+
+	/**
 	 * @param description the description to set
 	 */
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	/**
+	 * @return the items
+	 */
+	public ArrayList<Item> getItems() {
+		return items;
 	}
 
 	/**

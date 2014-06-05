@@ -31,17 +31,17 @@ public class Driver {
 	}
 
 	/**
-	 * @return the driverNIC
-	 */
-	public String getDriverNIC() {
-		return driverNIC;
-	}
-
-	/**
 	 * @param driverName the driverName to set
 	 */
 	public void setDriverName(String driverName) {
 		this.driverName = driverName;
+	}
+
+	/**
+	 * @return the driverNIC
+	 */
+	public String getDriverNIC() {
+		return driverNIC;
 	}
 
 	/**

@@ -11,15 +11,12 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ListView;
-import android.widget.TextView;
+import android.widget.*;
 import com.xfinity.ceylon_steel.R;
 import com.xfinity.ceylon_steel.controller.OrderController;
 import com.xfinity.ceylon_steel.model.Order;
 import com.xfinity.ceylon_steel.model.OrderDetail;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -41,13 +38,6 @@ public class ViewProjectSalesOrderActivity extends Activity {
 	private TextView txtViewProjectRemarks;
 	private ListView projectOrderDetailListView;
 	private Button btnProjectSync;
-
-	private static class OrderedItemViewHolder {
-
-		TextView txtItemDescription;
-		TextView txtQuantity;
-		TextView txtEachDiscount;
-	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -120,7 +110,6 @@ public class ViewProjectSalesOrderActivity extends Activity {
 			}
 		});
 	}
-	// </editor-fold>
 
 	private void orderDetailClicked(AdapterView<?> adapterView, View view, int position, long id) {
 		Intent viewItemDetailActivity = new Intent(this, ViewItemDetailActivity.class);
@@ -131,8 +120,16 @@ public class ViewProjectSalesOrderActivity extends Activity {
 		startActivity(viewItemDetailActivity);
 		finish();
 	}
+	// </editor-fold>
 
 	private void btnProjectSyncClicked(View view) {
 		OrderController.syncOrder(this, receivedOrder);
+	}
+
+	private static class OrderedItemViewHolder {
+
+		TextView txtItemDescription;
+		TextView txtQuantity;
+		TextView txtEachDiscount;
 	}
 }

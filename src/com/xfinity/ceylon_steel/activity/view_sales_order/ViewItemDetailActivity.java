@@ -19,6 +19,7 @@ import com.xfinity.ceylon_steel.R;
 import com.xfinity.ceylon_steel.controller.OrderController;
 import com.xfinity.ceylon_steel.model.Order;
 import com.xfinity.ceylon_steel.model.OrderDetail;
+
 import java.text.NumberFormat;
 
 /**
@@ -28,6 +29,7 @@ import java.text.NumberFormat;
  */
 public class ViewItemDetailActivity extends Activity {
 
+	NumberFormat currencyFormat;
 	private TextView viewItem;
 	private TextView viewItemUnitPrice;
 	private EditText viewTxtQuantity;
@@ -35,12 +37,9 @@ public class ViewItemDetailActivity extends Activity {
 	private TextView viewItemAmount;
 	private Button btnViewItemUpdate;
 	private Button btnViewItemBack;
-
 	private OrderDetail receivedOrderDetail;
 	private Order order;
 	private Class referer;
-
-	NumberFormat currencyFormat;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

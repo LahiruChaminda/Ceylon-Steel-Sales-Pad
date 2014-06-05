@@ -6,7 +6,6 @@
 package com.xfinity.ceylon_steel.controller;
 
 /**
- *
  * @author Supun Lakshan
  */
 abstract class WebServiceURL {

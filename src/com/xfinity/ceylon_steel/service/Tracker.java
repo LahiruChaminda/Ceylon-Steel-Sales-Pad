@@ -11,6 +11,7 @@ import android.location.Location;
 import android.os.IBinder;
 import com.xfinity.ceylon_steel.controller.UserController;
 import com.xfinity.ceylon_steel.model.UserLocation;
+
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -21,9 +22,13 @@ import java.util.TimerTask;
  */
 public class Tracker extends Service {
 
-	private Timer timer;
 	private static boolean status;
+	private Timer timer;
 	private GpsReceiver gpsReceiver;
+
+	public static void stopTracking() {
+		status = false;
+	}
 
 	@Override
 	public void onCreate() {
@@ -43,19 +48,15 @@ public class Tracker extends Service {
 					lastKnownLocation = gpsReceiver.getLastKnownLocation();
 				} while (lastKnownLocation == null);
 				UserLocation userLocation = new UserLocation(
-						lastKnownLocation.getLongitude(),
-						lastKnownLocation.getLatitude(),
-						lastKnownLocation.getTime(),
-						BatteryService.getBatteryLevel(Tracker.this)
+					lastKnownLocation.getLongitude(),
+					lastKnownLocation.getLatitude(),
+					lastKnownLocation.getTime(),
+					BatteryService.getBatteryLevel(Tracker.this)
 				);
 				UserController.markRepLocation(getApplicationContext(), userLocation);
 				UserController.syncRepLocations(getApplicationContext());
 			}
 		}, 0, 15 * 60 * 1000);//15*60*1000 is the millisecond for 15 minutes
-	}
-
-	public static void stopTracking() {
-		status = false;
 	}
 
 	@Override

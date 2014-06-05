@@ -17,16 +17,18 @@ import android.os.AsyncTask;
 import android.widget.Toast;
 import com.xfinity.ceylon_steel.activity.HomeActivity;
 import com.xfinity.ceylon_steel.activity.unproductive_call.MadeUnProductiveCallActivity;
-import static com.xfinity.ceylon_steel.controller.WebServiceURL.UnProductiveCallURL.recordUnProductiveCall;
 import com.xfinity.ceylon_steel.db.SQLiteDatabaseHelper;
 import com.xfinity.ceylon_steel.model.UnProductiveCall;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.json.JSONException;
-import org.json.JSONObject;
+
+import static com.xfinity.ceylon_steel.controller.WebServiceURL.UnProductiveCallURL.recordUnProductiveCall;
 
 /**
  * @author Supun Lakshan Wanigarathna Dissanayake
@@ -91,15 +93,15 @@ public class UnProductiveCallController extends AbstractController {
 
 		for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
 			UnProductiveCall unProductiveCall = new UnProductiveCall(
-					cursor.getInt(unProductiveCallIdIndex),
-					cursor.getInt(outletIdIndex),
-					cursor.getString(outletNameIndex),
-					cursor.getString(reasonIndex),
-					cursor.getLong(timeIndex),
-					cursor.getDouble(longitudeIndex),
-					cursor.getDouble(latitudeIndex),
-					cursor.getInt(batteryLevelIndex),
-					cursor.getInt(repIdIndex)
+				cursor.getInt(unProductiveCallIdIndex),
+				cursor.getInt(outletIdIndex),
+				cursor.getString(outletNameIndex),
+				cursor.getString(reasonIndex),
+				cursor.getLong(timeIndex),
+				cursor.getDouble(longitudeIndex),
+				cursor.getDouble(latitudeIndex),
+				cursor.getInt(batteryLevelIndex),
+				cursor.getInt(repIdIndex)
 			);
 			unProductiveCalls.add(unProductiveCall);
 		}

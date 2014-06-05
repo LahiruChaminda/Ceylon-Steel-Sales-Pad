@@ -1,7 +1,6 @@
 package com.xfinity.ceylon_steel.activity;
 
 import android.app.Activity;
-import static android.content.Context.LOCATION_SERVICE;
 import android.content.Intent;
 import android.location.LocationManager;
 import android.os.Bundle;
@@ -9,6 +8,7 @@ import android.provider.Settings;
 import com.xfinity.ceylon_steel.R;
 import com.xfinity.ceylon_steel.controller.UserController;
 import com.xfinity.ceylon_steel.model.User;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 

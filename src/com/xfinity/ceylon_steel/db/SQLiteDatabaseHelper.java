@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.res.AssetManager;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -24,11 +25,11 @@ import java.util.logging.Logger;
  */
 public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
 
-	private AtomicInteger atomicInteger;
 	private static final String DATABASE_NAME = "ceylon_steel";
 	private static final int VERSION = 23;
 	private static volatile SQLiteDatabaseHelper database;
 	private final AssetManager assets;
+	private AtomicInteger atomicInteger;
 
 	private SQLiteDatabaseHelper(Context context) {
 		super(context, DATABASE_NAME, null, VERSION);
@@ -40,6 +41,10 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
 			database = new SQLiteDatabaseHelper(context);
 		}
 		return database;
+	}
+
+	public static boolean dropDatabase(Context context) {
+		return context.deleteDatabase(DATABASE_NAME);
 	}
 
 	@Override
@@ -67,10 +72,6 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		onCreate(db);
-	}
-
-	public static boolean dropDatabase(Context context) {
-		return context.deleteDatabase(DATABASE_NAME);
 	}
 
 	@Override

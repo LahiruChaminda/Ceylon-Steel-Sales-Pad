@@ -1,84 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-			  android:orientation="vertical"
-			  android:layout_width="match_parent"
-			  android:layout_height="match_parent">
-	<ScrollView android:layout_width="fill_parent" android:layout_height="fill_parent">
-		<LinearLayout
-			android:orientation="vertical"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content" android:layout_margin="5dp">
-			<TextView
-				android:layout_width="fill_parent"
-				android:layout_height="wrap_content"
-				android:textAppearance="?android:attr/textAppearanceLarge"
-				android:text="Direct Project Sales Order" android:layout_margin="5dp" android:textSize="30dp"
-				android:gravity="center_horizontal"/>
-			<TextView
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:textAppearance="?android:attr/textAppearanceLarge"
-				android:text="Customer Name" android:layout_margin="5dp" android:textSize="25dp"/>
-			<AutoCompleteTextView
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:id="@+id/makeDirectProjectOrderCustomerAuto" android:layout_margin="5dp" android:textSize="25dp"/>
-			<TextView
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:textAppearance="?android:attr/textAppearanceLarge"
-				android:text="Vehicle" android:layout_margin="5dp" android:textSize="25dp"/>
-			<AutoCompleteTextView android:layout_width="match_parent"
-								  android:layout_height="wrap_content"
-								  android:id="@+id/makeDirectProjectOrderVehicleAuto" android:layout_margin="5dp"
-								  android:textSize="25dp"/>
-			<TextView
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:textAppearance="?android:attr/textAppearanceLarge"
-				android:text="Driver" android:layout_margin="5dp" android:textSize="25dp"/>
-			<AutoCompleteTextView android:layout_width="match_parent"
-								  android:layout_height="wrap_content"
-								  android:id="@+id/makeDirectProjectOrderDriverAuto" android:layout_margin="5dp"
-								  android:textSize="25dp"/>
-			<TextView
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:textAppearance="?android:attr/textAppearanceLarge"
-				android:text="Driver NIC" android:layout_margin="5dp" android:textSize="25dp"/>
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <ScrollView android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:layout_margin="5dp">
+            <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Direct Project Sales Order" android:layout_margin="5dp" android:textSize="30dp"
+                    android:gravity="center_horizontal"/>
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Customer Name" android:layout_margin="5dp" android:textSize="25dp"/>
+            <AutoCompleteTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/makeDirectProjectOrderCustomerAuto" android:layout_margin="5dp"
+                    android:textSize="25dp"/>
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Vehicle" android:layout_margin="5dp" android:textSize="25dp"/>
+            <AutoCompleteTextView android:layout_width="match_parent"
+                                  android:layout_height="wrap_content"
+                                  android:id="@+id/makeDirectProjectOrderVehicleAuto" android:layout_margin="5dp"
+                                  android:textSize="25dp"/>
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Driver" android:layout_margin="5dp" android:textSize="25dp"/>
+            <AutoCompleteTextView android:layout_width="match_parent"
+                                  android:layout_height="wrap_content"
+                                  android:id="@+id/makeDirectProjectOrderDriverAuto" android:layout_margin="5dp"
+                                  android:textSize="25dp"/>
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Driver NIC" android:layout_margin="5dp" android:textSize="25dp"/>
 
-			<EditText
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:id="@+id/makeDirectProjectOrderDriverNIC" android:layout_margin="5dp" android:textSize="25dp"/>
-			<TextView
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:textAppearance="?android:attr/textAppearanceLarge"
-				android:text="Delivery Date" android:layout_margin="5dp" android:textSize="25dp"/>
-			<DatePicker
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:id="@+id/makeDirectProjectOrderDeliveryDate" android:layout_margin="5dp"/>
-			<TextView
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:textAppearance="?android:attr/textAppearanceLarge"
-				android:text="Remarks" android:layout_margin="5dp" android:textSize="25dp"/>
-			<EditText
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:inputType="textMultiLine"
-				android:ems="10"
-				android:id="@+id/makeDirectProjectOrderRemarks" android:layout_margin="5dp" android:textSize="25dp"/>
-			<Button
-				android:layout_width="fill_parent"
-				android:layout_height="wrap_content"
-				android:text="Next"
-				android:layout_margin="5dp"
-				android:textSize="25dp"
-				android:id="@+id/btnMakeDirectProjectOrderNext" android:layout_gravity="center_horizontal"/>
-		</LinearLayout>
-	</ScrollView>
+            <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/makeDirectProjectOrderDriverNIC" android:layout_margin="5dp"
+                    android:textSize="25dp"/>
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Delivery Date" android:layout_margin="5dp" android:textSize="25dp"/>
+            <DatePicker
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/makeDirectProjectOrderDeliveryDate" android:layout_margin="5dp"/>
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Remarks" android:layout_margin="5dp" android:textSize="25dp"/>
+            <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textMultiLine"
+                    android:ems="10"
+                    android:id="@+id/makeDirectProjectOrderRemarks" android:layout_margin="5dp"
+                    android:textSize="25dp"/>
+            <Button
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Next"
+                    android:layout_margin="5dp"
+                    android:textSize="25dp"
+                    android:id="@+id/btnMakeDirectProjectOrderNext" android:layout_gravity="center_horizontal"/>
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

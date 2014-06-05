@@ -48,28 +48,29 @@
                 android:layout_height="fill_parent"
                 android:layout_margin="5dp"
                 android:weightSum="100">
-        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
-                  android:textAppearance="?android:attr/textAppearanceLarge" android:text="Quantity"
-                  android:textSize="25dp" android:layout_margin="5dp" android:layout_weight="50"/>
-        <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/viewTxtQuantity" android:textSize="25dp" android:layout_margin="5dp"
-                android:layout_weight="50"/>
-            </LinearLayout>
+            <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                      android:textAppearance="?android:attr/textAppearanceLarge" android:text="Quantity"
+                      android:textSize="25dp" android:layout_margin="5dp" android:layout_weight="50"/>
+            <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/viewTxtQuantity" android:textSize="25dp" android:layout_margin="5dp"
+                    android:layout_weight="50"/>
+        </LinearLayout>
         <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:layout_margin="5dp"
                 android:weightSum="100">
-        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
-                  android:textAppearance="?android:attr/textAppearanceLarge" android:text="Each Discount"
-                  android:textSize="25dp" android:layout_margin="5dp" android:layout_weight="50"/>
-        <EditText android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/viewTxtEachDiscount"
-                  android:textSize="25dp" android:layout_margin="5dp"
-                  android:layout_weight="50"/>
-            </LinearLayout>
+            <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                      android:textAppearance="?android:attr/textAppearanceLarge" android:text="Each Discount"
+                      android:textSize="25dp" android:layout_margin="5dp" android:layout_weight="50"/>
+            <EditText android:layout_width="match_parent" android:layout_height="wrap_content"
+                      android:id="@+id/viewTxtEachDiscount"
+                      android:textSize="25dp" android:layout_margin="5dp"
+                      android:layout_weight="50"/>
+        </LinearLayout>
         <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="fill_parent"
