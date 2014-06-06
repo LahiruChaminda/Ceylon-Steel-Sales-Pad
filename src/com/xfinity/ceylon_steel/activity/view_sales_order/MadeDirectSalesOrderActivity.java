@@ -12,7 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import com.xfinity.ceylon_steel.R;
@@ -38,10 +38,21 @@ public class MadeDirectSalesOrderActivity extends Activity {
 		initialize();
 
 		directOrders = OrderController.getDirectOrders(this);
-		ArrayAdapter<Order> orderAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, directOrders) {
-			private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEEE, dd MMMM, yyyy hh:mm:ss aa");
+		directOrderListView.setAdapter(new BaseAdapter() {
+			private final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEEE, dd MMMM, yyyy hh:mm:ss aa");
 
-			@Override
+			public int getCount() {
+				return directOrders.size();
+			}
+
+			public Object getItem(int position) {
+				return directOrders.get(position);
+			}
+
+			public long getItemId(int position) {
+				return position;
+			}
+
 			public View getView(int position, View convertView, ViewGroup parent) {
 				OrderItemViewHolder orderItemViewHolder;
 				if (convertView == null) {
@@ -59,8 +70,7 @@ public class MadeDirectSalesOrderActivity extends Activity {
 				orderItemViewHolder.txtDateTime.setText(simpleDateFormat.format(new Date(order.getOrderMadeTimeStamp())));
 				return convertView;
 			}
-		};
-		directOrderListView.setAdapter(orderAdapter);
+		});
 	}
 
 	@Override

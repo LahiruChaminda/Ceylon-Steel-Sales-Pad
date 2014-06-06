@@ -12,7 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import com.xfinity.ceylon_steel.R;
@@ -38,10 +38,21 @@ public class MadeConsignmentSalesOrderActivity extends Activity {
 		initialize();
 
 		consignmentOrders = OrderController.getConsignmentOrders(this);
-		ArrayAdapter<Order> orderAdapter = new ArrayAdapter<Order>(this, android.R.layout.simple_list_item_1, consignmentOrders) {
-			private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEEE, dd MMMM, yyyy hh:mm:ss aa");
+		consignmentOrderListView.setAdapter(new BaseAdapter() {
+			private final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEEE, dd MMMM, yyyy hh:mm:ss aa");
 
-			@Override
+			public int getCount() {
+				return consignmentOrders.size();
+			}
+
+			public Object getItem(int position) {
+				return consignmentOrders.get(position);
+			}
+
+			public long getItemId(int position) {
+				return position;
+			}
+
 			public View getView(int position, View convertView, ViewGroup parent) {
 				OrderItemViewHolder orderItemViewHolder;
 				if (convertView == null) {
@@ -59,8 +70,7 @@ public class MadeConsignmentSalesOrderActivity extends Activity {
 				orderItemViewHolder.txtDateTime.setText(simpleDateFormat.format(new Date(order.getOrderMadeTimeStamp())));
 				return convertView;
 			}
-		};
-		consignmentOrderListView.setAdapter(orderAdapter);
+		});
 	}
 
 	@Override
