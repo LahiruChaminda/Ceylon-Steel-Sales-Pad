@@ -161,10 +161,10 @@ public class SelectCategoryActivity extends Activity {
 				}
 				itemTextView.setText(categories.get(categoryPosition).getItems().get(itemPosition).toString());
 				if (itemIds.contains(categories.get(categoryPosition).getItems().get(itemPosition).getItemId())) {
-					itemTextView.setBackgroundColor(Color.rgb(79, 130, 180));
+					convertView.setBackgroundColor(Color.rgb(79, 130, 180));
 					itemTextView.setTextColor(Color.WHITE);
 				} else {
-					itemTextView.setBackgroundColor(Color.TRANSPARENT);
+					convertView.setBackgroundColor((itemPosition%2==0)?Color.parseColor("#E6E6E6"):Color.parseColor("#ffffff"));
 					itemTextView.setTextColor(Color.BLACK);
 				}
 				return convertView;
