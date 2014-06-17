@@ -196,6 +196,7 @@ public class UserController extends AbstractController {
 					return getJsonObject(getUserDetails, parameters, context);
 				} catch (IOException ex) {
 					Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+					return null;
 				} catch (JSONException ex) {
 					Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
 				} catch (NoSuchAlgorithmException ex) {

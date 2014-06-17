@@ -21,6 +21,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.*;
+import java.net.UnknownHostException;
 import java.util.HashMap;
 
 /**
@@ -34,7 +35,7 @@ abstract class AbstractController extends WebServiceURL {
 
 	}
 
-	protected final static JSONObject getJsonObject(String url, HashMap<String, Object> parameters, Context context) throws IOException, JSONException {
+	protected final static JSONObject getJsonObject(String url, HashMap<String, Object> parameters, Context context) throws IOException, JSONException, UnknownHostException {
 		if (InternetObserver.isConnectedToInternet(context)) {
 			HttpClient httpClient = new DefaultHttpClient();
 			HttpPost postRequest = new HttpPost(url);
@@ -82,7 +83,7 @@ abstract class AbstractController extends WebServiceURL {
 		return null;
 	}
 
-	protected final static JSONArray getJsonArray(String url, HashMap<String, Object> parameters, Context context) throws IOException, JSONException {
+	protected final static JSONArray getJsonArray(String url, HashMap<String, Object> parameters, Context context) throws IOException, JSONException, UnknownHostException {
 		if (InternetObserver.isConnectedToInternet(context)) {
 			HttpClient httpClient = new DefaultHttpClient();
 			HttpPost postRequest = new HttpPost(url);

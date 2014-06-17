@@ -7,8 +7,10 @@ package com.xfinity.ceylon_steel.activity.unproductive_call;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -33,7 +35,14 @@ public class MadeUnProductiveCallActivity extends Activity {
 		setContentView(R.layout.made_unproductive_call_page);
 		initialize();
 		ArrayList<UnProductiveCall> unProductiveCalls = UnProductiveCallController.getUnProductiveCalls(this);
-		ArrayAdapter<UnProductiveCall> unProductiveCallAdapter = new ArrayAdapter<UnProductiveCall>(this, android.R.layout.simple_list_item_1, unProductiveCalls);
+		ArrayAdapter<UnProductiveCall> unProductiveCallAdapter = new ArrayAdapter<UnProductiveCall>(this, android.R.layout.simple_list_item_1, unProductiveCalls) {
+			@Override
+			public View getView(int position, View convertView, ViewGroup parent) {
+				View view = super.getView(position, convertView, parent);
+				view.setBackgroundColor((position % 2 == 0) ? Color.parseColor("#E6E6E6") : Color.parseColor("#FFFFFF"));
+				return view;
+			}
+		};
 		unProductiveCallsListView.setAdapter(unProductiveCallAdapter);
 	}
 
