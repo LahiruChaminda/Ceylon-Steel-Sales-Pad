@@ -9,167 +9,70 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <application android:label="@string/app_name" android:icon="@drawable/icon"
+                 android:screenOrientation="portrait"
                  android:theme="@android:style/Theme.Light">
         <service android:name=".service.Tracker"/>
         <activity android:name=".activity.StartingActivity"
-                  android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen" android:screenOrientation="portrait">
+                  android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".activity.LoginActivity" android:label="Sign In to Sales Pad"
-                  android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="com.xfinity.ceylon_steel.activity.LOGIN"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-            </intent-filter>
+        <activity android:name=".activity.LoginActivity" android:label="Sign In to Sales Pad">
         </activity>
-        <activity android:name=".activity.HomeActivity" android:label="Home" android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="com.xfinity.ceylon_steel.activity.HOME"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-            </intent-filter>
+        <activity android:name=".activity.HomeActivity" android:label="Home">
         </activity>
-        <activity android:name=".activity.attendence.AttendanceActivity" android:label="Attendance"
-                  android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="com.xfinity.ceylon_steel.activity.ATTENDENCE"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-            </intent-filter>
+        <activity android:name=".activity.attendence.AttendanceActivity" android:label="Attendance">
         </activity>
-        <activity android:name=".activity.make_sales_order.MakeSalesOrderActivity" android:label="Make Sales Orders"
-                  android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="com.xfinity.ceylon_steel.activity.MAKE_SALES_ORDER"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-            </intent-filter>
+        <activity android:name=".activity.make_sales_order.MakeSalesOrderActivity" android:label="Make Sales Orders">
         </activity>
-        <activity android:name=".activity.view_sales_order.ViewSalesOrderActivity" android:label="View Sales Orders"
-                  android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="com.xfinity.ceylon_steel.activity.VIEW_SALES_ORDER"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-            </intent-filter>
+        <activity android:name=".activity.view_sales_order.ViewSalesOrderActivity" android:label="View Sales Orders">
         </activity>
-        <activity android:name=".activity.unproductive_call.UnProductiveCallActivity" android:label="Un Productive Call"
-                  android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="com.xfinity.ceylon_steel.activity.UNPRODUCTIVE_CALL"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-            </intent-filter>
+        <activity android:name=".activity.unproductive_call.UnProductiveCallActivity" android:label="Un Productive Call">
         </activity>
-        <activity android:name=".activity.unproductive_call.MakeUnProductiveCallActivity"
-                  android:label="Make Un Productive Call" android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="com.xfinity.ceylon_steel.activity.MAKE_UNPRODUCTIVE_CALL"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-            </intent-filter>
+        <activity android:name=".activity.unproductive_call.MakeUnProductiveCallActivity" android:label="Make Un Productive Call">
         </activity>
-        <activity android:name=".activity.unproductive_call.MadeUnProductiveCallActivity"
-                  android:label="Select Un Productive Call" android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="com.xfinity.ceylon_steel.activity.SELECT_UNPRODUCTIVE_CALL"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-            </intent-filter>
+        <activity android:name=".activity.unproductive_call.MadeUnProductiveCallActivity" android:label="Select Un Productive Call">
         </activity>
         <activity android:name=".activity.unproductive_call.ViewUnProductiveCallActivity"
-                  android:label="View Un Productive Call" android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="com.xfinity.ceylon_steel.activity.VIEW_UNPRODUCTIVE_CALL"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-            </intent-filter>
+                  android:label="View Un Productive Call">
         </activity>
         <activity android:name=".activity.make_sales_order.MakeConsignmentSalesOrderActivity"
-                  android:label="Make Consignment Sales Order" android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="com.xfinity.ceylon_steel.activity.MAKE_CONSIGNMENT_ORDER"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-            </intent-filter>
+                  android:label="Make Consignment Sales Order">
         </activity>
         <activity android:name=".activity.make_sales_order.MakeDirectSalesOrderActivity"
-                  android:label="Make Direct Sales Order" android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="com.xfinity.ceylon_steel.activity.MAKE_DIRECT_ORDER"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-            </intent-filter>
+                  android:label="Make Direct Sales Order">
         </activity>
         <activity android:name=".activity.make_sales_order.MakeProjectSalesOrderActivity"
-                  android:label="Make Project Sales Order" android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="com.xfinity.ceylon_steel.activity.MAKE_PROJECT_ORDER"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-            </intent-filter>
+                  android:label="Make Project Sales Order">
         </activity>
         <activity android:name=".activity.make_sales_order.MakeDirectProjectSalesOrderActivity"
-                  android:label="Make Direct Project Sales Order" android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="com.xfinity.ceylon_steel.activity.MAKE_DIRECT_PROJECT_ORDER"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-            </intent-filter>
+                  android:label="Make Direct Project Sales Order">
         </activity>
         <activity android:name=".activity.view_sales_order.MadeConsignmentSalesOrderActivity"
-                  android:label="Select Consignment Sales Order" android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="com.xfinity.ceylon_steel.activity.MADE_CONSIGNMENT_ORDER"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-            </intent-filter>
+                  android:label="Select Consignment Sales Order">
         </activity>
         <activity android:name=".activity.view_sales_order.MadeDirectSalesOrderActivity"
-                  android:label="Select Direct Sales Order" android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="com.xfinity.ceylon_steel.activity.MADE_DIRECT_ORDER"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-            </intent-filter>
+                  android:label="Select Direct Sales Order">
         </activity>
         <activity android:name=".activity.view_sales_order.MadeProjectSalesOrderActivity"
-                  android:label="Select Project Sales Order" android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="com.xfinity.ceylon_steel.activity.MADE_PROJECT_ORDER"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-            </intent-filter>
+                  android:label="Select Project Sales Order">
         </activity>
         <activity android:name=".activity.view_sales_order.ViewConsignmentSalesOrderActivity"
-                  android:label="View Consignment Sales Order" android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="com.xfinity.ceylon_steel.activity.VIEW_CONSIGNMENT_ORDER"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-            </intent-filter>
+                  android:label="View Consignment Sales Order">
         </activity>
         <activity android:name=".activity.view_sales_order.ViewDirectSalesOrderActivity"
-                  android:label="View Direct Sales Order" android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="com.xfinity.ceylon_steel.activity.VIEW_DIRECT_ORDER"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-            </intent-filter>
+                  android:label="View Direct Sales Order">
         </activity>
         <activity android:name=".activity.view_sales_order.ViewProjectSalesOrderActivity"
-                  android:label="View Project Sales Order" android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="com.xfinity.ceylon_steel.activity.VIEW_PROJECT_ORDER"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-            </intent-filter>
+                  android:label="View Project Sales Order">
         </activity>
-        <activity android:name=".activity.make_sales_order.SelectCategoryActivity" android:label="Select Items"
-                  android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="com.xfinity.ceylon_steel.activity.CATEGORIES_AND_ITEMS"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-            </intent-filter>
+        <activity android:name=".activity.make_sales_order.SelectCategoryActivity" android:label="Select Items">
         </activity>
-        <activity android:name=".activity.make_sales_order.EnterItemDetailActivity" android:label="Enter Item Details"
-                  android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="com.xfinity.ceylon_steel.activity.ENTER_ITEM_DETAIL"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-            </intent-filter>
+        <activity android:name=".activity.make_sales_order.EnterItemDetailActivity" android:label="Enter Item Details">
         </activity>
-        <activity android:name=".activity.view_sales_order.ViewItemDetailActivity" android:label="View Item Details"
-                  android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="com.xfinity.ceylon_steel.activity.VIEW_ITEM_DETAIL"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-            </intent-filter>
+        <activity android:name=".activity.view_sales_order.ViewItemDetailActivity" android:label="View Item Details">
         </activity>
     </application>
 </manifest>
