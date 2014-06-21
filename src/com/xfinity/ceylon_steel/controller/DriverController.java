@@ -77,7 +77,7 @@ public class DriverController extends AbstractController {
 				if (result != null) {
 					SQLiteDatabaseHelper databaseInstance = SQLiteDatabaseHelper.getDatabaseInstance(context);
 					SQLiteDatabase database = databaseInstance.getWritableDatabase();
-					SQLiteStatement compiledStatement = database.compileStatement("insert or ignore into tbl_driver(driverName,driverNIC) values(?,?)");
+					SQLiteStatement compiledStatement = database.compileStatement("replace into tbl_driver(driverName,driverNIC) values(?,?)");
 					try {
 						database.beginTransaction();
 						for (int i = 0; i < result.length(); i++) {

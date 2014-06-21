@@ -5,6 +5,8 @@
  */
 package com.xfinity.ceylon_steel.model;
 
+import java.util.ArrayList;
+
 /**
  * @author Supun Lakshan Wanigarathna Dissanayake
  * @mobile +94711290392
@@ -14,6 +16,7 @@ public class Outlet {
 
 	private int outletId;
 	private String outletName;
+	private ArrayList<Invoice> pendingInvoices;
 
 	public Outlet() {
 	}
@@ -21,6 +24,12 @@ public class Outlet {
 	public Outlet(int outletId, String outletName) {
 		this.outletId = outletId;
 		this.outletName = outletName;
+	}
+
+	public Outlet(int outletId, String outletName, ArrayList<Invoice> pendingInvoices) {
+		this.outletId = outletId;
+		this.outletName = outletName;
+		this.pendingInvoices = pendingInvoices;
 	}
 
 	/**
@@ -56,4 +65,11 @@ public class Outlet {
 		return outletName;
 	}
 
+	public ArrayList<Invoice> getPendingInvoices() {
+		return pendingInvoices;
+	}
+
+	public void setPendingInvoices(ArrayList<Invoice> pendingInvoices) {
+		this.pendingInvoices = pendingInvoices;
+	}
 }

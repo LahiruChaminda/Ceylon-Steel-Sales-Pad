@@ -6,14 +6,10 @@
     <uses-sdk android:minSdkVersion="15"/>
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <application android:label="@string/app_name" android:icon="@drawable/icon"
-                 android:screenOrientation="portrait"
-                 android:theme="@android:style/Theme.Light">
+    <application android:label="@string/app_name" android:icon="@drawable/icon" android:screenOrientation="portrait" android:theme="@android:style/Theme.Light">
         <service android:name=".service.Tracker"/>
-        <activity android:name=".activity.StartingActivity"
-                  android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen">
+        <activity android:name=".activity.StartingActivity" android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
@@ -23,7 +19,7 @@
         </activity>
         <activity android:name=".activity.HomeActivity" android:label="Home">
         </activity>
-        <activity android:name=".activity.attendence.AttendanceActivity" android:label="Attendance">
+        <activity android:name=".activity.attendance.AttendanceActivity" android:label="Attendance">
         </activity>
         <activity android:name=".activity.make_sales_order.MakeSalesOrderActivity" android:label="Make Sales Orders">
         </activity>
@@ -35,44 +31,35 @@
         </activity>
         <activity android:name=".activity.unproductive_call.MadeUnProductiveCallActivity" android:label="Select Un Productive Call">
         </activity>
-        <activity android:name=".activity.unproductive_call.ViewUnProductiveCallActivity"
-                  android:label="View Un Productive Call">
+        <activity android:name=".activity.unproductive_call.ViewUnProductiveCallActivity" android:label="View Un Productive Call">
         </activity>
-        <activity android:name=".activity.make_sales_order.MakeConsignmentSalesOrderActivity"
-                  android:label="Make Consignment Sales Order">
+        <activity android:name=".activity.make_sales_order.MakeConsignmentSalesOrderActivity" android:label="Make Consignment Sales Order">
         </activity>
-        <activity android:name=".activity.make_sales_order.MakeDirectSalesOrderActivity"
-                  android:label="Make Direct Sales Order">
+        <activity android:name=".activity.make_sales_order.MakeDirectSalesOrderActivity" android:label="Make Direct Sales Order">
         </activity>
-        <activity android:name=".activity.make_sales_order.MakeProjectSalesOrderActivity"
-                  android:label="Make Project Sales Order">
+        <activity android:name=".activity.make_sales_order.MakeProjectSalesOrderActivity" android:label="Make Project Sales Order">
         </activity>
-        <activity android:name=".activity.make_sales_order.MakeDirectProjectSalesOrderActivity"
-                  android:label="Make Direct Project Sales Order">
+        <activity android:name=".activity.make_sales_order.MakeDirectProjectSalesOrderActivity" android:label="Make Direct Project Sales Order">
         </activity>
-        <activity android:name=".activity.view_sales_order.MadeConsignmentSalesOrderActivity"
-                  android:label="Select Consignment Sales Order">
+        <activity android:name=".activity.view_sales_order.MadeConsignmentSalesOrderActivity" android:label="Select Consignment Sales Order">
         </activity>
-        <activity android:name=".activity.view_sales_order.MadeDirectSalesOrderActivity"
-                  android:label="Select Direct Sales Order">
+        <activity android:name=".activity.view_sales_order.MadeDirectSalesOrderActivity" android:label="Select Direct Sales Order">
         </activity>
-        <activity android:name=".activity.view_sales_order.MadeProjectSalesOrderActivity"
-                  android:label="Select Project Sales Order">
+        <activity android:name=".activity.view_sales_order.MadeProjectSalesOrderActivity" android:label="Select Project Sales Order">
         </activity>
-        <activity android:name=".activity.view_sales_order.ViewConsignmentSalesOrderActivity"
-                  android:label="View Consignment Sales Order">
+        <activity android:name=".activity.view_sales_order.ViewConsignmentSalesOrderActivity" android:label="View Consignment Sales Order">
         </activity>
-        <activity android:name=".activity.view_sales_order.ViewDirectSalesOrderActivity"
-                  android:label="View Direct Sales Order">
+        <activity android:name=".activity.view_sales_order.ViewDirectSalesOrderActivity" android:label="View Direct Sales Order">
         </activity>
-        <activity android:name=".activity.view_sales_order.ViewProjectSalesOrderActivity"
-                  android:label="View Project Sales Order">
+        <activity android:name=".activity.view_sales_order.ViewProjectSalesOrderActivity" android:label="View Project Sales Order">
         </activity>
         <activity android:name=".activity.make_sales_order.SelectCategoryActivity" android:label="Select Items">
         </activity>
         <activity android:name=".activity.make_sales_order.EnterItemDetailActivity" android:label="Enter Item Details">
         </activity>
         <activity android:name=".activity.view_sales_order.ViewItemDetailActivity" android:label="View Item Details">
+        </activity>
+        <activity android:name=".activity.payment.PaymentActivity" android:label="Payments" android:screenOrientation="landscape">
         </activity>
     </application>
 </manifest>

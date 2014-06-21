@@ -101,8 +101,8 @@ public class CategoryController extends AbstractController {
 				try {
 					if (result != null) {
 						database.beginTransaction();
-						SQLiteStatement categoryStatement = database.compileStatement("insert or ignore into tbl_category(categoryId,categoryDescription) values(?,?)");
-						SQLiteStatement itemStatement = database.compileStatement("insert or ignore into tbl_item(itemId,categoryId,itemCode,itemDescription,price) values(?,?,?,?,?)");
+						SQLiteStatement categoryStatement = database.compileStatement("replace into tbl_category(categoryId,categoryDescription) values(?,?)");
+						SQLiteStatement itemStatement = database.compileStatement("replace into tbl_item(itemId,categoryId,itemCode,itemDescription,price) values(?,?,?,?,?)");
 						for (int categoryCount = 0; categoryCount < result.length(); categoryCount++) {
 							JSONObject categoryJSON = result.getJSONObject(categoryCount);
 							JSONArray items = categoryJSON.getJSONArray("items");

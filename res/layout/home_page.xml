@@ -29,6 +29,11 @@
                 android:layout_height="wrap_content"
                 android:text="Un Productive Call"
                 android:id="@+id/btnUnProductiveCall" android:layout_margin="5dp" android:textSize="25dp"/>
+        <Button
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Payment"
+                android:id="@+id/btnPayment" android:layout_margin="5dp" android:textSize="25dp"/>
     </LinearLayout>
     <Button
             android:layout_width="match_parent"

@@ -13,8 +13,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import com.xfinity.ceylon_steel.R;
-import com.xfinity.ceylon_steel.activity.attendence.AttendanceActivity;
+import com.xfinity.ceylon_steel.activity.attendance.AttendanceActivity;
 import com.xfinity.ceylon_steel.activity.make_sales_order.MakeSalesOrderActivity;
+import com.xfinity.ceylon_steel.activity.payment.PaymentActivity;
 import com.xfinity.ceylon_steel.activity.unproductive_call.UnProductiveCallActivity;
 import com.xfinity.ceylon_steel.activity.view_sales_order.ViewSalesOrderActivity;
 import com.xfinity.ceylon_steel.controller.UserController;
@@ -32,6 +33,7 @@ public class HomeActivity extends Activity {
 	private Button btnViewSalesOrder;
 	private Button btnAttendence;
 	private Button btnUnProductiveCall;
+	private Button btnPayment;
 	private Button btnReloadData;
 	private Button btnLogout;
 
@@ -61,6 +63,7 @@ public class HomeActivity extends Activity {
 		btnUnProductiveCall = (Button) findViewById(R.id.btnUnProductiveCall);
 		btnReloadData = (Button) findViewById(R.id.btnReloadData);
 		btnLogout = (Button) findViewById(R.id.btnLogout);
+		btnPayment = (Button) findViewById(R.id.btnPayment);
 
 		btnMakeSalesOrder.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View view) {
@@ -87,6 +90,11 @@ public class HomeActivity extends Activity {
 				btnReloadDataClicked(view);
 			}
 		});
+		btnPayment.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View view) {
+				btnPaymentClicked(view);
+			}
+		});
 		btnLogout.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View view) {
 				btnLogoutClicked(view);
@@ -94,6 +102,13 @@ public class HomeActivity extends Activity {
 		});
 	}
 	// </editor-fold>
+
+
+	private void btnPaymentClicked(View view) {
+		Intent paymentActivity = new Intent(this, PaymentActivity.class);
+		startActivity(paymentActivity);
+		finish();
+	}
 
 	private void btnMakeSalesOrderClicked(View view) {
 		Intent makeSalesOrderActivity = new Intent(this, MakeSalesOrderActivity.class);

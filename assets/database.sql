@@ -1,84 +1,100 @@
-drop table if exists tbl_item;
-drop table if exists tbl_category;
-drop table if exists tbl_customer;
-drop table if exists tbl_driver;
-drop table if exists tbl_distributor;
-drop table if exists tbl_outlet;
-drop table if exists tbl_order_detail;
-drop table if exists tbl_order;
-drop table if exists tbl_rep_location;
-drop table if exists tbl_vehicle;
-drop table if exists tbl_unproductive_call;
+DROP TABLE IF EXISTS tbl_item;
+DROP TABLE IF EXISTS tbl_category;
+DROP TABLE IF EXISTS tbl_customer;
+DROP TABLE IF EXISTS tbl_driver;
+DROP TABLE IF EXISTS tbl_distributor;
+DROP TABLE IF EXISTS tbl_outlet;
+DROP TABLE IF EXISTS tbl_order_detail;
+DROP TABLE IF EXISTS tbl_order;
+DROP TABLE IF EXISTS tbl_rep_location;
+DROP TABLE IF EXISTS tbl_vehicle;
+DROP TABLE IF EXISTS tbl_payment;
+DROP TABLE IF EXISTS tbl_invoice;
 
-create table tbl_category(
-	categoryId integer primary key,
-	categoryDescription text not null
+CREATE TABLE tbl_category (
+  categoryId          INTEGER PRIMARY KEY,
+  categoryDescription TEXT NOT NULL
 );
-create table tbl_item(
-	itemId integer primary key,
-	categoryId integer not null references tbl_category(categoryId) on update cascade,
-	itemCode text not null,
-	itemDescription text check(itemDescription!=''),
-	price real
+CREATE TABLE tbl_item (
+  itemId          INTEGER PRIMARY KEY,
+  categoryId      INTEGER NOT NULL REFERENCES tbl_category(categoryId) ON UPDATE CASCADE,
+  itemCode        TEXT    NOT NULL,
+  itemDescription TEXT CHECK (itemDescription != ''),
+  price           DECIMAL(50, 2)
 );
-create table tbl_customer(
-	customerId integer not null primary key,
-	customerName text not null
+CREATE TABLE tbl_customer (
+  customerId   INTEGER NOT NULL PRIMARY KEY,
+  customerName TEXT    NOT NULL
 );
-create table tbl_vehicle(
-	vehicleNo text not null primary key
+CREATE TABLE tbl_vehicle (
+  vehicleNo TEXT NOT NULL PRIMARY KEY
 );
-create table tbl_driver(
-	driverName text not null,
-	driverNIC text not null unique
+CREATE TABLE tbl_driver (
+  driverName TEXT NOT NULL,
+  driverNIC  TEXT NOT NULL UNIQUE
 );
-create table tbl_distributor(
-	distributorId integer not null primary key,
-	distributorName text not null
+CREATE TABLE tbl_distributor (
+  distributorId   INTEGER NOT NULL PRIMARY KEY,
+  distributorName TEXT    NOT NULL
 );
-create table tbl_outlet(
-	outletId integer not null primary key,
-	outletName text not null
+CREATE TABLE tbl_outlet (
+  outletId   INTEGER NOT NULL PRIMARY KEY,
+  outletName TEXT    NOT NULL
 );
-create table tbl_order(
-	orderId integer not null primary key autoincrement,
-	distributorId integer references tbl_distributor(distributorId) on update cascade,
-	outletId integer references tbl_outlet(outletId) on update cascade,
-	customerId integer references tbl_customer(customerId) on update cascade,
-	orderDate long,
-	deliveryDate long,
-	driverName text check(driverName!=''),
-	driverNIC text check(driverNIC!=''),
-	vehicleNo text check(vehicleNo!=''),
-	total real,
-	batteryLevel integer not null,
-	longitude real not null,
-	latitude real not null,
-	type text not null,
-    remarks text
+CREATE TABLE tbl_order (
+  orderId       INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  distributorId INTEGER REFERENCES tbl_distributor( distributorId) ON UPDATE cascade,
+outletId INTEGER REFERENCES tbl_outlet(outletId) ON UPDATE cascade,
+customerId INTEGER REFERENCES tbl_customer(customerId) ON UPDATE cascade,
+orderDate long,
+deliveryDate long,
+driverName TEXT CHECK(driverName!=''),
+driverNIC TEXT CHECK(driverNIC!=''),
+vehicleNo TEXT CHECK(vehicleNo!=''),
+total DECIMAL(50, 2),
+batteryLevel INTEGER NOT NULL,
+longitude REAL NOT NULL,
+latitude REAL NOT NULL,
+type TEXT NOT NULL,
+remarks TEXT
 );
-create table tbl_order_detail(
-	orderId integer not null references tbl_order(orderId) on update cascade on delete cascade,
-	itemId integer not null references tbl_item(itemId) on update cascade,
-	price real not null,
-	discount real,
-	quantity real
+CREATE TABLE tbl_order_detail (
+  orderId  INTEGER        NOT NULL REFERENCES tbl_order(orderId) ON UPDATE CASCADE ON DELETE CASCADE,
+  itemId   INTEGER        NOT NULL REFERENCES tbl_item(itemId) ON UPDATE CASCADE,
+  price    DECIMAL(50, 2) NOT NULL,
+  discount REAL,
+  quantity REAL
 );
-create table tbl_rep_location(
-    repLocationId integer not null primary key autoincrement,
-	repId int not null,
-    longitude real not null,
-	latitude real not null,
-	batteryLevel integer not null,
-    gpsTime long
+CREATE TABLE tbl_rep_location (
+  repLocationId INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  repId         INT     NOT NULL,
+  longitude     REAL    NOT NULL,
+  latitude      REAL    NOT NULL,
+  batteryLevel  INTEGER NOT NULL,
+  gpsTime       long
 );
-create table tbl_unproductive_call(
-    unProductiveCallId integer not null primary key autoincrement,
-    outletId int not null references tbl_outlet(outletId) on update cascade,
-	batteryLevel int not null,
-	repId integer not null,
-	reason real not null,
-	longitude real not null,
-	latitude real not null,
-    time long not null
+CREATE TABLE tbl_unproductive_call (
+  unProductiveCallId INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  outletId           INT     NOT NULL REFERENCES tbl_outlet(outletId) ON UPDATE CASCADE,
+  batteryLevel       INT     NOT NULL,
+  repId              INTEGER NOT NULL,
+  reason             REAL    NOT NULL,
+  longitude          REAL    NOT NULL,
+  latitude           REAL    NOT NULL,
+  time               long    NOT NULL
+);
+CREATE TABLE tbl_invoice (
+  salesOrderId    long           NOT NULL,
+  outletId        INT            NOT NULL REFERENCES tbl_outlet(outletId) ON UPDATE CASCADE,
+  date            DATE           NOT NULL,
+  distributorCode TEXT           NOT NULL,
+  pendingAmount   DECIMAL(50, 2) NOT NULL
+);
+CREATE TABLE tbl_payment (
+  salesOrderId  long NOT NULL,
+  paidValue     DECIMAL(50, 2) DEFAULT 0.00 NOT NULL,
+  paidDate      DATE NOT NULL,
+  paymentMethod TEXT DEFAULT '',
+  chequeNo      TEXT,
+  status        INT DEFAULT 0
 );

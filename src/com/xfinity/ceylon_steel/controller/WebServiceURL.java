@@ -10,7 +10,7 @@ package com.xfinity.ceylon_steel.controller;
  */
 abstract class WebServiceURL {
 
-	private static final String webServiceURL = "http://gateway.ceylonlinux.com/Ceylon_Steel/native/";
+	private static final String webServiceURL = "http://192.168.1.112/Ceylon_Steel/native/";
 
 	protected WebServiceURL() {
 	}

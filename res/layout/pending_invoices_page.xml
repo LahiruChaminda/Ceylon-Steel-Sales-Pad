@@ -33,31 +33,6 @@
             android:gravity="center" android:textSize="25dp" android:background="#ffe6e6e6"/>
     <ExpandableListView
             android:layout_width="match_parent"
-            android:layout_height="400dp"
+            android:layout_height="match_parent"
             android:id="@+id/invoiceList" android:layout_gravity="center_horizontal"/>
-    <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:background="#ffe6e6e6" android:baselineAligned="false" android:weightSum="100" android:padding="5dp">
-        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:textAppearance="?android:attr/textAppearanceLarge"
-                  android:text="Payment" android:layout_gravity="center_horizontal" android:gravity="center" android:textSize="25dp"
-                  android:layout_weight="80"/>
-        <Button
-                style="?android:attr/buttonStyleSmall"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="Cash"
-                android:id="@+id/btnAddCashPayment" android:gravity="center" android:layout_weight="10"/>
-        <Button
-                style="?android:attr/buttonStyleSmall"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="Cheque"
-                android:id="@+id/btnAddChequePayment" android:gravity="center" android:layout_weight="10"/>
-    </LinearLayout>
-    <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:id="@+id/paymentList">
-    </LinearLayout>
 </LinearLayout>

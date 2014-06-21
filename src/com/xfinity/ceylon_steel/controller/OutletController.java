@@ -11,9 +11,12 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.widget.Toast;
 import com.xfinity.ceylon_steel.db.SQLiteDatabaseHelper;
+import com.xfinity.ceylon_steel.model.Invoice;
 import com.xfinity.ceylon_steel.model.Outlet;
+import com.xfinity.ceylon_steel.model.Payment;
 import com.xfinity.ceylon_steel.model.User;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -35,15 +38,54 @@ import static com.xfinity.ceylon_steel.controller.WebServiceURL.OutletURL.getOut
 public class OutletController extends AbstractController {
 
 	public static ArrayList<Outlet> getOutlets(Context context) {
+		return readFromDatabase(context, false);
+	}
+
+	public static ArrayList<Outlet> getOutletsWithInvoices(Context context) {
+		return readFromDatabase(context, true);
+	}
+
+	private static ArrayList<Outlet> readFromDatabase(Context context, boolean requestInvoices) {
 		SQLiteDatabaseHelper databaseInstance = SQLiteDatabaseHelper.getDatabaseInstance(context);
 		SQLiteDatabase writableDatabase = databaseInstance.getWritableDatabase();
-		Cursor cursor = writableDatabase.rawQuery("select * from tbl_outlet", null);
+		Cursor cursor = writableDatabase.rawQuery("select distinct * from tbl_outlet", null);
 		int outletIdIndex = cursor.getColumnIndex("outletId");
 		int outletNameIndex = cursor.getColumnIndex("outletName");
 		ArrayList<Outlet> outlets = new ArrayList<Outlet>();
 		for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
-			Outlet outlet = new Outlet(cursor.getInt(outletIdIndex), cursor.getString(outletNameIndex));
-			outlets.add(outlet);
+			int outletId = cursor.getInt(outletIdIndex);
+			String outletName = cursor.getString(outletNameIndex);
+			if (requestInvoices) {
+				ArrayList<Invoice> invoices = new ArrayList<Invoice>();
+				Cursor invoiceCursor = writableDatabase.rawQuery("select distinct salesOrderId, date, distributorCode, pendingAmount from tbl_invoice where outletId=?", new String[]{Integer.toString(outletId)});
+				for (invoiceCursor.moveToFirst(); !invoiceCursor.isAfterLast(); invoiceCursor.moveToNext()) {
+					ArrayList<Payment> payments = new ArrayList<Payment>();
+					long salesOrderId = invoiceCursor.getLong(0);
+					String date = invoiceCursor.getString(1);
+					String distributorCode = invoiceCursor.getString(2);
+					double pendingAmount = invoiceCursor.getDouble(3);
+					Cursor paymentCursor = writableDatabase.rawQuery("select distinct paidValue, paidDate, paymentMethod, chequeNo, status from tbl_payment where salesOrderId=?", new String[]{Long.toString(salesOrderId)});
+					for (paymentCursor.moveToFirst(); !paymentCursor.isAfterLast(); paymentCursor.moveToNext()) {
+						double paidValue = paymentCursor.getDouble(0);
+						String paidDate = paymentCursor.getString(1);
+						String paymentMethod = paymentCursor.getString(2);
+						String chequeNo = paymentCursor.getString(3);
+						boolean status = paymentCursor.getInt(4) == 1;
+						if (paymentMethod.equalsIgnoreCase(Payment.CASH_PAYMENT)) {
+							payments.add(new Payment(salesOrderId, paidValue, paidDate, status));
+						} else {
+							payments.add(new Payment(salesOrderId, paidValue, paidDate, chequeNo, status));
+						}
+					}
+					Log.i("Payment_Count", payments.size() + " -> " + outletName);
+					paymentCursor.close();
+					invoices.add(new Invoice(date, distributorCode, pendingAmount, salesOrderId, payments));
+				}
+				invoiceCursor.close();
+				outlets.add(new Outlet(outletId, outletName, invoices));
+			} else {
+				outlets.add(new Outlet(outletId, outletName));
+			}
 		}
 		cursor.close();
 		databaseInstance.close();
@@ -89,7 +131,9 @@ public class OutletController extends AbstractController {
 					SQLiteDatabase writableDatabase = databaseInstance.getWritableDatabase();
 					try {
 						writableDatabase.beginTransaction();
-						SQLiteStatement compiledStatement = writableDatabase.compileStatement("insert or ignore into tbl_outlet(outletId, outletName) values(?,?)");
+						SQLiteStatement compiledStatement = writableDatabase.compileStatement("replace into tbl_outlet(outletId, outletName) values(?,?)");
+						SQLiteStatement invoiceStatement = writableDatabase.compileStatement("replace into tbl_invoice(salesOrderId, outletId, date, distributorCode, pendingAmount) values(?,?,?,?,?)");
+						SQLiteStatement paymentStatement = writableDatabase.compileStatement("replace into tbl_payment(salesOrderId, paidValue, paidDate, paymentMethod, chequeNo, status) values(?,?,?,?,?,?)");
 						for (int i = 0; i < result.length(); i++) {
 							JSONObject outlet = result.getJSONObject(i);
 							compiledStatement.bindAllArgsAsStrings(new String[]{
@@ -97,6 +141,31 @@ public class OutletController extends AbstractController {
 								outlet.getString("outletName")
 							});
 							compiledStatement.executeInsert();
+							JSONArray invoices = outlet.getJSONArray("invoices");
+							for (int j = 0; j < invoices.length(); j++) {
+								JSONObject invoiceJson = invoices.getJSONObject(j);
+								invoiceStatement.bindAllArgsAsStrings(new String[]{
+									String.valueOf(invoiceJson.getLong("salesOrderId")),
+									outlet.getString("outletId"),
+									invoiceJson.getString("date"),
+									invoiceJson.getString("distributorCode"),
+									invoiceJson.getString("pendingAmount")
+								});
+								invoiceStatement.executeInsert();
+								JSONArray payments = invoiceJson.getJSONArray("payments");
+								for (int k = 0; k < payments.length(); k++) {
+									JSONObject payment = payments.getJSONObject(k);
+									paymentStatement.bindAllArgsAsStrings(new String[]{
+										invoiceJson.getString("salesOrderId"),
+										payment.getString("paidValue"),
+										payment.getString("paidDate"),
+										payment.getString("paymentMethod"),
+										payment.getString("chequeNo"),
+										Integer.toString(1)
+									});
+									paymentStatement.executeInsert();
+								}
+							}
 						}
 						writableDatabase.setTransactionSuccessful();
 					} catch (JSONException ex) {

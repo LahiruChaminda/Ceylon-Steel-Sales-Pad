@@ -3,7 +3,7 @@
  * Copyright (c) 2013, Xfinity and/or its affiliates. All rights reserved.
  * Created on : Mar 9, 2014, 12:29:04 PM
  */
-package com.xfinity.ceylon_steel.activity.attendence;
+package com.xfinity.ceylon_steel.activity.attendance;
 
 import android.app.Activity;
 import android.app.AlertDialog;
