@@ -6,7 +6,9 @@
 package com.xfinity.ceylon_steel.activity.payment;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,12 +16,16 @@ import android.view.ViewGroup;
 import android.widget.*;
 import com.xfinity.ceylon_steel.R;
 import com.xfinity.ceylon_steel.activity.HomeActivity;
+import com.xfinity.ceylon_steel.controller.BankController;
 import com.xfinity.ceylon_steel.controller.OutletController;
+import com.xfinity.ceylon_steel.model.Bank;
 import com.xfinity.ceylon_steel.model.Invoice;
 import com.xfinity.ceylon_steel.model.Outlet;
 import com.xfinity.ceylon_steel.model.Payment;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * @author Supun Lakshan Wanigarathna Dissanayake
@@ -29,9 +35,6 @@ import java.util.ArrayList;
 public class PaymentActivity extends Activity {
 	private AutoCompleteTextView outletAuto;
 	private ExpandableListView invoiceList;
-	private LinearLayout paymentList;
-	private Button btnAddCashPayment;
-	private Button btnAddChequePayment;
 
 	private ArrayList<Outlet> outlets;
 
@@ -102,35 +105,29 @@ public class PaymentActivity extends Activity {
 						}
 						Invoice invoice = getGroup(groupPosition);
 						categoryViewHolder.txtInvoiceNo.setText(invoice.getDistributorCode());
-						categoryViewHolder.txtTotal.setText("10000.00");
+						categoryViewHolder.txtTotal.setText(Double.toString(invoice.getPendingAmount()));
 						categoryViewHolder.txtDate.setText(invoice.getDate());
 						return convertView;
 					}
 
 					@Override
 					public View getChildView(int groupPosition, int childPosition, boolean b, View convertView, ViewGroup viewGroup) {
-						ChildViewHolder childViewHolder;
+						final Invoice invoice = getGroup(groupPosition);
 						LayoutInflater inflater = (LayoutInflater) getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
-						if (convertView == null) {
-							convertView = inflater.inflate(R.layout.invoice_payment_details_page, viewGroup, false);
-							childViewHolder = new ChildViewHolder();
-							childViewHolder.donePaymentList = (LinearLayout) convertView.findViewById(R.id.donePaymentList);
-							childViewHolder.txtPendingAmount = (TextView) convertView.findViewById(R.id.txtPendingAmount);
-							childViewHolder.inputNowPaying = (EditText) convertView.findViewById(R.id.inputNowPaying);
-							convertView.setTag(childViewHolder);
-						} else {
-							childViewHolder = (ChildViewHolder) convertView.getTag();
-						}
-						Invoice invoice = getGroup(groupPosition);
+						convertView = inflater.inflate(R.layout.invoice_payment_details_page, viewGroup, false);
+						LinearLayout donePaymentList = (LinearLayout) convertView.findViewById(R.id.donePaymentList);
+						LinearLayout justMadePaymentList = (LinearLayout) convertView.findViewById(R.id.madePayments);
+						TextView txtPendingAmount = (TextView) convertView.findViewById(R.id.txtPendingAmount);
+						boolean colorize = true;
 						for (Payment payment : invoice.getPayments()) {
-
 							if (payment.getPaymentMethod().equalsIgnoreCase(Payment.CASH_PAYMENT)) {
 								View cashPaymentDetail = inflater.inflate(R.layout.cash_payment_details_page, viewGroup, false);
 								TextView txtPaidValue = (TextView) cashPaymentDetail.findViewById(R.id.txtPaidValue);
 								TextView txtPaidDate = (TextView) cashPaymentDetail.findViewById(R.id.txtPaidDate);
 								txtPaidDate.setText(payment.getPaidDate());
 								txtPaidValue.setText(Double.toString(payment.getPaidValue()));
-								childViewHolder.donePaymentList.addView(cashPaymentDetail);
+								cashPaymentDetail.setBackgroundColor((colorize) ? Color.parseColor("#E6E6E6") : Color.parseColor("#FFFFFF"));
+								justMadePaymentList.addView(cashPaymentDetail);
 							} else {
 								View chequePaymentDetail = inflater.inflate(R.layout.cheque_payment_detail_page, viewGroup, false);
 								TextView txtPaidValue = (TextView) chequePaymentDetail.findViewById(R.id.txtPaidValue);
@@ -139,10 +136,105 @@ public class PaymentActivity extends Activity {
 								txtPaidDate.setText(payment.getPaidDate());
 								txtChequeNo.setText(payment.getChequeNo());
 								txtPaidValue.setText(Double.toString(payment.getPaidValue()));
-								childViewHolder.donePaymentList.addView(chequePaymentDetail);
+								chequePaymentDetail.setBackgroundColor((colorize) ? Color.parseColor("#E6E6E6") : Color.parseColor("#FFFFFF"));
+								justMadePaymentList.addView(chequePaymentDetail);
 							}
+							colorize = !colorize;
 						}
-						childViewHolder.txtPendingAmount.setText(Double.toString(invoice.getPendingAmount()));
+						colorize = true;
+						for (Payment payment : invoice.getNewPayments()) {
+							if (payment.getPaymentMethod().equalsIgnoreCase(Payment.CASH_PAYMENT)) {
+								View cashPaymentDetail = inflater.inflate(R.layout.cash_payment_details_page, viewGroup, false);
+								TextView txtPaidValue = (TextView) cashPaymentDetail.findViewById(R.id.txtPaidValue);
+								TextView txtPaidDate = (TextView) cashPaymentDetail.findViewById(R.id.txtPaidDate);
+								txtPaidDate.setText(payment.getPaidDate());
+								txtPaidValue.setText(Double.toString(payment.getPaidValue()));
+								cashPaymentDetail.setBackgroundColor((colorize) ? Color.parseColor("#E6E6E6") : Color.parseColor("#FFFFFF"));
+								donePaymentList.addView(cashPaymentDetail);
+							} else {
+								View chequePaymentDetail = inflater.inflate(R.layout.cheque_payment_detail_page, viewGroup, false);
+								TextView txtPaidValue = (TextView) chequePaymentDetail.findViewById(R.id.txtPaidValue);
+								TextView txtPaidDate = (TextView) chequePaymentDetail.findViewById(R.id.txtPaidDate);
+								TextView txtChequeNo = (TextView) chequePaymentDetail.findViewById(R.id.txtChequeNo);
+								txtPaidDate.setText(payment.getPaidDate());
+								txtChequeNo.setText(payment.getChequeNo());
+								txtPaidValue.setText(Double.toString(payment.getPaidValue()));
+								chequePaymentDetail.setBackgroundColor((colorize) ? Color.parseColor("#E6E6E6") : Color.parseColor("#FFFFFF"));
+								donePaymentList.addView(chequePaymentDetail);
+							}
+							colorize = !colorize;
+						}
+						Button btnCash = (Button) convertView.findViewById(R.id.btnCash);
+						btnCash.setOnClickListener(new View.OnClickListener() {
+							@Override
+							public void onClick(View view) {
+								final Dialog dialog = new Dialog(PaymentActivity.this);
+								dialog.setTitle("Cash Payment");
+								dialog.setContentView(R.layout.cash_data_input_dialog_page);
+								Button btnOk = (Button) dialog.findViewById(R.id.btnOk);
+								Button btnCancel = (Button) dialog.findViewById(R.id.btnCancel);
+								final EditText inputAmount = (EditText) dialog.findViewById(R.id.inputAmount);
+								btnOk.setOnClickListener(new View.OnClickListener() {
+									@Override
+									public void onClick(View view) {
+										Payment payment = new Payment(invoice.getSalesOrderId(), Double.parseDouble(inputAmount.getText().toString()), new SimpleDateFormat("yyyy-MM-dd").format(new Date()), false);
+										ArrayList<Payment> newPayments;
+										if ((newPayments = invoice.getNewPayments()) == null) {
+											newPayments = new ArrayList<Payment>();
+											invoice.setNewPayments(newPayments);
+										}
+										newPayments.add(payment);
+										dialog.dismiss();
+									}
+								});
+								btnCancel.setOnClickListener(new View.OnClickListener() {
+									@Override
+									public void onClick(View view) {
+										dialog.dismiss();
+									}
+								});
+								dialog.show();
+							}
+						});
+						Button btnCheque = (Button) convertView.findViewById(R.id.btnCheque);
+						btnCheque.setOnClickListener(new View.OnClickListener() {
+							@Override
+							public void onClick(View view) {
+								final Dialog dialog = new Dialog(PaymentActivity.this);
+								dialog.setTitle("Cheque Payment");
+								dialog.setContentView(R.layout.cheque_data_input_dialog_page);
+								final Spinner bankCombo = (Spinner) dialog.findViewById(R.id.bankCombo);
+								ArrayAdapter<Bank> adapter = new ArrayAdapter<Bank>(PaymentActivity.this, android.R.layout.simple_spinner_item, BankController.getBanks());
+								adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+								bankCombo.setAdapter(adapter);
+								Button btnCancel = (Button) dialog.findViewById(R.id.btnCancel);
+								Button btnOk = (Button) dialog.findViewById(R.id.btnOk);
+								final EditText inputAmount = (EditText) dialog.findViewById(R.id.inputAmount);
+								final EditText inputChequeNo = (EditText) dialog.findViewById(R.id.inputAmount);
+
+								btnOk.setOnClickListener(new View.OnClickListener() {
+									@Override
+									public void onClick(View view) {
+										Payment payment = new Payment(invoice.getSalesOrderId(), Double.parseDouble(inputAmount.getText().toString()), new SimpleDateFormat("yyyy-MM-dd").format(new Date()), bankCombo.getSelectedItem().toString(), inputChequeNo.getText().toString(), false);
+										ArrayList<Payment> newPayments;
+										if ((newPayments = invoice.getNewPayments()) == null) {
+											newPayments = new ArrayList<Payment>();
+											invoice.setNewPayments(newPayments);
+										}
+										newPayments.add(payment);
+										dialog.dismiss();
+									}
+								});
+								btnCancel.setOnClickListener(new View.OnClickListener() {
+									@Override
+									public void onClick(View view) {
+										dialog.dismiss();
+									}
+								});
+								dialog.show();
+							}
+						});
+						txtPendingAmount.setText(Double.toString(invoice.getPendingAmount()));
 						return convertView;
 					}
 
@@ -173,32 +265,11 @@ public class PaymentActivity extends Activity {
 				outletAutoItemClicked(adapterView, view, position, id);
 			}
 		});
-/*
-		btnAddCashPayment.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				btnAddCashPaymentClicked(view);
-			}
-		});
-		btnAddCashPayment.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				btnAddChequePaymentClicked(view);
-			}
-		});*/
-	}
-
-	private void outletAutoItemClicked(AdapterView<?> adapterView, View view, int position, long id) {
-		Outlet outlet = (Outlet) outletAuto.getAdapter().getItem(position);
-	}
-
-	private void btnAddChequePaymentClicked(View view) {
-
 	}
 	// </editor-fold>
 
-	private void btnAddCashPaymentClicked(View view) {
-
+	private void outletAutoItemClicked(AdapterView<?> adapterView, View view, int position, long id) {
+		Outlet outlet = (Outlet) outletAuto.getAdapter().getItem(position);
 	}
 
 	private static class CategoryViewHolder {
@@ -210,6 +281,5 @@ public class PaymentActivity extends Activity {
 	private static class ChildViewHolder {
 		LinearLayout donePaymentList;
 		TextView txtPendingAmount;
-		EditText inputNowPaying;
 	}
 }

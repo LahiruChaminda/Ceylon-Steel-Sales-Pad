@@ -93,6 +93,7 @@ CREATE TABLE tbl_invoice (
 CREATE TABLE tbl_payment (
   salesOrderId  long NOT NULL,
   paidValue     DECIMAL(50, 2) DEFAULT 0.00 NOT NULL,
+  bank          TEXT DEFAULT '',
   paidDate      DATE NOT NULL,
   paymentMethod TEXT DEFAULT '',
   chequeNo      TEXT,

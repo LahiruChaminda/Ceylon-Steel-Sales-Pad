@@ -225,7 +225,6 @@ public class SelectCategoryActivity extends Activity {
 			} else if (order.getOrderType().equalsIgnoreCase(Order.DIRECT_PROJECT)) {
 				placeOrder = OrderController.placeProjectOrder(this, order);
 			}
-
 			if (placeOrder != -1) {
 				orderDetails.clear();
 				builder.setMessage("Order Placed Successfully");

@@ -21,6 +21,7 @@ public class Payment implements Serializable {
 	private double paidValue;
 	private String paidDate;
 	private String paymentMethod;
+	private String bank;
 	private String chequeNo;
 	private boolean synced;
 
@@ -33,12 +34,13 @@ public class Payment implements Serializable {
 		this.synced = synced;
 	}
 
-	public Payment(long salesOrderId, double paidValue, String paidDate, String chequeNo, boolean synced) {
+	public Payment(long salesOrderId, double paidValue, String paidDate, String bank, String chequeNo, boolean synced) {
 		this.salesOrderId = salesOrderId;
 		this.paidValue = paidValue;
 		this.paidDate = paidDate;
 		this.paymentMethod = CHEQUE_PAYMENT;
 		this.chequeNo = chequeNo;
+		this.bank = bank;
 		this.synced = synced;
 	}
 
@@ -88,5 +90,13 @@ public class Payment implements Serializable {
 
 	public void setSynced(boolean synced) {
 		this.synced = synced;
+	}
+
+	public String getBank() {
+		return bank;
+	}
+
+	public void setBank(String bank) {
+		this.bank = bank;
 	}
 }

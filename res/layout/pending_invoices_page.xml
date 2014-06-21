@@ -30,9 +30,14 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Pending Invoices"
             android:layout_gravity="center_horizontal"
-            android:gravity="center" android:textSize="25dp" android:background="#ffe6e6e6"/>
+            android:gravity="center" android:textSize="25dp" android:background="#FF4F82B4"/>
     <ExpandableListView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/invoiceList" android:layout_gravity="center_horizontal"/>
+            android:id="@+id/invoiceList" android:layout_gravity="center_horizontal" android:layout_weight="1"/>
+    <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ok"
+            android:id="@+id/button"/>
 </LinearLayout>

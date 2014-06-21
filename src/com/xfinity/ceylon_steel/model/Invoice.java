@@ -19,6 +19,7 @@ public class Invoice implements Serializable {
 	private double pendingAmount;
 	private long salesOrderId;
 	private ArrayList<Payment> payments;
+	private ArrayList<Payment> newPayments;
 
 	public Invoice(String date, String distributorCode, double pendingAmount, long salesOrderId, ArrayList<Payment> payments) {
 		this.date = date;
@@ -26,6 +27,15 @@ public class Invoice implements Serializable {
 		this.pendingAmount = pendingAmount;
 		this.salesOrderId = salesOrderId;
 		this.payments = payments;
+	}
+
+	public Invoice(String date, String distributorCode, double pendingAmount, long salesOrderId, ArrayList<Payment> payments, ArrayList<Payment> newPayments) {
+		this.date = date;
+		this.distributorCode = distributorCode;
+		this.pendingAmount = pendingAmount;
+		this.salesOrderId = salesOrderId;
+		this.payments = payments;
+		this.newPayments = newPayments;
 	}
 
 	public String getDate() {
@@ -66,5 +76,13 @@ public class Invoice implements Serializable {
 
 	public void setSalesOrderId(long salesOrderId) {
 		this.salesOrderId = salesOrderId;
+	}
+
+	public ArrayList<Payment> getNewPayments() {
+		return newPayments;
+	}
+
+	public void setNewPayments(ArrayList<Payment> newPayments) {
+		this.newPayments = newPayments;
 	}
 }

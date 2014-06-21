@@ -64,17 +64,18 @@ public class OutletController extends AbstractController {
 					String date = invoiceCursor.getString(1);
 					String distributorCode = invoiceCursor.getString(2);
 					double pendingAmount = invoiceCursor.getDouble(3);
-					Cursor paymentCursor = writableDatabase.rawQuery("select distinct paidValue, paidDate, paymentMethod, chequeNo, status from tbl_payment where salesOrderId=?", new String[]{Long.toString(salesOrderId)});
+					Cursor paymentCursor = writableDatabase.rawQuery("select distinct paidValue, paidDate, paymentMethod, chequeNo, status, bank from tbl_payment where salesOrderId=?", new String[]{Long.toString(salesOrderId)});
 					for (paymentCursor.moveToFirst(); !paymentCursor.isAfterLast(); paymentCursor.moveToNext()) {
 						double paidValue = paymentCursor.getDouble(0);
 						String paidDate = paymentCursor.getString(1);
 						String paymentMethod = paymentCursor.getString(2);
 						String chequeNo = paymentCursor.getString(3);
 						boolean status = paymentCursor.getInt(4) == 1;
+						String bank = paymentCursor.getString(5);
 						if (paymentMethod.equalsIgnoreCase(Payment.CASH_PAYMENT)) {
 							payments.add(new Payment(salesOrderId, paidValue, paidDate, status));
 						} else {
-							payments.add(new Payment(salesOrderId, paidValue, paidDate, chequeNo, status));
+							payments.add(new Payment(salesOrderId, paidValue, paidDate, bank, chequeNo, status));
 						}
 					}
 					Log.i("Payment_Count", payments.size() + " -> " + outletName);
@@ -133,7 +134,7 @@ public class OutletController extends AbstractController {
 						writableDatabase.beginTransaction();
 						SQLiteStatement compiledStatement = writableDatabase.compileStatement("replace into tbl_outlet(outletId, outletName) values(?,?)");
 						SQLiteStatement invoiceStatement = writableDatabase.compileStatement("replace into tbl_invoice(salesOrderId, outletId, date, distributorCode, pendingAmount) values(?,?,?,?,?)");
-						SQLiteStatement paymentStatement = writableDatabase.compileStatement("replace into tbl_payment(salesOrderId, paidValue, paidDate, paymentMethod, chequeNo, status) values(?,?,?,?,?,?)");
+						SQLiteStatement paymentStatement = writableDatabase.compileStatement("replace into tbl_payment(salesOrderId, paidValue, paidDate, paymentMethod, chequeNo, status, bank) values(?,?,?,?,?,?,?)");
 						for (int i = 0; i < result.length(); i++) {
 							JSONObject outlet = result.getJSONObject(i);
 							compiledStatement.bindAllArgsAsStrings(new String[]{
@@ -161,7 +162,8 @@ public class OutletController extends AbstractController {
 										payment.getString("paidDate"),
 										payment.getString("paymentMethod"),
 										payment.getString("chequeNo"),
-										Integer.toString(1)
+										Integer.toString(1),
+										payment.getString("bank")
 									});
 									paymentStatement.executeInsert();
 								}
