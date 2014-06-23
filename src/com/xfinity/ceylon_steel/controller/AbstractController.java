@@ -47,7 +47,7 @@ abstract class AbstractController extends WebServiceURL {
 					if (paramValue instanceof File) {
 						FileBody fileContent = new FileBody((File) paramValue, ContentType.MULTIPART_FORM_DATA);
 						multipartEntityBuilder.addPart(parameter, fileContent);
-					} else if (paramValue instanceof JSONObject) {
+					} else if (paramValue instanceof JSONObject || paramValue instanceof JSONArray) {
 						StringBody json = new StringBody(paramValue.toString(), ContentType.APPLICATION_JSON);
 						multipartEntityBuilder.addPart(parameter, json);
 					} else {
@@ -95,7 +95,7 @@ abstract class AbstractController extends WebServiceURL {
 					if (paramValue instanceof File) {
 						FileBody fileContent = new FileBody((File) paramValue, ContentType.MULTIPART_FORM_DATA);
 						multipartEntityBuilder.addPart(parameter, fileContent);
-					} else if (paramValue instanceof JSONObject) {
+					} else if (paramValue instanceof JSONObject || paramValue instanceof JSONArray) {
 						StringBody json = new StringBody(paramValue.toString(), ContentType.APPLICATION_JSON);
 						multipartEntityBuilder.addPart(parameter, json);
 					} else {

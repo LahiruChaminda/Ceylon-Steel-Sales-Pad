@@ -5,7 +5,10 @@
  */
 package com.xfinity.ceylon_steel.model;
 
+import org.json.JSONObject;
+
 import java.io.Serializable;
+import java.util.HashMap;
 
 /**
  * @author Supun Lakshan Wanigarathna Dissanayake
@@ -100,16 +103,14 @@ public class Payment implements Serializable {
 		this.bank = bank;
 	}
 
-	@Override
-	public String toString() {
-		return "Payment{" +
-			"salesOrderId=" + salesOrderId +
-			", paidValue=" + paidValue +
-			", paidDate='" + paidDate + '\'' +
-			", paymentMethod='" + paymentMethod + '\'' +
-			", bank='" + bank + '\'' +
-			", chequeNo='" + chequeNo + '\'' +
-			", synced=" + synced +
-			'}';
+	public JSONObject getPaymentAsJson() {
+		HashMap<String, Object> jsonParams = new HashMap<String, Object>();
+		jsonParams.put("salesOrderId", salesOrderId);
+		jsonParams.put("paidValue", paidValue);
+		jsonParams.put("paidDate", paidDate);
+		jsonParams.put("paymentMethod", paymentMethod);
+		jsonParams.put("bank", (bank == null) ? "" : bank);
+		jsonParams.put("chequeNo", (chequeNo == null) ? "" : chequeNo);
+		return new JSONObject(jsonParams);
 	}
 }

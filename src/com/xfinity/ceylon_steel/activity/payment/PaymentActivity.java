@@ -11,9 +11,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.view.*;
 import android.widget.*;
 import com.xfinity.ceylon_steel.R;
 import com.xfinity.ceylon_steel.activity.HomeActivity;
@@ -56,6 +54,20 @@ public class PaymentActivity extends Activity {
 				outletAutoOnItemClicked(adapterView, view, i, l);
 			}
 		});
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		super.onCreateOptionsMenu(menu);
+		MenuInflater menuInflater = getMenuInflater();
+		menuInflater.inflate(R.menu.payments_menu, menu);
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		OutletController.syncPayments(PaymentActivity.this);
+		return true;
 	}
 
 	private void outletAutoOnItemClicked(AdapterView<?> adapterView, View view, int position, long id) {
