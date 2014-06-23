@@ -11,7 +11,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
 import android.os.AsyncTask;
-import android.util.Log;
 import android.widget.Toast;
 import com.xfinity.ceylon_steel.db.SQLiteDatabaseHelper;
 import com.xfinity.ceylon_steel.model.Invoice;
@@ -60,11 +59,12 @@ public class OutletController extends AbstractController {
 				Cursor invoiceCursor = writableDatabase.rawQuery("select distinct salesOrderId, date, distributorCode, pendingAmount from tbl_invoice where outletId=?", new String[]{Integer.toString(outletId)});
 				for (invoiceCursor.moveToFirst(); !invoiceCursor.isAfterLast(); invoiceCursor.moveToNext()) {
 					ArrayList<Payment> payments = new ArrayList<Payment>();
+					ArrayList<Payment> newPayments = new ArrayList<Payment>();
 					long salesOrderId = invoiceCursor.getLong(0);
 					String date = invoiceCursor.getString(1);
 					String distributorCode = invoiceCursor.getString(2);
 					double pendingAmount = invoiceCursor.getDouble(3);
-					Cursor paymentCursor = writableDatabase.rawQuery("select distinct paidValue, paidDate, paymentMethod, chequeNo, status, bank from tbl_payment where salesOrderId=?", new String[]{Long.toString(salesOrderId)});
+					Cursor paymentCursor = writableDatabase.rawQuery("select paidValue, paidDate, paymentMethod, chequeNo, status, bank from tbl_payment where salesOrderId=?", new String[]{Long.toString(salesOrderId)});
 					for (paymentCursor.moveToFirst(); !paymentCursor.isAfterLast(); paymentCursor.moveToNext()) {
 						double paidValue = paymentCursor.getDouble(0);
 						String paidDate = paymentCursor.getString(1);
@@ -78,9 +78,8 @@ public class OutletController extends AbstractController {
 							payments.add(new Payment(salesOrderId, paidValue, paidDate, bank, chequeNo, status));
 						}
 					}
-					Log.i("Payment_Count", payments.size() + " -> " + outletName);
 					paymentCursor.close();
-					invoices.add(new Invoice(date, distributorCode, pendingAmount, salesOrderId, payments));
+					invoices.add(new Invoice(date, distributorCode, pendingAmount, salesOrderId, payments, newPayments));
 				}
 				invoiceCursor.close();
 				outlets.add(new Outlet(outletId, outletName, invoices));
@@ -182,5 +181,38 @@ public class OutletController extends AbstractController {
 				}
 			}
 		}.execute(UserController.getAuthorizedUser(context));
+	}
+
+	public static boolean saveInvoicePayments(ArrayList<Outlet> outlets, Context context) {
+		SQLiteDatabaseHelper databaseHelper = SQLiteDatabaseHelper.getDatabaseInstance(context);
+		SQLiteDatabase database = databaseHelper.getWritableDatabase();
+		String sql = "insert into tbl_payment(salesOrderId, paidValue, bank, paidDate, paymentMethod, chequeNo, status) values(?,?,?,?,?,?,?)";
+		SQLiteStatement paymentsInsertQuery = database.compileStatement(sql);
+		try {
+			database.beginTransaction();
+			for (Outlet outlet : outlets) {
+				for (Invoice invoice : outlet.getPendingInvoices()) {
+					if (invoice.getNewPayments() != null) {
+						for (Payment payment : invoice.getNewPayments()) {
+							paymentsInsertQuery.bindAllArgsAsStrings(new String[]{
+								Long.toString(invoice.getSalesOrderId()),
+								Double.toString(payment.getPaidValue()),
+								(payment.getBank() == null) ? "" : payment.getBank(),
+								payment.getPaidDate(),
+								payment.getPaymentMethod(),
+								(payment.getChequeNo() == null) ? "" : payment.getChequeNo(),
+								Integer.toString(0)
+							});
+							paymentsInsertQuery.executeInsert();
+						}
+					}
+				}
+			}
+			database.setTransactionSuccessful();
+		} finally {
+			database.endTransaction();
+			databaseHelper.close();
+		}
+		return true;
 	}
 }

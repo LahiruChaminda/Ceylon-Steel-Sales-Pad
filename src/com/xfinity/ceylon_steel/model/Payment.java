@@ -99,4 +99,17 @@ public class Payment implements Serializable {
 	public void setBank(String bank) {
 		this.bank = bank;
 	}
+
+	@Override
+	public String toString() {
+		return "Payment{" +
+			"salesOrderId=" + salesOrderId +
+			", paidValue=" + paidValue +
+			", paidDate='" + paidDate + '\'' +
+			", paymentMethod='" + paymentMethod + '\'' +
+			", bank='" + bank + '\'' +
+			", chequeNo='" + chequeNo + '\'' +
+			", synced=" + synced +
+			'}';
+	}
 }
