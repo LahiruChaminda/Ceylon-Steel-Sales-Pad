@@ -38,6 +38,7 @@ public class PaymentActivity extends Activity {
 	private Outlet selectedOutlet;
 	private Button btnOk;
 	private Button btnCancel;
+	private BaseExpandableListAdapter adapter;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -54,25 +55,8 @@ public class PaymentActivity extends Activity {
 				outletAutoOnItemClicked(adapterView, view, i, l);
 			}
 		});
-	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		super.onCreateOptionsMenu(menu);
-		MenuInflater menuInflater = getMenuInflater();
-		menuInflater.inflate(R.menu.payments_menu, menu);
-		return true;
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		OutletController.syncPayments(PaymentActivity.this);
-		return true;
-	}
-
-	private void outletAutoOnItemClicked(AdapterView<?> adapterView, View view, int position, long id) {
-		selectedOutlet = (Outlet) adapterView.getAdapter().getItem(position);
-		invoiceList.setAdapter(new BaseExpandableListAdapter() {
+		adapter = new BaseExpandableListAdapter() {
 			@Override
 			public int getGroupCount() {
 				return selectedOutlet.getPendingInvoices().size();
@@ -267,7 +251,28 @@ public class PaymentActivity extends Activity {
 			public boolean isChildSelectable(int groupPosition, int childPosition) {
 				return false;
 			}
-		});
+		};
+
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		super.onCreateOptionsMenu(menu);
+		MenuInflater menuInflater = getMenuInflater();
+		menuInflater.inflate(R.menu.payments_menu, menu);
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		OutletController.syncPayments(PaymentActivity.this);
+		return true;
+	}
+
+	private void outletAutoOnItemClicked(AdapterView<?> adapterView, View view, int position, long id) {
+		selectedOutlet = (Outlet) adapterView.getAdapter().getItem(position);
+		adapter.notifyDataSetChanged();
+		invoiceList.setAdapter(adapter);
 	}
 
 	@Override
