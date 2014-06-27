@@ -16,5 +16,5 @@
 
 ### Who do I talk to? ###
 
-* supunlakshan.xfinity@gmail.com
-* +94711290392
+* [E-mail](supunlakshan.xfinity@gmail.com)
+* [Mobile](+94711290392)
