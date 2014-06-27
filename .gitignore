@@ -1,11 +1,4 @@
 /out/
-/private/
-/bin/
 /gen/
-/ant.properties
-/build.properties
-/default.properties
-/project.properties
 /.idea/
-/proguard-project.txt
 /ceylon_steel.iml
