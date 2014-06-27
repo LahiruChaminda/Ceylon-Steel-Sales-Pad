@@ -1,4 +1,4 @@
-# README #
+# READ ME #
 
 * Android SDK v 4.0.3 or above
 * Java SE v 1.7 or above
@@ -7,7 +7,6 @@
 
 * Ceylon Steel Native Android Application
 * v 1.0
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
 
 ### How do I get set up? ###
 
