@@ -5,6 +5,9 @@
  */
 package com.xfinity.ceylon_steel.model;
 
+import android.content.Context;
+import com.xfinity.ceylon_steel.controller.CategoryController;
+
 import java.util.ArrayList;
 
 /**
@@ -16,15 +19,13 @@ public class Category {
 
 	private int categoryId;
 	private String description;
-	private ArrayList<Item> items;
 
 	public Category() {
 	}
 
-	public Category(int categoryId, String description, ArrayList<Item> items) {
+	public Category(int categoryId, String description) {
 		this.categoryId = categoryId;
 		this.description = description;
-		this.items = items;
 	}
 
 	/**
@@ -55,22 +56,12 @@ public class Category {
 		this.description = description;
 	}
 
-	/**
-	 * @return the items
-	 */
-	public ArrayList<Item> getItems() {
-		return items;
-	}
-
-	/**
-	 * @param items the items to set
-	 */
-	public void setItems(ArrayList<Item> items) {
-		this.items = items;
-	}
-
 	@Override
 	public String toString() {
 		return description;
+	}
+
+	public ArrayList<Item> getItems(Context context) {
+		return CategoryController.getItems(categoryId, context);
 	}
 }
