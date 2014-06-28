@@ -42,24 +42,32 @@ public class CategoryController extends AbstractController {
 		for (categoryCursor.moveToFirst(); !categoryCursor.isAfterLast(); categoryCursor.moveToNext()) {
 			int categoryId = categoryCursor.getInt(0);
 			String categoryDescription = categoryCursor.getString(1);
-			Cursor itemCursor = database.rawQuery("select itemId,itemCode,itemDescription,price from tbl_item where categoryId=?", new String[]{String.valueOf(categoryId)});
-			ArrayList<Item> items = new ArrayList<Item>();
-			for (itemCursor.moveToFirst(); !itemCursor.isAfterLast(); itemCursor.moveToNext()) {
-				Item item = new Item(
-					itemCursor.getInt(0),
-					itemCursor.getString(1),
-					itemCursor.getString(2),
-					itemCursor.getDouble(3)
-				);
-				items.add(item);
-			}
-			itemCursor.close();
-			Category category = new Category(categoryId, categoryDescription, items);
+
+			Category category = new Category(categoryId, categoryDescription);
 			categories.add(category);
 		}
 		categoryCursor.close();
 		databaseInstance.close();
 		return categories;
+	}
+
+	public static ArrayList<Item> getItems(int categoryId, Context context) {
+		SQLiteDatabaseHelper databaseInstance = SQLiteDatabaseHelper.getDatabaseInstance(context);
+		SQLiteDatabase database = databaseInstance.getWritableDatabase();
+		Cursor itemCursor = database.rawQuery("select itemId,itemCode,itemDescription,price from tbl_item where categoryId=?", new String[]{String.valueOf(categoryId)});
+		ArrayList<Item> items = new ArrayList<Item>();
+		for (itemCursor.moveToFirst(); !itemCursor.isAfterLast(); itemCursor.moveToNext()) {
+			Item item = new Item(
+				itemCursor.getInt(0),
+				itemCursor.getString(1),
+				itemCursor.getString(2),
+				itemCursor.getDouble(3)
+			);
+			items.add(item);
+		}
+		itemCursor.close();
+		databaseInstance.close();
+		return items;
 	}
 
 	public static void downLoadItemsAndCategories(final Context context) {

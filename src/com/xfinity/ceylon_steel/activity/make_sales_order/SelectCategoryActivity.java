@@ -104,15 +104,15 @@ public class SelectCategoryActivity extends Activity {
 			}
 
 			public int getChildrenCount(int categoryPosition) {
-				return categories.get(categoryPosition).getItems().size();
+				return categories.get(categoryPosition).getItems(SelectCategoryActivity.this).size();
 			}
 
-			public Object getGroup(int categoryPosition) {
+			public Category getGroup(int categoryPosition) {
 				return categories.get(categoryPosition);
 			}
 
-			public Object getChild(int categoryPosition, int itemPosition) {
-				return categories.get(categoryPosition).getItems().get(itemPosition);
+			public Item getChild(int categoryPosition, int itemPosition) {
+				return categories.get(categoryPosition).getItems(SelectCategoryActivity.this).get(itemPosition);
 			}
 
 			public long getGroupId(int categoryPosition) {
@@ -159,8 +159,9 @@ public class SelectCategoryActivity extends Activity {
 					childViewHolder = (ChildViewHolder) convertView.getTag();
 					itemTextView = childViewHolder.childViewHolder;
 				}
-				itemTextView.setText(categories.get(categoryPosition).getItems().get(itemPosition).toString());
-				if (itemIds.contains(categories.get(categoryPosition).getItems().get(itemPosition).getItemId())) {
+				ArrayList<Item> items = categories.get(categoryPosition).getItems(SelectCategoryActivity.this);
+				itemTextView.setText(items.get(itemPosition).toString());
+				if (itemIds.contains(items.get(itemPosition).getItemId())) {
 					convertView.setBackgroundColor(Color.rgb(79, 130, 180));
 					itemTextView.setTextColor(Color.WHITE);
 				} else {
@@ -202,7 +203,7 @@ public class SelectCategoryActivity extends Activity {
 	}
 
 	private boolean onChildClicked(ExpandableListView parent, View view, int groupPosition, int childPosition, long id) {
-		Item item = categories.get(groupPosition).getItems().get(childPosition);
+		Item item = categories.get(groupPosition).getItems(SelectCategoryActivity.this).get(childPosition);
 		Intent enterItemDetailActivity = new Intent(this, EnterItemDetailActivity.class);
 		categoryPosition = groupPosition;
 		enterItemDetailActivity.putExtra("item", item);
