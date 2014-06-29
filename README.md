@@ -14,5 +14,5 @@ Utilizing such data the web based system can produce customized reports and loca
 
 ### Prerequisites
 
-* Android SDK v 4.0.3 or above
-* Java SE v 1.7 or above
+* [Android SDK v4.0.3](http://developer.android.com/sdk/)
+* [Java SE v1.7](http://www.oracle.com/technetwork/java/javase/downloads/)
