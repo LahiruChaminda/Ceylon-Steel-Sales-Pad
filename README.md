@@ -1,8 +1,8 @@
 # Ceylon Steel Sales Pad
-`Android`
+`Android` `SQLite`
 _____
 
-### About ###
+### About
 
 SalesPad is an android application especially designed for sales representatives and field personnel. 
 It allows them to create sales orders and add new retail outlets/dealers in their respective routes.
@@ -12,7 +12,7 @@ Free issues or Complimentary items offered by companies and even Item return log
 SalesPad sends GPS location and the battery level along with the sales data to the head office. 
 Utilizing such data the web based system can produce customized reports and location maps of the sales/field staff.
 
-### Prerequisites ###
+### Prerequisites
 
 * Android SDK v 4.0.3 or above
 * Java SE v 1.7 or above
