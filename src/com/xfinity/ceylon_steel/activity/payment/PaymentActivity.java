@@ -46,7 +46,7 @@ public class PaymentActivity extends Activity {
 		setContentView(R.layout.pending_invoices_page);
 		initialize();
 
-		outlets = OutletController.getOutletsWithInvoices(PaymentActivity.this);
+		outlets = OutletController.getOutlets(PaymentActivity.this);
 		outletAuto.setAdapter(new ArrayAdapter<Outlet>(this, android.R.layout.simple_dropdown_item_1line, outlets));
 
 		outletAuto.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -59,7 +59,7 @@ public class PaymentActivity extends Activity {
 		adapter = new BaseExpandableListAdapter() {
 			@Override
 			public int getGroupCount() {
-				return selectedOutlet.getPendingInvoices().size();
+				return selectedOutlet.getPendingInvoices(PaymentActivity.this).size();
 			}
 
 			@Override
@@ -69,7 +69,7 @@ public class PaymentActivity extends Activity {
 
 			@Override
 			public Invoice getGroup(int groupPosition) {
-				return selectedOutlet.getPendingInvoices().get(groupPosition);
+				return selectedOutlet.getPendingInvoices(PaymentActivity.this).get(groupPosition);
 			}
 
 			@Override
