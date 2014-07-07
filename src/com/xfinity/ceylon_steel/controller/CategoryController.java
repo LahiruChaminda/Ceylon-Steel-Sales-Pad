@@ -42,8 +42,7 @@ public class CategoryController extends AbstractController {
 		for (categoryCursor.moveToFirst(); !categoryCursor.isAfterLast(); categoryCursor.moveToNext()) {
 			int categoryId = categoryCursor.getInt(0);
 			String categoryDescription = categoryCursor.getString(1);
-
-			Category category = new Category(categoryId, categoryDescription);
+			Category category = new Category(categoryId, categoryDescription, getItems(categoryId, context));
 			categories.add(category);
 		}
 		categoryCursor.close();
@@ -51,7 +50,7 @@ public class CategoryController extends AbstractController {
 		return categories;
 	}
 
-	public static ArrayList<Item> getItems(int categoryId, Context context) {
+	private static ArrayList<Item> getItems(int categoryId, Context context) {
 		SQLiteDatabaseHelper databaseInstance = SQLiteDatabaseHelper.getDatabaseInstance(context);
 		SQLiteDatabase database = databaseInstance.getWritableDatabase();
 		Cursor itemCursor = database.rawQuery("select itemId,itemCode,itemDescription,price from tbl_item where categoryId=?", new String[]{String.valueOf(categoryId)});

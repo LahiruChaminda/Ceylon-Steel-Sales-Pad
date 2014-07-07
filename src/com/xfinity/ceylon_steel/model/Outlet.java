@@ -5,6 +5,9 @@
  */
 package com.xfinity.ceylon_steel.model;
 
+import android.content.Context;
+import com.xfinity.ceylon_steel.controller.OutletController;
+
 import java.util.ArrayList;
 
 /**
@@ -24,12 +27,6 @@ public class Outlet {
 	public Outlet(int outletId, String outletName) {
 		this.outletId = outletId;
 		this.outletName = outletName;
-	}
-
-	public Outlet(int outletId, String outletName, ArrayList<Invoice> pendingInvoices) {
-		this.outletId = outletId;
-		this.outletName = outletName;
-		this.pendingInvoices = pendingInvoices;
 	}
 
 	/**
@@ -65,11 +62,10 @@ public class Outlet {
 		return outletName;
 	}
 
-	public ArrayList<Invoice> getPendingInvoices() {
-		return pendingInvoices;
-	}
-
-	public void setPendingInvoices(ArrayList<Invoice> pendingInvoices) {
-		this.pendingInvoices = pendingInvoices;
+	public ArrayList<Invoice> getPendingInvoices(Context context) {
+		if (pendingInvoices == null) {
+			this.pendingInvoices = OutletController.getPendingInvoices(this.outletId, context);
+		}
+		return this.pendingInvoices;
 	}
 }
