@@ -2,7 +2,7 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
-              android:layout_width="400dp"
+              android:layout_width="match_parent"
               android:layout_height="wrap_content" android:weightSum="4" android:padding="3dp" android:paddingRight="5dp" android:paddingLeft="5dp">
     <LinearLayout
             android:orientation="horizontal"
@@ -25,11 +25,12 @@
         <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:text="Check No"
+                android:text="Cheque No"
                 android:gravity="center_vertical" android:layout_weight="1"/>
         <EditText
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:hint="Cheque No"
                 android:id="@+id/inputChequeNo" android:layout_weight="2"/>
     </LinearLayout>
     <LinearLayout
@@ -44,7 +45,34 @@
         <EditText
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:id="@+id/inputAmount" android:layout_weight="2" android:inputType="numberDecimal"/>
+                android:id="@+id/inputAmount" android:layout_weight="2" android:inputType="numberDecimal" android:hint="Amount"/>
+    </LinearLayout>
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:layout_weight="1" android:weightSum="3">
+        <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="Realization Date"
+                android:gravity="center_vertical" android:layout_weight="1"/>
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" android:layout_weight="2" android:weightSum="3">
+            <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:id="@+id/inputYear" android:layout_weight="1" android:hint="Year"/>
+            <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:id="@+id/inputMonth" android:layout_weight="1" android:hint="Month"/>
+            <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:id="@+id/inputDate" android:layout_weight="1" android:hint="Date"/>
+        </LinearLayout>
     </LinearLayout>
     <LinearLayout
             android:orientation="horizontal"
