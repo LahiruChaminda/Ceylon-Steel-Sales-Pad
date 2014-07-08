@@ -27,7 +27,8 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="Distributor" android:textSize="25dp"/>
-        <AutoCompleteTextView android:layout_width="match_parent" android:layout_height="wrap_content"
+        <AutoCompleteTextView
+                android:layout_width="match_parent" android:layout_height="wrap_content"
                               android:id="@+id/makeConsignmentOrderDistributorAuto"
                               android:textSize="25dp"/>
         <TextView

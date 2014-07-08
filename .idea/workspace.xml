@@ -77,12 +77,6 @@
           <theme>@android:style/Theme.Light</theme>
         </config>
       </layout>
-      <layout url="file://$PROJECT_DIR$/res/layout/g.xml">
-        <config>
-          <state>Landscape</state>
-          <theme>@android:style/Theme.Light</theme>
-        </config>
-      </layout>
       <layout url="file://$PROJECT_DIR$/res/layout/home_page.xml">
         <config>
           <theme>@android:style/Theme.Holo.Light</theme>
@@ -212,26 +206,9 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="app: com.xfinity.ceylon_steel" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="705bd5aa-854f-4790-a9d6-20c6e04e4b10" name="Default" comment="change layouts&#10;update database">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/enter_item_detail_page.xml" afterPath="$PROJECT_DIR$/res/layout/enter_item_detail_page.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/home_page.xml" afterPath="$PROJECT_DIR$/res/layout/home_page.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/invoice_payment_details_page.xml" afterPath="$PROJECT_DIR$/res/layout/invoice_payment_details_page.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/login_page.xml" afterPath="$PROJECT_DIR$/res/layout/login_page.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/made_consignment_page.xml" afterPath="$PROJECT_DIR$/res/layout/made_consignment_page.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/made_direct_page.xml" afterPath="$PROJECT_DIR$/res/layout/made_direct_page.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/made_project_page.xml" afterPath="$PROJECT_DIR$/res/layout/made_project_page.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/made_unproductive_call_page.xml" afterPath="$PROJECT_DIR$/res/layout/made_unproductive_call_page.xml" />
+    <list default="true" id="705bd5aa-854f-4790-a9d6-20c6e04e4b10" name="Default" comment="change layouts">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/make_consignment_order_page.xml" afterPath="$PROJECT_DIR$/res/layout/make_consignment_order_page.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/make_direct_order_page.xml" afterPath="$PROJECT_DIR$/res/layout/make_direct_order_page.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/make_direct_project_order_page.xml" afterPath="$PROJECT_DIR$/res/layout/make_direct_project_order_page.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/make_order_page.xml" afterPath="$PROJECT_DIR$/res/layout/make_order_page.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/make_project_order_page.xml" afterPath="$PROJECT_DIR$/res/layout/make_project_order_page.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/make_unproductive_call_page.xml" afterPath="$PROJECT_DIR$/res/layout/make_unproductive_call_page.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/order_list_item_view.xml" afterPath="$PROJECT_DIR$/res/layout/order_list_item_view.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/order_type_seletion_page.xml" afterPath="$PROJECT_DIR$/res/layout/order_type_seletion_page.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/ordered_item.xml" afterPath="$PROJECT_DIR$/res/layout/ordered_item.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/view_consignment_order_page.xml" afterPath="$PROJECT_DIR$/res/layout/view_consignment_order_page.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/view_project_order_page.xml" afterPath="$PROJECT_DIR$/res/layout/view_project_order_page.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="ceylon_steel.iws" />
@@ -299,8 +276,8 @@
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
     </breakpoint_any>
-    <ui_properties converted="true" />
     <breakpoint_rules converted="true" />
+    <ui_properties converted="true" />
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="ExportToHTMLSettings">
@@ -310,7 +287,60 @@
     <favorites_list name="ceylon_steel" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="make_consignment_order_page.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/res/layout/make_consignment_order_page.xml">
+          <provider selected="true" editor-type-id="android-designer">
+            <state />
+          </provider>
+          <provider editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1425">
+              <caret line="51" column="17" selection-start-line="51" selection-start-column="17" selection-end-line="51" selection-end-column="17" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="make_direct_order_page.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/res/layout/make_direct_order_page.xml">
+          <provider selected="true" editor-type-id="android-designer">
+            <state />
+          </provider>
+          <provider editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="414" max-vertical-offset="1230">
+              <caret line="76" column="13" selection-start-line="76" selection-start-column="13" selection-end-line="76" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="make_direct_project_order_page.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/res/layout/make_direct_project_order_page.xml">
+          <provider selected="true" editor-type-id="android-designer">
+            <state />
+          </provider>
+          <provider editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="459" max-vertical-offset="1275">
+              <caret line="79" column="13" selection-start-line="79" selection-start-column="13" selection-end-line="79" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="make_project_order_page.xml" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/res/layout/make_project_order_page.xml">
+          <provider editor-type-id="android-designer">
+            <state />
+          </provider>
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="1.1552567" vertical-offset="0" max-vertical-offset="1350">
+              <caret line="63" column="38" selection-start-line="63" selection-start-column="38" selection-end-line="63" selection-end-column="38" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -365,7 +395,6 @@
         <option value="$PROJECT_DIR$/res/layout/invoice_payment_details_page.xml" />
         <option value="$PROJECT_DIR$/res/layout/home_page.xml" />
         <option value="$PROJECT_DIR$/res/layout/enter_item_detail_page.xml" />
-        <option value="$PROJECT_DIR$/res/layout/make_consignment_order_page.xml" />
         <option value="$PROJECT_DIR$/res/layout/made_unproductive_call_page.xml" />
         <option value="$PROJECT_DIR$/res/layout/made_project_page.xml" />
         <option value="$PROJECT_DIR$/res/layout/made_direct_page.xml" />
@@ -374,13 +403,14 @@
         <option value="$PROJECT_DIR$/res/layout/make_direct_order_page.xml" />
         <option value="$PROJECT_DIR$/res/layout/make_direct_project_order_page.xml" />
         <option value="$PROJECT_DIR$/res/layout/make_order_page.xml" />
-        <option value="$PROJECT_DIR$/res/layout/make_project_order_page.xml" />
         <option value="$PROJECT_DIR$/res/layout/make_unproductive_call_page.xml" />
         <option value="$PROJECT_DIR$/res/layout/order_list_item_view.xml" />
         <option value="$PROJECT_DIR$/res/layout/order_type_seletion_page.xml" />
         <option value="$PROJECT_DIR$/res/layout/ordered_item.xml" />
         <option value="$PROJECT_DIR$/res/layout/view_consignment_order_page.xml" />
         <option value="$PROJECT_DIR$/res/layout/view_project_order_page.xml" />
+        <option value="$PROJECT_DIR$/res/layout/make_consignment_order_page.xml" />
+        <option value="$PROJECT_DIR$/res/layout/make_project_order_page.xml" />
       </list>
     </option>
   </component>
@@ -434,7 +464,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
@@ -446,6 +475,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -712,6 +742,12 @@
       <envs />
       <method />
     </configuration>
+    <configuration default="true" type="com.intellij.persistence.run.ConsoleRunConfigurationType" factoryName="Query Language Console">
+      <option name="VM_PARAMETERS" value="" />
+      <option name="USER_CFG_CLASS" />
+      <option name="CONTEXT_PROVIDER" />
+      <method />
+    </configuration>
     <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android Application">
       <module name="" />
       <option name="ACTIVITY_CLASS" value="" />
@@ -730,12 +766,6 @@
       <option name="CLEAR_LOGCAT" value="false" />
       <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
       <option name="FILTER_LOGCAT_AUTOMATICALLY" value="true" />
-      <method />
-    </configuration>
-    <configuration default="true" type="com.intellij.persistence.run.ConsoleRunConfigurationType" factoryName="Query Language Console">
-      <option name="VM_PARAMETERS" value="" />
-      <option name="USER_CFG_CLASS" />
-      <option name="CONTEXT_PROVIDER" />
       <method />
     </configuration>
     <configuration default="false" name="BlueStacks" type="AndroidRunConfigurationType" factoryName="Android Application">
@@ -852,7 +882,8 @@
       <workItem from="1403956341931" duration="6000" />
       <workItem from="1404747621835" duration="9000" />
       <workItem from="1404790522220" duration="27000" />
-      <workItem from="1404796191797" duration="8366000" />
+      <workItem from="1404796191797" duration="8442000" />
+      <workItem from="1404807772388" duration="294000" />
     </task>
     <task id="LOCAL-00001" summary="Reformat the Code using Intellij Idea">
       <created>1401982163969</created>
@@ -914,11 +945,15 @@
       <created>1404803332487</created>
       <updated>1404803332487</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="change layouts">
+      <created>1404805279481</created>
+      <updated>1404805279481</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="106446000" />
+    <option name="totallyTimeSpent" value="106816000" />
   </component>
   <component name="TodoView" selected-index="0">
     <todo-panel id="selected-file">
@@ -959,10 +994,9 @@
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32930514" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5416667" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.26352128" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Android" active="false" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.49482164" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32943144" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24924472" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24908425" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -975,6 +1009,7 @@
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32666665" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.26352128" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -1005,7 +1040,8 @@
     <MESSAGE value="Update gitignore file" />
     <MESSAGE value="added payment realization date in cheque payments" />
     <MESSAGE value="change layouts&#10;update database" />
-    <option name="LAST_COMMIT_MESSAGE" value="change layouts&#10;update database" />
+    <MESSAGE value="change layouts" />
+    <option name="LAST_COMMIT_MESSAGE" value="change layouts" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
@@ -1102,20 +1138,19 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
-      <provider editor-type-id="MarkdownPreviewEditor">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="534">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
+      </provider>
+      <provider editor-type-id="MarkdownPreviewEditor">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="525">
           <caret line="3" column="5" selection-start-line="3" selection-start-column="5" selection-end-line="3" selection-end-column="5" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1123,9 +1158,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="2919" max-vertical-offset="3750">
           <caret line="316" column="57" selection-start-line="316" selection-start-column="57" selection-end-line="316" selection-end-column="57" />
-          <folding>
-            <element signature="class#1975:11685" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1133,11 +1165,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.5379147" vertical-offset="446" max-vertical-offset="1410">
           <caret line="91" column="40" selection-start-line="91" selection-start-column="40" selection-end-line="91" selection-end-column="40" />
-          <folding>
-            <element signature="e#2236#2237#0" expanded="true" />
-            <element signature="e#2295#2296#0" expanded="true" />
-            <element signature="e#2340#2341#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1145,9 +1172,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="3.5920577" vertical-offset="0" max-vertical-offset="4005">
           <caret line="233" column="40" selection-start-line="233" selection-start-column="40" selection-end-line="233" selection-end-column="40" />
-          <folding>
-            <element signature="class#2274:6404" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1155,7 +1179,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1155">
           <caret line="35" column="37" selection-start-line="35" selection-start-column="37" selection-end-line="35" selection-end-column="37" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1163,7 +1186,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.22727273" vertical-offset="0" max-vertical-offset="1620">
           <caret line="12" column="28" selection-start-line="12" selection-start-column="28" selection-end-line="12" selection-end-column="28" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1307,17 +1329,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/make_consignment_order_page.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3492647" vertical-offset="0" max-vertical-offset="1410">
-          <caret line="19" column="8" selection-start-line="19" selection-start-column="8" selection-end-line="19" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/res/layout/main.xml">
       <provider selected="true" editor-type-id="android-designer">
         <state />
@@ -1384,45 +1395,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/make_direct_order_page.xml">
-      <provider selected="true" editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="414" max-vertical-offset="1230">
-          <caret line="76" column="13" selection-start-line="76" selection-start-column="13" selection-end-line="76" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/make_direct_project_order_page.xml">
-      <provider selected="true" editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="459" max-vertical-offset="1275">
-          <caret line="79" column="13" selection-start-line="79" selection-start-column="13" selection-end-line="79" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/res/layout/make_order_page.xml">
       <provider selected="true" editor-type-id="android-designer">
         <state />
       </provider>
       <provider editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="600">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/make_project_order_page.xml">
-      <provider selected="true" editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1455">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
@@ -1567,6 +1545,50 @@
       <provider editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="690">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/make_consignment_order_page.xml">
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1425">
+          <caret line="51" column="17" selection-start-line="51" selection-start-column="17" selection-end-line="51" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/make_direct_order_page.xml">
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="414" max-vertical-offset="1230">
+          <caret line="76" column="13" selection-start-line="76" selection-start-column="13" selection-end-line="76" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/make_direct_project_order_page.xml">
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="459" max-vertical-offset="1275">
+          <caret line="79" column="13" selection-start-line="79" selection-start-column="13" selection-end-line="79" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/make_project_order_page.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.1552567" vertical-offset="0" max-vertical-offset="1350">
+          <caret line="63" column="38" selection-start-line="63" selection-start-column="38" selection-end-line="63" selection-end-column="38" />
           <folding />
         </state>
       </provider>
