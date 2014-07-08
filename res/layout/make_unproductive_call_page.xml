@@ -3,39 +3,34 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
+              android:layout_height="match_parent" android:padding="5dp">
 
-    <LinearLayout
-            android:orientation="vertical"
+    <TextView
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent" android:weightSum="1" android:layout_margin="5dp">
-        <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Outlet Name"
-                android:layout_margin="5dp" android:textSize="25dp"/>
-        <AutoCompleteTextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/unProductiveCallOutletAuto" android:layout_margin="5dp" android:textSize="25dp"/>
-        <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Reason"
-                android:layout_margin="5dp" android:textSize="25dp"/>
-        <EditText
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textMultiLine"
-                android:ems="10"
-                android:id="@+id/txtMakeUnProductiveCallReason" android:layout_margin="5dp"
-                android:textSize="25dp"/>
-        <Button
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="Submit"
-                android:id="@+id/btnUnProductiveCallSubmit" android:layout_margin="5dp" android:textSize="25dp"/>
-    </LinearLayout>
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Outlet Name"
+            android:textSize="25dp"/>
+    <AutoCompleteTextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/unProductiveCallOutletAuto" android:textSize="25dp"/>
+    <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Reason"
+            android:textSize="25dp"/>
+    <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textMultiLine"
+            android:ems="10"
+            android:id="@+id/txtMakeUnProductiveCallReason"
+            android:textSize="25dp"/>
+    <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Submit"
+            android:id="@+id/btnUnProductiveCallSubmit" android:textSize="25dp"/>
 </LinearLayout>

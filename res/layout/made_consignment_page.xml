@@ -3,22 +3,17 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
+              android:layout_height="match_parent" android:padding="5dp">
 
-    <LinearLayout
-            android:orientation="vertical"
+    <TextView
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent" android:layout_weight="100" android:layout_margin="5dp">
-        <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Consignment Sales Orders"
-                android:layout_gravity="center_horizontal" android:textSize="30dp"
-                android:gravity="center_horizontal" android:layout_margin="5dp"/>
-        <ListView android:layout_width="match_parent" android:layout_height="match_parent" android:layout_margin="5dp"
-                  android:choiceMode="singleChoice" android:id="@+id/consignmentOrderListView">
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Consignment Sales Orders"
+            android:layout_gravity="center_horizontal" android:textSize="30dp"
+            android:gravity="center_horizontal"/>
+    <ListView android:layout_width="match_parent" android:layout_height="match_parent"
+              android:choiceMode="singleChoice" android:id="@+id/consignmentOrderListView">
 
-        </ListView>
-    </LinearLayout>
+    </ListView>
 </LinearLayout>

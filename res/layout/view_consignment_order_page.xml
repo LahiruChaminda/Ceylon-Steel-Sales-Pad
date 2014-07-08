@@ -9,7 +9,6 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Consignment Sales Order"
-            android:layout_margin="5dp"
             android:textSize="30dp"
             android:focusableInTouchMode="true"
             android:gravity="center_horizontal"/>
@@ -25,13 +24,11 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:layout_weight="70"
                 android:text="Outlet"
-                android:layout_margin="5dp"
                 android:textSize="25dp"/>
         <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/txtViewConsignmentOutletName"
-                android:layout_margin="5dp"
                 android:layout_weight="30"
                 android:textSize="25dp"/>
     </LinearLayout>
@@ -45,13 +42,11 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="Distributor"
-                android:layout_margin="5dp"
                 android:textSize="25dp" android:layout_weight="70"/>
         <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/txtViewConsignmentDistributorName"
-                android:layout_margin="5dp"
                 android:textSize="25dp" android:layout_weight="30"/>
     </LinearLayout>
     <LinearLayout
@@ -64,13 +59,11 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="Vehicle"
-                android:layout_margin="5dp"
                 android:textSize="25dp" android:layout_weight="70"/>
         <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/txtViewConsignmentVehicleNo"
-                android:layout_margin="5dp"
                 android:textSize="25dp" android:layout_weight="30"/>
     </LinearLayout>
     <LinearLayout
@@ -83,13 +76,11 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="Driver"
-                android:layout_margin="5dp"
                 android:textSize="25dp" android:layout_weight="70"/>
         <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/txtViewConsignmentDriverName"
-                android:layout_margin="5dp"
                 android:textSize="25dp" android:layout_weight="30"/>
     </LinearLayout>
     <LinearLayout
@@ -102,12 +93,11 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="Driver NIC"
-                android:layout_margin="5dp"
                 android:textSize="25dp" android:layout_weight="70"/>
         <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/txtViewConsignmentDriverNIC" android:layout_margin="5dp" android:textSize="25dp"
+                android:id="@+id/txtViewConsignmentDriverNIC" android:textSize="25dp"
                 android:layout_weight="30"/>
     </LinearLayout>
     <LinearLayout
@@ -121,12 +111,12 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="70"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Delivery Date" android:layout_margin="5dp" android:textSize="25dp"/>
+                android:text="Delivery Date" android:textSize="25dp"/>
         <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="30"
-                android:id="@+id/txtViewConsignmentDeliveryDate" android:layout_margin="5dp"
+                android:id="@+id/txtViewConsignmentDeliveryDate"
                 android:textSize="25dp"/>
     </LinearLayout>
     <LinearLayout
@@ -138,12 +128,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Remarks" android:layout_margin="5dp" android:textSize="25dp"
+                android:text="Remarks" android:textSize="25dp"
                 android:layout_weight="70"/>
         <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/txtViewConsignmentRemarks" android:layout_margin="5dp" android:textSize="25dp"
+                android:id="@+id/txtViewConsignmentRemarks" android:textSize="25dp"
                 android:layout_weight="30"/>
     </LinearLayout>
     <LinearLayout
@@ -157,7 +147,6 @@
                 android:text="Ordered Items"
                 android:textColor="@android:color/white"
                 android:background="#4F82B4"
-                android:layout_margin="5dp"
                 android:textSize="25dp" android:layout_weight="30"
                 android:gravity="center"/>
     </LinearLayout>
@@ -167,15 +156,12 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:clickable="false"
-            android:layout_margin="5dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp">
+            >
     </ListView>
     <Button
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="Sync"
-            android:layout_margin="5dp"
             android:layout_alignParentBottom="true"
             android:textSize="25dp"
             android:id="@+id/btnConsignmentSync"

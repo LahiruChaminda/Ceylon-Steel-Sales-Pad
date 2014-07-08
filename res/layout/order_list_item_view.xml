@@ -3,24 +3,19 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
+              android:layout_height="match_parent" android:padding="5dp">
 
-    <LinearLayout
-            android:orientation="vertical"
+    <TextView
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content">
-        <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:textSize="25dp"
-                android:text="Order Receiver"
-                android:id="@+id/txtOrderOwner"/>
-        <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="Date Time"
-                android:textSize="20dp"
-                android:gravity="right"
-                android:id="@+id/txtDateTime" android:layout_gravity="right"/>
-    </LinearLayout>
+            android:layout_height="wrap_content"
+            android:text="Date Time"
+            android:textSize="20dp"
+            android:gravity="right"
+            android:id="@+id/txtDateTime" android:layout_gravity="right"/>
+    <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textSize="25dp"
+            android:text="Order Receiver"
+            android:id="@+id/txtOrderOwner"/>
 </LinearLayout>
