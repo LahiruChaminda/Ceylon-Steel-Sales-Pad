@@ -152,7 +152,7 @@ public class OutletController extends AbstractController {
 	public static boolean saveInvoicePayments(ArrayList<Outlet> outlets, Context context) {
 		SQLiteDatabaseHelper databaseHelper = SQLiteDatabaseHelper.getDatabaseInstance(context);
 		SQLiteDatabase database = databaseHelper.getWritableDatabase();
-		String sql = "insert into tbl_payment(salesOrderId, paidValue, bank, paidDate, paymentMethod, chequeNo, status) values(?,?,?,?,?,?,?)";
+		String sql = "insert into tbl_payment(salesOrderId, paidValue, bank, paidDate, paymentMethod, chequeNo, realizationDate, status) values(?,?,?,?,?,?,?,?)";
 		SQLiteStatement paymentsInsertQuery = database.compileStatement(sql);
 		try {
 			database.beginTransaction();
@@ -167,6 +167,7 @@ public class OutletController extends AbstractController {
 								payment.getPaidDate(),
 								payment.getPaymentMethod(),
 								(payment.getChequeNo() == null) ? "" : payment.getChequeNo(),
+								(payment.getRealizationDate() == null) ? "" : payment.getRealizationDate(),
 								Integer.toString(0)
 							});
 							paymentsInsertQuery.executeInsert();
@@ -200,7 +201,7 @@ public class OutletController extends AbstractController {
 				try {
 					SQLiteDatabaseHelper databaseInstance = SQLiteDatabaseHelper.getDatabaseInstance(context);
 					SQLiteDatabase database = databaseInstance.getWritableDatabase();
-					Cursor paymentCursor = database.rawQuery("select paidValue, paidDate, paymentMethod, chequeNo, status, bank, salesOrderId from tbl_payment where status=0", null);
+					Cursor paymentCursor = database.rawQuery("select paidValue, paidDate, paymentMethod, chequeNo, status, bank, salesOrderId, realizationDate from tbl_payment where status=0", null);
 					JSONArray paymentsJson = new JSONArray();
 
 					for (paymentCursor.moveToFirst(); !paymentCursor.isAfterLast(); paymentCursor.moveToNext()) {
@@ -208,13 +209,14 @@ public class OutletController extends AbstractController {
 						String paidDate = paymentCursor.getString(1);
 						String paymentMethod = paymentCursor.getString(2);
 						String chequeNo = paymentCursor.getString(3);
+						String realizationDate = paymentCursor.getString(7);
 						boolean status = paymentCursor.getInt(4) == 1;
 						String bank = paymentCursor.getString(5);
 						long salesOrderId = paymentCursor.getLong(6);
 						if (paymentMethod.equalsIgnoreCase(Payment.CASH_PAYMENT)) {
 							paymentsJson.put(new Payment(salesOrderId, paidValue, paidDate, status).getPaymentAsJson());
 						} else {
-							paymentsJson.put(new Payment(salesOrderId, paidValue, paidDate, bank, chequeNo, status).getPaymentAsJson());
+							paymentsJson.put(new Payment(salesOrderId, paidValue, paidDate, bank, chequeNo, realizationDate, status).getPaymentAsJson());
 						}
 					}
 					paymentCursor.close();
@@ -268,18 +270,19 @@ public class OutletController extends AbstractController {
 			String date = invoiceCursor.getString(1);
 			String distributorCode = invoiceCursor.getString(2);
 			double pendingAmount = invoiceCursor.getDouble(3);
-			Cursor paymentCursor = writableDatabase.rawQuery("select paidValue, paidDate, paymentMethod, chequeNo, status, bank from tbl_payment where salesOrderId=?", new String[]{Long.toString(salesOrderId)});
+			Cursor paymentCursor = writableDatabase.rawQuery("select paidValue, paidDate, paymentMethod, chequeNo, status, bank, realizationDate from tbl_payment where salesOrderId=?", new String[]{Long.toString(salesOrderId)});
 			for (paymentCursor.moveToFirst(); !paymentCursor.isAfterLast(); paymentCursor.moveToNext()) {
 				double paidValue = paymentCursor.getDouble(0);
 				String paidDate = paymentCursor.getString(1);
 				String paymentMethod = paymentCursor.getString(2);
 				String chequeNo = paymentCursor.getString(3);
+				String realizationDate = paymentCursor.getString(6);
 				boolean status = paymentCursor.getInt(4) == 1;
 				String bank = paymentCursor.getString(5);
 				if (paymentMethod.equalsIgnoreCase(Payment.CASH_PAYMENT)) {
 					payments.add(new Payment(salesOrderId, paidValue, paidDate, status));
 				} else {
-					payments.add(new Payment(salesOrderId, paidValue, paidDate, bank, chequeNo, status));
+					payments.add(new Payment(salesOrderId, paidValue, paidDate, bank, chequeNo, realizationDate, status));
 				}
 			}
 			paymentCursor.close();

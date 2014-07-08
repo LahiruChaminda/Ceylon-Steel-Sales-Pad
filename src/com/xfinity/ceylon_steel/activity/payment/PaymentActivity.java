@@ -218,11 +218,14 @@ public class PaymentActivity extends Activity {
 						Button btnOk = (Button) dialog.findViewById(R.id.btnOk);
 						final EditText inputAmount = (EditText) dialog.findViewById(R.id.inputAmount);
 						final EditText inputChequeNo = (EditText) dialog.findViewById(R.id.inputChequeNo);
-
+						final EditText inputYear = (EditText) dialog.findViewById(R.id.inputYear);
+						final EditText inputMonth = (EditText) dialog.findViewById(R.id.inputMonth);
+						final EditText inputDate = (EditText) dialog.findViewById(R.id.inputDate);
+						final String realizationDate = inputYear.getText().toString() + "-" + inputMonth.getText().toString() + "-" + inputDate.getText().toString();
 						btnOk.setOnClickListener(new View.OnClickListener() {
 							@Override
 							public void onClick(View view) {
-								Payment payment = new Payment(invoice.getSalesOrderId(), Double.parseDouble(inputAmount.getText().toString()), new SimpleDateFormat("yyyy-MM-dd").format(new Date()), bankCombo.getSelectedItem().toString(), inputChequeNo.getText().toString(), false);
+								Payment payment = new Payment(invoice.getSalesOrderId(), Double.parseDouble(inputAmount.getText().toString()), new SimpleDateFormat("yyyy-MM-dd").format(new Date()), bankCombo.getSelectedItem().toString(), inputChequeNo.getText().toString(), realizationDate, false);
 								ArrayList<Payment> newPayments;
 								if ((newPayments = invoice.getNewPayments()) == null) {
 									newPayments = new ArrayList<Payment>();

@@ -97,5 +97,6 @@ CREATE TABLE tbl_payment (
   paidDate      DATE NOT NULL,
   paymentMethod TEXT DEFAULT '',
   chequeNo      TEXT,
+  realizationDate TEXT DEFAULT '',
   status        INT DEFAULT 0
 );

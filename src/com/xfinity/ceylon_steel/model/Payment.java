@@ -26,6 +26,7 @@ public class Payment implements Serializable {
 	private String paymentMethod;
 	private String bank;
 	private String chequeNo;
+	private String realizationDate;
 	private boolean synced;
 
 
@@ -37,13 +38,14 @@ public class Payment implements Serializable {
 		this.synced = synced;
 	}
 
-	public Payment(long salesOrderId, double paidValue, String paidDate, String bank, String chequeNo, boolean synced) {
+	public Payment(long salesOrderId, double paidValue, String paidDate, String bank, String chequeNo, String realizationDate, boolean synced) {
 		this.salesOrderId = salesOrderId;
 		this.paidValue = paidValue;
 		this.paidDate = paidDate;
 		this.paymentMethod = CHEQUE_PAYMENT;
 		this.chequeNo = chequeNo;
 		this.bank = bank;
+		this.realizationDate = realizationDate;
 		this.synced = synced;
 	}
 
@@ -87,6 +89,14 @@ public class Payment implements Serializable {
 		this.salesOrderId = salesOrderId;
 	}
 
+	public String getRealizationDate() {
+		return realizationDate;
+	}
+
+	public void setRealizationDate(String realizationDate) {
+		this.realizationDate = realizationDate;
+	}
+
 	public boolean isSynced() {
 		return synced;
 	}
@@ -111,6 +121,7 @@ public class Payment implements Serializable {
 		jsonParams.put("paymentMethod", paymentMethod);
 		jsonParams.put("bank", (bank == null) ? "" : bank);
 		jsonParams.put("chequeNo", (chequeNo == null) ? "" : chequeNo);
+		jsonParams.put("realizationDate", (realizationDate == null) ? "" : realizationDate);
 		return new JSONObject(jsonParams);
 	}
 }
