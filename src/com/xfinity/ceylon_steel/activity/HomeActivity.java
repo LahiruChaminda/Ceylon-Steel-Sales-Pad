@@ -15,6 +15,7 @@ import android.widget.Button;
 import com.xfinity.ceylon_steel.R;
 import com.xfinity.ceylon_steel.activity.attendance.AttendanceActivity;
 import com.xfinity.ceylon_steel.activity.make_sales_order.MakeSalesOrderActivity;
+import com.xfinity.ceylon_steel.activity.payment.DailyReportActivity;
 import com.xfinity.ceylon_steel.activity.payment.PaymentActivity;
 import com.xfinity.ceylon_steel.activity.unproductive_call.UnProductiveCallActivity;
 import com.xfinity.ceylon_steel.activity.view_sales_order.ViewSalesOrderActivity;
@@ -34,6 +35,7 @@ public class HomeActivity extends Activity {
 	private Button btnAttendence;
 	private Button btnUnProductiveCall;
 	private Button btnPayment;
+	private Button btnPendingInvoices;
 	private Button btnReloadData;
 	private Button btnLogout;
 
@@ -64,6 +66,7 @@ public class HomeActivity extends Activity {
 		btnReloadData = (Button) findViewById(R.id.btnReloadData);
 		btnLogout = (Button) findViewById(R.id.btnLogout);
 		btnPayment = (Button) findViewById(R.id.btnPayment);
+		btnPendingInvoices = (Button) findViewById(R.id.btnPendingInvoices);
 
 		btnMakeSalesOrder.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View view) {
@@ -95,6 +98,11 @@ public class HomeActivity extends Activity {
 				btnPaymentClicked(view);
 			}
 		});
+		btnPendingInvoices.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View view) {
+				btnPendingInvoicesClicked(view);
+			}
+		});
 		btnLogout.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View view) {
 				btnLogoutClicked(view);
@@ -103,7 +111,11 @@ public class HomeActivity extends Activity {
 	}
 	// </editor-fold>
 
-
+	private void btnPendingInvoicesClicked(View view) {
+		Intent dailyReportActivity = new Intent(this, DailyReportActivity.class);
+		startActivity(dailyReportActivity);
+		finish();
+	}
 	private void btnPaymentClicked(View view) {
 		Intent paymentActivity = new Intent(this, PaymentActivity.class);
 		startActivity(paymentActivity);

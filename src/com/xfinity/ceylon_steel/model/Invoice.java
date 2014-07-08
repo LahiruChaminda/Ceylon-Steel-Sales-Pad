@@ -20,22 +20,28 @@ public class Invoice implements Serializable {
 	private long salesOrderId;
 	private ArrayList<Payment> payments;
 	private ArrayList<Payment> newPayments;
+	private String outletName;
+	private String deliveryDate;
 
-	public Invoice(String date, String distributorCode, double pendingAmount, long salesOrderId, ArrayList<Payment> payments) {
+	public Invoice(String date, String distributorCode, double pendingAmount, long salesOrderId, ArrayList<Payment> payments, String outletName, String deliveryDate) {
 		this.date = date;
 		this.distributorCode = distributorCode;
 		this.pendingAmount = pendingAmount;
 		this.salesOrderId = salesOrderId;
 		this.payments = payments;
+		this.outletName = outletName;
+		this.deliveryDate = deliveryDate;
 	}
 
-	public Invoice(String date, String distributorCode, double pendingAmount, long salesOrderId, ArrayList<Payment> payments, ArrayList<Payment> newPayments) {
+	public Invoice(String date, String distributorCode, double pendingAmount, long salesOrderId, ArrayList<Payment> payments, ArrayList<Payment> newPayments, String outletName, String deliveryDate) {
 		this.date = date;
 		this.distributorCode = distributorCode;
 		this.pendingAmount = pendingAmount;
 		this.salesOrderId = salesOrderId;
 		this.payments = payments;
 		this.newPayments = newPayments;
+		this.outletName = outletName;
+		this.deliveryDate = deliveryDate;
 	}
 
 	public String getDate() {
@@ -84,5 +90,21 @@ public class Invoice implements Serializable {
 
 	public void setNewPayments(ArrayList<Payment> newPayments) {
 		this.newPayments = newPayments;
+	}
+
+	public String getOutletName() {
+		return outletName;
+	}
+
+	public void setOutletName(String outletName) {
+		this.outletName = outletName;
+	}
+
+	public String getDeliveryDate() {
+		return deliveryDate;
+	}
+
+	public void setDeliveryDate(String deliveryDate) {
+		this.deliveryDate = deliveryDate;
 	}
 }

@@ -89,7 +89,8 @@ CREATE TABLE tbl_invoice (
   outletId        INT            NOT NULL REFERENCES tbl_outlet(outletId) ON UPDATE CASCADE,
   date            DATE           NOT NULL,
   distributorCode TEXT           NOT NULL,
-  pendingAmount   DECIMAL(50, 2) NOT NULL
+  pendingAmount   DECIMAL(50, 2) NOT NULL,
+  deliveryDate    DATE           NOT NULL
 );
 CREATE TABLE tbl_payment (
   salesOrderId  long NOT NULL,

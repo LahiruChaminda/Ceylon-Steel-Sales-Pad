@@ -263,12 +263,14 @@ public class OutletController extends AbstractController {
 		SQLiteDatabaseHelper databaseInstance = SQLiteDatabaseHelper.getDatabaseInstance(context);
 		SQLiteDatabase writableDatabase = databaseInstance.getWritableDatabase();
 		ArrayList<Invoice> invoices = new ArrayList<Invoice>();
-		Cursor invoiceCursor = writableDatabase.rawQuery("select distinct salesOrderId, date, distributorCode, pendingAmount from tbl_invoice where outletId=?", new String[]{Integer.toString(outletId)});
+		Cursor invoiceCursor = writableDatabase.rawQuery("select distinct salesOrderId, date, distributorCode, pendingAmount, outletName, deliveryDate from tbl_invoice inner join tbl_outlet on tbl_outlet.outletId=tbl_invoice.outletId where tbl_invoice.outletId=?", new String[]{Integer.toString(outletId)});
 		for (invoiceCursor.moveToFirst(); !invoiceCursor.isAfterLast(); invoiceCursor.moveToNext()) {
 			ArrayList<Payment> payments = new ArrayList<Payment>();
 			long salesOrderId = invoiceCursor.getLong(0);
 			String date = invoiceCursor.getString(1);
 			String distributorCode = invoiceCursor.getString(2);
+			String outletName = invoiceCursor.getString(4);
+			String deliveryDate = invoiceCursor.getString(5);
 			double pendingAmount = invoiceCursor.getDouble(3);
 			Cursor paymentCursor = writableDatabase.rawQuery("select paidValue, paidDate, paymentMethod, chequeNo, status, bank, realizationDate from tbl_payment where salesOrderId=?", new String[]{Long.toString(salesOrderId)});
 			for (paymentCursor.moveToFirst(); !paymentCursor.isAfterLast(); paymentCursor.moveToNext()) {
@@ -286,7 +288,42 @@ public class OutletController extends AbstractController {
 				}
 			}
 			paymentCursor.close();
-			invoices.add(new Invoice(date, distributorCode, pendingAmount, salesOrderId, payments));
+			invoices.add(new Invoice(date, distributorCode, pendingAmount, salesOrderId, payments, outletName, deliveryDate));
+		}
+		invoiceCursor.close();
+		return invoices;
+	}
+
+	public static ArrayList<Invoice> getPendingInvoices(Context context) {
+		SQLiteDatabaseHelper databaseInstance = SQLiteDatabaseHelper.getDatabaseInstance(context);
+		SQLiteDatabase writableDatabase = databaseInstance.getWritableDatabase();
+		ArrayList<Invoice> invoices = new ArrayList<Invoice>();
+		Cursor invoiceCursor = writableDatabase.rawQuery("select distinct salesOrderId, date, distributorCode, pendingAmount, outletName, deliveryDate from tbl_invoice inner join tbl_outlet on tbl_outlet.outletId=tbl_invoice.outletId", null);
+		for (invoiceCursor.moveToFirst(); !invoiceCursor.isAfterLast(); invoiceCursor.moveToNext()) {
+			ArrayList<Payment> payments = new ArrayList<Payment>();
+			long salesOrderId = invoiceCursor.getLong(0);
+			String date = invoiceCursor.getString(1);
+			String distributorCode = invoiceCursor.getString(2);
+			String outletName = invoiceCursor.getString(4);
+			String deliveryDate = invoiceCursor.getString(5);
+			double pendingAmount = invoiceCursor.getDouble(3);
+			Cursor paymentCursor = writableDatabase.rawQuery("select paidValue, paidDate, paymentMethod, chequeNo, status, bank, realizationDate from tbl_payment where salesOrderId=?", new String[]{Long.toString(salesOrderId)});
+			for (paymentCursor.moveToFirst(); !paymentCursor.isAfterLast(); paymentCursor.moveToNext()) {
+				double paidValue = paymentCursor.getDouble(0);
+				String paidDate = paymentCursor.getString(1);
+				String paymentMethod = paymentCursor.getString(2);
+				String chequeNo = paymentCursor.getString(3);
+				String realizationDate = paymentCursor.getString(6);
+				boolean status = paymentCursor.getInt(4) == 1;
+				String bank = paymentCursor.getString(5);
+				if (paymentMethod.equalsIgnoreCase(Payment.CASH_PAYMENT)) {
+					payments.add(new Payment(salesOrderId, paidValue, paidDate, status));
+				} else {
+					payments.add(new Payment(salesOrderId, paidValue, paidDate, bank, chequeNo, realizationDate, status));
+				}
+			}
+			paymentCursor.close();
+			invoices.add(new Invoice(date, distributorCode, pendingAmount, salesOrderId, payments, outletName, deliveryDate));
 		}
 		invoiceCursor.close();
 		return invoices;
