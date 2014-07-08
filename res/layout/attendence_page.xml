@@ -3,21 +3,16 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
+              android:layout_height="match_parent" android:padding="5dp">
 
-    <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:layout_margin="5dp">
-        <Button
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="Check In"
-                android:id="@+id/btnCheckIn" android:layout_margin="5dp" android:textSize="25dp"/>
-        <Button
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="Check Out"
-                android:id="@+id/btnCheckOut" android:layout_margin="5dp" android:textSize="25dp"/>
-    </LinearLayout>
+    <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Check Out"
+            android:id="@+id/btnCheckOut" android:textSize="25dp"/>
+    <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Check In"
+            android:id="@+id/btnCheckIn" android:textSize="25dp"/>
 </LinearLayout>

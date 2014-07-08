@@ -2,107 +2,92 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
-    <LinearLayout
-            android:orientation="vertical"
+              android:layout_height="match_parent" android:padding="5dp">
+    <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            >
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Item"
+            android:textSize="25dp"/>
+    <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/viewItem" android:textSize="25dp"/>
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="100">
         <TextView
-                android:layout_width="fill_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Item"
-                android:textSize="25dp" android:layout_margin="5dp"/>
+                android:layout_weight="50"
+                android:textSize="25dp"
+                android:text="Unit Price"/>
         <TextView
-                android:layout_width="fill_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/viewItem" android:textSize="25dp" android:layout_margin="5dp"/>
-        <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_margin="5dp"
-                android:weightSum="100">
-            <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:layout_weight="50"
-                    android:textSize="25dp"
-                    android:layout_margin="5dp"
-                    android:text="Unit Price"/>
-            <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="50"
-                    android:textSize="25dp"
-                    android:layout_margin="5dp"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:id="@+id/viewItemUnitPrice"/>
-        </LinearLayout>
-        <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_margin="5dp"
-                android:weightSum="100">
-            <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
-                      android:textAppearance="?android:attr/textAppearanceLarge" android:text="Quantity"
-                      android:textSize="25dp" android:layout_margin="5dp" android:layout_weight="50"/>
-            <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/viewTxtQuantity" android:textSize="25dp" android:layout_margin="5dp"
-                    android:layout_weight="50"/>
-        </LinearLayout>
-        <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_margin="5dp"
-                android:weightSum="100">
-            <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
-                      android:textAppearance="?android:attr/textAppearanceLarge" android:text="Each Discount"
-                      android:textSize="25dp" android:layout_margin="5dp" android:layout_weight="50"/>
-            <EditText android:layout_width="match_parent" android:layout_height="wrap_content"
-                      android:id="@+id/viewTxtEachDiscount"
-                      android:textSize="25dp" android:layout_margin="5dp"
-                      android:layout_weight="50"/>
-        </LinearLayout>
-        <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_margin="5dp"
-                android:weightSum="100">
-            <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:layout_weight="50"
-                    android:textSize="25dp"
-                    android:layout_margin="5dp"
-                    android:text="Amount"/>
-            <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="50"
-                    android:textSize="25dp"
-                    android:layout_margin="5dp"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:id="@+id/viewItemAmount"/>
-        </LinearLayout>
-        <Button
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="Update And Back"
-                android:id="@+id/btnViewItemUpdate" android:layout_margin="5dp" android:textSize="25dp"/>
-        <Button
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="Back"
-                android:id="@+id/btnViewItemBack" android:layout_margin="5dp" android:textSize="25dp"/>
+                android:layout_weight="50"
+                android:textSize="25dp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:id="@+id/viewItemUnitPrice"/>
     </LinearLayout>
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="100">
+        <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                  android:textAppearance="?android:attr/textAppearanceLarge" android:text="Quantity"
+                  android:textSize="25dp" android:layout_weight="50"/>
+        <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/viewTxtQuantity" android:textSize="25dp"
+                android:layout_weight="50"/>
+    </LinearLayout>
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="100">
+        <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                  android:textAppearance="?android:attr/textAppearanceLarge" android:text="Each Discount"
+                  android:textSize="25dp" android:layout_weight="50"/>
+        <EditText android:layout_width="0dp" android:layout_height="wrap_content"
+                  android:id="@+id/viewTxtEachDiscount"
+                  android:textSize="25dp"
+                  android:layout_weight="50"/>
+    </LinearLayout>
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="100">
+        <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:layout_weight="50"
+                android:textSize="25dp"
+                android:text="Amount"/>
+        <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="50"
+                android:textSize="25dp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:id="@+id/viewItemAmount"/>
+    </LinearLayout>
+    <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Update And Back"
+            android:id="@+id/btnViewItemUpdate" android:textSize="25dp"/>
+    <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Back"
+            android:id="@+id/btnViewItemBack" android:textSize="25dp"/>
 </LinearLayout>

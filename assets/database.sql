@@ -3,6 +3,7 @@ DROP TABLE IF EXISTS tbl_category;
 DROP TABLE IF EXISTS tbl_customer;
 DROP TABLE IF EXISTS tbl_driver;
 DROP TABLE IF EXISTS tbl_distributor;
+DROP TABLE IF EXISTS tbl_unproductive_call;
 DROP TABLE IF EXISTS tbl_outlet;
 DROP TABLE IF EXISTS tbl_order_detail;
 DROP TABLE IF EXISTS tbl_order;

@@ -4,8 +4,8 @@
               android:orientation="vertical"
               android:weightSum="2"
               android:layout_width="match_parent"
-              android:layout_height="wrap_content" android:padding="3dp" android:paddingRight="5dp" android:paddingLeft="50dp">
-    <LinearLayout
+              android:layout_height="wrap_content" android:padding="5dp">
+<LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="0dp" android:layout_weight="1" android:weightSum="3">

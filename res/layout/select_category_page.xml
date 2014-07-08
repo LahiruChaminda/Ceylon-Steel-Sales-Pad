@@ -3,13 +3,13 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent" android:padding="5dp">
     <ExpandableListView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:id="@+id/categoryExpandableListView"
-            android:layout_margin="5dp"/>
+            />
 
     <Button
             android:layout_width="match_parent"
@@ -17,7 +17,6 @@
             android:text="Finish Make Bill"
             android:layout_alignParentBottom="true"
             android:id="@+id/btnFinishMakeBill"
-            android:layout_margin="5dp"
             android:textSize="25dp"/>
     <Button
             android:layout_width="match_parent"
@@ -25,7 +24,6 @@
             android:text="Sync Order"
             android:layout_alignParentBottom="true"
             android:id="@+id/btnQuickSync"
-            android:layout_margin="5dp"
             android:textSize="25dp"/>
     <Button
             android:layout_width="match_parent"
@@ -33,6 +31,5 @@
             android:text="Return To Home"
             android:layout_alignParentBottom="true"
             android:id="@+id/btnReturnToHome"
-            android:layout_margin="5dp"
             android:textSize="25dp"/>
 </LinearLayout>

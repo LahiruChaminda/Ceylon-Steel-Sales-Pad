@@ -3,7 +3,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
+              android:layout_height="match_parent" android:padding="5dp">
     <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
@@ -14,7 +14,6 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="Project Sales Order"
-                android:layout_margin="5dp"
                 android:textSize="30dp"
                 android:focusableInTouchMode="true"
                 android:gravity="center_horizontal"/>
@@ -23,21 +22,19 @@
                 android:layout_width="match_parent"
                 android:weightSum="100"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp">
-            <TextView
+                >
+        <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="70"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text="Customer"
-                    android:layout_margin="5dp"
                     android:textSize="25dp"/>
             <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="30"
                     android:id="@+id/txtViewProjectCustomerName"
-                    android:layout_margin="5dp"
                     android:textSize="25dp"/>
         </LinearLayout>
         <LinearLayout
@@ -45,21 +42,19 @@
                 android:layout_width="match_parent"
                 android:weightSum="100"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp">
-            <TextView
+                >
+        <TextView
                     android:layout_width="match_parent"
                     android:layout_weight="70"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text="Distributor"
-                    android:layout_margin="5dp"
                     android:textSize="25dp"/>
             <TextView
                     android:layout_width="match_parent"
                     android:layout_weight="30"
                     android:layout_height="wrap_content"
                     android:id="@+id/txtViewProjectDistributorName"
-                    android:layout_margin="5dp"
                     android:textSize="25dp"/>
         </LinearLayout>
         <LinearLayout
@@ -67,21 +62,19 @@
                 android:weightSum="100"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp">
-            <TextView
+                >
+        <TextView
                     android:layout_width="match_parent"
                     android:layout_weight="70"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text="Vehicle"
-                    android:layout_margin="5dp"
                     android:textSize="25dp"/>
             <TextView
                     android:layout_width="match_parent"
                     android:layout_weight="30"
                     android:layout_height="wrap_content"
                     android:id="@+id/txtViewProjectVehicleNo"
-                    android:layout_margin="5dp"
                     android:textSize="25dp"/>
         </LinearLayout>
         <LinearLayout
@@ -89,20 +82,18 @@
                 android:weightSum="100"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp">
-            <TextView
+                >
+        <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text="Driver"
                     android:layout_weight="70"
-                    android:layout_margin="5dp"
                     android:textSize="25dp"/>
             <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/txtViewProjectDriverName"
-                    android:layout_margin="5dp"
                     android:layout_weight="30"
                     android:textSize="25dp"/>
         </LinearLayout>
@@ -111,70 +102,68 @@
                 android:weightSum="100"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp">
+                >
             <TextView
                     android:layout_width="match_parent"
                     android:layout_weight="70"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text="Driver NIC"
-                    android:layout_margin="5dp"
                     android:textSize="25dp"/>
             <TextView
                     android:layout_width="match_parent"
                     android:layout_weight="30"
                     android:layout_height="wrap_content"
-                    android:id="@+id/txtViewProjectDriverNIC" android:layout_margin="5dp" android:textSize="25dp"/>
+                    android:id="@+id/txtViewProjectDriverNIC" android:textSize="25dp"/>
         </LinearLayout>
         <LinearLayout
                 android:orientation="horizontal"
                 android:weightSum="100"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp">
+                >
             <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="70"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:text="Delivery Date" android:layout_margin="5dp" android:textSize="25dp"/>
+                    android:text="Delivery Date" android:textSize="25dp"/>
             <TextView
                     android:layout_width="match_parent"
                     android:layout_weight="30"
                     android:layout_height="wrap_content"
-                    android:id="@+id/txtViewProjectDeliveryDate" android:layout_margin="5dp" android:textSize="25dp"/>
+                    android:id="@+id/txtViewProjectDeliveryDate" android:textSize="25dp"/>
         </LinearLayout>
         <LinearLayout
                 android:orientation="horizontal"
                 android:weightSum="100"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp">
+                >
             <TextView
                     android:layout_width="match_parent"
                     android:layout_weight="70"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:text="Remarks" android:layout_margin="5dp" android:textSize="25dp"/>
+                    android:text="Remarks" android:textSize="25dp"/>
             <TextView
                     android:layout_width="match_parent"
                     android:layout_weight="30"
                     android:layout_height="wrap_content"
-                    android:id="@+id/txtViewProjectRemarks" android:layout_margin="5dp" android:textSize="25dp"/>
+                    android:id="@+id/txtViewProjectRemarks" android:textSize="25dp"/>
         </LinearLayout>
         <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp">
-            <TextView
+                >
+        <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@android:color/white"
                     android:background="#4F82B4"
                     android:text="Ordered Items"
                     android:gravity="center"
-                    android:layout_margin="5dp"
                     android:textSize="25dp" android:layout_weight="30"/>
         </LinearLayout>
         <ListView
@@ -184,13 +173,12 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:layout_margin="5dp">
+                >
         </ListView>
         <Button
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="Sync"
-                android:layout_margin="5dp"
                 android:textSize="25dp"
                 android:id="@+id/btnProjectSync"
                 android:layout_gravity="center_horizontal"/>
