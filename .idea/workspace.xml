@@ -209,19 +209,14 @@
     </layouts>
   </component>
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="RealizationDate" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="app: com.xfinity.ceylon_steel" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="705bd5aa-854f-4790-a9d6-20c6e04e4b10" name="Default" comment="adding daily invoice report">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AndroidManifest.xml" afterPath="$PROJECT_DIR$/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/xfinity/ceylon_steel/activity/payment/DailyReportActivity.java" afterPath="$PROJECT_DIR$/src/com/xfinity/ceylon_steel/activity/payment/DailyReportActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/xfinity/ceylon_steel/controller/OutletController.java" afterPath="$PROJECT_DIR$/src/com/xfinity/ceylon_steel/controller/OutletController.java" />
+    <list default="true" id="705bd5aa-854f-4790-a9d6-20c6e04e4b10" name="Default" comment="added daily invoice report">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/xfinity/ceylon_steel/activity/payment/PaymentActivity.java" afterPath="$PROJECT_DIR$/src/com/xfinity/ceylon_steel/activity/payment/PaymentActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/cheque_data_input_dialog_page.xml" afterPath="$PROJECT_DIR$/res/layout/cheque_data_input_dialog_page.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/make_direct_order_page.xml" afterPath="$PROJECT_DIR$/res/layout/make_direct_order_page.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/make_direct_project_order_page.xml" afterPath="$PROJECT_DIR$/res/layout/make_direct_project_order_page.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/make_project_order_page.xml" afterPath="$PROJECT_DIR$/res/layout/make_project_order_page.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/cash_payment_details_page.xml" afterPath="$PROJECT_DIR$/res/layout/cash_payment_details_page.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/cheque_payment_detail_page.xml" afterPath="$PROJECT_DIR$/res/layout/cheque_payment_detail_page.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/daily_report.xml" afterPath="$PROJECT_DIR$/res/layout/daily_report.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="ceylon_steel.iws" />
@@ -289,8 +284,8 @@
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
     </breakpoint_any>
-    <ui_properties converted="true" />
     <breakpoint_rules converted="true" />
+    <ui_properties converted="true" />
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="ExportToHTMLSettings">
@@ -333,14 +328,12 @@
         <option value="$PROJECT_DIR$/res/values/style.xml" />
         <option value="$PROJECT_DIR$/res/layout/attendence_page.xml" />
         <option value="$PROJECT_DIR$/res/layout/cash_data_input_dialog_page.xml" />
-        <option value="$PROJECT_DIR$/res/layout/cash_payment_details_page.xml" />
         <option value="$PROJECT_DIR$/res/layout/view_unproductive_call_page.xml" />
         <option value="$PROJECT_DIR$/res/layout/view_order_page.xml" />
         <option value="$PROJECT_DIR$/res/layout/unproductive_call_page.xml" />
         <option value="$PROJECT_DIR$/res/layout/select_category_page.xml" />
         <option value="$PROJECT_DIR$/res/layout/view_direct_order_page.xml" />
         <option value="$PROJECT_DIR$/res/layout/view_item_detail_page.xml" />
-        <option value="$PROJECT_DIR$/res/layout/cheque_payment_detail_page.xml" />
         <option value="$PROJECT_DIR$/res/layout/invoice_payment_details_page.xml" />
         <option value="$PROJECT_DIR$/res/layout/enter_item_detail_page.xml" />
         <option value="$PROJECT_DIR$/res/layout/made_unproductive_call_page.xml" />
@@ -356,21 +349,23 @@
         <option value="$PROJECT_DIR$/res/layout/view_consignment_order_page.xml" />
         <option value="$PROJECT_DIR$/res/layout/view_project_order_page.xml" />
         <option value="$PROJECT_DIR$/res/layout/pending_invoices_page.xml" />
-        <option value="$PROJECT_DIR$/res/layout/daily_report.xml" />
-        <option value="$PROJECT_DIR$/res/layout/daily_report_item.xml" />
         <option value="$PROJECT_DIR$/assets/database.sql" />
         <option value="$PROJECT_DIR$/res/layout/make_consignment_order_page.xml" />
         <option value="$PROJECT_DIR$/src/com/xfinity/ceylon_steel/model/Invoice.java" />
         <option value="$PROJECT_DIR$/res/layout/home_page.xml" />
         <option value="$PROJECT_DIR$/src/com/xfinity/ceylon_steel/activity/HomeActivity.java" />
-        <option value="$PROJECT_DIR$/src/com/xfinity/ceylon_steel/activity/payment/DailyReportActivity.java" />
         <option value="$PROJECT_DIR$/res/layout/make_project_order_page.xml" />
         <option value="$PROJECT_DIR$/res/layout/make_direct_project_order_page.xml" />
         <option value="$PROJECT_DIR$/res/layout/make_direct_order_page.xml" />
         <option value="$PROJECT_DIR$/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/src/com/xfinity/ceylon_steel/controller/OutletController.java" />
-        <option value="$PROJECT_DIR$/src/com/xfinity/ceylon_steel/activity/payment/PaymentActivity.java" />
         <option value="$PROJECT_DIR$/res/layout/cheque_data_input_dialog_page.xml" />
+        <option value="$PROJECT_DIR$/res/layout/daily_report.xml" />
+        <option value="$PROJECT_DIR$/res/layout/daily_report_item.xml" />
+        <option value="$PROJECT_DIR$/src/com/xfinity/ceylon_steel/activity/payment/DailyReportActivity.java" />
+        <option value="$PROJECT_DIR$/res/layout/cash_payment_details_page.xml" />
+        <option value="$PROJECT_DIR$/src/com/xfinity/ceylon_steel/activity/payment/PaymentActivity.java" />
+        <option value="$PROJECT_DIR$/res/layout/cheque_payment_detail_page.xml" />
       </list>
     </option>
   </component>
@@ -434,8 +429,8 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
       <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -702,6 +697,12 @@
       <envs />
       <method />
     </configuration>
+    <configuration default="true" type="com.intellij.persistence.run.ConsoleRunConfigurationType" factoryName="Query Language Console">
+      <option name="VM_PARAMETERS" value="" />
+      <option name="USER_CFG_CLASS" />
+      <option name="CONTEXT_PROVIDER" />
+      <method />
+    </configuration>
     <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android Application">
       <module name="" />
       <option name="ACTIVITY_CLASS" value="" />
@@ -720,12 +721,6 @@
       <option name="CLEAR_LOGCAT" value="false" />
       <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
       <option name="FILTER_LOGCAT_AUTOMATICALLY" value="true" />
-      <method />
-    </configuration>
-    <configuration default="true" type="com.intellij.persistence.run.ConsoleRunConfigurationType" factoryName="Query Language Console">
-      <option name="VM_PARAMETERS" value="" />
-      <option name="USER_CFG_CLASS" />
-      <option name="CONTEXT_PROVIDER" />
       <method />
     </configuration>
     <configuration default="false" name="BlueStacks" type="AndroidRunConfigurationType" factoryName="Android Application">
@@ -846,7 +841,10 @@
       <workItem from="1404807772388" duration="6101000" />
       <workItem from="1404815380466" duration="668000" />
       <workItem from="1404816677834" duration="3041000" />
-      <workItem from="1404873952777" duration="5522000" />
+      <workItem from="1404873952777" duration="5826000" />
+      <workItem from="1404882067085" duration="564000" />
+      <workItem from="1404885317220" duration="6159000" />
+      <workItem from="1404891649051" duration="1253000" />
     </task>
     <task id="LOCAL-00001" summary="Reformat the Code using Intellij Idea">
       <created>1401982163969</created>
@@ -920,11 +918,15 @@
       <created>1404819758792</created>
       <updated>1404819758792</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="added daily invoice report">
+      <created>1404879618603</created>
+      <updated>1404879618603</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="121854000" />
+    <option name="totallyTimeSpent" value="130134000" />
   </component>
   <component name="TodoView" selected-index="0">
     <todo-panel id="selected-file">
@@ -953,7 +955,6 @@
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.23504274" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32833335" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.41514042" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32943144" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32930514" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -965,7 +966,7 @@
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32930514" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5416667" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.26352128" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.26237053" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Android" active="false" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.49482164" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32943144" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24908425" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -980,6 +981,7 @@
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.41514042" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32666665" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
@@ -1013,7 +1015,8 @@
     <MESSAGE value="change layouts&#10;update database" />
     <MESSAGE value="change layouts" />
     <MESSAGE value="adding daily invoice report" />
-    <option name="LAST_COMMIT_MESSAGE" value="adding daily invoice report" />
+    <MESSAGE value="added daily invoice report" />
+    <option name="LAST_COMMIT_MESSAGE" value="added daily invoice report" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
@@ -1060,16 +1063,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="534">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-      <provider editor-type-id="MarkdownPreviewEditor">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="525">
@@ -1104,30 +1097,10 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/cash_payment_details_page.xml">
-      <provider editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="390" max-vertical-offset="510">
-          <caret line="26" column="34" selection-start-line="26" selection-start-column="34" selection-end-line="26" selection-end-column="34" />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/res/layout/category_list.xml">
       <provider editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="270">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/cheque_payment_detail_page.xml">
-      <provider editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.0" vertical-offset="465" max-vertical-offset="600">
-          <caret line="31" column="34" selection-start-line="31" selection-start-column="34" selection-end-line="31" selection-end-column="34" />
         </state>
       </provider>
       <provider selected="true" editor-type-id="android-designer">
@@ -1368,18 +1341,6 @@
       <provider editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="795">
           <caret line="26" column="4" selection-start-line="26" selection-start-column="4" selection-end-line="26" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/daily_report.xml">
-      <provider editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="255">
-          <caret line="11" column="15" selection-start-line="11" selection-start-column="15" selection-end-line="11" selection-end-column="15" />
-          <folding />
         </state>
       </provider>
       <provider selected="true" editor-type-id="android-designer">
@@ -1390,34 +1351,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2100">
           <caret line="89" column="40" selection-start-line="89" selection-start-column="40" selection-end-line="89" selection-end-column="40" />
-          <folding />
         </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/daily_report_item.xml">
-      <provider editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="645">
-          <caret line="32" column="38" selection-start-line="32" selection-start-column="38" selection-end-line="32" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/xfinity/ceylon_steel/model/Invoice.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1245">
           <caret line="94" column="35" selection-start-line="94" selection-start-column="35" selection-end-line="94" selection-end-column="35" />
-          <folding>
-            <element signature="e#2559#2560#0" expanded="false" />
-            <element signature="e#2608#2609#0" expanded="false" />
-            <element signature="e#2643#2644#0" expanded="false" />
-            <element signature="e#2679#2680#0" expanded="false" />
-            <element signature="e#2705#2706#0" expanded="false" />
-            <element signature="e#2758#2759#0" expanded="false" />
-            <element signature="e#2797#2798#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1439,7 +1379,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.6139706" vertical-offset="84" max-vertical-offset="900">
           <caret line="39" column="46" selection-start-line="39" selection-start-column="46" selection-end-line="39" selection-end-column="46" />
-          <folding />
         </state>
       </provider>
       <provider editor-type-id="android-designer">
@@ -1450,15 +1389,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="1.621547" vertical-offset="793" max-vertical-offset="1635">
           <caret line="92" column="14" selection-start-line="92" selection-start-column="2" selection-end-line="92" selection-end-column="14" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/xfinity/ceylon_steel/activity/payment/DailyReportActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.34085512" vertical-offset="373" max-vertical-offset="1215">
-          <caret line="74" column="102" selection-start-line="74" selection-start-column="102" selection-end-line="74" selection-end-column="102" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1466,7 +1396,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.9191176" vertical-offset="225" max-vertical-offset="1335">
           <caret line="65" column="16" selection-start-line="65" selection-start-column="16" selection-end-line="65" selection-end-column="49" />
-          <folding />
         </state>
       </provider>
       <provider editor-type-id="android-designer">
@@ -1477,7 +1406,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.52205884" vertical-offset="459" max-vertical-offset="1290">
           <caret line="59" column="49" selection-start-line="59" selection-start-column="49" selection-end-line="59" selection-end-column="49" />
-          <folding />
         </state>
       </provider>
       <provider editor-type-id="android-designer">
@@ -1488,7 +1416,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.54044116" vertical-offset="579" max-vertical-offset="1425">
           <caret line="68" column="52" selection-start-line="68" selection-start-column="52" selection-end-line="68" selection-end-column="52" />
-          <folding />
         </state>
       </provider>
       <provider editor-type-id="android-designer">
@@ -1499,7 +1426,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-16.961538" vertical-offset="414" max-vertical-offset="1245">
           <caret line="57" column="49" selection-start-line="57" selection-start-column="49" selection-end-line="57" selection-end-column="49" />
-          <folding />
         </state>
       </provider>
       <provider editor-type-id="android-designer">
@@ -1514,29 +1440,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/xfinity/ceylon_steel/model/Payment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8574822" vertical-offset="478" max-vertical-offset="1350">
-          <caret line="123" column="39" selection-start-line="123" selection-start-column="24" selection-end-line="123" selection-end-column="39" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/xfinity/ceylon_steel/controller/OutletController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33293125" vertical-offset="1509" max-vertical-offset="4590">
-          <caret line="153" column="26" selection-start-line="153" selection-start-column="26" selection-end-line="153" selection-end-column="26" />
-          <folding>
-            <element signature="class#2299:6493" expanded="true" />
-            <element signature="class#8018:11276" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/res/layout/cheque_data_input_dialog_page.xml">
       <provider editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="150" max-vertical-offset="1455">
           <caret line="10" column="8" selection-start-line="10" selection-start-column="8" selection-end-line="10" selection-end-column="8" />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/xfinity/ceylon_steel/activity/HomeActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.1935867" vertical-offset="0" max-vertical-offset="1905">
+          <caret line="121" column="17" selection-start-line="121" selection-start-column="17" selection-end-line="121" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/daily_report_item.xml">
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="645">
+          <caret line="37" column="0" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1544,23 +1468,81 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/xfinity/ceylon_steel/activity/payment/PaymentActivity.java">
+    <entry file="file://$PROJECT_DIR$/res/layout/daily_report.xml">
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="37" max-vertical-offset="900">
+          <caret line="11" column="32" selection-start-line="11" selection-start-column="32" selection-end-line="11" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/xfinity/ceylon_steel/activity/payment/DailyReportActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6670688" vertical-offset="1727" max-vertical-offset="3750">
-          <caret line="212" column="73" selection-start-line="212" selection-start-column="73" selection-end-line="212" selection-end-column="73" />
+        <state vertical-scroll-proportion="0.8598575" vertical-offset="461" max-vertical-offset="1305">
+          <caret line="119" column="5" selection-start-line="119" selection-start-column="5" selection-end-line="119" selection-end-column="5" />
+          <folding>
+            <element signature="class#1648:3186" expanded="false" />
+            <element signature="class#ViewHolder#0;class#DailyReportActivity#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/xfinity/ceylon_steel/model/Payment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="43" max-vertical-offset="1380">
+          <caret line="91" column="18" selection-start-line="91" selection-start-column="18" selection-end-line="91" selection-end-column="18" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/xfinity/ceylon_steel/activity/HomeActivity.java">
+    <entry file="file://$PROJECT_DIR$/src/com/xfinity/ceylon_steel/activity/payment/PaymentActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.1935867" vertical-offset="0" max-vertical-offset="1905">
-          <caret line="121" column="17" selection-start-line="121" selection-start-column="17" selection-end-line="121" selection-end-column="17" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="737" max-vertical-offset="4155">
+          <caret line="242" column="54" selection-start-line="242" selection-start-column="54" selection-end-line="242" selection-end-column="54" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/cash_payment_details_page.xml">
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="480">
+          <caret line="10" column="18" selection-start-line="10" selection-start-column="18" selection-end-line="10" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/cheque_payment_detail_page.xml">
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="645">
+          <caret line="36" column="24" selection-start-line="36" selection-start-column="24" selection-end-line="36" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/xfinity/ceylon_steel/controller/OutletController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2205">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="n#!!doc;n#initialize#0;n#HomeActivity#0" expanded="true" />
-            <element signature="e#3380#3490#0" expanded="true" />
-            <element signature="e#3485#3486#0" expanded="true" />
+            <element signature="e#0#15659#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/xfinity/ceylon_steel/controller/CategoryController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.14489311" vertical-offset="733" max-vertical-offset="1935">
+          <caret line="85" column="0" selection-start-line="85" selection-start-column="0" selection-end-line="85" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>

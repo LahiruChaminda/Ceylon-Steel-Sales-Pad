@@ -7,6 +7,42 @@
         android:padding="5dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+    <LinearLayout
+            android:orientation="horizontal"
+            android:weightSum="5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Outlet Name"
+                android:textSize="25dp" android:gravity="center"/>
+        <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Distributor Code"
+                android:textSize="25dp" android:gravity="center"/>
+        <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Date of Invoice"
+                android:textSize="25dp" android:gravity="center"/>
+        <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Delivery Date"
+                android:textSize="25dp" android:gravity="center"/>
+        <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Amount"
+                android:textSize="25dp" android:gravity="center"/>
+    </LinearLayout>
     <ListView android:layout_width="match_parent" android:layout_height="match_parent" android:layout_weight="1" android:id="@+id/listInvoices"></ListView>
     <Button android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/btnReturnToHome" android:text="Back to Home"
             android:textSize="25dp"/>

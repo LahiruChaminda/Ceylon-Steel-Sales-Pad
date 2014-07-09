@@ -11,6 +11,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.*;
 import android.widget.*;
 import com.xfinity.ceylon_steel.R;
@@ -22,6 +23,8 @@ import com.xfinity.ceylon_steel.model.Invoice;
 import com.xfinity.ceylon_steel.model.Outlet;
 import com.xfinity.ceylon_steel.model.Payment;
 
+import java.text.NumberFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -39,12 +42,18 @@ public class PaymentActivity extends Activity {
 	private Button btnOk;
 	private Button btnCancel;
 	private BaseExpandableListAdapter adapter;
+	private NumberFormat currencyFormat;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.pending_invoices_page);
 		initialize();
+
+		currencyFormat = NumberFormat.getNumberInstance();
+		currencyFormat.setMinimumFractionDigits(2);
+		currencyFormat.setMaximumFractionDigits(2);
+		currencyFormat.setGroupingUsed(true);
 
 		outlets = OutletController.getOutlets(PaymentActivity.this);
 		outletAuto.setAdapter(new ArrayAdapter<Outlet>(this, android.R.layout.simple_dropdown_item_1line, outlets));
@@ -108,7 +117,7 @@ public class PaymentActivity extends Activity {
 				}
 				Invoice invoice = getGroup(groupPosition);
 				categoryViewHolder.txtInvoiceNo.setText(invoice.getDistributorCode());
-				categoryViewHolder.txtTotal.setText(Double.toString(invoice.getPendingAmount()));
+				categoryViewHolder.txtTotal.setText("Rs " + currencyFormat.format(invoice.getPendingAmount()));
 				categoryViewHolder.txtDate.setText(invoice.getDate());
 				return convertView;
 			}
@@ -128,7 +137,7 @@ public class PaymentActivity extends Activity {
 						TextView txtPaidValue = (TextView) cashPaymentDetail.findViewById(R.id.txtPaidValue);
 						TextView txtPaidDate = (TextView) cashPaymentDetail.findViewById(R.id.txtPaidDate);
 						txtPaidDate.setText(payment.getPaidDate());
-						txtPaidValue.setText(Double.toString(payment.getPaidValue()));
+						txtPaidValue.setText("Rs " + currencyFormat.format(payment.getPaidValue()));
 						cashPaymentDetail.setBackgroundColor((colorize) ? Color.parseColor("#E6E6E6") : Color.parseColor("#FFFFFF"));
 						donePaymentList.addView(cashPaymentDetail);
 					} else {
@@ -136,9 +145,13 @@ public class PaymentActivity extends Activity {
 						TextView txtPaidValue = (TextView) chequePaymentDetail.findViewById(R.id.txtPaidValue);
 						TextView txtPaidDate = (TextView) chequePaymentDetail.findViewById(R.id.txtPaidDate);
 						TextView txtChequeNo = (TextView) chequePaymentDetail.findViewById(R.id.txtChequeNo);
+						TextView txtAgingAnalysis = (TextView) chequePaymentDetail.findViewById(R.id.txtAgingAnalysis);
 						txtPaidDate.setText(payment.getPaidDate());
 						txtChequeNo.setText(payment.getChequeNo());
-						txtPaidValue.setText(Double.toString(payment.getPaidValue()));
+						txtPaidValue.setText("Rs " + currencyFormat.format(payment.getPaidValue()));
+						Log.i("txtAgingAnalysis", " view " + (txtAgingAnalysis == null));
+						Log.i("txtAgingAnalysis", " date " + (payment.getRealizationDate() == null));
+						txtAgingAnalysis.setText(calculateAging(payment.getRealizationDate()) + " day(s)");
 						chequePaymentDetail.setBackgroundColor((colorize) ? Color.parseColor("#E6E6E6") : Color.parseColor("#FFFFFF"));
 						donePaymentList.addView(chequePaymentDetail);
 					}
@@ -152,7 +165,7 @@ public class PaymentActivity extends Activity {
 							TextView txtPaidValue = (TextView) cashPaymentDetail.findViewById(R.id.txtPaidValue);
 							TextView txtPaidDate = (TextView) cashPaymentDetail.findViewById(R.id.txtPaidDate);
 							txtPaidDate.setText(payment.getPaidDate());
-							txtPaidValue.setText(Double.toString(payment.getPaidValue()));
+							txtPaidValue.setText("Rs " + currencyFormat.format(payment.getPaidValue()));
 							cashPaymentDetail.setBackgroundColor((colorize) ? Color.parseColor("#E6E6E6") : Color.parseColor("#FFFFFF"));
 							justMadePaymentList.addView(cashPaymentDetail);
 						} else {
@@ -160,9 +173,11 @@ public class PaymentActivity extends Activity {
 							TextView txtPaidValue = (TextView) chequePaymentDetail.findViewById(R.id.txtPaidValue);
 							TextView txtPaidDate = (TextView) chequePaymentDetail.findViewById(R.id.txtPaidDate);
 							TextView txtChequeNo = (TextView) chequePaymentDetail.findViewById(R.id.txtChequeNo);
+							TextView txtAgingAnalysis = (TextView) chequePaymentDetail.findViewById(R.id.txtAgingAnalysis);
 							txtPaidDate.setText(payment.getPaidDate());
 							txtChequeNo.setText(payment.getChequeNo());
-							txtPaidValue.setText(Double.toString(payment.getPaidValue()));
+							txtPaidValue.setText("Rs " + currencyFormat.format(payment.getPaidValue()));
+							txtAgingAnalysis.setText(calculateAging(payment.getRealizationDate()) + " day(s)");
 							chequePaymentDetail.setBackgroundColor((colorize) ? Color.parseColor("#E6E6E6") : Color.parseColor("#FFFFFF"));
 							justMadePaymentList.addView(chequePaymentDetail);
 						}
@@ -182,7 +197,8 @@ public class PaymentActivity extends Activity {
 						btnOk.setOnClickListener(new View.OnClickListener() {
 							@Override
 							public void onClick(View view) {
-								Payment payment = new Payment(invoice.getSalesOrderId(), Double.parseDouble(inputAmount.getText().toString()), new SimpleDateFormat("yyyy-MM-dd").format(new Date()), false);
+								String amountString = inputAmount.getText().toString();
+								Payment payment = new Payment(invoice.getSalesOrderId(), Double.parseDouble(amountString.isEmpty() ? "0" : amountString), new SimpleDateFormat("yyyy-MM-dd").format(new Date()), false);
 								ArrayList<Payment> newPayments;
 								if ((newPayments = invoice.getNewPayments()) == null) {
 									newPayments = new ArrayList<Payment>();
@@ -224,8 +240,9 @@ public class PaymentActivity extends Activity {
 						btnOk.setOnClickListener(new View.OnClickListener() {
 							@Override
 							public void onClick(View view) {
+								String amountString = inputAmount.getText().toString();
 								String realizationDate = inputYear.getText().toString() + "-" + inputMonth.getText().toString() + "-" + inputDate.getText().toString();
-								Payment payment = new Payment(invoice.getSalesOrderId(), Double.parseDouble(inputAmount.getText().toString()), new SimpleDateFormat("yyyy-MM-dd").format(new Date()), bankCombo.getSelectedItem().toString(), inputChequeNo.getText().toString(), realizationDate, false);
+								Payment payment = new Payment(invoice.getSalesOrderId(), Double.parseDouble(amountString.isEmpty() ? "0" : amountString), new SimpleDateFormat("yyyy-MM-dd").format(new Date()), bankCombo.getSelectedItem().toString(), inputChequeNo.getText().toString(), realizationDate, false);
 								ArrayList<Payment> newPayments;
 								if ((newPayments = invoice.getNewPayments()) == null) {
 									newPayments = new ArrayList<Payment>();
@@ -326,6 +343,19 @@ public class PaymentActivity extends Activity {
 			dialog.setMessage("Unable to place Payments");
 			dialog.setPositiveButton("Ok", null);
 			dialog.show();
+		}
+	}
+
+	private long calculateAging(String bankingDateString) {
+		try {
+			Date today = new Date();
+			SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+			Date bankingDate = simpleDateFormat.parse(bankingDateString);
+			long timeDifference = (bankingDate.getTime() - today.getTime()) / 86400000;
+			return (timeDifference > 0) ? timeDifference : 0;
+		} catch (ParseException e) {
+			e.printStackTrace();
+			return 0;
 		}
 	}
 
