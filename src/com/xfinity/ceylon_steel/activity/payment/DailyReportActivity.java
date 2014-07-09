@@ -36,6 +36,7 @@ public class DailyReportActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		setContentView(R.layout.daily_report);
 		initialize();
 	}
 
@@ -74,6 +75,7 @@ public class DailyReportActivity extends Activity {
 					viewHolder.txtDateOfInvoice = (TextView) view.findViewById(R.id.txtDateOfInvoice);
 					viewHolder.txtDeliveryDate = (TextView) view.findViewById(R.id.txtDeliveryDate);
 					viewHolder.txtAmount = (TextView) view.findViewById(R.id.txtAmount);
+					view.setTag(viewHolder);
 				} else {
 					viewHolder = (ViewHolder) view.getTag();
 				}

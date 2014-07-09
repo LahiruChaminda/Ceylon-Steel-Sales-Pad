@@ -63,17 +63,16 @@
         <DatePicker
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:calendarViewShown="false"
                 android:id="@+id/makeProjectOrderDeliveryDate"/>
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="Remarks" android:textSize="25dp"/>
         <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textMultiLine"
-                android:ems="10"
                 android:id="@+id/makeProjectOrderRemarks" android:textSize="25dp"/>
         <Button
                 android:layout_width="fill_parent"

@@ -12,6 +12,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.widget.Toast;
 import com.xfinity.ceylon_steel.R;
 import com.xfinity.ceylon_steel.db.SQLiteDatabaseHelper;
@@ -98,7 +99,7 @@ public class OutletController extends AbstractController {
 						SQLiteStatement compiledStatement = writableDatabase.compileStatement("replace into tbl_outlet(outletId, outletName) values(?,?)");
 						writableDatabase.compileStatement("delete from tbl_payment").executeUpdateDelete();
 						writableDatabase.compileStatement("delete from tbl_invoice").executeUpdateDelete();
-						SQLiteStatement invoiceStatement = writableDatabase.compileStatement("replace into tbl_invoice(salesOrderId, outletId, date, distributorCode, pendingAmount) values(?,?,?,?,?)");
+						SQLiteStatement invoiceStatement = writableDatabase.compileStatement("replace into tbl_invoice(salesOrderId, outletId, date, distributorCode, pendingAmount, deliveryDate) values(?,?,?,?,?,?)");
 						SQLiteStatement paymentStatement = writableDatabase.compileStatement("replace into tbl_payment(salesOrderId, paidValue, paidDate, paymentMethod, chequeNo, status, bank) values(?,?,?,?,?,?,?)");
 						for (int i = 0; i < result.length(); i++) {
 							JSONObject outlet = result.getJSONObject(i);
@@ -115,7 +116,8 @@ public class OutletController extends AbstractController {
 									outlet.getString("outletId"),
 									invoiceJson.getString("date"),
 									invoiceJson.getString("distributorCode"),
-									invoiceJson.getString("pendingAmount")
+									invoiceJson.getString("pendingAmount"),
+									invoiceJson.getString("deliveryDate")
 								});
 								invoiceStatement.executeInsert();
 								JSONArray payments = invoiceJson.getJSONArray("payments");
@@ -216,6 +218,7 @@ public class OutletController extends AbstractController {
 						if (paymentMethod.equalsIgnoreCase(Payment.CASH_PAYMENT)) {
 							paymentsJson.put(new Payment(salesOrderId, paidValue, paidDate, status).getPaymentAsJson());
 						} else {
+							Log.i("response json", new Payment(salesOrderId, paidValue, paidDate, bank, chequeNo, realizationDate, status).getPaymentAsJson().toString());
 							paymentsJson.put(new Payment(salesOrderId, paidValue, paidDate, bank, chequeNo, realizationDate, status).getPaymentAsJson());
 						}
 					}
