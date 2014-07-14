@@ -11,8 +11,8 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.Location;
-import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.*;
 import com.xfinity.ceylon_steel.R;
@@ -27,8 +27,6 @@ import com.xfinity.ceylon_steel.service.BatteryService;
 import com.xfinity.ceylon_steel.service.GpsReceiver;
 
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * @author Supun Lakshan Wanigarathna Dissanayake
@@ -46,38 +44,7 @@ public class MakeDirectProjectSalesOrderActivity extends Activity {
 	private Button btnMakeDirectProjectOrderNext;
 
 	private Location lastKnownLocation;
-	private final AsyncTask<Void, Void, Void> GPS_CHECKER = new AsyncTask<Void, Void, Void>() {
-		private ProgressDialog progressDialog;
-
-		@Override
-		protected void onPreExecute() {
-			progressDialog = new ProgressDialog(MakeDirectProjectSalesOrderActivity.this);
-			progressDialog.setMessage("Waiting for GPS Location...");
-			progressDialog.setCanceledOnTouchOutside(false);
-			progressDialog.show();
-		}
-
-		@Override
-		protected Void doInBackground(Void... arg0) {
-			do {
-				lastKnownLocation = gpsReceiver.getLastKnownLocation();
-				try {
-					Thread.sleep(1000);//delay 1 sec
-				} catch (InterruptedException ex) {
-					Logger.getLogger(MakeDirectProjectSalesOrderActivity.class.getName()).log(Level.SEVERE, null, ex);
-				}
-			} while (lastKnownLocation == null);
-			return null;
-		}
-
-		@Override
-		protected void onPostExecute(Void result) {
-			if (progressDialog != null && progressDialog.isShowing()) {
-				progressDialog.dismiss();
-			}
-			btnMakeDirectProjectOrderNext.setEnabled(true);
-		}
-	};
+	private Thread GPS_CHECKER;
 	private GpsReceiver gpsReceiver;
 	private Customer customer;
 
@@ -85,7 +52,6 @@ public class MakeDirectProjectSalesOrderActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.make_direct_project_order_page);
-		gpsReceiver = GpsReceiver.getGpsReceiver(getApplicationContext());
 		initialize();
 
 		ArrayList<Customer> customers = CustomerController.getCustomers(this);
@@ -100,7 +66,37 @@ public class MakeDirectProjectSalesOrderActivity extends Activity {
 		ArrayAdapter<Driver> driverAdapter = new ArrayAdapter<Driver>(this, android.R.layout.simple_dropdown_item_1line, drivers);
 		makeDirectProjectOrderDriverAuto.setAdapter(driverAdapter);
 
-		GPS_CHECKER.execute();
+		gpsReceiver = GpsReceiver.getGpsReceiver(getApplicationContext());
+		GPS_CHECKER = new Thread() {
+			private Handler handler = new Handler();
+			private ProgressDialog progressDialog;
+
+			@Override
+			public void run() {
+				handler.post(new Runnable() {
+					@Override
+					public void run() {
+						progressDialog = new ProgressDialog(MakeDirectProjectSalesOrderActivity.this);
+						progressDialog.setMessage("Waiting for GPS Location...");
+						progressDialog.setCanceledOnTouchOutside(false);
+						progressDialog.show();
+					}
+				});
+				do {
+					lastKnownLocation = gpsReceiver.getLastKnownLocation();
+				} while (lastKnownLocation == null);
+				handler.post(new Runnable() {
+					@Override
+					public void run() {
+						if (progressDialog.isShowing()) {
+							progressDialog.dismiss();
+						}
+						btnMakeDirectProjectOrderNext.setEnabled(true);
+					}
+				});
+			}
+		};
+		GPS_CHECKER.start();
 	}
 
 	@Override
