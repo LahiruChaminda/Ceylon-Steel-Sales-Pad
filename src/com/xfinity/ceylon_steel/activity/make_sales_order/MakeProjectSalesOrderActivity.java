@@ -21,8 +21,8 @@ import com.xfinity.ceylon_steel.controller.DriverController;
 import com.xfinity.ceylon_steel.controller.UserController;
 import com.xfinity.ceylon_steel.controller.VehicleController;
 import com.xfinity.ceylon_steel.model.*;
-import com.xfinity.ceylon_steel.service.BatteryService;
-import com.xfinity.ceylon_steel.service.GpsReceiver;
+import com.xfinity.ceylon_steel.util.BatteryUtil;
+import com.xfinity.ceylon_steel.util.GpsReceiver;
 
 import java.util.ArrayList;
 
@@ -239,7 +239,7 @@ public class MakeProjectSalesOrderActivity extends Activity {
 		order.setDriver(makeProjectOrderDistributorAuto.getText().toString());
 		order.setDriverNIC(makeProjectOrderDriverNIC.getText().toString());
 		order.setRemarks(makeProjectOrderRemarks.getText().toString());
-		order.setBatteryLevel(BatteryService.getBatteryLevel(this));
+		order.setBatteryLevel(BatteryUtil.getBatteryLevel(this));
 		Intent categoriesAndItems = new Intent(this, SelectCategoryActivity.class);
 		categoriesAndItems.putExtra("order", order);
 		startActivity(categoriesAndItems);

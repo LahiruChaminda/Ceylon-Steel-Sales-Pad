@@ -21,7 +21,7 @@ import com.xfinity.ceylon_steel.activity.unproductive_call.UnProductiveCallActiv
 import com.xfinity.ceylon_steel.activity.view_sales_order.ViewSalesOrderActivity;
 import com.xfinity.ceylon_steel.controller.UserController;
 import com.xfinity.ceylon_steel.db.SQLiteDatabaseHelper;
-import com.xfinity.ceylon_steel.service.Tracker;
+import com.xfinity.ceylon_steel.util.Tracker;
 
 /**
  * @author Supun Lakshan Wanigarathna Dissanayake
@@ -116,6 +116,7 @@ public class HomeActivity extends Activity {
 		startActivity(dailyReportActivity);
 		finish();
 	}
+
 	private void btnPaymentClicked(View view) {
 		Intent paymentActivity = new Intent(this, PaymentActivity.class);
 		startActivity(paymentActivity);

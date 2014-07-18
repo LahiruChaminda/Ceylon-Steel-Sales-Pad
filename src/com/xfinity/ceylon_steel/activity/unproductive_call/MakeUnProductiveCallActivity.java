@@ -20,8 +20,8 @@ import com.xfinity.ceylon_steel.controller.UnProductiveCallController;
 import com.xfinity.ceylon_steel.controller.UserController;
 import com.xfinity.ceylon_steel.model.Outlet;
 import com.xfinity.ceylon_steel.model.UnProductiveCall;
-import com.xfinity.ceylon_steel.service.BatteryService;
-import com.xfinity.ceylon_steel.service.GpsReceiver;
+import com.xfinity.ceylon_steel.util.BatteryUtil;
+import com.xfinity.ceylon_steel.util.GpsReceiver;
 
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -126,7 +126,7 @@ public class MakeUnProductiveCallActivity extends Activity {
 			lastKnownLocation.getTime(),
 			lastKnownLocation.getLongitude(),
 			lastKnownLocation.getLatitude(),
-			BatteryService.getBatteryLevel(this),
+			BatteryUtil.getBatteryLevel(this),
 			UserController.getAuthorizedUser(this).getUserId()
 		);
 		UnProductiveCallController.makeUnProductiveCall(unProductiveCall, this);

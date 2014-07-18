@@ -3,7 +3,7 @@
  * Copyright (c) 2013, Supun Lakshan Wanigarathna Dissanayake. All rights reserved.
  * Created on : Mar 16, 2014, 12:11:56 PM
  */
-package com.xfinity.ceylon_steel.service;
+package com.xfinity.ceylon_steel.util;
 
 import android.app.Service;
 import android.content.Intent;
@@ -51,7 +51,7 @@ public class Tracker extends Service {
 					lastKnownLocation.getLongitude(),
 					lastKnownLocation.getLatitude(),
 					lastKnownLocation.getTime(),
-					BatteryService.getBatteryLevel(Tracker.this)
+					BatteryUtil.getBatteryLevel(Tracker.this)
 				);
 				UserController.markRepLocation(getApplicationContext(), userLocation);
 				UserController.syncRepLocations(getApplicationContext());

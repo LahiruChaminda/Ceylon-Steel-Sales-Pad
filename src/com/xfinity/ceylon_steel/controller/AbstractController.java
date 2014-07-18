@@ -6,7 +6,7 @@
 package com.xfinity.ceylon_steel.controller;
 
 import android.content.Context;
-import com.xfinity.ceylon_steel.service.InternetObserver;
+import com.xfinity.ceylon_steel.util.InternetObserver;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;

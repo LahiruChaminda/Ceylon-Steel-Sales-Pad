@@ -3,7 +3,7 @@
  * Copyright (c) 2014, Supun Lakshan Wanigarathna Dissanayake. All rights reserved.
  * Created on : Mar 9, 2014, 10:43:25 AM
  */
-package com.xfinity.ceylon_steel.service;
+package com.xfinity.ceylon_steel.util;
 
 import android.content.Context;
 import android.content.Intent;
@@ -15,7 +15,7 @@ import android.os.BatteryManager;
  * @mobile +94711290392
  * @email supunlakshan.xfinity@gmail.com
  */
-public class BatteryService {
+public class BatteryUtil {
 
 	public static int getBatteryLevel(Context context) {
 		IntentFilter ifilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
