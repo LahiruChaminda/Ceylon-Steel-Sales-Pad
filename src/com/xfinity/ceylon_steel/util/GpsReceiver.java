@@ -15,9 +15,6 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.os.Looper;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 public class GpsReceiver extends Service {
 
 	private static final long MINIMUM_DISTANCE_CHANGE = 0;
@@ -41,31 +38,32 @@ public class GpsReceiver extends Service {
 
 	public synchronized Location getHighAccurateLocation() {
 		lastKnownLocation = null;
-		while (lastKnownLocation == null) {
-			try {
-				Thread.sleep(100);
-			} catch (InterruptedException ex) {
-				Logger.getLogger(GpsReceiver.class.getName()).log(Level.SEVERE, null, ex);
+		do {
+			if (lastKnownLocation != null) {
+				if (lastKnownLocation.getLatitude() == 0 && lastKnownLocation.getLongitude() == 0) {
+					return lastKnownLocation = null;
+				}
+				long time = lastKnownLocation.getTime();
+				long currentTimeMillis = System.currentTimeMillis();
+				long timeDifference = Math.abs(time - currentTimeMillis);
+				if (timeDifference > 30 * 60 * 1000) {
+					return lastKnownLocation = null;
+				}
 			}
-		}
-		if (lastKnownLocation != null && lastKnownLocation.getLatitude() != 0 && lastKnownLocation.getLongitude() != 0 && locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-			long time = lastKnownLocation.getTime();
-			long currentTimeMillis = System.currentTimeMillis();
-			long timeDifference = Math.abs(time - currentTimeMillis);
-			if (timeDifference > 30 * 60 * 1000) {
-				return null;
-			}
-		}
+		} while (lastKnownLocation == null || (lastKnownLocation != null && (lastKnownLocation.getLatitude() == 0 || lastKnownLocation.getLongitude() == 0)));
 		return lastKnownLocation;
 	}
 
 	public synchronized Location getLastKnownLocation() {
-		if (lastKnownLocation != null && lastKnownLocation.getLatitude() != 0 && lastKnownLocation.getLongitude() != 0 && locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+		if (lastKnownLocation != null) {
+			if (lastKnownLocation.getLatitude() == 0 && lastKnownLocation.getLongitude() == 0) {
+				return lastKnownLocation = null;
+			}
 			long time = lastKnownLocation.getTime();
 			long currentTimeMillis = System.currentTimeMillis();
 			long timeDifference = Math.abs(time - currentTimeMillis);
 			if (timeDifference > 30 * 60 * 1000) {
-				return null;
+				return lastKnownLocation = null;
 			}
 		}
 		return lastKnownLocation;
