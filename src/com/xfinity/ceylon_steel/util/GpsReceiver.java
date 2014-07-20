@@ -100,7 +100,7 @@ public class GpsReceiver extends Service {
 		private LocationListenerImpl() {
 		}
 
-		public synchronized static LocationListenerImpl getInstance() {
+		public static LocationListenerImpl getInstance() {
 			return (locationListener == null) ? locationListener = new LocationListenerImpl() : locationListener;
 		}
 
