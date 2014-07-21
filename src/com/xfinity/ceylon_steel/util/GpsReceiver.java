@@ -8,6 +8,7 @@ package com.xfinity.ceylon_steel.util;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -19,41 +20,31 @@ import java.util.List;
 
 public class GpsReceiver extends Service {
 
+
 	private static final long MINIMUM_DISTANCE_CHANGE = 0;
 	private static final long MINIMUM_TIME_DIFFERENCE = 0;
 	protected static LocationManager locationManager;
 	private volatile static Location lastKnownLocation;
 	private volatile static GpsReceiver gpsReceiver;
 
-	private GpsReceiver(Context applicationContext) {
-		locationManager = (LocationManager) applicationContext.getSystemService(Context.LOCATION_SERVICE);
+	private GpsReceiver(Context context) {
+		locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
 
-		float bestAccuracy = Float.MAX_VALUE;
-		long bestTime = Long.MIN_VALUE;
+		//look for fastest location fix
+		Criteria criteria = new Criteria();
+		String bestProvider = locationManager.getBestProvider(criteria, true);
+		lastKnownLocation = locationManager.getLastKnownLocation(bestProvider);
+
 		List<String> matchingProviders = locationManager.getAllProviders();
 		for (String provider : matchingProviders) {
 			Location location = locationManager.getLastKnownLocation(provider);
+			lastKnownLocation = (lastKnownLocation != null && location != null && location.getAccuracy() < lastKnownLocation.getAccuracy()) ? location : lastKnownLocation;
 			locationManager.requestLocationUpdates(provider, MINIMUM_TIME_DIFFERENCE, MINIMUM_DISTANCE_CHANGE, LocationListenerImpl.getInstance(), Looper.getMainLooper());
-			if (location != null) {
-				float accuracy = location.getAccuracy();
-				long time = location.getTime();
-				if ((time > MINIMUM_TIME_DIFFERENCE && accuracy < bestAccuracy)) {
-					lastKnownLocation = location;
-					bestAccuracy = accuracy;
-					bestTime = time;
-				} else if (time < MINIMUM_TIME_DIFFERENCE && bestAccuracy == Float.MAX_VALUE && time > bestTime) {
-					lastKnownLocation = location;
-					bestTime = time;
-				}
-			}
 		}
 	}
 
 	public synchronized static GpsReceiver getGpsReceiver(Context applicationContext) {
-		if (gpsReceiver == null) {
-			gpsReceiver = new GpsReceiver(applicationContext);
-		}
-		return gpsReceiver;
+		return (gpsReceiver == null) ? gpsReceiver = new GpsReceiver(applicationContext) : gpsReceiver;
 	}
 
 	public synchronized Location getHighAccurateLocation() {
@@ -90,7 +81,7 @@ public class GpsReceiver extends Service {
 	}
 
 	@Override
-	public IBinder onBind(Intent arg0) {
+	public IBinder onBind(Intent intent) {
 		return null;
 	}
 
@@ -106,20 +97,6 @@ public class GpsReceiver extends Service {
 
 		@Override
 		public void onLocationChanged(Location location) {
-			float bestAccuracy = Float.MAX_VALUE;
-			long bestTime = Long.MIN_VALUE;
-			if (location != null) {
-				float accuracy = location.getAccuracy();
-				long time = location.getTime();
-				if ((time > MINIMUM_TIME_DIFFERENCE && accuracy < bestAccuracy)) {
-					lastKnownLocation = location;
-					bestAccuracy = accuracy;
-					bestTime = time;
-				} else if (time < MINIMUM_TIME_DIFFERENCE && bestAccuracy == Float.MAX_VALUE && time > bestTime) {
-					lastKnownLocation = location;
-					bestTime = time;
-				}
-			}
 			lastKnownLocation = location;
 		}
 
@@ -135,5 +112,4 @@ public class GpsReceiver extends Service {
 		public void onStatusChanged(String provider, int status, Bundle extras) {
 		}
 	}
-
 }

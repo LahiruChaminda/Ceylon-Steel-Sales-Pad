@@ -32,7 +32,7 @@ public class StartingActivity extends Activity {
 			@Override
 			public void run() {
 				try {
-					Thread.sleep(3000);
+					Thread.sleep(5000);
 				} catch (InterruptedException ex) {
 					Logger.getLogger(StartingActivity.class.getName()).log(Level.SEVERE, null, ex);
 				} finally {
