@@ -22,6 +22,7 @@ import com.xfinity.ceylon_steel.model.Outlet;
 import com.xfinity.ceylon_steel.model.UnProductiveCall;
 import com.xfinity.ceylon_steel.util.BatteryUtil;
 import com.xfinity.ceylon_steel.util.GpsReceiver;
+import com.xfinity.ceylon_steel.util.InternetObserver;
 
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -37,6 +38,7 @@ public class MakeUnProductiveCallActivity extends Activity {
 	private AutoCompleteTextView unProductiveCallOutletAuto;
 	private EditText txtMakeUnProductiveCallReason;
 	private Button btnUnProductiveCallSubmit;
+	private Button btnUnProductiveCallSync;
 	private int outletId;
 
 	private Location lastKnownLocation;
@@ -99,6 +101,7 @@ public class MakeUnProductiveCallActivity extends Activity {
 		unProductiveCallOutletAuto = (AutoCompleteTextView) findViewById(R.id.unProductiveCallOutletAuto);
 		txtMakeUnProductiveCallReason = (EditText) findViewById(R.id.txtMakeUnProductiveCallReason);
 		btnUnProductiveCallSubmit = (Button) findViewById(R.id.btnUnProductiveCallSubmit);
+		btnUnProductiveCallSync = (Button) findViewById(R.id.btnUnProductiveCallSync);
 		btnUnProductiveCallSubmit.setEnabled(false);
 		unProductiveCallOutletAuto.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
@@ -111,8 +114,30 @@ public class MakeUnProductiveCallActivity extends Activity {
 				btnUnProductiveCallSubmitClicked(view);
 			}
 		});
+		btnUnProductiveCallSync.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View view) {
+				btnUnProductiveCallSyncClicked(view);
+			}
+		});
 	}
 	// </editor-fold>
+
+	private void btnUnProductiveCallSyncClicked(View view) {
+		UnProductiveCall unProductiveCall = new UnProductiveCall(
+			outletId,
+			txtMakeUnProductiveCallReason.getText().toString(),
+			lastKnownLocation.getTime(),
+			lastKnownLocation.getLongitude(),
+			lastKnownLocation.getLatitude(),
+			BatteryUtil.getBatteryLevel(this),
+			UserController.getAuthorizedUser(this).getUserId()
+		);
+		if (InternetObserver.isConnectedToInternet(this)) {
+			UnProductiveCallController.syncUnproductiveCall(unProductiveCall, this);
+		} else {
+			UnProductiveCallController.makeUnProductiveCall(unProductiveCall, this);
+		}
+	}
 
 	private void unProductiveCallOutletAutoItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
 		Outlet outlet = (Outlet) adapterView.getAdapter().getItem(position);

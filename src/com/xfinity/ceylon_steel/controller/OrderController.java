@@ -217,7 +217,7 @@ public class OrderController extends AbstractController {
 		SQLiteDatabaseHelper databaseInstance = SQLiteDatabaseHelper.getDatabaseInstance(context);
 		SQLiteDatabase database = databaseInstance.getWritableDatabase();
 		int repId = UserController.getAuthorizedUser(context).getUserId();
-		Cursor orderCursor = database.rawQuery("select orderId, tbl_order.distributorId, tbl_distributor.distributorName, tbl_order.outletId, orderDate, deliveryDate, driverName, driverNIC, vehicleNo, total, batteryLevel, longitude, latitude, type, remarks, outletName from tbl_order, tbl_outlet, tbl_distributor where tbl_distributor.distributorId=tbl_order.distributorId and tbl_order.outletId=tbl_outlet.outletId and type='CONSIGNMENT'", null);
+		Cursor orderCursor = database.rawQuery("select orderId, tbl_order.distributorId, tbl_distributor.distributorName, tbl_order.outletId, orderDate, deliveryDate, driverName, driverNIC, vehicleNo, total, batteryLevel, longitude, latitude, type, remarks, outletName, syncStatus from tbl_order, tbl_outlet, tbl_distributor where tbl_distributor.distributorId=tbl_order.distributorId and tbl_order.outletId=tbl_outlet.outletId and type='CONSIGNMENT'", null);
 		int orderIdIndex = orderCursor.getColumnIndex("orderId");
 		int distributorIdIndex = orderCursor.getColumnIndex("distributorId");
 		int distributorNameIndex = orderCursor.getColumnIndex("distributorName");
@@ -233,6 +233,7 @@ public class OrderController extends AbstractController {
 		int latitudeIndex = orderCursor.getColumnIndex("latitude");
 		int remarksIndex = orderCursor.getColumnIndex("remarks");
 		int outletNameIndex = orderCursor.getColumnIndex("outletName");
+		int syncStatusIndex = orderCursor.getColumnIndex("syncStatus");
 		for (orderCursor.moveToFirst(); !orderCursor.isAfterLast(); orderCursor.moveToNext()) {
 			long orderId = orderCursor.getLong(orderIdIndex);
 			Order order = new Order();
@@ -254,6 +255,7 @@ public class OrderController extends AbstractController {
 			order.setRemarks(orderCursor.getString(remarksIndex));
 			order.setOrderDetails(getOrderDetails(database, orderId));
 			order.setTotal(orderCursor.getDouble(totalIndex));
+			order.setSyncStatus(orderCursor.getInt(syncStatusIndex) == 1);
 			orders.add(order);
 		}
 		orderCursor.close();
@@ -266,7 +268,7 @@ public class OrderController extends AbstractController {
 		SQLiteDatabaseHelper databaseInstance = SQLiteDatabaseHelper.getDatabaseInstance(context);
 		SQLiteDatabase database = databaseInstance.getWritableDatabase();
 		int repId = UserController.getAuthorizedUser(context).getUserId();
-		Cursor orderCursor = database.rawQuery("select orderId, tbl_order.outletId, orderDate, deliveryDate, driverName, driverNIC, vehicleNo, total, batteryLevel, longitude, latitude, type, remarks, outletName from tbl_order, tbl_outlet where tbl_order.outletId=tbl_outlet.outletId and type='DIRECT'", null);
+		Cursor orderCursor = database.rawQuery("select orderId, tbl_order.outletId, orderDate, deliveryDate, driverName, driverNIC, vehicleNo, total, batteryLevel, longitude, latitude, type, remarks, outletName, syncStatus from tbl_order, tbl_outlet where tbl_order.outletId=tbl_outlet.outletId and type='DIRECT'", null);
 		int orderIdIndex = orderCursor.getColumnIndex("orderId");
 		int outletIdIndex = orderCursor.getColumnIndex("outletId");
 		int orderDateIndex = orderCursor.getColumnIndex("orderDate");
@@ -280,6 +282,7 @@ public class OrderController extends AbstractController {
 		int latitudeIndex = orderCursor.getColumnIndex("latitude");
 		int remarksIndex = orderCursor.getColumnIndex("remarks");
 		int outletNameIndex = orderCursor.getColumnIndex("outletName");
+		int syncStatusIndex = orderCursor.getColumnIndex("syncStatus");
 		for (orderCursor.moveToFirst(); !orderCursor.isAfterLast(); orderCursor.moveToNext()) {
 			long orderId = orderCursor.getLong(orderIdIndex);
 			Order order = new Order();
@@ -299,6 +302,7 @@ public class OrderController extends AbstractController {
 			order.setRemarks(orderCursor.getString(remarksIndex));
 			order.setOrderDetails(getOrderDetails(database, orderId));
 			order.setTotal(orderCursor.getDouble(totalIndex));
+			order.setSyncStatus(orderCursor.getInt(syncStatusIndex) == 1);
 			orders.add(order);
 		}
 		orderCursor.close();
@@ -311,7 +315,7 @@ public class OrderController extends AbstractController {
 		SQLiteDatabaseHelper databaseInstance = SQLiteDatabaseHelper.getDatabaseInstance(context);
 		SQLiteDatabase database = databaseInstance.getWritableDatabase();
 		int repId = UserController.getAuthorizedUser(context).getUserId();
-		Cursor orderCursor = database.rawQuery("select orderId, tbl_order.distributorId, tbl_distributor.distributorName, tbl_order.customerId, customerName, orderDate, deliveryDate, driverName, driverNIC, vehicleNo, total, batteryLevel, longitude, latitude, type, remarks from tbl_order, tbl_customer, tbl_distributor where tbl_order.distributorId-tbl_distributor.distributorId and tbl_order.customerId=tbl_customer.customerId and type='PROJECT'", null);
+		Cursor orderCursor = database.rawQuery("select orderId, tbl_order.distributorId, tbl_distributor.distributorName, tbl_order.customerId, customerName, orderDate, deliveryDate, driverName, driverNIC, vehicleNo, total, batteryLevel, longitude, latitude, type, remarks, syncStatus from tbl_order, tbl_customer, tbl_distributor where tbl_order.distributorId-tbl_distributor.distributorId and tbl_order.customerId=tbl_customer.customerId and type='PROJECT'", null);
 		int orderIdIndex = orderCursor.getColumnIndex("orderId");
 		int distributorIdIndex = orderCursor.getColumnIndex("distributorId");
 		int distributorNameIndex = orderCursor.getColumnIndex("distributorName");
@@ -327,6 +331,7 @@ public class OrderController extends AbstractController {
 		int latitudeIndex = orderCursor.getColumnIndex("latitude");
 		int remarksIndex = orderCursor.getColumnIndex("remarks");
 		int customerNameIndex = orderCursor.getColumnIndex("customerName");
+		int syncStatusIndex = orderCursor.getColumnIndex("syncStatus");
 		for (orderCursor.moveToFirst(); !orderCursor.isAfterLast(); orderCursor.moveToNext()) {
 			long orderId = orderCursor.getLong(orderIdIndex);
 			Order order = new Order();
@@ -348,6 +353,7 @@ public class OrderController extends AbstractController {
 			order.setRemarks(orderCursor.getString(remarksIndex));
 			order.setOrderDetails(getOrderDetails(database, orderId));
 			order.setTotal(orderCursor.getDouble(totalIndex));
+			order.setSyncStatus(orderCursor.getInt(syncStatusIndex) == 1);
 			orders.add(order);
 		}
 		orderCursor.close();
@@ -408,15 +414,12 @@ public class OrderController extends AbstractController {
 				if (result) {
 					SQLiteDatabaseHelper databaseInstance = SQLiteDatabaseHelper.getDatabaseInstance(context);
 					SQLiteDatabase database = databaseInstance.getWritableDatabase();
-					SQLiteStatement orderDetailDeleteSql = database.compileStatement("delete from tbl_order_detail where orderId=?");
-					SQLiteStatement orderDeleteSql = database.compileStatement("delete from tbl_order where orderId=?");
+					SQLiteStatement orderSyncStatusChangeSql = database.compileStatement("update tbl_order set syncStatus=1 where orderId=?");
 					String[] parameter = new String[]{Long.toString(order.getOrderId())};
-					orderDetailDeleteSql.bindAllArgsAsStrings(parameter);
-					orderDeleteSql.bindAllArgsAsStrings(parameter);
-					orderDetailDeleteSql.executeUpdateDelete();
-					orderDeleteSql.executeUpdateDelete();
+					orderSyncStatusChangeSql.bindAllArgsAsStrings(parameter);
+					orderSyncStatusChangeSql.executeUpdateDelete();
 					databaseInstance.close();
-					builder.setMessage("Sales Order syncked successfully");
+					builder.setMessage("Sales Order synced successfully");
 					builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
 						public void onClick(DialogInterface arg0, int arg1) {
 							Intent homeActivity = new Intent(context, HomeActivity.class);

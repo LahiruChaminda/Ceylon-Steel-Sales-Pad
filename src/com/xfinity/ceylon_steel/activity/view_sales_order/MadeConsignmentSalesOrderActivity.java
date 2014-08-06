@@ -7,6 +7,7 @@ package com.xfinity.ceylon_steel.activity.view_sales_order;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -66,6 +67,9 @@ public class MadeConsignmentSalesOrderActivity extends Activity {
 					orderItemViewHolder = (OrderItemViewHolder) convertView.getTag();
 				}
 				Order order = consignmentOrders.get(position);
+				if (order.isSynced()) {
+					convertView.setBackgroundColor(Color.RED);
+				}
 				orderItemViewHolder.txtOrderOwner.setText(order.toString());
 				orderItemViewHolder.txtDateTime.setText(simpleDateFormat.format(new Date(order.getOrderMadeTimeStamp())));
 				return convertView;

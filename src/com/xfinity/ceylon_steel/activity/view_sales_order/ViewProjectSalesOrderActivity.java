@@ -36,6 +36,7 @@ public class ViewProjectSalesOrderActivity extends Activity {
 	private TextView txtViewProjectDriverNIC;
 	private TextView txtViewProjectDeliveryDate;
 	private TextView txtViewProjectRemarks;
+	private TextView txtViewTotal;
 	private ListView projectOrderDetailListView;
 	private Button btnProjectSync;
 
@@ -53,6 +54,7 @@ public class ViewProjectSalesOrderActivity extends Activity {
 		txtViewProjectDriverNIC.setText(receivedOrder.getDriverNIC());
 		txtViewProjectDeliveryDate.setText(new SimpleDateFormat("yyyy-MM-dd").format(new Date(receivedOrder.getDeliveryDate())));
 		txtViewProjectRemarks.setText(receivedOrder.getRemarks());
+		txtViewTotal.setText(String.valueOf(receivedOrder.getTotal()));
 
 		ArrayAdapter<OrderDetail> orderDetails = new ArrayAdapter<OrderDetail>(this, android.R.layout.simple_list_item_1, receivedOrder.getOrderDetails()) {
 			@Override
@@ -95,6 +97,7 @@ public class ViewProjectSalesOrderActivity extends Activity {
 		txtViewProjectDriverNIC = (TextView) findViewById(R.id.txtViewProjectDriverNIC);
 		txtViewProjectDeliveryDate = (TextView) findViewById(R.id.txtViewProjectDeliveryDate);
 		txtViewProjectRemarks = (TextView) findViewById(R.id.txtViewProjectRemarks);
+		txtViewTotal = (TextView) findViewById(R.id.txtViewTotal);
 		projectOrderDetailListView = (ListView) findViewById(R.id.projectOrderDetailListView);
 		btnProjectSync = (Button) findViewById(R.id.btnProjectSync);
 

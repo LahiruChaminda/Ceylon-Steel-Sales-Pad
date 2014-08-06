@@ -44,6 +44,7 @@ public class Order implements Serializable {
 	private String remarks;
 	private ArrayList<OrderDetail> orderDetails;
 	private double total;
+	private boolean synced;
 
 	public Order() {
 	}
@@ -227,9 +228,6 @@ public class Order implements Serializable {
 		return deliveryDate;
 	}
 
-	/**
-	 * @param delivetyDate the delivetyDate to set
-	 */
 	public void setDeliveryDate(long deliveryDate) {
 		this.deliveryDate = deliveryDate;
 	}
@@ -322,7 +320,13 @@ public class Order implements Serializable {
 	 * @return the total
 	 */
 	public double getTotal() {
-		return total;
+		double sum = 0;
+		if (orderDetails != null) {
+			for (OrderDetail orderDetail : orderDetails) {
+				sum += ((orderDetail.getUnitPrice() - orderDetail.getEachDiscount()) * orderDetail.getQuantity());
+			}
+		}
+		return total = sum;
 	}
 
 	/**
@@ -330,6 +334,14 @@ public class Order implements Serializable {
 	 */
 	public void setTotal(double total) {
 		this.total = total;
+	}
+
+	public boolean isSynced() {
+		return synced;
+	}
+
+	public void setSyncStatus(boolean syncStatus) {
+		this.synced = syncStatus;
 	}
 
 	/**

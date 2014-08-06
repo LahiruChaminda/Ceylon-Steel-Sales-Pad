@@ -148,6 +148,23 @@
                 android:id="@+id/txtViewProjectRemarks" android:textSize="25dp"/>
     </LinearLayout>
     <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp" android:weightSum="100">
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Total" android:textSize="25dp"
+                android:layout_weight="70"/>
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtViewTotal" android:textSize="25dp"
+                android:layout_weight="30"/>
+    </LinearLayout>
+    <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

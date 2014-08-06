@@ -5,6 +5,7 @@
  */
 package com.xfinity.ceylon_steel.util;
 
+import android.app.AlarmManager;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
@@ -57,7 +58,7 @@ public class GpsReceiver extends Service {
 				long time = lastKnownLocation.getTime();
 				long currentTimeMillis = System.currentTimeMillis();
 				long timeDifference = Math.abs(time - currentTimeMillis);
-				if (timeDifference > 30 * 60 * 1000) {
+				if (timeDifference > AlarmManager.INTERVAL_HALF_HOUR) {
 					return lastKnownLocation = null;
 				}
 			}
@@ -73,7 +74,7 @@ public class GpsReceiver extends Service {
 			long time = lastKnownLocation.getTime();
 			long currentTimeMillis = System.currentTimeMillis();
 			long timeDifference = Math.abs(time - currentTimeMillis);
-			if (timeDifference > 30 * 60 * 1000) {
+			if (timeDifference > AlarmManager.INTERVAL_HALF_HOUR) {
 				return lastKnownLocation = null;
 			}
 		}

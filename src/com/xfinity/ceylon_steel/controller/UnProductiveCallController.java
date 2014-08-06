@@ -117,7 +117,7 @@ public class UnProductiveCallController extends AbstractController {
 			@Override
 			protected void onPreExecute() {
 				progressDialog = new ProgressDialog(context);
-				progressDialog.setMessage("Syncking Unproductive Call");
+				progressDialog.setMessage("Syncing Unproductive Call");
 				progressDialog.setCanceledOnTouchOutside(false);
 				progressDialog.show();
 			}
@@ -152,7 +152,7 @@ public class UnProductiveCallController extends AbstractController {
 					databaseInstance.close();
 					Intent madeUnProductiveCallActivity = new Intent(context, MadeUnProductiveCallActivity.class);
 					context.startActivity(madeUnProductiveCallActivity);
-					Toast.makeText(context, "Unproductive Call Successfully syncked", Toast.LENGTH_SHORT).show();
+					Toast.makeText(context, "Unproductive Call Successfully synced", Toast.LENGTH_SHORT).show();
 				} else {
 					AlertDialog.Builder builder = new AlertDialog.Builder(context);
 					builder.setMessage("Unable to sync UnProductive Call");

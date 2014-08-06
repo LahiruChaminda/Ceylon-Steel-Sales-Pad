@@ -36,6 +36,7 @@ public class ViewConsignmentSalesOrderActivity extends Activity {
 	private TextView txtViewConsignmentDriverNIC;
 	private TextView txtViewConsignmentDeliveryDate;
 	private TextView txtViewConsignmentRemarks;
+	private TextView txtViewTotal;
 	private ListView consignmentOrderDetailListView;
 	private Button btnConsignmentSync;
 
@@ -53,6 +54,7 @@ public class ViewConsignmentSalesOrderActivity extends Activity {
 		txtViewConsignmentDriverNIC.setText(receivedOrder.getDriverNIC());
 		txtViewConsignmentDeliveryDate.setText(new SimpleDateFormat("yyyy-MM-dd").format(new Date(receivedOrder.getDeliveryDate())));
 		txtViewConsignmentRemarks.setText(receivedOrder.getRemarks());
+		txtViewTotal.setText(String.valueOf(receivedOrder.getTotal()));
 
 		ArrayAdapter<OrderDetail> orderDetails = new ArrayAdapter<OrderDetail>(this, android.R.layout.simple_list_item_1, receivedOrder.getOrderDetails()) {
 			@Override
@@ -95,6 +97,7 @@ public class ViewConsignmentSalesOrderActivity extends Activity {
 		txtViewConsignmentDriverNIC = (TextView) findViewById(R.id.txtViewConsignmentDriverNIC);
 		txtViewConsignmentDeliveryDate = (TextView) findViewById(R.id.txtViewConsignmentDeliveryDate);
 		txtViewConsignmentRemarks = (TextView) findViewById(R.id.txtViewConsignmentRemarks);
+		txtViewTotal = (TextView) findViewById(R.id.txtViewTotal);
 		consignmentOrderDetailListView = (ListView) findViewById(R.id.consignmentOrderDetailListView);
 		btnConsignmentSync = (Button) findViewById(R.id.btnConsignmentSync);
 		consignmentOrderDetailListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

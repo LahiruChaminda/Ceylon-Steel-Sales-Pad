@@ -31,6 +31,11 @@
     <Button
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:text="Sync"
+            android:id="@+id/btnUnProductiveCallSync" android:textSize="25dp"/>
+    <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
             android:text="Submit"
             android:id="@+id/btnUnProductiveCallSubmit" android:textSize="25dp"/>
 </LinearLayout>

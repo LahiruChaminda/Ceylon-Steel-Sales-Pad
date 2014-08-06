@@ -35,6 +35,7 @@ public class ViewDirectSalesOrderActivity extends Activity {
 	private TextView txtViewDirectDriverNIC;
 	private TextView txtViewDirectDeliveryDate;
 	private TextView txtViewDirectRemarks;
+	private TextView txtViewTotal;
 	private ListView directOrderDetailListView;
 	private Button btnDirectSync;
 
@@ -51,6 +52,7 @@ public class ViewDirectSalesOrderActivity extends Activity {
 		txtViewDirectDriverNIC.setText(receivedOrder.getDriverNIC());
 		txtViewDirectDeliveryDate.setText(new SimpleDateFormat("yyyy-MM-dd").format(new Date(receivedOrder.getDeliveryDate())));
 		txtViewDirectRemarks.setText(receivedOrder.getRemarks());
+		txtViewTotal.setText(String.valueOf(receivedOrder.getTotal()));
 
 		ArrayAdapter<OrderDetail> orderDetails = new ArrayAdapter<OrderDetail>(this, android.R.layout.simple_list_item_1, receivedOrder.getOrderDetails()) {
 			@Override
@@ -92,6 +94,7 @@ public class ViewDirectSalesOrderActivity extends Activity {
 		txtViewDirectDriverNIC = (TextView) findViewById(R.id.txtViewDirectDriverNIC);
 		txtViewDirectDeliveryDate = (TextView) findViewById(R.id.txtViewDirectDeliveryDate);
 		txtViewDirectRemarks = (TextView) findViewById(R.id.txtViewDirectRemarks);
+		txtViewTotal = (TextView) findViewById(R.id.txtViewTotal);
 		directOrderDetailListView = (ListView) findViewById(R.id.directOrderDetailListView);
 		btnDirectSync = (Button) findViewById(R.id.btnDirectSync);
 
