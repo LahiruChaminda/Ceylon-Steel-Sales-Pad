@@ -79,7 +79,7 @@ public class UnProductiveCallController extends AbstractController {
 		ArrayList<UnProductiveCall> unProductiveCalls = new ArrayList<UnProductiveCall>();
 		SQLiteDatabaseHelper databaseInstance = SQLiteDatabaseHelper.getDatabaseInstance(context);
 		SQLiteDatabase database = databaseInstance.getWritableDatabase();
-		String sql = "select unProductiveCallId, tbl_unproductive_call.outletId, repId, reason, batteryLevel, time, longitude, latitude, tbl_outlet.outletName from tbl_unproductive_call, tbl_outlet where tbl_unproductive_call.outletId=tbl_outlet.outletId";
+		String sql = "select unProductiveCallId, tbl_unproductive_call.outletId, repId, reason, batteryLevel, time, longitude, latitude, tbl_outlet.outletName, syncStatus from tbl_unproductive_call, tbl_outlet where tbl_unproductive_call.outletId=tbl_outlet.outletId";
 		Cursor cursor = database.rawQuery(sql, null);
 		int unProductiveCallIdIndex = cursor.getColumnIndex("unProductiveCallId");
 		int outletIdIndex = cursor.getColumnIndex("outletId");
@@ -90,6 +90,7 @@ public class UnProductiveCallController extends AbstractController {
 		int latitudeIndex = cursor.getColumnIndex("latitude");
 		int repIdIndex = cursor.getColumnIndex("repId");
 		int batteryLevelIndex = cursor.getColumnIndex("batteryLevel");
+		int syncStatusIndex = cursor.getColumnIndex("syncStatus");
 
 		for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
 			UnProductiveCall unProductiveCall = new UnProductiveCall(
@@ -103,6 +104,7 @@ public class UnProductiveCallController extends AbstractController {
 				cursor.getInt(batteryLevelIndex),
 				cursor.getInt(repIdIndex)
 			);
+			unProductiveCall.setSyncStatus(cursor.getInt(syncStatusIndex) == 1);
 			unProductiveCalls.add(unProductiveCall);
 		}
 		cursor.close();
@@ -146,7 +148,7 @@ public class UnProductiveCallController extends AbstractController {
 				if (result) {
 					SQLiteDatabaseHelper databaseInstance = SQLiteDatabaseHelper.getDatabaseInstance(context);
 					SQLiteDatabase database = databaseInstance.getWritableDatabase();
-					SQLiteStatement compiledStatement = database.compileStatement("delete from tbl_unproductive_call where unProductiveCallId=?");
+					SQLiteStatement compiledStatement = database.compileStatement("update tbl_unproductive_call set syncStatus=1 where unProductiveCallId=?");
 					compiledStatement.bindAllArgsAsStrings(new String[]{Integer.toString(unProductiveCall.getUnProductiveCallId())});
 					compiledStatement.executeUpdateDelete();
 					databaseInstance.close();

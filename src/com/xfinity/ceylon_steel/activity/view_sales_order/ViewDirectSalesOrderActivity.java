@@ -123,7 +123,11 @@ public class ViewDirectSalesOrderActivity extends Activity {
 	// </editor-fold>
 
 	private void btnDirectSyncClicked(View view) {
-		OrderController.syncOrder(this, receivedOrder);
+		if (receivedOrder.isSynced()) {
+			Toast.makeText(ViewDirectSalesOrderActivity.this, "Already Synced", Toast.LENGTH_LONG).show();
+		} else {
+			OrderController.syncOrder(this, receivedOrder);
+		}
 	}
 
 	private static class OrderedItemViewHolder {

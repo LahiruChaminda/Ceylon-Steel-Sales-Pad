@@ -45,14 +45,12 @@ CREATE TABLE tbl_customer (
 );
 
 CREATE TABLE tbl_vehicle ( 
-    vehicleNo TEXT NOT NULL
-                   PRIMARY KEY 
+    vehicleNo TEXT NOT NULL PRIMARY KEY
 );
 
 CREATE TABLE tbl_driver ( 
     driverName TEXT NOT NULL,
-    driverNIC  TEXT NOT NULL
-                    UNIQUE 
+    driverNIC  TEXT NOT NULL UNIQUE
 );
 
 CREATE TABLE tbl_distributor ( 
@@ -118,7 +116,8 @@ CREATE TABLE tbl_unproductive_call (
     reason             REAL    NOT NULL,
     longitude          REAL    NOT NULL,
     latitude           REAL    NOT NULL,
-    time               LONG    NOT NULL 
+    time               LONG    NOT NULL,
+    syncStatus         INT     DEFAULT 0
 );
 
 CREATE TABLE tbl_invoice ( 

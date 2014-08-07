@@ -124,7 +124,11 @@ public class ViewConsignmentSalesOrderActivity extends Activity {
 	// </editor-fold>
 
 	private void btnConsignmentSyncClicked(View view) {
-		OrderController.syncOrder(this, receivedOrder);
+		if (receivedOrder.isSynced()) {
+			Toast.makeText(ViewConsignmentSalesOrderActivity.this, "Already Synced", Toast.LENGTH_LONG).show();
+		} else {
+			OrderController.syncOrder(this, receivedOrder);
+		}
 	}
 
 	private static class OrderedItemViewHolder {

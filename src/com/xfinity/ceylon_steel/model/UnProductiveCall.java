@@ -27,6 +27,7 @@ public class UnProductiveCall implements Serializable {
 	private long timestamp;
 	private double longitude;
 	private double latitude;
+	private boolean synced;
 
 	public UnProductiveCall() {
 	}
@@ -51,6 +52,14 @@ public class UnProductiveCall implements Serializable {
 		this.latitude = latitude;
 		this.batteryLevel = batteryLevel;
 		this.repId = repId;
+	}
+
+	public boolean isSynced() {
+		return synced;
+	}
+
+	public void setSyncStatus(boolean synced) {
+		this.synced = synced;
 	}
 
 	/**

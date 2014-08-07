@@ -30,7 +30,10 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Pending Invoices"
             android:layout_gravity="center_horizontal"
-            android:gravity="center" android:textSize="25dp" android:background="#FF4F82B4"/>
+            android:gravity="center"
+            android:textSize="25dp"
+            android:textColor="#FFFFFFFF"
+            android:background="#FF4F82B4"/>
     <ExpandableListView
             android:layout_width="match_parent"
             android:layout_height="match_parent"

@@ -9,7 +9,8 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <application android:label="@string/app_name" android:icon="@drawable/icon" android:theme="@android:style/Theme.Holo.Light">
         <service android:name=".util.Tracker"/>
-        <activity android:name=".activity.StartingActivity" android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen">
+        <activity android:name=".activity.StartingActivity" android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen"
+                  android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>

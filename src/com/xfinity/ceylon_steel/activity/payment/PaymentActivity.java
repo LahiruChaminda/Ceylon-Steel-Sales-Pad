@@ -11,7 +11,6 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.*;
 import android.widget.*;
 import com.xfinity.ceylon_steel.R;
@@ -117,7 +116,14 @@ public class PaymentActivity extends Activity {
 				}
 				Invoice invoice = getGroup(groupPosition);
 				categoryViewHolder.txtInvoiceNo.setText(invoice.getDistributorCode());
-				categoryViewHolder.txtTotal.setText("Rs " + currencyFormat.format(invoice.getPendingAmount()));
+				double paidAmount = 0;
+				ArrayList<Payment> payments;
+				if ((payments = invoice.getPayments()) != null) {
+					for (Payment payment : payments) {
+						paidAmount += payment.getPaidValue();
+					}
+				}
+				categoryViewHolder.txtTotal.setText("Rs " + currencyFormat.format(invoice.getPendingAmount() + paidAmount));
 				categoryViewHolder.txtDate.setText(invoice.getDate());
 				return convertView;
 			}
@@ -149,8 +155,6 @@ public class PaymentActivity extends Activity {
 						txtPaidDate.setText(payment.getPaidDate());
 						txtChequeNo.setText(payment.getChequeNo());
 						txtPaidValue.setText("Rs " + currencyFormat.format(payment.getPaidValue()));
-						Log.i("txtAgingAnalysis", " view " + (txtAgingAnalysis == null));
-						Log.i("txtAgingAnalysis", " date " + (payment.getRealizationDate() == null));
 						txtAgingAnalysis.setText(calculateAging(payment.getRealizationDate()) + " day(s)");
 						chequePaymentDetail.setBackgroundColor((colorize) ? Color.parseColor("#E6E6E6") : Color.parseColor("#FFFFFF"));
 						donePaymentList.addView(chequePaymentDetail);

@@ -126,7 +126,11 @@ public class ViewProjectSalesOrderActivity extends Activity {
 	// </editor-fold>
 
 	private void btnProjectSyncClicked(View view) {
-		OrderController.syncOrder(this, receivedOrder);
+		if (receivedOrder.isSynced()) {
+			Toast.makeText(ViewProjectSalesOrderActivity.this, "Already Synced", Toast.LENGTH_LONG).show();
+		} else {
+			OrderController.syncOrder(this, receivedOrder);
+		}
 	}
 
 	private static class OrderedItemViewHolder {

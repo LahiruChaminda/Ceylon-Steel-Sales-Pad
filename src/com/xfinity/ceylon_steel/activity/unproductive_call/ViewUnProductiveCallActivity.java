@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 import com.xfinity.ceylon_steel.R;
 import com.xfinity.ceylon_steel.controller.UnProductiveCallController;
 import com.xfinity.ceylon_steel.model.UnProductiveCall;
@@ -61,6 +62,10 @@ public class ViewUnProductiveCallActivity extends Activity {
 	// </editor-fold>
 
 	private void btnUnProductiveCallSyncClicked(View view) {
-		UnProductiveCallController.syncUnproductiveCall(receivedUnProductiveCall, this);
+		if (receivedUnProductiveCall.isSynced()) {
+			Toast.makeText(ViewUnProductiveCallActivity.this, "Already Synced", Toast.LENGTH_LONG).show();
+		} else {
+			UnProductiveCallController.syncUnproductiveCall(receivedUnProductiveCall, this);
+		}
 	}
 }
