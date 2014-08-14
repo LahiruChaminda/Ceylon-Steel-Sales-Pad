@@ -12,7 +12,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
 import android.os.AsyncTask;
-import android.util.Log;
 import android.widget.Toast;
 import com.xfinity.ceylon_steel.R;
 import com.xfinity.ceylon_steel.db.SQLiteDatabaseHelper;
@@ -99,7 +98,7 @@ public class OutletController extends AbstractController {
 						SQLiteStatement compiledStatement = writableDatabase.compileStatement("replace into tbl_outlet(outletId, outletName) values(?,?)");
 						writableDatabase.compileStatement("delete from tbl_payment").executeUpdateDelete();
 						writableDatabase.compileStatement("delete from tbl_invoice").executeUpdateDelete();
-						SQLiteStatement invoiceStatement = writableDatabase.compileStatement("replace into tbl_invoice(salesOrderId, outletId, date, distributorCode, pendingAmount, deliveryDate) values(?,?,?,?,?,?)");
+						SQLiteStatement invoiceStatement = writableDatabase.compileStatement("replace into tbl_invoice(salesOrderId, outletId, date, distributorCode, pendingAmount, deliveryDate, invoiceAmount) values(?,?,?,?,?,?,?)");
 						SQLiteStatement paymentStatement = writableDatabase.compileStatement("replace into tbl_payment(salesOrderId, paidValue, paidDate, paymentMethod, chequeNo, status, bank) values(?,?,?,?,?,?,?)");
 						for (int i = 0; i < result.length(); i++) {
 							JSONObject outlet = result.getJSONObject(i);
@@ -117,7 +116,8 @@ public class OutletController extends AbstractController {
 									invoiceJson.getString("date"),
 									invoiceJson.getString("distributorCode"),
 									invoiceJson.getString("pendingAmount"),
-									invoiceJson.getString("deliveryDate")
+									invoiceJson.getString("deliveryDate"),
+									invoiceJson.getString("invoiceAmount")
 								});
 								invoiceStatement.executeInsert();
 								JSONArray payments = invoiceJson.getJSONArray("payments");
@@ -129,7 +129,7 @@ public class OutletController extends AbstractController {
 										payment.getString("paidDate"),
 										payment.getString("paymentMethod"),
 										payment.getString("chequeNo"),
-										Integer.toString(1),
+										payment.getString("status"),
 										payment.getString("bank")
 									});
 									paymentStatement.executeInsert();
@@ -160,8 +160,12 @@ public class OutletController extends AbstractController {
 			database.beginTransaction();
 			for (Outlet outlet : outlets) {
 				for (Invoice invoice : outlet.getPendingInvoices(context)) {
-					if (invoice.getNewPayments() != null) {
-						for (Payment payment : invoice.getNewPayments()) {
+					ArrayList<Payment> unSyncedPayments;
+					if ((unSyncedPayments = invoice.getUnSyncedPayments()) != null) {
+						for (Payment payment : unSyncedPayments) {
+							if (payment.getStatus() != Payment.FRESH_PAYMENT) {
+								continue;
+							}
 							paymentsInsertQuery.bindAllArgsAsStrings(new String[]{
 								Long.toString(invoice.getSalesOrderId()),
 								Double.toString(payment.getPaidValue()),
@@ -170,7 +174,7 @@ public class OutletController extends AbstractController {
 								payment.getPaymentMethod(),
 								(payment.getChequeNo() == null) ? "" : payment.getChequeNo(),
 								(payment.getRealizationDate() == null) ? "" : payment.getRealizationDate(),
-								Integer.toString(0)
+								Integer.toString(Payment.AGED_PAYMENT)
 							});
 							paymentsInsertQuery.executeInsert();
 						}
@@ -203,7 +207,7 @@ public class OutletController extends AbstractController {
 				try {
 					SQLiteDatabaseHelper databaseInstance = SQLiteDatabaseHelper.getDatabaseInstance(context);
 					SQLiteDatabase database = databaseInstance.getWritableDatabase();
-					Cursor paymentCursor = database.rawQuery("select paidValue, paidDate, paymentMethod, chequeNo, status, bank, salesOrderId, realizationDate from tbl_payment where status=0", null);
+					Cursor paymentCursor = database.rawQuery("select paidValue, paidDate, paymentMethod, chequeNo, status, bank, salesOrderId, realizationDate from tbl_payment where status=" + Payment.AGED_PAYMENT, null);
 					JSONArray paymentsJson = new JSONArray();
 
 					for (paymentCursor.moveToFirst(); !paymentCursor.isAfterLast(); paymentCursor.moveToNext()) {
@@ -212,14 +216,13 @@ public class OutletController extends AbstractController {
 						String paymentMethod = paymentCursor.getString(2);
 						String chequeNo = paymentCursor.getString(3);
 						String realizationDate = paymentCursor.getString(7);
-						boolean status = paymentCursor.getInt(4) == 1;
+						int status = paymentCursor.getInt(4);
 						String bank = paymentCursor.getString(5);
 						long salesOrderId = paymentCursor.getLong(6);
 						if (paymentMethod.equalsIgnoreCase(Payment.CASH_PAYMENT)) {
-							paymentsJson.put(new Payment(salesOrderId, paidValue, paidDate, status).getPaymentAsJson());
+							paymentsJson.put(new Payment(salesOrderId, paidValue, paidDate, (byte) status).getPaymentAsJson());
 						} else {
-							Log.i("response json", new Payment(salesOrderId, paidValue, paidDate, bank, chequeNo, realizationDate, status).getPaymentAsJson().toString());
-							paymentsJson.put(new Payment(salesOrderId, paidValue, paidDate, bank, chequeNo, realizationDate, status).getPaymentAsJson());
+							paymentsJson.put(new Payment(salesOrderId, paidValue, paidDate, bank, chequeNo, realizationDate, (byte) status).getPaymentAsJson());
 						}
 					}
 					paymentCursor.close();
@@ -266,15 +269,18 @@ public class OutletController extends AbstractController {
 		SQLiteDatabaseHelper databaseInstance = SQLiteDatabaseHelper.getDatabaseInstance(context);
 		SQLiteDatabase writableDatabase = databaseInstance.getWritableDatabase();
 		ArrayList<Invoice> invoices = new ArrayList<Invoice>();
-		Cursor invoiceCursor = writableDatabase.rawQuery("select distinct salesOrderId, date, distributorCode, pendingAmount, outletName, deliveryDate from tbl_invoice inner join tbl_outlet on tbl_outlet.outletId=tbl_invoice.outletId where tbl_invoice.outletId=?", new String[]{Integer.toString(outletId)});
+		Cursor invoiceCursor = writableDatabase.rawQuery("select distinct salesOrderId, date, distributorCode, pendingAmount, outletName, deliveryDate, invoiceAmount from tbl_invoice inner join tbl_outlet on tbl_outlet.outletId=tbl_invoice.outletId where tbl_invoice.outletId=?", new String[]{Integer.toString(outletId)});
 		for (invoiceCursor.moveToFirst(); !invoiceCursor.isAfterLast(); invoiceCursor.moveToNext()) {
 			ArrayList<Payment> payments = new ArrayList<Payment>();
+			ArrayList<Payment> unSyncedPayments = new ArrayList<Payment>();
+			ArrayList<Payment> pendingPayments = new ArrayList<Payment>();
 			long salesOrderId = invoiceCursor.getLong(0);
 			String date = invoiceCursor.getString(1);
 			String distributorCode = invoiceCursor.getString(2);
 			String outletName = invoiceCursor.getString(4);
 			String deliveryDate = invoiceCursor.getString(5);
 			double pendingAmount = invoiceCursor.getDouble(3);
+			double invoiceAmount = invoiceCursor.getDouble(6);
 			Cursor paymentCursor = writableDatabase.rawQuery("select paidValue, paidDate, paymentMethod, chequeNo, status, bank, realizationDate from tbl_payment where salesOrderId=?", new String[]{Long.toString(salesOrderId)});
 			for (paymentCursor.moveToFirst(); !paymentCursor.isAfterLast(); paymentCursor.moveToNext()) {
 				double paidValue = paymentCursor.getDouble(0);
@@ -282,16 +288,30 @@ public class OutletController extends AbstractController {
 				String paymentMethod = paymentCursor.getString(2);
 				String chequeNo = paymentCursor.getString(3);
 				String realizationDate = paymentCursor.getString(6);
-				boolean status = paymentCursor.getInt(4) == 1;
+				int status = paymentCursor.getInt(4);
 				String bank = paymentCursor.getString(5);
+				Payment payment;
 				if (paymentMethod.equalsIgnoreCase(Payment.CASH_PAYMENT)) {
-					payments.add(new Payment(salesOrderId, paidValue, paidDate, status));
+					payment = new Payment(salesOrderId, paidValue, paidDate, (byte) status);
 				} else {
-					payments.add(new Payment(salesOrderId, paidValue, paidDate, bank, chequeNo, realizationDate, status));
+					payment = new Payment(salesOrderId, paidValue, paidDate, bank, chequeNo, realizationDate, (byte) status);
+				}
+				switch (status) {
+					case Payment.ACCEPTED_PAYMENT:
+					case Payment.REJECTED_PAYMENT:
+						payments.add(payment);
+						break;
+					case Payment.PENDING_PAYMENT:
+						pendingPayments.add(payment);
+						break;
+					case Payment.AGED_PAYMENT:
+					case Payment.FRESH_PAYMENT:
+						unSyncedPayments.add(payment);
+						break;
 				}
 			}
 			paymentCursor.close();
-			invoices.add(new Invoice(date, distributorCode, pendingAmount, salesOrderId, payments, outletName, deliveryDate));
+			invoices.add(new Invoice(date, distributorCode, pendingAmount, salesOrderId, payments, unSyncedPayments, pendingPayments, outletName, deliveryDate, invoiceAmount));
 		}
 		invoiceCursor.close();
 		return invoices;
@@ -301,15 +321,18 @@ public class OutletController extends AbstractController {
 		SQLiteDatabaseHelper databaseInstance = SQLiteDatabaseHelper.getDatabaseInstance(context);
 		SQLiteDatabase writableDatabase = databaseInstance.getWritableDatabase();
 		ArrayList<Invoice> invoices = new ArrayList<Invoice>();
-		Cursor invoiceCursor = writableDatabase.rawQuery("select distinct salesOrderId, date, distributorCode, pendingAmount, outletName, deliveryDate from tbl_invoice inner join tbl_outlet on tbl_outlet.outletId=tbl_invoice.outletId", null);
+		Cursor invoiceCursor = writableDatabase.rawQuery("select distinct salesOrderId, date, distributorCode, pendingAmount, outletName, deliveryDate, invoiceAmount from tbl_invoice inner join tbl_outlet on tbl_outlet.outletId=tbl_invoice.outletId", null);
 		for (invoiceCursor.moveToFirst(); !invoiceCursor.isAfterLast(); invoiceCursor.moveToNext()) {
 			ArrayList<Payment> payments = new ArrayList<Payment>();
+			ArrayList<Payment> unSyncedPayments = new ArrayList<Payment>();
+			ArrayList<Payment> pendingPayments = new ArrayList<Payment>();
 			long salesOrderId = invoiceCursor.getLong(0);
 			String date = invoiceCursor.getString(1);
 			String distributorCode = invoiceCursor.getString(2);
 			String outletName = invoiceCursor.getString(4);
 			String deliveryDate = invoiceCursor.getString(5);
 			double pendingAmount = invoiceCursor.getDouble(3);
+			double invoiceAmount = invoiceCursor.getDouble(6);
 			Cursor paymentCursor = writableDatabase.rawQuery("select paidValue, paidDate, paymentMethod, chequeNo, status, bank, realizationDate from tbl_payment where salesOrderId=?", new String[]{Long.toString(salesOrderId)});
 			for (paymentCursor.moveToFirst(); !paymentCursor.isAfterLast(); paymentCursor.moveToNext()) {
 				double paidValue = paymentCursor.getDouble(0);
@@ -317,16 +340,30 @@ public class OutletController extends AbstractController {
 				String paymentMethod = paymentCursor.getString(2);
 				String chequeNo = paymentCursor.getString(3);
 				String realizationDate = paymentCursor.getString(6);
-				boolean status = paymentCursor.getInt(4) == 1;
+				int status = paymentCursor.getInt(4);
 				String bank = paymentCursor.getString(5);
+				Payment payment;
 				if (paymentMethod.equalsIgnoreCase(Payment.CASH_PAYMENT)) {
-					payments.add(new Payment(salesOrderId, paidValue, paidDate, status));
+					payment = new Payment(salesOrderId, paidValue, paidDate, (byte) status);
 				} else {
-					payments.add(new Payment(salesOrderId, paidValue, paidDate, bank, chequeNo, realizationDate, status));
+					payment = new Payment(salesOrderId, paidValue, paidDate, bank, chequeNo, realizationDate, (byte) status);
+				}
+				switch (status) {
+					case Payment.ACCEPTED_PAYMENT:
+					case Payment.REJECTED_PAYMENT:
+						payments.add(payment);
+						break;
+					case Payment.PENDING_PAYMENT:
+						pendingPayments.add(payment);
+						break;
+					case Payment.AGED_PAYMENT:
+					case Payment.FRESH_PAYMENT:
+						unSyncedPayments.add(payment);
+						break;
 				}
 			}
 			paymentCursor.close();
-			invoices.add(new Invoice(date, distributorCode, pendingAmount, salesOrderId, payments, outletName, deliveryDate));
+			invoices.add(new Invoice(date, distributorCode, pendingAmount, salesOrderId, payments, unSyncedPayments, pendingPayments, outletName, deliveryDate, invoiceAmount));
 		}
 		invoiceCursor.close();
 		return invoices;

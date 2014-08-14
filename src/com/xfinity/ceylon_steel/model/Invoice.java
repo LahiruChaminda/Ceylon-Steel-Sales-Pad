@@ -17,31 +17,33 @@ public class Invoice implements Serializable {
 	private String date;
 	private String distributorCode;
 	private double pendingAmount;
+	private double invoiceAmount;
 	private long salesOrderId;
 	private ArrayList<Payment> payments;
-	private ArrayList<Payment> newPayments;
+	private ArrayList<Payment> unSyncedPayments;
+	private ArrayList<Payment> pendingPayments;
 	private String outletName;
 	private String deliveryDate;
 
-	public Invoice(String date, String distributorCode, double pendingAmount, long salesOrderId, ArrayList<Payment> payments, String outletName, String deliveryDate) {
+	public Invoice(String date, String distributorCode, double pendingAmount, long salesOrderId, ArrayList<Payment> payments, ArrayList<Payment> unSyncedPayments, ArrayList<Payment> pendingPayments, String outletName, String deliveryDate, double invoiceAmount) {
 		this.date = date;
 		this.distributorCode = distributorCode;
 		this.pendingAmount = pendingAmount;
 		this.salesOrderId = salesOrderId;
 		this.payments = payments;
+		this.unSyncedPayments = unSyncedPayments;
+		this.pendingPayments = pendingPayments;
 		this.outletName = outletName;
 		this.deliveryDate = deliveryDate;
+		this.invoiceAmount = invoiceAmount;
 	}
 
-	public Invoice(String date, String distributorCode, double pendingAmount, long salesOrderId, ArrayList<Payment> payments, ArrayList<Payment> newPayments, String outletName, String deliveryDate) {
-		this.date = date;
-		this.distributorCode = distributorCode;
-		this.pendingAmount = pendingAmount;
-		this.salesOrderId = salesOrderId;
-		this.payments = payments;
-		this.newPayments = newPayments;
-		this.outletName = outletName;
-		this.deliveryDate = deliveryDate;
+	public double getInvoiceAmount() {
+		return invoiceAmount;
+	}
+
+	public void setInvoiceAmount(double invoiceAmount) {
+		this.invoiceAmount = invoiceAmount;
 	}
 
 	public String getDate() {
@@ -84,12 +86,20 @@ public class Invoice implements Serializable {
 		this.salesOrderId = salesOrderId;
 	}
 
-	public ArrayList<Payment> getNewPayments() {
-		return newPayments;
+	public ArrayList<Payment> getUnSyncedPayments() {
+		return unSyncedPayments;
 	}
 
-	public void setNewPayments(ArrayList<Payment> newPayments) {
-		this.newPayments = newPayments;
+	public void setUnSyncedPayments(ArrayList<Payment> unSyncedPayments) {
+		this.unSyncedPayments = unSyncedPayments;
+	}
+
+	public ArrayList<Payment> getPendingPayments() {
+		return pendingPayments;
+	}
+
+	public void setPendingPayments(ArrayList<Payment> pendingPayments) {
+		this.pendingPayments = pendingPayments;
 	}
 
 	public String getOutletName() {

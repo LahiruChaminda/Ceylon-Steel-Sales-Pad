@@ -19,6 +19,11 @@ public class Payment implements Serializable {
 
 	public static final String CASH_PAYMENT = "CASH";
 	public static final String CHEQUE_PAYMENT = "CHEQUE";
+	public static final byte ACCEPTED_PAYMENT = 0;
+	public static final byte REJECTED_PAYMENT = 1;
+	public static final byte PENDING_PAYMENT = 2;
+	public static final byte AGED_PAYMENT = 3;
+	public static final byte FRESH_PAYMENT = 4;
 
 	private long salesOrderId;
 	private double paidValue;
@@ -27,18 +32,18 @@ public class Payment implements Serializable {
 	private String bank;
 	private String chequeNo;
 	private String realizationDate;
-	private boolean synced;
+	private byte status;
 
 
-	public Payment(long salesOrderId, double paidValue, String paidDate, boolean synced) {
+	public Payment(long salesOrderId, double paidValue, String paidDate, byte status) {
 		this.salesOrderId = salesOrderId;
 		this.paidValue = paidValue;
 		this.paidDate = paidDate;
 		this.paymentMethod = CASH_PAYMENT;
-		this.synced = synced;
+		this.status = status;
 	}
 
-	public Payment(long salesOrderId, double paidValue, String paidDate, String bank, String chequeNo, String realizationDate, boolean synced) {
+	public Payment(long salesOrderId, double paidValue, String paidDate, String bank, String chequeNo, String realizationDate, byte status) {
 		this.salesOrderId = salesOrderId;
 		this.paidValue = paidValue;
 		this.paidDate = paidDate;
@@ -46,7 +51,7 @@ public class Payment implements Serializable {
 		this.chequeNo = chequeNo;
 		this.bank = bank;
 		this.realizationDate = realizationDate;
-		this.synced = synced;
+		this.status = status;
 	}
 
 	public double getPaidValue() {
@@ -97,12 +102,12 @@ public class Payment implements Serializable {
 		this.realizationDate = realizationDate;
 	}
 
-	public boolean isSynced() {
-		return synced;
+	public byte getStatus() {
+		return status;
 	}
 
-	public void setSynced(boolean synced) {
-		this.synced = synced;
+	public void setStatus(byte status) {
+		this.status = status;
 	}
 
 	public String getBank() {

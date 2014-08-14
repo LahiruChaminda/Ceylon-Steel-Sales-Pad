@@ -26,7 +26,7 @@ import java.util.logging.Logger;
 public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
 
 	private static final String DATABASE_NAME = "ceylon_steel";
-	private static final int VERSION = 24;
+	private static final int VERSION = 25;
 	private static volatile SQLiteDatabaseHelper database;
 	private final AssetManager assets;
 	private AtomicInteger atomicInteger;

@@ -43,7 +43,7 @@
     <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Reload Data"
+            android:text="Sync Data"
             android:layout_alignParentBottom="true"
             android:id="@+id/btnReloadData" android:textSize="25dp"/>
     <Button

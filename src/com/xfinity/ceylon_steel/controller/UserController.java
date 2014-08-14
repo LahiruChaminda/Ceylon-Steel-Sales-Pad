@@ -470,6 +470,9 @@ public class UserController extends AbstractController {
 			UserController.atomicInteger = new AtomicInteger();
 		}
 
+		OutletController.syncPayments(context);
+		UserController.syncRepLocations(context);
+
 		UserController.atomicInteger.incrementAndGet();
 		CategoryController.downLoadItemsAndCategories(context);
 

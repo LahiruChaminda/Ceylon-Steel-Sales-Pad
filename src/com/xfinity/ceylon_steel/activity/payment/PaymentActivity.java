@@ -64,218 +64,7 @@ public class PaymentActivity extends Activity {
 			}
 		});
 
-		adapter = new BaseExpandableListAdapter() {
-			@Override
-			public int getGroupCount() {
-				return selectedOutlet.getPendingInvoices(PaymentActivity.this).size();
-			}
-
-			@Override
-			public int getChildrenCount(int groupPosition) {
-				return 1;
-			}
-
-			@Override
-			public Invoice getGroup(int groupPosition) {
-				return selectedOutlet.getPendingInvoices(PaymentActivity.this).get(groupPosition);
-			}
-
-			@Override
-			public Object getChild(int groupPosition, int childPosition) {
-				return null;
-			}
-
-			@Override
-			public long getGroupId(int groupPosition) {
-				return groupPosition;
-			}
-
-			@Override
-			public long getChildId(int groupPosition, int childPosition) {
-				return childPosition;
-			}
-
-			@Override
-			public boolean hasStableIds() {
-				return false;
-			}
-
-			@Override
-			public View getGroupView(int groupPosition, boolean b, View convertView, ViewGroup viewGroup) {
-				CategoryViewHolder categoryViewHolder;
-				if (convertView == null) {
-					LayoutInflater inflater = (LayoutInflater) getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
-					convertView = inflater.inflate(R.layout.invoice_item, viewGroup, false);
-					categoryViewHolder = new CategoryViewHolder();
-					categoryViewHolder.txtInvoiceNo = (TextView) convertView.findViewById(R.id.txtInvoiceNo);
-					categoryViewHolder.txtTotal = (TextView) convertView.findViewById(R.id.txtTotal);
-					categoryViewHolder.txtDate = (TextView) convertView.findViewById(R.id.txtDate);
-					convertView.setTag(categoryViewHolder);
-				} else {
-					categoryViewHolder = (CategoryViewHolder) convertView.getTag();
-				}
-				Invoice invoice = getGroup(groupPosition);
-				categoryViewHolder.txtInvoiceNo.setText(invoice.getDistributorCode());
-				double paidAmount = 0;
-				ArrayList<Payment> payments;
-				if ((payments = invoice.getPayments()) != null) {
-					for (Payment payment : payments) {
-						paidAmount += payment.getPaidValue();
-					}
-				}
-				categoryViewHolder.txtTotal.setText("Rs " + currencyFormat.format(invoice.getPendingAmount() + paidAmount));
-				categoryViewHolder.txtDate.setText(invoice.getDate());
-				return convertView;
-			}
-
-			@Override
-			public View getChildView(final int groupPosition, int childPosition, boolean b, View convertView, ViewGroup viewGroup) {
-				final Invoice invoice = getGroup(groupPosition);
-				LayoutInflater inflater = (LayoutInflater) getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
-				convertView = inflater.inflate(R.layout.invoice_payment_details_page, viewGroup, false);
-				LinearLayout donePaymentList = (LinearLayout) convertView.findViewById(R.id.donePaymentList);
-				LinearLayout justMadePaymentList = (LinearLayout) convertView.findViewById(R.id.madePayments);
-				TextView txtPendingAmount = (TextView) convertView.findViewById(R.id.txtPendingAmount);
-				boolean colorize = true;
-				for (Payment payment : invoice.getPayments()) {
-					if (payment.getPaymentMethod().equalsIgnoreCase(Payment.CASH_PAYMENT)) {
-						View cashPaymentDetail = inflater.inflate(R.layout.cash_payment_details_page, viewGroup, false);
-						TextView txtPaidValue = (TextView) cashPaymentDetail.findViewById(R.id.txtPaidValue);
-						TextView txtPaidDate = (TextView) cashPaymentDetail.findViewById(R.id.txtPaidDate);
-						txtPaidDate.setText(payment.getPaidDate());
-						txtPaidValue.setText("Rs " + currencyFormat.format(payment.getPaidValue()));
-						cashPaymentDetail.setBackgroundColor((colorize) ? Color.parseColor("#E6E6E6") : Color.parseColor("#FFFFFF"));
-						donePaymentList.addView(cashPaymentDetail);
-					} else {
-						View chequePaymentDetail = inflater.inflate(R.layout.cheque_payment_detail_page, viewGroup, false);
-						TextView txtPaidValue = (TextView) chequePaymentDetail.findViewById(R.id.txtPaidValue);
-						TextView txtPaidDate = (TextView) chequePaymentDetail.findViewById(R.id.txtPaidDate);
-						TextView txtChequeNo = (TextView) chequePaymentDetail.findViewById(R.id.txtChequeNo);
-						TextView txtAgingAnalysis = (TextView) chequePaymentDetail.findViewById(R.id.txtAgingAnalysis);
-						txtPaidDate.setText(payment.getPaidDate());
-						txtChequeNo.setText(payment.getChequeNo());
-						txtPaidValue.setText("Rs " + currencyFormat.format(payment.getPaidValue()));
-						txtAgingAnalysis.setText(calculateAging(payment.getRealizationDate()) + " day(s)");
-						chequePaymentDetail.setBackgroundColor((colorize) ? Color.parseColor("#E6E6E6") : Color.parseColor("#FFFFFF"));
-						donePaymentList.addView(chequePaymentDetail);
-					}
-					colorize = !colorize;
-				}
-				colorize = true;
-				if (invoice.getNewPayments() != null) {
-					for (Payment payment : invoice.getNewPayments()) {
-						if (payment.getPaymentMethod().equalsIgnoreCase(Payment.CASH_PAYMENT)) {
-							View cashPaymentDetail = inflater.inflate(R.layout.cash_payment_details_page, viewGroup, false);
-							TextView txtPaidValue = (TextView) cashPaymentDetail.findViewById(R.id.txtPaidValue);
-							TextView txtPaidDate = (TextView) cashPaymentDetail.findViewById(R.id.txtPaidDate);
-							txtPaidDate.setText(payment.getPaidDate());
-							txtPaidValue.setText("Rs " + currencyFormat.format(payment.getPaidValue()));
-							cashPaymentDetail.setBackgroundColor((colorize) ? Color.parseColor("#E6E6E6") : Color.parseColor("#FFFFFF"));
-							justMadePaymentList.addView(cashPaymentDetail);
-						} else {
-							View chequePaymentDetail = inflater.inflate(R.layout.cheque_payment_detail_page, viewGroup, false);
-							TextView txtPaidValue = (TextView) chequePaymentDetail.findViewById(R.id.txtPaidValue);
-							TextView txtPaidDate = (TextView) chequePaymentDetail.findViewById(R.id.txtPaidDate);
-							TextView txtChequeNo = (TextView) chequePaymentDetail.findViewById(R.id.txtChequeNo);
-							TextView txtAgingAnalysis = (TextView) chequePaymentDetail.findViewById(R.id.txtAgingAnalysis);
-							txtPaidDate.setText(payment.getPaidDate());
-							txtChequeNo.setText(payment.getChequeNo());
-							txtPaidValue.setText("Rs " + currencyFormat.format(payment.getPaidValue()));
-							txtAgingAnalysis.setText(calculateAging(payment.getRealizationDate()) + " day(s)");
-							chequePaymentDetail.setBackgroundColor((colorize) ? Color.parseColor("#E6E6E6") : Color.parseColor("#FFFFFF"));
-							justMadePaymentList.addView(chequePaymentDetail);
-						}
-						colorize = !colorize;
-					}
-				}
-				Button btnCash = (Button) convertView.findViewById(R.id.btnCash);
-				btnCash.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View view) {
-						final Dialog dialog = new Dialog(PaymentActivity.this);
-						dialog.setTitle("Cash Payment");
-						dialog.setContentView(R.layout.cash_data_input_dialog_page);
-						Button btnOk = (Button) dialog.findViewById(R.id.btnOk);
-						Button btnCancel = (Button) dialog.findViewById(R.id.btnCancel);
-						final EditText inputAmount = (EditText) dialog.findViewById(R.id.inputAmount);
-						btnOk.setOnClickListener(new View.OnClickListener() {
-							@Override
-							public void onClick(View view) {
-								String amountString = inputAmount.getText().toString();
-								Payment payment = new Payment(invoice.getSalesOrderId(), Double.parseDouble(amountString.isEmpty() ? "0" : amountString), new SimpleDateFormat("yyyy-MM-dd").format(new Date()), false);
-								ArrayList<Payment> newPayments;
-								if ((newPayments = invoice.getNewPayments()) == null) {
-									newPayments = new ArrayList<Payment>();
-									invoice.setNewPayments(newPayments);
-								}
-								newPayments.add(payment);
-								invoiceList.collapseGroup(groupPosition);
-								invoiceList.expandGroup(groupPosition);
-								dialog.dismiss();
-							}
-						});
-						btnCancel.setOnClickListener(new View.OnClickListener() {
-							@Override
-							public void onClick(View view) {
-								dialog.dismiss();
-							}
-						});
-						dialog.show();
-					}
-				});
-				Button btnCheque = (Button) convertView.findViewById(R.id.btnCheque);
-				btnCheque.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View view) {
-						final Dialog dialog = new Dialog(PaymentActivity.this);
-						dialog.setTitle("Cheque Payment");
-						dialog.setContentView(R.layout.cheque_data_input_dialog_page);
-						final Spinner bankCombo = (Spinner) dialog.findViewById(R.id.bankCombo);
-						ArrayAdapter<Bank> adapter = new ArrayAdapter<Bank>(PaymentActivity.this, android.R.layout.simple_spinner_item, BankController.getBanks());
-						adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-						bankCombo.setAdapter(adapter);
-						Button btnCancel = (Button) dialog.findViewById(R.id.btnCancel);
-						Button btnOk = (Button) dialog.findViewById(R.id.btnOk);
-						final EditText inputAmount = (EditText) dialog.findViewById(R.id.inputAmount);
-						final EditText inputChequeNo = (EditText) dialog.findViewById(R.id.inputChequeNo);
-						final EditText inputYear = (EditText) dialog.findViewById(R.id.inputYear);
-						final EditText inputMonth = (EditText) dialog.findViewById(R.id.inputMonth);
-						final EditText inputDate = (EditText) dialog.findViewById(R.id.inputDate);
-						btnOk.setOnClickListener(new View.OnClickListener() {
-							@Override
-							public void onClick(View view) {
-								String amountString = inputAmount.getText().toString();
-								String realizationDate = inputYear.getText().toString() + "-" + inputMonth.getText().toString() + "-" + inputDate.getText().toString();
-								Payment payment = new Payment(invoice.getSalesOrderId(), Double.parseDouble(amountString.isEmpty() ? "0" : amountString), new SimpleDateFormat("yyyy-MM-dd").format(new Date()), bankCombo.getSelectedItem().toString(), inputChequeNo.getText().toString(), realizationDate, false);
-								ArrayList<Payment> newPayments;
-								if ((newPayments = invoice.getNewPayments()) == null) {
-									newPayments = new ArrayList<Payment>();
-									invoice.setNewPayments(newPayments);
-								}
-								newPayments.add(payment);
-								invoiceList.collapseGroup(groupPosition);
-								invoiceList.expandGroup(groupPosition);
-								dialog.dismiss();
-							}
-						});
-						btnCancel.setOnClickListener(new View.OnClickListener() {
-							@Override
-							public void onClick(View view) {
-								dialog.dismiss();
-							}
-						});
-						dialog.show();
-					}
-				});
-				txtPendingAmount.setText(Double.toString(invoice.getPendingAmount()));
-				return convertView;
-			}
-
-			@Override
-			public boolean isChildSelectable(int groupPosition, int childPosition) {
-				return false;
-			}
-		};
+		adapter = new MyExpandableListAdapter();
 
 	}
 
@@ -351,21 +140,255 @@ public class PaymentActivity extends Activity {
 	}
 
 	private long calculateAging(String bankingDateString) {
+
+		Date today = new Date();
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		Date bankingDate = null;
 		try {
-			Date today = new Date();
-			SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-			Date bankingDate = simpleDateFormat.parse(bankingDateString);
-			long timeDifference = (bankingDate.getTime() - today.getTime()) / 86400000;
-			return (timeDifference > 0) ? timeDifference : 0;
+			bankingDate = simpleDateFormat.parse(bankingDateString);
 		} catch (ParseException e) {
 			e.printStackTrace();
+		}
+		if (bankingDate == null) {
 			return 0;
 		}
+		long timeDifference = (bankingDate.getTime() - today.getTime()) / 86400000;
+		return (timeDifference > 0) ? timeDifference : 0;
+
 	}
 
 	private static class CategoryViewHolder {
 		TextView txtInvoiceNo;
 		TextView txtTotal;
 		TextView txtDate;
+	}
+
+	private class MyExpandableListAdapter extends BaseExpandableListAdapter {
+		@Override
+		public int getGroupCount() {
+			return selectedOutlet.getPendingInvoices(PaymentActivity.this).size();
+		}
+
+		@Override
+		public int getChildrenCount(int groupPosition) {
+			return 1;
+		}
+
+		@Override
+		public Invoice getGroup(int groupPosition) {
+			return selectedOutlet.getPendingInvoices(PaymentActivity.this).get(groupPosition);
+		}
+
+		@Override
+		public Object getChild(int groupPosition, int childPosition) {
+			return null;
+		}
+
+		@Override
+		public long getGroupId(int groupPosition) {
+			return groupPosition;
+		}
+
+		@Override
+		public long getChildId(int groupPosition, int childPosition) {
+			return childPosition;
+		}
+
+		@Override
+		public boolean hasStableIds() {
+			return false;
+		}
+
+		@Override
+		public View getGroupView(int groupPosition, boolean b, View convertView, ViewGroup viewGroup) {
+			CategoryViewHolder categoryViewHolder;
+			if (convertView == null) {
+				LayoutInflater inflater = (LayoutInflater) getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
+				convertView = inflater.inflate(R.layout.invoice_item, viewGroup, false);
+				categoryViewHolder = new CategoryViewHolder();
+				categoryViewHolder.txtInvoiceNo = (TextView) convertView.findViewById(R.id.txtInvoiceNo);
+				categoryViewHolder.txtTotal = (TextView) convertView.findViewById(R.id.txtTotal);
+				categoryViewHolder.txtDate = (TextView) convertView.findViewById(R.id.txtDate);
+				convertView.setTag(categoryViewHolder);
+			} else {
+				categoryViewHolder = (CategoryViewHolder) convertView.getTag();
+			}
+			Invoice invoice = getGroup(groupPosition);
+			categoryViewHolder.txtInvoiceNo.setText(invoice.getDistributorCode());
+			categoryViewHolder.txtTotal.setText("Rs " + currencyFormat.format(invoice.getInvoiceAmount()));
+			categoryViewHolder.txtDate.setText(invoice.getDate());
+			return convertView;
+		}
+
+		@Override
+		public View getChildView(final int groupPosition, int childPosition, boolean b, View convertView, ViewGroup viewGroup) {
+			final Invoice invoice = getGroup(groupPosition);
+			LayoutInflater inflater = (LayoutInflater) getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
+			convertView = convertView == null ? inflater.inflate(R.layout.invoice_payment_details_page, viewGroup, false) : convertView;
+			LinearLayout donePaymentList = (LinearLayout) convertView.findViewById(R.id.donePaymentList);
+			LinearLayout unSyncedPaymentList = (LinearLayout) convertView.findViewById(R.id.madePayments);
+			TextView txtPendingAmount = (TextView) convertView.findViewById(R.id.txtPendingAmount);
+			donePaymentList.removeAllViews();
+			unSyncedPaymentList.removeAllViews();
+
+			for (Payment payment : invoice.getPayments()) {
+				if (payment.getPaymentMethod().equalsIgnoreCase(Payment.CASH_PAYMENT)) {
+					View cashPaymentDetail = inflater.inflate(R.layout.cash_payment_details_page, viewGroup, false);
+					TextView txtPaidValue = (TextView) cashPaymentDetail.findViewById(R.id.txtPaidValue);
+					TextView txtPaidDate = (TextView) cashPaymentDetail.findViewById(R.id.txtPaidDate);
+					txtPaidDate.setText(payment.getPaidDate());
+					txtPaidValue.setText("Rs " + currencyFormat.format(payment.getPaidValue()));
+					cashPaymentDetail.setBackgroundColor((payment.getStatus() == Payment.REJECTED_PAYMENT) ? Color.parseColor("#ffcccc") : Color.parseColor("#ccffcc"));
+					donePaymentList.addView(cashPaymentDetail);
+				} else {
+					View chequePaymentDetail = inflater.inflate(R.layout.cheque_payment_detail_page, viewGroup, false);
+					TextView txtPaidValue = (TextView) chequePaymentDetail.findViewById(R.id.txtPaidValue);
+					TextView txtPaidDate = (TextView) chequePaymentDetail.findViewById(R.id.txtPaidDate);
+					TextView txtChequeNo = (TextView) chequePaymentDetail.findViewById(R.id.txtChequeNo);
+					TextView txtAgingAnalysis = (TextView) chequePaymentDetail.findViewById(R.id.txtAgingAnalysis);
+					txtPaidDate.setText(payment.getPaidDate());
+					txtChequeNo.setText(payment.getChequeNo());
+					txtPaidValue.setText("Rs " + currencyFormat.format(payment.getPaidValue()));
+					txtAgingAnalysis.setText(calculateAging(payment.getRealizationDate()) + " day(s)");
+					chequePaymentDetail.setBackgroundColor((payment.getStatus() == Payment.REJECTED_PAYMENT) ? Color.parseColor("#ffcccc") : Color.parseColor("#ccffcc"));
+					donePaymentList.addView(chequePaymentDetail);
+				}
+			}
+
+			if (invoice.getPendingPayments() != null) {
+				for (Payment payment : invoice.getPendingPayments()) {
+					if (payment.getPaymentMethod().equalsIgnoreCase(Payment.CASH_PAYMENT)) {
+						View cashPaymentDetail = inflater.inflate(R.layout.cash_payment_details_page, viewGroup, false);
+						TextView txtPaidValue = (TextView) cashPaymentDetail.findViewById(R.id.txtPaidValue);
+						TextView txtPaidDate = (TextView) cashPaymentDetail.findViewById(R.id.txtPaidDate);
+						txtPaidDate.setText(payment.getPaidDate());
+						txtPaidValue.setText("Rs " + currencyFormat.format(payment.getPaidValue()));
+						cashPaymentDetail.setBackgroundColor(Color.parseColor("#ffffcc"));
+						donePaymentList.addView(cashPaymentDetail);
+					} else {
+						View chequePaymentDetail = inflater.inflate(R.layout.cheque_payment_detail_page, viewGroup, false);
+						TextView txtPaidValue = (TextView) chequePaymentDetail.findViewById(R.id.txtPaidValue);
+						TextView txtPaidDate = (TextView) chequePaymentDetail.findViewById(R.id.txtPaidDate);
+						TextView txtChequeNo = (TextView) chequePaymentDetail.findViewById(R.id.txtChequeNo);
+						TextView txtAgingAnalysis = (TextView) chequePaymentDetail.findViewById(R.id.txtAgingAnalysis);
+						txtPaidDate.setText(payment.getPaidDate());
+						txtChequeNo.setText(payment.getChequeNo());
+						txtPaidValue.setText("Rs " + currencyFormat.format(payment.getPaidValue()));
+						txtAgingAnalysis.setText(calculateAging(payment.getRealizationDate()) + " day(s)");
+						chequePaymentDetail.setBackgroundColor(Color.parseColor("#ffffcc"));
+						donePaymentList.addView(chequePaymentDetail);
+					}
+				}
+			}
+
+			if (invoice.getUnSyncedPayments() != null) {
+				for (Payment payment : invoice.getUnSyncedPayments()) {
+					if (payment.getPaymentMethod().equalsIgnoreCase(Payment.CASH_PAYMENT)) {
+						View cashPaymentDetail = inflater.inflate(R.layout.cash_payment_details_page, viewGroup, false);
+						TextView txtPaidValue = (TextView) cashPaymentDetail.findViewById(R.id.txtPaidValue);
+						TextView txtPaidDate = (TextView) cashPaymentDetail.findViewById(R.id.txtPaidDate);
+						txtPaidDate.setText(payment.getPaidDate());
+						txtPaidValue.setText("Rs " + currencyFormat.format(payment.getPaidValue()));
+						cashPaymentDetail.setBackgroundColor(Color.parseColor("#ccccff"));
+						unSyncedPaymentList.addView(cashPaymentDetail);
+					} else {
+						View chequePaymentDetail = inflater.inflate(R.layout.cheque_payment_detail_page, viewGroup, false);
+						TextView txtPaidValue = (TextView) chequePaymentDetail.findViewById(R.id.txtPaidValue);
+						TextView txtPaidDate = (TextView) chequePaymentDetail.findViewById(R.id.txtPaidDate);
+						TextView txtChequeNo = (TextView) chequePaymentDetail.findViewById(R.id.txtChequeNo);
+						TextView txtAgingAnalysis = (TextView) chequePaymentDetail.findViewById(R.id.txtAgingAnalysis);
+						txtPaidDate.setText(payment.getPaidDate());
+						txtChequeNo.setText(payment.getChequeNo());
+						txtPaidValue.setText("Rs " + currencyFormat.format(payment.getPaidValue()));
+						txtAgingAnalysis.setText(calculateAging(payment.getRealizationDate()) + " day(s)");
+						chequePaymentDetail.setBackgroundColor(Color.parseColor("#ccccff"));
+						unSyncedPaymentList.addView(chequePaymentDetail);
+					}
+				}
+			}
+
+			Button btnCash = (Button) convertView.findViewById(R.id.btnCash);
+			btnCash.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View view) {
+					final Dialog dialog = new Dialog(PaymentActivity.this);
+					dialog.setTitle("Cash Payment");
+					dialog.setContentView(R.layout.cash_data_input_dialog_page);
+					Button btnOk = (Button) dialog.findViewById(R.id.btnOk);
+					Button btnCancel = (Button) dialog.findViewById(R.id.btnCancel);
+					final EditText inputAmount = (EditText) dialog.findViewById(R.id.inputAmount);
+					btnOk.setOnClickListener(new View.OnClickListener() {
+						@Override
+						public void onClick(View view) {
+							String amountString = inputAmount.getText().toString();
+							Payment payment = new Payment(invoice.getSalesOrderId(), amountString.isEmpty() ? 0 : Double.parseDouble(amountString), new SimpleDateFormat("yyyy-MM-dd").format(new Date()), Payment.FRESH_PAYMENT);
+							ArrayList<Payment> unSyncedPayments;
+							if ((unSyncedPayments = invoice.getUnSyncedPayments()) == null) {
+								invoice.setUnSyncedPayments(unSyncedPayments = new ArrayList<Payment>());
+							}
+							unSyncedPayments.add(payment);
+							adapter.notifyDataSetChanged();
+							dialog.dismiss();
+						}
+					});
+					btnCancel.setOnClickListener(new View.OnClickListener() {
+						@Override
+						public void onClick(View view) {
+							dialog.dismiss();
+						}
+					});
+					dialog.show();
+				}
+			});
+			Button btnCheque = (Button) convertView.findViewById(R.id.btnCheque);
+			btnCheque.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View view) {
+					final Dialog dialog = new Dialog(PaymentActivity.this);
+					dialog.setTitle("Cheque Payment");
+					dialog.setContentView(R.layout.cheque_data_input_dialog_page);
+					final Spinner bankCombo = (Spinner) dialog.findViewById(R.id.bankCombo);
+					ArrayAdapter<Bank> bankAdapter = new ArrayAdapter<Bank>(PaymentActivity.this, android.R.layout.simple_spinner_item, BankController.getBanks());
+					bankAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+					bankCombo.setAdapter(bankAdapter);
+					Button btnCancel = (Button) dialog.findViewById(R.id.btnCancel);
+					Button btnOk = (Button) dialog.findViewById(R.id.btnOk);
+					final EditText inputAmount = (EditText) dialog.findViewById(R.id.inputAmount);
+					final EditText inputChequeNo = (EditText) dialog.findViewById(R.id.inputChequeNo);
+					final EditText inputYear = (EditText) dialog.findViewById(R.id.inputYear);
+					final EditText inputMonth = (EditText) dialog.findViewById(R.id.inputMonth);
+					final EditText inputDate = (EditText) dialog.findViewById(R.id.inputDate);
+					btnOk.setOnClickListener(new View.OnClickListener() {
+						@Override
+						public void onClick(View view) {
+							String amountString = inputAmount.getText().toString();
+							String realizationDate = inputYear.getText().toString() + "-" + inputMonth.getText().toString() + "-" + inputDate.getText().toString();
+							Payment payment = new Payment(invoice.getSalesOrderId(), amountString.isEmpty() ? 0 : Double.parseDouble(amountString), new SimpleDateFormat("yyyy-MM-dd").format(new Date()), bankCombo.getSelectedItem().toString(), inputChequeNo.getText().toString(), realizationDate, Payment.FRESH_PAYMENT);
+							ArrayList<Payment> unSyncedPayments;
+							if ((unSyncedPayments = invoice.getUnSyncedPayments()) == null) {
+								invoice.setUnSyncedPayments(unSyncedPayments = new ArrayList<Payment>());
+							}
+							unSyncedPayments.add(payment);
+							adapter.notifyDataSetChanged();
+							dialog.dismiss();
+						}
+					});
+					btnCancel.setOnClickListener(new View.OnClickListener() {
+						@Override
+						public void onClick(View view) {
+							dialog.dismiss();
+						}
+					});
+					dialog.show();
+				}
+			});
+			txtPendingAmount.setText(Double.toString(invoice.getPendingAmount()));
+			return convertView;
+		}
+
+		@Override
+		public boolean isChildSelectable(int groupPosition, int childPosition) {
+			return false;
+		}
 	}
 }
