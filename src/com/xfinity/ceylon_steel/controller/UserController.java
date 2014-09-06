@@ -20,6 +20,7 @@ import android.provider.Settings;
 import android.widget.Toast;
 import com.xfinity.ceylon_steel.activity.HomeActivity;
 import com.xfinity.ceylon_steel.db.SQLiteDatabaseHelper;
+import com.xfinity.ceylon_steel.model.AttendanceRecord;
 import com.xfinity.ceylon_steel.model.User;
 import com.xfinity.ceylon_steel.model.UserLocation;
 import com.xfinity.ceylon_steel.util.BatteryUtil;
@@ -301,7 +302,9 @@ public class UserController extends AbstractController {
 					HashMap<String, Object> parameters = new HashMap<String, Object>();
 					parameters.put("data", new JSONObject(checkIn));
 					checkinDateTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date);
-					return getJsonObject(checkInCheckOut, parameters, context);
+					JSONObject response = getJsonObject(checkInCheckOut, parameters, context);
+					updateAttendanceHistory(context);
+					return response;
 				} catch (JSONException ex) {
 					Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
 				} catch (IOException ex) {
@@ -398,7 +401,9 @@ public class UserController extends AbstractController {
 					checkoutDateTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date);
 					HashMap<String, Object> parameters = new HashMap<String, Object>();
 					parameters.put("data", new JSONObject(checkOut));
-					return getJsonObject(checkInCheckOut, parameters, context);
+					JSONObject response = getJsonObject(checkInCheckOut, parameters, context);
+					updateAttendanceHistory(context);
+					return response;
 				} catch (JSONException ex) {
 					Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
 				} catch (IOException ex) {
@@ -465,14 +470,18 @@ public class UserController extends AbstractController {
 		}.execute(new User());
 	}
 
-	public static void loadDataFromServer(Context context) {
+	public static void loadDataFromServer(final Context context) {
 		if (UserController.atomicInteger == null) {
 			UserController.atomicInteger = new AtomicInteger();
 		}
 
 		OutletController.syncPayments(context);
-		UserController.syncRepLocations(context);
-
+		new Thread() {
+			@Override
+			public void run() {
+				UserController.syncRepLocations(context);
+			}
+		}.start();
 		UserController.atomicInteger.incrementAndGet();
 		CategoryController.downLoadItemsAndCategories(context);
 
@@ -484,6 +493,36 @@ public class UserController extends AbstractController {
 
 		UserController.atomicInteger.incrementAndGet();
 		CustomerController.downloadCustomers(context);
+
+		UserController.atomicInteger.incrementAndGet();
+		new AsyncTask<Void, Void, Void>() {
+
+			@Override
+			protected void onPreExecute() {
+				if (UserController.progressDialog == null) {
+					UserController.progressDialog = new ProgressDialog(context);
+					UserController.progressDialog.setMessage("Downloading Data");
+					UserController.progressDialog.setCanceledOnTouchOutside(false);
+				}
+				if (!UserController.progressDialog.isShowing()) {
+					UserController.progressDialog.show();
+				}
+			}
+
+			@Override
+			protected Void doInBackground(Void... params) {
+				UserController.updateAttendanceHistory(context);
+				return null;
+			}
+
+			@Override
+			protected void onPostExecute(Void aVoid) {
+				if (UserController.atomicInteger.decrementAndGet() == 0 && UserController.progressDialog != null && UserController.progressDialog.isShowing()) {
+					UserController.progressDialog.dismiss();
+					UserController.progressDialog = null;
+				}
+			}
+		}.execute();
 	}
 
 	public static void markRepLocation(Context context, UserLocation userLocation) {
@@ -531,14 +570,14 @@ public class UserController extends AbstractController {
 			userLocations.add(userLocation);
 		}
 		cursor.close();
-		List<Integer> synckedRepLocations = new ArrayList<Integer>();
+		List<Integer> syncedRepLocations = new ArrayList<Integer>();
 		for (UserLocation userLocation : userLocations) {
 			try {
 				HashMap<String, Object> parameters = new HashMap<String, Object>();
 				parameters.put("data", userLocation.getUserLocationJson());
 				JSONObject responseJson = getJsonObject(markRepLocations, parameters, context);
 				if (responseJson != null && responseJson.getBoolean("response")) {
-					synckedRepLocations.add(userLocation.getRepLocationId());
+					syncedRepLocations.add(userLocation.getRepLocationId());
 				}
 			} catch (IOException ex) {
 				Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
@@ -546,7 +585,7 @@ public class UserController extends AbstractController {
 				Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
 			}
 		}
-		for (Object repLocationId : synckedRepLocations) {
+		for (Object repLocationId : syncedRepLocations) {
 			compiledStatement.bindAllArgsAsStrings(new String[]{
 				Integer.toString((Integer) repLocationId)
 			});
@@ -563,5 +602,49 @@ public class UserController extends AbstractController {
 		editor.putString("type", "");
 		editor.putLong("loginTime", -1);
 		return editor.commit();
+	}
+
+	public static void updateAttendanceHistory(Context context) {
+		SQLiteDatabaseHelper databaseHelper = SQLiteDatabaseHelper.getDatabaseInstance(context);
+		try {
+			HashMap<String, Object> parameters = new HashMap<String, Object>();
+			parameters.put("userId", UserController.getAuthorizedUser(context).getUserId());
+			JSONArray responseJson = getJsonArray(UserURL.getAttendanceHistory, parameters, context);
+			SQLiteDatabase database = databaseHelper.getWritableDatabase();
+			database.compileStatement("delete from tbl_attendance_history").executeUpdateDelete();
+			SQLiteStatement statement = database.compileStatement("insert into tbl_attendance_history (date, checkInTime, checkOutTime) values (?,?,?)");
+			for (int i = 0, JSON_LENGTH = responseJson.length(); i < JSON_LENGTH; i++) {
+				JSONObject jsonInstance = responseJson.getJSONObject(i);
+				statement.bindAllArgsAsStrings(new String[]{
+					jsonInstance.getString("date"),
+					jsonInstance.getString("checkinTime"),
+					jsonInstance.getString("checkoutTime")
+				});
+				statement.executeInsert();
+			}
+		} catch (IOException ex) {
+			Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+		} catch (JSONException ex) {
+			Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+		} finally {
+			databaseHelper.close();
+		}
+	}
+
+	public static ArrayList<AttendanceRecord> getAttendanceHistory(Context context) {
+		SQLiteDatabaseHelper databaseHelper = SQLiteDatabaseHelper.getDatabaseInstance(context);
+		SQLiteDatabase database = databaseHelper.getWritableDatabase();
+		Cursor cursor = database.rawQuery("select date, checkInTime, checkOutTime from tbl_attendance_history", null);
+		ArrayList<AttendanceRecord> attendanceRecords = new ArrayList<AttendanceRecord>();
+		for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
+			attendanceRecords.add(new AttendanceRecord(
+				cursor.getString(0),
+				cursor.getString(1),
+				cursor.getString(2)
+			));
+		}
+		cursor.close();
+		databaseHelper.close();
+		return attendanceRecords;
 	}
 }

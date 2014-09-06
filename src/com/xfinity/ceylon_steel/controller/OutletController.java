@@ -269,7 +269,7 @@ public class OutletController extends AbstractController {
 		SQLiteDatabaseHelper databaseInstance = SQLiteDatabaseHelper.getDatabaseInstance(context);
 		SQLiteDatabase writableDatabase = databaseInstance.getWritableDatabase();
 		ArrayList<Invoice> invoices = new ArrayList<Invoice>();
-		Cursor invoiceCursor = writableDatabase.rawQuery("select distinct salesOrderId, date, distributorCode, pendingAmount, outletName, deliveryDate, invoiceAmount from tbl_invoice inner join tbl_outlet on tbl_outlet.outletId=tbl_invoice.outletId where tbl_invoice.outletId=?", new String[]{Integer.toString(outletId)});
+		Cursor invoiceCursor = writableDatabase.rawQuery("select distinct salesOrderId, date, distributorCode, pendingAmount, outletName, deliveryDate, invoiceAmount from tbl_invoice inner join tbl_outlet on tbl_outlet.outletId=tbl_invoice.outletId where tbl_invoice.outletId=? order by date desc", new String[]{Integer.toString(outletId)});
 		for (invoiceCursor.moveToFirst(); !invoiceCursor.isAfterLast(); invoiceCursor.moveToNext()) {
 			ArrayList<Payment> payments = new ArrayList<Payment>();
 			ArrayList<Payment> unSyncedPayments = new ArrayList<Payment>();
@@ -321,7 +321,7 @@ public class OutletController extends AbstractController {
 		SQLiteDatabaseHelper databaseInstance = SQLiteDatabaseHelper.getDatabaseInstance(context);
 		SQLiteDatabase writableDatabase = databaseInstance.getWritableDatabase();
 		ArrayList<Invoice> invoices = new ArrayList<Invoice>();
-		Cursor invoiceCursor = writableDatabase.rawQuery("select distinct salesOrderId, date, distributorCode, pendingAmount, outletName, deliveryDate, invoiceAmount from tbl_invoice inner join tbl_outlet on tbl_outlet.outletId=tbl_invoice.outletId", null);
+		Cursor invoiceCursor = writableDatabase.rawQuery("select distinct salesOrderId, date, distributorCode, pendingAmount, outletName, deliveryDate, invoiceAmount from tbl_invoice inner join tbl_outlet on tbl_outlet.outletId=tbl_invoice.outletId order by date desc", null);
 		for (invoiceCursor.moveToFirst(); !invoiceCursor.isAfterLast(); invoiceCursor.moveToNext()) {
 			ArrayList<Payment> payments = new ArrayList<Payment>();
 			ArrayList<Payment> unSyncedPayments = new ArrayList<Payment>();

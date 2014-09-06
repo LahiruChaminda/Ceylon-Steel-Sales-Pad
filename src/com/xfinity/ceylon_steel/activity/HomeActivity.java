@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import com.xfinity.ceylon_steel.R;
 import com.xfinity.ceylon_steel.activity.attendance.AttendanceActivity;
+import com.xfinity.ceylon_steel.activity.attendance.CheckInCheckOutHistory;
 import com.xfinity.ceylon_steel.activity.make_sales_order.MakeSalesOrderActivity;
 import com.xfinity.ceylon_steel.activity.payment.DailyReportActivity;
 import com.xfinity.ceylon_steel.activity.payment.PaymentActivity;
@@ -33,6 +34,7 @@ public class HomeActivity extends Activity {
 	private Button btnMakeSalesOrder;
 	private Button btnViewSalesOrder;
 	private Button btnAttendence;
+	private Button btnAttendanceHistory;
 	private Button btnUnProductiveCall;
 	private Button btnPayment;
 	private Button btnPendingInvoices;
@@ -67,6 +69,7 @@ public class HomeActivity extends Activity {
 		btnLogout = (Button) findViewById(R.id.btnLogout);
 		btnPayment = (Button) findViewById(R.id.btnPayment);
 		btnPendingInvoices = (Button) findViewById(R.id.btnPendingInvoices);
+		btnAttendanceHistory = (Button) findViewById(R.id.btnCheckInCheckoutHistory);
 
 		btnMakeSalesOrder.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View view) {
@@ -86,6 +89,11 @@ public class HomeActivity extends Activity {
 		btnUnProductiveCall.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View view) {
 				btnUnProductiveCallClicked(view);
+			}
+		});
+		btnAttendanceHistory.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View view) {
+				btnAttendanceHistoryClicked(view);
 			}
 		});
 		btnReloadData.setOnClickListener(new View.OnClickListener() {
@@ -110,6 +118,12 @@ public class HomeActivity extends Activity {
 		});
 	}
 	// </editor-fold>
+
+	private void btnAttendanceHistoryClicked(View view) {
+		Intent checkInCheckOutHistoryActivity = new Intent(this, CheckInCheckOutHistory.class);
+		startActivity(checkInCheckOutHistoryActivity);
+		finish();
+	}
 
 	private void btnPendingInvoicesClicked(View view) {
 		Intent dailyReportActivity = new Intent(this, DailyReportActivity.class);

@@ -55,11 +55,11 @@ public class LoginActivity extends Activity {
 			txtUserName.requestFocus();
 			return;
 		}
-		String passoword = txtPassword.getText().toString();
-		if (passoword.trim().isEmpty()) {
+		String password = txtPassword.getText().toString();
+		if (password.trim().isEmpty()) {
 			txtPassword.requestFocus();
 			return;
 		}
-		UserController.authenticate(userName, passoword, this);
+		UserController.authenticate(userName, password, this);
 	}
 }

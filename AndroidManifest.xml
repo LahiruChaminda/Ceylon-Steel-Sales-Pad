@@ -73,9 +73,11 @@
         </activity>
         <activity android:name=".activity.view_sales_order.ViewItemDetailActivity" android:label="View Item Details" android:screenOrientation="portrait">
         </activity>
+        <activity android:name=".activity.attendance.CheckInCheckOutHistory" android:label="Attendance History" android:screenOrientation="portrait">
+        </activity>
         <activity android:name=".activity.payment.PaymentActivity" android:label="Payments" android:screenOrientation="landscape">
         </activity>
-        <activity android:name=".activity.payment.DailyReportActivity" android:label="Daily Report" android:screenOrientation="landscape">
+        <activity android:name=".activity.payment.DailyReportActivity" android:label="Distributor wise Outlet Sale" android:screenOrientation="landscape">
         </activity>
     </application>
 </manifest>

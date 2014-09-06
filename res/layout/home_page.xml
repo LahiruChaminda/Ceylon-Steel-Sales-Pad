@@ -22,7 +22,7 @@
         <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Attendence"
+                android:text="Attendance"
                 android:id="@+id/btnAttendence" android:textSize="25dp"/>
         <Button
                 android:layout_width="match_parent"
@@ -37,8 +37,13 @@
         <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Pending Invoices"
+                android:text="Distributor wise Outlet Sale"
                 android:id="@+id/btnPendingInvoices" android:textSize="25dp"/>
+        <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Attendance History"
+                android:id="@+id/btnCheckInCheckoutHistory" android:textSize="25dp"/>
     </LinearLayout>
     <Button
             android:layout_width="match_parent"

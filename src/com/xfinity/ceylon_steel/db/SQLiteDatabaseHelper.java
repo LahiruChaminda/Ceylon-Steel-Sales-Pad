@@ -15,8 +15,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * @author Supun Lakshan Wanigarathna Dissanayake
@@ -26,7 +24,7 @@ import java.util.logging.Logger;
 public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
 
 	private static final String DATABASE_NAME = "ceylon_steel";
-	private static final int VERSION = 25;
+	private static final int VERSION = 26;
 	private static volatile SQLiteDatabaseHelper database;
 	private final AssetManager assets;
 	private AtomicInteger atomicInteger;
@@ -55,7 +53,7 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
 			StringBuilder databaseDeclaration = new StringBuilder();
 			String line;
 			while ((line = bufferedReader.readLine()) != null) {
-				databaseDeclaration.append(line.replace("\t", ""));
+				databaseDeclaration.append(line.replace("\t", " "));
 			}
 			for (String sql : databaseDeclaration.toString().split(";")) {
 				String trimmedQuery;
@@ -65,7 +63,7 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
 			}
 			db.execSQL("PRAGMA foreign_keys = ON;");
 		} catch (IOException ex) {
-			Logger.getLogger(SQLiteDatabaseHelper.class.getName()).log(Level.SEVERE, null, ex);
+			ex.printStackTrace();
 		}
 	}
 

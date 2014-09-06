@@ -52,6 +52,7 @@ abstract class WebServiceURL {
 		public static final String checkInCheckOut = webServiceURL + "checkInCheckOut";
 		public static final String getDistributorsOfUser = webServiceURL + "getDistributorsOfUser";
 		public static final String markRepLocations = webServiceURL + "markRepLocations";
+		public static final String getAttendanceHistory = webServiceURL + "getAttendanceHistory";
 	}
 
 	protected static final class VehicleURL {

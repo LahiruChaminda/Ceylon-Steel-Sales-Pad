@@ -145,7 +145,9 @@ public class PaymentActivity extends Activity {
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		Date bankingDate = null;
 		try {
-			bankingDate = simpleDateFormat.parse(bankingDateString);
+			if (!bankingDateString.isEmpty()) {
+				bankingDate = simpleDateFormat.parse(bankingDateString);
+			}
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
