@@ -6,6 +6,7 @@
 package com.xfinity.ceylon_steel.activity.payment;
 
 import android.app.Activity;
+import android.app.AlarmManager;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Intent;
@@ -154,7 +155,7 @@ public class PaymentActivity extends Activity {
 		if (bankingDate == null) {
 			return 0;
 		}
-		long timeDifference = (bankingDate.getTime() - today.getTime()) / 86400000;
+		long timeDifference = (bankingDate.getTime() - today.getTime()) / AlarmManager.INTERVAL_DAY;
 		return (timeDifference > 0) ? timeDifference : 0;
 
 	}

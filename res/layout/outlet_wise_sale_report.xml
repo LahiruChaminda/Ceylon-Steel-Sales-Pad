@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools" android:orientation="vertical"
+        android:weightSum="1"
+        android:padding="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content">
+    </LinearLayout>
+    <LinearLayout
+            android:orientation="horizontal"
+            android:weightSum="8"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:background="#ff8cfffd">
+        <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Outlet Name"
+                android:textSize="15dp" android:gravity="center"/>
+        <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Distributor Code"
+                android:textSize="15dp" android:gravity="center"/>
+        <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Order Type"
+                android:textSize="15dp" android:gravity="center"/>
+        <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:textSize="15dp" android:gravity="center" android:text="Date"/>
+        <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:textSize="15dp" android:gravity="center" android:text="Item Name"/>
+        <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:textSize="15dp" android:gravity="center" android:text="Quantity"/>
+        <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:textSize="15dp" android:gravity="center" android:text="Unit"/>
+        <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Amount"
+                android:textSize="15dp" android:gravity="center"/>
+    </LinearLayout>
+    <ListView android:layout_width="match_parent" android:layout_height="match_parent" android:layout_weight="1" android:id="@+id/listOfSales"
+              tools:listitem="@layout/outlet_wise_sale_item"></ListView>
+    <Button android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/btnReturnToHome" android:text="Back to Home"
+            android:textSize="25dp"/>
+</LinearLayout>

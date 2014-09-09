@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="horizontal"
+              android:weightSum="10"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Outlet Name"
+            android:id="@+id/txtRetailer"
+            android:textSize="15dp" android:gravity="center"/>
+    <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:id="@+id/txtInvoiceNo"
+            android:text="Distributor Code"
+            android:textSize="15dp" android:gravity="center"/>
+    <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Payment Received on"
+            android:id="@+id/txtInvoiceDate"
+            android:textSize="15dp" android:gravity="center"/>
+    <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:id="@+id/txtPaymentMode"
+            android:text="Delivery Date"
+            android:textSize="15dp" android:gravity="center"/>
+    <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Amount"
+            android:id="@+id/txtPaymentDate"
+            android:textSize="15dp" android:gravity="center"/>
+    <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Amount"
+            android:id="@+id/txtChequeNo"
+            android:textSize="15dp" android:gravity="center"/>
+    <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Amount"
+            android:id="@+id/txtBank"
+            android:textSize="15dp" android:gravity="center"/>
+    <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Amount"
+            android:id="@+id/txtBankingDate"
+            android:textSize="15dp" android:gravity="center"/>
+    <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Amount"
+            android:id="@+id/txtAcknowledgement"
+            android:textSize="15dp" android:gravity="center"/>
+    <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Amount"
+            android:id="@+id/txtAmount"
+            android:textSize="15dp" android:gravity="center"/>
+</LinearLayout>

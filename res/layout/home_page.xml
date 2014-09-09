@@ -37,13 +37,28 @@
         <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Distributor wise Outlet Sale"
+                android:text="Outstanding Invoices"
                 android:id="@+id/btnPendingInvoices" android:textSize="25dp"/>
         <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Attendance History"
                 android:id="@+id/btnCheckInCheckoutHistory" android:textSize="25dp"/>
+        <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Payment Confirmation Report"
+                android:id="@+id/btnPaymentConfirmationReport" android:textSize="25dp"/>
+        <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Cheque Status Report"
+                android:id="@+id/btnChequeStatusReport" android:textSize="25dp"/>
+        <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Outlet wise Sale"
+                android:id="@+id/btnOutletWiseSaleReport" android:textSize="25dp"/>
     </LinearLayout>
     <Button
             android:layout_width="match_parent"

@@ -16,8 +16,11 @@ import com.xfinity.ceylon_steel.R;
 import com.xfinity.ceylon_steel.activity.attendance.AttendanceActivity;
 import com.xfinity.ceylon_steel.activity.attendance.CheckInCheckOutHistory;
 import com.xfinity.ceylon_steel.activity.make_sales_order.MakeSalesOrderActivity;
-import com.xfinity.ceylon_steel.activity.payment.DailyReportActivity;
 import com.xfinity.ceylon_steel.activity.payment.PaymentActivity;
+import com.xfinity.ceylon_steel.activity.report.ChequeRealizationReport;
+import com.xfinity.ceylon_steel.activity.report.DailyReportActivity;
+import com.xfinity.ceylon_steel.activity.report.OutletWiseSaleReport;
+import com.xfinity.ceylon_steel.activity.report.PaymentConfirmationReport;
 import com.xfinity.ceylon_steel.activity.unproductive_call.UnProductiveCallActivity;
 import com.xfinity.ceylon_steel.activity.view_sales_order.ViewSalesOrderActivity;
 import com.xfinity.ceylon_steel.controller.UserController;
@@ -40,6 +43,9 @@ public class HomeActivity extends Activity {
 	private Button btnPendingInvoices;
 	private Button btnReloadData;
 	private Button btnLogout;
+	private Button btnPaymentConfirmationReport;
+	private Button btnChequeStatusReport;
+	private Button btnOutletWiseSaleReport;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +76,9 @@ public class HomeActivity extends Activity {
 		btnPayment = (Button) findViewById(R.id.btnPayment);
 		btnPendingInvoices = (Button) findViewById(R.id.btnPendingInvoices);
 		btnAttendanceHistory = (Button) findViewById(R.id.btnCheckInCheckoutHistory);
+		btnPaymentConfirmationReport = (Button) findViewById(R.id.btnPaymentConfirmationReport);
+		btnChequeStatusReport = (Button) findViewById(R.id.btnChequeStatusReport);
+		btnOutletWiseSaleReport = (Button) findViewById(R.id.btnOutletWiseSaleReport);
 
 		btnMakeSalesOrder.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View view) {
@@ -114,6 +123,22 @@ public class HomeActivity extends Activity {
 		btnLogout.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View view) {
 				btnLogoutClicked(view);
+			}
+		});
+
+		btnPaymentConfirmationReport.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View view) {
+				btnPaymentConfirmationReportClicked(view);
+			}
+		});
+		btnChequeStatusReport.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View view) {
+				btnChequeStatusReportClicked(view);
+			}
+		});
+		btnOutletWiseSaleReport.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View view) {
+				btnOutletWiseSaleReportClicked(view);
 			}
 		});
 	}
@@ -191,4 +216,21 @@ public class HomeActivity extends Activity {
 		startService(tracker);
 	}
 
+	private void btnPaymentConfirmationReportClicked(View view) {
+		Intent intent = new Intent(HomeActivity.this, PaymentConfirmationReport.class);
+		startActivity(intent);
+		finish();
+	}
+
+	private void btnChequeStatusReportClicked(View view) {
+		Intent intent = new Intent(HomeActivity.this, ChequeRealizationReport.class);
+		startActivity(intent);
+		finish();
+	}
+
+	private void btnOutletWiseSaleReportClicked(View view) {
+		Intent intent = new Intent(HomeActivity.this, OutletWiseSaleReport.class);
+		startActivity(intent);
+		finish();
+	}
 }

@@ -39,6 +39,7 @@ abstract class WebServiceURL {
 
 		public static final String getOutletsOfUser = webServiceURL + "getOutletsOfUser";
 		public static final String syncPayments = webServiceURL + "syncPayments";
+		public static final String getPaymentConfirmationDetails = webServiceURL + "getPaymentConfirmationDetails";
 	}
 
 	protected static final class UnProductiveCallURL {

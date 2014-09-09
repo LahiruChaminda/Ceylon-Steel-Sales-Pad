@@ -368,4 +368,10 @@ public class OutletController extends AbstractController {
 		invoiceCursor.close();
 		return invoices;
 	}
+
+	public static JSONArray getPaymentConfirmationDetails(Context context) throws JSONException, IOException {
+		HashMap<String, Object> parameters = new HashMap<String, Object>();
+		parameters.put("userId", UserController.getAuthorizedUser(context).getUserId());
+		return getJsonArray(OutletURL.getPaymentConfirmationDetails, parameters, context);
+	}
 }

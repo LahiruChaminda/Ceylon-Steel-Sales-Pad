@@ -3,7 +3,7 @@
  * Copyright (c) 2014, Supun Lakshan Wanigarathna Dissanayake. All rights reserved.
  * Created on : Jul 08, 2014, 2:37 PM
  */
-package com.xfinity.ceylon_steel.activity.payment;
+package com.xfinity.ceylon_steel.activity.report;
 
 import android.app.Activity;
 import android.content.Intent;
