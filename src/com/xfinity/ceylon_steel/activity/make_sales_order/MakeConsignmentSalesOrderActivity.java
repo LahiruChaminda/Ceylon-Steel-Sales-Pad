@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.widget.*;
+import com.squareup.otto.Subscribe;
 import com.xfinity.ceylon_steel.R;
 import com.xfinity.ceylon_steel.controller.DriverController;
 import com.xfinity.ceylon_steel.controller.OutletController;
@@ -246,5 +247,10 @@ public class MakeConsignmentSalesOrderActivity extends Activity {
 		categoriesAndItems.putExtra("order", order);
 		startActivity(categoriesAndItems);
 		finish();
+	}
+
+	@Subscribe
+	public void locationUpdateReceived(Location location) {
+		this.lastKnownLocation = location;
 	}
 }

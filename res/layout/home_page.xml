@@ -23,7 +23,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Attendance"
-                android:id="@+id/btnAttendence" android:textSize="25dp"/>
+                android:id="@+id/btnAttendance" android:textSize="25dp"/>
         <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

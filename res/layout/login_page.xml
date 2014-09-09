@@ -33,5 +33,5 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="Sign In"
-            android:id="@+id/btnSignIn" android:textSize="25dp"/>
+            android:id="@+id/btnSignIn" android:textSize="25dp" android:background="@drawable/rounded_button"/>
 </LinearLayout>

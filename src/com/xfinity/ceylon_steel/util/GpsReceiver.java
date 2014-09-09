@@ -99,6 +99,7 @@ public class GpsReceiver extends Service {
 		@Override
 		public void onLocationChanged(Location location) {
 			lastKnownLocation = location;
+			BusProvider.getInstance().post(location);
 		}
 
 		@Override
