@@ -36,7 +36,7 @@ public class HomeActivity extends Activity {
 
 	private Button btnMakeSalesOrder;
 	private Button btnViewSalesOrder;
-	private Button btnAttendence;
+	private Button btnAttendance;
 	private Button btnAttendanceHistory;
 	private Button btnUnProductiveCall;
 	private Button btnPayment;
@@ -69,7 +69,7 @@ public class HomeActivity extends Activity {
 	private void initialize() {
 		btnMakeSalesOrder = (Button) findViewById(R.id.btnMakeSalesOrder);
 		btnViewSalesOrder = (Button) findViewById(R.id.btnViewSalesOrder);
-		btnAttendence = (Button) findViewById(R.id.btnAttendence);
+		btnAttendance = (Button) findViewById(R.id.btnAttendance);
 		btnUnProductiveCall = (Button) findViewById(R.id.btnUnProductiveCall);
 		btnReloadData = (Button) findViewById(R.id.btnReloadData);
 		btnLogout = (Button) findViewById(R.id.btnLogout);
@@ -90,7 +90,7 @@ public class HomeActivity extends Activity {
 				btnViewSalesOrderClicked(view);
 			}
 		});
-		btnAttendence.setOnClickListener(new View.OnClickListener() {
+		btnAttendance.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View view) {
 				btnAttendenceClicked(view);
 			}
