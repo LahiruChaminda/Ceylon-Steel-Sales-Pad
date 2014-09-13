@@ -38,6 +38,8 @@ public class OutletWiseSaleReport extends Activity {
 	private ArrayList<JSONObject> outletWiseSales = new ArrayList<JSONObject>();
 	private BaseAdapter adapter;
 	private NumberFormat currencyFormat;
+	private String from = "";
+	private String to = "";
 	private Runnable runnable = new Runnable() {
 		private Handler handler = new Handler();
 		private ProgressDialog progressDialog;
@@ -51,7 +53,7 @@ public class OutletWiseSaleReport extends Activity {
 						progressDialog = ProgressDialog.show(OutletWiseSaleReport.this, null, "Downloading Data...");
 					}
 				});
-				JSONArray confirmationDetails = OutletController.getDistributorOutletWiseSaleDetails(OutletWiseSaleReport.this);
+				JSONArray confirmationDetails = OutletController.getDistributorOutletWiseSaleDetails(OutletWiseSaleReport.this, from, to);
 				outletWiseSales.clear();
 				for (int i = 0; i < confirmationDetails.length(); i++) {
 					outletWiseSales.add(confirmationDetails.getJSONObject(i));
@@ -179,7 +181,7 @@ public class OutletWiseSaleReport extends Activity {
 		new DatePickerDialog(OutletWiseSaleReport.this, new DatePickerDialog.OnDateSetListener() {
 			@Override
 			public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-				inputToDate.setText(year + "-" + monthOfYear + "-" + dayOfMonth);
+				inputToDate.setText(to = year + "-" + monthOfYear + "-" + dayOfMonth);
 			}
 		}, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
 	}
@@ -188,7 +190,7 @@ public class OutletWiseSaleReport extends Activity {
 		new DatePickerDialog(OutletWiseSaleReport.this, new DatePickerDialog.OnDateSetListener() {
 			@Override
 			public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-				inputFromDate.setText(year + "-" + monthOfYear + "-" + dayOfMonth);
+				inputFromDate.setText(from = year + "-" + monthOfYear + "-" + dayOfMonth);
 			}
 		}, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
 	}

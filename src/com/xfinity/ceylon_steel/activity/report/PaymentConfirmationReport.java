@@ -45,7 +45,8 @@ public class PaymentConfirmationReport extends Activity {
 	private EditText inputFromDate;
 	private EditText inputToDate;
 	private Button btnSearch;
-	private Calendar calendar = Calendar.getInstance();
+	private String from = "";
+	private String to = "";
 	private Runnable runnable = new Runnable() {
 
 		private Handler handler = new Handler();
@@ -60,7 +61,7 @@ public class PaymentConfirmationReport extends Activity {
 						progressDialog = ProgressDialog.show(PaymentConfirmationReport.this, null, "Downloading Data...");
 					}
 				});
-				JSONArray confirmationDetails = OutletController.getPaymentConfirmationDetails(PaymentConfirmationReport.this);
+				JSONArray confirmationDetails = OutletController.getPaymentConfirmationDetails(PaymentConfirmationReport.this, from, to);
 				paymentConfirmationDetails.clear();
 				for (int i = 0; i < confirmationDetails.length(); i++) {
 					paymentConfirmationDetails.add(confirmationDetails.getJSONObject(i));
@@ -80,6 +81,7 @@ public class PaymentConfirmationReport extends Activity {
 			}
 		}
 	};
+	private Calendar calendar = Calendar.getInstance();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -211,7 +213,7 @@ public class PaymentConfirmationReport extends Activity {
 		new DatePickerDialog(PaymentConfirmationReport.this, new DatePickerDialog.OnDateSetListener() {
 			@Override
 			public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-				inputToDate.setText(year + "-" + monthOfYear + "-" + dayOfMonth);
+				inputToDate.setText(to = year + "-" + monthOfYear + "-" + dayOfMonth);
 			}
 		}, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
 	}
@@ -224,7 +226,7 @@ public class PaymentConfirmationReport extends Activity {
 		new DatePickerDialog(PaymentConfirmationReport.this, new DatePickerDialog.OnDateSetListener() {
 			@Override
 			public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-				inputFromDate.setText(year + "-" + monthOfYear + "-" + dayOfMonth);
+				inputFromDate.setText(from = year + "-" + monthOfYear + "-" + dayOfMonth);
 			}
 		}, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
 	}

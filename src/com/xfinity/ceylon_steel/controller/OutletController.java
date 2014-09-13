@@ -369,21 +369,27 @@ public class OutletController extends AbstractController {
 		return invoices;
 	}
 
-	public static JSONArray getPaymentConfirmationDetails(Context context) throws JSONException, IOException {
+	public static JSONArray getPaymentConfirmationDetails(Context context, String from, String to) throws JSONException, IOException {
 		HashMap<String, Object> parameters = new HashMap<String, Object>();
 		parameters.put("userId", UserController.getAuthorizedUser(context).getUserId());
+		parameters.put("from", from);
+		parameters.put("to", to);
 		return getJsonArray(OutletURL.getPaymentConfirmationDetails, parameters, context);
 	}
 
-	public static JSONArray getChequeRealizationDetails(Context context) throws JSONException, IOException {
+	public static JSONArray getChequeRealizationDetails(Context context, String from, String to) throws JSONException, IOException {
 		HashMap<String, Object> parameters = new HashMap<String, Object>();
 		parameters.put("userId", UserController.getAuthorizedUser(context).getUserId());
+		parameters.put("from", from);
+		parameters.put("to", to);
 		return getJsonArray(OutletURL.getChequeRealizationDetails, parameters, context);
 	}
 
-	public static JSONArray getDistributorOutletWiseSaleDetails(Context context) throws JSONException, IOException {
+	public static JSONArray getDistributorOutletWiseSaleDetails(Context context, String from, String to) throws JSONException, IOException {
 		HashMap<String, Object> parameters = new HashMap<String, Object>();
 		parameters.put("userId", UserController.getAuthorizedUser(context).getUserId());
+		parameters.put("from", from);
+		parameters.put("to", to);
 		return getJsonArray(OutletURL.getDistributorOutletWiseSaleDetails, parameters, context);
 	}
 }
