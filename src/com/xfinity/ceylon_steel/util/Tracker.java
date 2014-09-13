@@ -5,6 +5,7 @@
  */
 package com.xfinity.ceylon_steel.util;
 
+import android.app.AlarmManager;
 import android.app.Service;
 import android.content.Intent;
 import android.location.Location;
@@ -56,11 +57,11 @@ public class Tracker extends Service {
 				UserController.markRepLocation(getApplicationContext(), userLocation);
 				UserController.syncRepLocations(getApplicationContext());
 			}
-		}, 0, 15 * 60 * 1000);//15*60*1000 is the millisecond for 15 minutes
+		}, 0, AlarmManager.INTERVAL_FIFTEEN_MINUTES);
 	}
 
 	@Override
-	public IBinder onBind(Intent arg0) {
+	public IBinder onBind(Intent intent) {
 		return null;
 	}
 }

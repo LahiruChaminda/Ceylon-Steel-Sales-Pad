@@ -17,7 +17,7 @@
       <sourceFolder url="file://$MODULE_DIR$/gen" isTestSource="false" generated="true" />
     </content>
     <orderEntry type="jdk" jdkName="Android API 15 Platform v4.0.3" jdkType="Android SDK" />
-    <orderEntry type="library" name="Apache_mime" level="project" />
+    <orderEntry type="library" name="libs" level="project" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
 </module>

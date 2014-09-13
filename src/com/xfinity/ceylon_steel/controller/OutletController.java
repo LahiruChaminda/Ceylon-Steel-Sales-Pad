@@ -374,4 +374,16 @@ public class OutletController extends AbstractController {
 		parameters.put("userId", UserController.getAuthorizedUser(context).getUserId());
 		return getJsonArray(OutletURL.getPaymentConfirmationDetails, parameters, context);
 	}
+
+	public static JSONArray getChequeRealizationDetails(Context context) throws JSONException, IOException {
+		HashMap<String, Object> parameters = new HashMap<String, Object>();
+		parameters.put("userId", UserController.getAuthorizedUser(context).getUserId());
+		return getJsonArray(OutletURL.getChequeRealizationDetails, parameters, context);
+	}
+
+	public static JSONArray getDistributorOutletWiseSaleDetails(Context context) throws JSONException, IOException {
+		HashMap<String, Object> parameters = new HashMap<String, Object>();
+		parameters.put("userId", UserController.getAuthorizedUser(context).getUserId());
+		return getJsonArray(OutletURL.getDistributorOutletWiseSaleDetails, parameters, context);
+	}
 }

@@ -2,7 +2,7 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="horizontal"
-              android:weightSum="8"
+              android:weightSum="7"
               android:layout_width="match_parent"
               android:layout_height="wrap_content">
     <TextView
@@ -18,13 +18,6 @@
             android:layout_weight="1"
             android:text="Distributor Code"
             android:id="@+id/txtDistributorCode"
-            android:textSize="15dp" android:gravity="center"/>
-    <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="Order Type"
-            android:id="@+id/txtOrderType"
             android:textSize="15dp" android:gravity="center"/>
     <TextView
             android:layout_width="0dp"

@@ -6,25 +6,28 @@
 package com.xfinity.ceylon_steel.activity.report;
 
 import android.app.Activity;
+import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.Button;
-import android.widget.ListView;
-import android.widget.TextView;
+import android.widget.*;
 import com.xfinity.ceylon_steel.R;
 import com.xfinity.ceylon_steel.activity.HomeActivity;
 import com.xfinity.ceylon_steel.controller.OutletController;
+import com.xfinity.ceylon_steel.controller.UserController;
+import com.xfinity.ceylon_steel.model.User;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 /**
  * @author Supun Lakshan Wanigarathna Dissanayake
@@ -37,6 +40,12 @@ public class PaymentConfirmationReport extends Activity {
 	private ListView listOfPayments;
 	private BaseAdapter adapter;
 	private ArrayList<JSONObject> paymentConfirmationDetails = new ArrayList<JSONObject>();
+	private NumberFormat currencyFormat;
+	private AutoCompleteTextView distributorAuto;
+	private EditText inputFromDate;
+	private EditText inputToDate;
+	private Button btnSearch;
+	private Calendar calendar = Calendar.getInstance();
 	private Runnable runnable = new Runnable() {
 
 		private Handler handler = new Handler();
@@ -76,6 +85,10 @@ public class PaymentConfirmationReport extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.payment_confirmation_report);
+		currencyFormat = NumberFormat.getNumberInstance();
+		currencyFormat.setMinimumFractionDigits(2);
+		currencyFormat.setMaximumFractionDigits(2);
+		currencyFormat.setGroupingUsed(true);
 		initialize();
 	}
 
@@ -88,10 +101,33 @@ public class PaymentConfirmationReport extends Activity {
 
 	private void initialize() {
 		btnReturnToHome = (Button) findViewById(R.id.btnReturnToHome);
+		btnSearch = (Button) findViewById(R.id.btnSearch);
+		distributorAuto = (AutoCompleteTextView) findViewById(R.id.distributorAuto);
+		inputFromDate = (EditText) findViewById(R.id.inputFromDate);
+		inputToDate = (EditText) findViewById(R.id.inputToDate);
+
 		btnReturnToHome.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				onBackPressed();
+			}
+		});
+		inputFromDate.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				inputFromDateClicked(v);
+			}
+		});
+		inputToDate.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				inputToDateClicked(v);
+			}
+		});
+		btnSearch.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				btnSearchClicked(v);
 			}
 		});
 		listOfPayments = (ListView) findViewById(R.id.listOfPayments);
@@ -133,6 +169,21 @@ public class PaymentConfirmationReport extends Activity {
 				}
 				JSONObject json = getItem(position);
 				try {
+					String status = "";
+					switch (json.getInt("acknowladgement")) {
+						case 0:
+							status = "ACCEPTED";
+							convertView.setBackgroundColor(Color.parseColor("#b2ffb2"));
+							break;
+						case 1:
+							status = "NOT ACCEPTED";
+							convertView.setBackgroundColor(Color.parseColor("#ffb2b2"));
+							break;
+						case 2:
+							status = "PENDING";
+							convertView.setBackgroundColor(Color.parseColor("#ffffb2"));
+							break;
+					}
 					viewHolder.txtRetailer.setText(json.isNull("outletName") ? "" : json.getString("outletName"));
 					viewHolder.txtInvoiceNo.setText(json.isNull("distributorCode") ? "" : json.getString("distributorCode"));
 					viewHolder.txtInvoiceDate.setText(json.isNull("salesOrderDate") ? "" : json.getString("salesOrderDate"));
@@ -141,8 +192,8 @@ public class PaymentConfirmationReport extends Activity {
 					viewHolder.txtChequeNo.setText(json.isNull("chequeNo") ? "" : json.getString("chequeNo"));
 					viewHolder.txtBank.setText(json.isNull("bank") ? "" : json.getString("bank"));
 					viewHolder.txtBankingDate.setText(json.isNull("bankingDate") ? "" : json.getString("bankingDate"));
-					viewHolder.txtAmount.setText(json.isNull("amount") ? "" : json.getString("amount"));
-					viewHolder.txtAcknowledgement.setText(json.getInt("acknowladgement") == 0 ? "ACCEPTED" : (json.getInt("acknowladgement") == 1 ? "NOT ACCEPTED" : "PENDING"));
+					viewHolder.txtAmount.setText("Rs " + currencyFormat.format(json.isNull("amount") ? 0 : Double.parseDouble(json.getString("amount"))));
+					viewHolder.txtAcknowledgement.setText(status);
 				} catch (JSONException e) {
 					e.printStackTrace();
 				}
@@ -150,7 +201,38 @@ public class PaymentConfirmationReport extends Activity {
 			}
 		};
 		listOfPayments.setAdapter(adapter);
+
+		ArrayList<User> distributors = UserController.getDistributors(this);
+		ArrayAdapter<User> distributorAdapter = new ArrayAdapter<User>(this, android.R.layout.simple_dropdown_item_1line, distributors);
+		distributorAuto.setAdapter(distributorAdapter);
+	}
+
+	private void inputToDateClicked(View view) {
+		new DatePickerDialog(PaymentConfirmationReport.this, new DatePickerDialog.OnDateSetListener() {
+			@Override
+			public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+				inputToDate.setText(year + "-" + monthOfYear + "-" + dayOfMonth);
+			}
+		}, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
+	}
+
+	private void btnSearchClicked(View view) {
 		new Thread(runnable).start();
+	}
+
+	private void inputFromDateClicked(View view) {
+		new DatePickerDialog(PaymentConfirmationReport.this, new DatePickerDialog.OnDateSetListener() {
+			@Override
+			public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+				inputFromDate.setText(year + "-" + monthOfYear + "-" + dayOfMonth);
+			}
+		}, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
+	}
+
+	@Override
+	protected void onPostResume() {
+		super.onPostResume();
+		btnSearch.callOnClick();
 	}
 
 	private class ViewHolder {

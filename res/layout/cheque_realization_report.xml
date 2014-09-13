@@ -1,8 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
-
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools" android:orientation="vertical"
+        android:weightSum="1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <LinearLayout android:orientation="horizontal"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content" android:weightSum="10">
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent" android:weightSum="2" android:layout_weight="9">
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="0dp" android:baselineAligned="false" android:layout_weight="1" android:weightSum="3">
+                <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="From" android:layout_weight="1"/>
+                <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="To" android:layout_weight="1"/>
+                <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="Distributor" android:layout_weight="1"/>
+            </LinearLayout>
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="0dp" android:layout_weight="1" android:weightSum="3">
+                <EditText
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:inputType="date"
+                        android:id="@+id/inputFromDate" android:layout_weight="1" android:layout_gravity="center_vertical"/>
+                <EditText
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:inputType="date"
+                        android:id="@+id/inputToDate" android:layout_weight="1" android:layout_gravity="center_vertical"/>
+                <AutoCompleteTextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:id="@+id/distributorAuto" android:layout_weight="1" android:layout_gravity="center_vertical"/>
+            </LinearLayout>
+        </LinearLayout>
+        <Button
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="Search"
+                android:id="@+id/btnSearch" android:layout_weight="1"/>
+    </LinearLayout>
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:weightSum="10" android:background="#ffbaecff">
+        <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Retailer" android:layout_weight="1" android:gravity="center_horizontal" android:textSize="15dp"/>
+        <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="invoice No" android:layout_weight="1" android:gravity="center_horizontal" android:textSize="15dp"/>
+        <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Invoice Date" android:layout_weight="1" android:gravity="center_horizontal" android:textSize="15dp"/>
+        <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Payment Mode" android:layout_weight="1" android:gravity="center_horizontal" android:textSize="15dp"/>
+        <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Payment Date" android:layout_weight="1" android:gravity="center_horizontal" android:textSize="15dp"/>
+        <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Cheque No" android:layout_weight="1" android:gravity="center_horizontal" android:textSize="15dp"/>
+        <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Bank" android:layout_weight="1" android:gravity="center_horizontal" android:textSize="15dp"/>
+        <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Banking Date"
+                android:layout_weight="1" android:gravity="center_horizontal" android:textSize="15dp"/>
+        <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Amount" android:layout_weight="1" android:gravity="center_horizontal" android:textSize="15dp"/>
+        <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Cheque Status" android:layout_weight="1" android:gravity="center_horizontal" android:textSize="15dp"/>
+    </LinearLayout>
+    <ListView android:layout_width="match_parent" android:layout_height="match_parent" android:layout_weight="1" android:id="@+id/listOfCheques"
+              tools:listitem="@layout/cheque_realization_item"></ListView>
+    <Button android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/btnReturnToHome" android:text="Back to Home"
+            android:textSize="25dp"/>
 </LinearLayout>

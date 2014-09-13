@@ -8,7 +8,56 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content">
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:orientation="horizontal"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content" android:weightSum="10">
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent" android:weightSum="2" android:layout_weight="9">
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="0dp" android:baselineAligned="false" android:layout_weight="1" android:weightSum="3">
+                <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="From" android:layout_weight="1"/>
+                <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="To" android:layout_weight="1"/>
+                <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="Distributor" android:layout_weight="1"/>
+            </LinearLayout>
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="0dp" android:layout_weight="1" android:weightSum="3">
+                <EditText
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:inputType="date"
+                        android:id="@+id/inputFromDate" android:layout_weight="1" android:layout_gravity="center_vertical"/>
+                <EditText
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:inputType="date"
+                        android:id="@+id/inputToDate" android:layout_weight="1" android:layout_gravity="center_vertical"/>
+                <AutoCompleteTextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:id="@+id/distributorAuto" android:layout_weight="1" android:layout_gravity="center_vertical"/>
+            </LinearLayout>
+        </LinearLayout>
+        <Button
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="Search"
+                android:id="@+id/btnSearch" android:layout_weight="1"/>
     </LinearLayout>
     <LinearLayout
             android:orientation="horizontal"
