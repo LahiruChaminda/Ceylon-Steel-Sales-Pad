@@ -631,10 +631,13 @@ public class UserController extends AbstractController {
 		}
 	}
 
-	public static ArrayList<AttendanceRecord> getAttendanceHistory(Context context) {
+	public static ArrayList<AttendanceRecord> getAttendanceHistory(Context context, String from, String to) {
 		SQLiteDatabaseHelper databaseHelper = SQLiteDatabaseHelper.getDatabaseInstance(context);
 		SQLiteDatabase database = databaseHelper.getWritableDatabase();
-		Cursor cursor = database.rawQuery("select date, checkInTime, checkOutTime from tbl_attendance_history", null);
+		Cursor cursor = database.rawQuery("select date, checkInTime, checkOutTime from tbl_attendance_history where date between ? and ?", new String[]{
+			from,
+			to.isEmpty() ? new SimpleDateFormat("yyyy-MM-dd").format(new Date()) : to
+		});
 		ArrayList<AttendanceRecord> attendanceRecords = new ArrayList<AttendanceRecord>();
 		for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
 			attendanceRecords.add(new AttendanceRecord(

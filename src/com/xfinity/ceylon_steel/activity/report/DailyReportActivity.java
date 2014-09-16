@@ -16,9 +16,7 @@ import android.widget.*;
 import com.xfinity.ceylon_steel.R;
 import com.xfinity.ceylon_steel.activity.HomeActivity;
 import com.xfinity.ceylon_steel.controller.OutletController;
-import com.xfinity.ceylon_steel.controller.UserController;
 import com.xfinity.ceylon_steel.model.Invoice;
-import com.xfinity.ceylon_steel.model.User;
 import com.xfinity.ceylon_steel.widget.FilterableBaseAdapter;
 
 import java.text.NumberFormat;
@@ -32,13 +30,16 @@ import java.util.Calendar;
  */
 public class DailyReportActivity extends Activity {
 
+	private final ArrayList<Invoice> invoices = new ArrayList<Invoice>();
 	private Button btnReturnToHome;
 	private ListView listInvoices;
 	private Button btnSearch;
-	private AutoCompleteTextView distributorAuto;
 	private EditText inputFromDate;
 	private EditText inputToDate;
 	private Calendar calendar = Calendar.getInstance();
+	private FilterableBaseAdapter adapter;
+	private String fromString = "";
+	private String toString = "";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -49,11 +50,6 @@ public class DailyReportActivity extends Activity {
 
 	private void initialize() {
 		listInvoices = (ListView) findViewById(R.id.listInvoices);
-		distributorAuto = (AutoCompleteTextView) findViewById(R.id.distributorAuto);
-
-		ArrayList<User> distributors = UserController.getDistributors(this);
-		ArrayAdapter<User> distributorAdapter = new ArrayAdapter<User>(this, android.R.layout.simple_dropdown_item_1line, distributors);
-		distributorAuto.setAdapter(distributorAdapter);
 
 		inputFromDate = (EditText) findViewById(R.id.inputFromDate);
 		inputToDate = (EditText) findViewById(R.id.inputToDate);
@@ -77,12 +73,14 @@ public class DailyReportActivity extends Activity {
 				btnSearchClicked(v);
 			}
 		});
-		final ArrayList<Invoice> invoices = OutletController.getPendingInvoices(DailyReportActivity.this);
+		invoices.clear();
+		invoices.addAll(OutletController.getPendingInvoices(DailyReportActivity.this, fromString.trim(), toString.trim()));
 		final NumberFormat currencyFormat = NumberFormat.getNumberInstance();
 		currencyFormat.setMinimumFractionDigits(2);
 		currencyFormat.setMaximumFractionDigits(2);
 		currencyFormat.setGroupingUsed(true);
-		listInvoices.setAdapter(new FilterableBaseAdapter() {
+		listInvoices.setAdapter(adapter = new FilterableBaseAdapter() {
+
 			@Override
 			public int getCount() {
 				return invoices.size();
@@ -138,14 +136,16 @@ public class DailyReportActivity extends Activity {
 	}
 
 	private void btnSearchClicked(View view) {
-
+		invoices.clear();
+		invoices.addAll(OutletController.getPendingInvoices(DailyReportActivity.this, fromString.trim(), toString.trim()));
+		adapter.notifyDataSetChanged();
 	}
 
 	private void inputToDateClicked(View view) {
 		new DatePickerDialog(DailyReportActivity.this, new DatePickerDialog.OnDateSetListener() {
 			@Override
 			public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-				inputToDate.setText(year + "-" + monthOfYear + "-" + dayOfMonth);
+				inputToDate.setText(toString = year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
 			}
 		}, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
 	}
@@ -154,7 +154,7 @@ public class DailyReportActivity extends Activity {
 		new DatePickerDialog(DailyReportActivity.this, new DatePickerDialog.OnDateSetListener() {
 			@Override
 			public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-				inputFromDate.setText(year + "-" + monthOfYear + "-" + dayOfMonth);
+				inputFromDate.setText(fromString = year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
 			}
 		}, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
 	}

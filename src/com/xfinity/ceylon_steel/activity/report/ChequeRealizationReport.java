@@ -19,8 +19,6 @@ import android.widget.*;
 import com.xfinity.ceylon_steel.R;
 import com.xfinity.ceylon_steel.activity.HomeActivity;
 import com.xfinity.ceylon_steel.controller.OutletController;
-import com.xfinity.ceylon_steel.controller.UserController;
-import com.xfinity.ceylon_steel.model.User;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -41,7 +39,6 @@ public class ChequeRealizationReport extends Activity {
 	private Button btnSearch;
 	private EditText inputFromDate;
 	private EditText inputToDate;
-	private AutoCompleteTextView distributorAuto;
 	private ArrayList<JSONObject> chequeRealizationStatusCollection = new ArrayList<JSONObject>();
 	private BaseAdapter adapter;
 	private String from = "";
@@ -87,23 +84,15 @@ public class ChequeRealizationReport extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.cheque_realization_report);
-
 		currencyFormat = NumberFormat.getNumberInstance();
 		currencyFormat.setMinimumFractionDigits(2);
 		currencyFormat.setMaximumFractionDigits(2);
 		currencyFormat.setGroupingUsed(true);
-
 		initialize();
 	}
 
 	private void initialize() {
 		btnReturnToHome = (Button) findViewById(R.id.btnReturnToHome);
-		distributorAuto = (AutoCompleteTextView) findViewById(R.id.distributorAuto);
-
-		ArrayList<User> distributors = UserController.getDistributors(this);
-		ArrayAdapter<User> distributorAdapter = new ArrayAdapter<User>(this, android.R.layout.simple_dropdown_item_1line, distributors);
-		distributorAuto.setAdapter(distributorAdapter);
-
 		btnSearch = (Button) findViewById(R.id.btnSearch);
 		btnSearch.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -212,7 +201,7 @@ public class ChequeRealizationReport extends Activity {
 		new DatePickerDialog(ChequeRealizationReport.this, new DatePickerDialog.OnDateSetListener() {
 			@Override
 			public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-				inputFromDate.setText(to = year + "-" + monthOfYear + "-" + dayOfMonth);
+				inputToDate.setText(to = year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
 			}
 		}, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
 	}
@@ -221,7 +210,7 @@ public class ChequeRealizationReport extends Activity {
 		new DatePickerDialog(ChequeRealizationReport.this, new DatePickerDialog.OnDateSetListener() {
 			@Override
 			public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-				inputFromDate.setText(from = year + "-" + monthOfYear + "-" + dayOfMonth);
+				inputFromDate.setText(from = year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
 			}
 		}, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
 	}

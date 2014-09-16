@@ -91,6 +91,7 @@ public class OutletWiseSaleReport extends Activity {
 		btnReturnToHome = (Button) findViewById(R.id.btnReturnToHome);
 		inputFromDate = (EditText) findViewById(R.id.inputFromDate);
 		inputToDate = (EditText) findViewById(R.id.inputToDate);
+		btnSearch = (Button) findViewById(R.id.btnSearch);
 
 		adapter = new BaseAdapter() {
 			@Override
@@ -181,7 +182,7 @@ public class OutletWiseSaleReport extends Activity {
 		new DatePickerDialog(OutletWiseSaleReport.this, new DatePickerDialog.OnDateSetListener() {
 			@Override
 			public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-				inputToDate.setText(to = year + "-" + monthOfYear + "-" + dayOfMonth);
+				inputToDate.setText(to = year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
 			}
 		}, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
 	}
@@ -190,7 +191,7 @@ public class OutletWiseSaleReport extends Activity {
 		new DatePickerDialog(OutletWiseSaleReport.this, new DatePickerDialog.OnDateSetListener() {
 			@Override
 			public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-				inputFromDate.setText(from = year + "-" + monthOfYear + "-" + dayOfMonth);
+				inputFromDate.setText(from = year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
 			}
 		}, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
 	}

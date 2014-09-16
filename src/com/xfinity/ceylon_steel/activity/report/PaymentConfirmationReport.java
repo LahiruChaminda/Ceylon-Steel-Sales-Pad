@@ -19,8 +19,6 @@ import android.widget.*;
 import com.xfinity.ceylon_steel.R;
 import com.xfinity.ceylon_steel.activity.HomeActivity;
 import com.xfinity.ceylon_steel.controller.OutletController;
-import com.xfinity.ceylon_steel.controller.UserController;
-import com.xfinity.ceylon_steel.model.User;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -41,7 +39,6 @@ public class PaymentConfirmationReport extends Activity {
 	private BaseAdapter adapter;
 	private ArrayList<JSONObject> paymentConfirmationDetails = new ArrayList<JSONObject>();
 	private NumberFormat currencyFormat;
-	private AutoCompleteTextView distributorAuto;
 	private EditText inputFromDate;
 	private EditText inputToDate;
 	private Button btnSearch;
@@ -104,7 +101,6 @@ public class PaymentConfirmationReport extends Activity {
 	private void initialize() {
 		btnReturnToHome = (Button) findViewById(R.id.btnReturnToHome);
 		btnSearch = (Button) findViewById(R.id.btnSearch);
-		distributorAuto = (AutoCompleteTextView) findViewById(R.id.distributorAuto);
 		inputFromDate = (EditText) findViewById(R.id.inputFromDate);
 		inputToDate = (EditText) findViewById(R.id.inputToDate);
 
@@ -203,17 +199,13 @@ public class PaymentConfirmationReport extends Activity {
 			}
 		};
 		listOfPayments.setAdapter(adapter);
-
-		ArrayList<User> distributors = UserController.getDistributors(this);
-		ArrayAdapter<User> distributorAdapter = new ArrayAdapter<User>(this, android.R.layout.simple_dropdown_item_1line, distributors);
-		distributorAuto.setAdapter(distributorAdapter);
 	}
 
 	private void inputToDateClicked(View view) {
 		new DatePickerDialog(PaymentConfirmationReport.this, new DatePickerDialog.OnDateSetListener() {
 			@Override
 			public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-				inputToDate.setText(to = year + "-" + monthOfYear + "-" + dayOfMonth);
+				inputToDate.setText(to = year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
 			}
 		}, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
 	}
@@ -226,7 +218,7 @@ public class PaymentConfirmationReport extends Activity {
 		new DatePickerDialog(PaymentConfirmationReport.this, new DatePickerDialog.OnDateSetListener() {
 			@Override
 			public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-				inputFromDate.setText(from = year + "-" + monthOfYear + "-" + dayOfMonth);
+				inputFromDate.setText(from = year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
 			}
 		}, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
 	}
