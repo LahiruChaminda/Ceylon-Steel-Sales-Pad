@@ -17,7 +17,9 @@ import android.view.ViewGroup;
 import android.widget.*;
 import com.xfinity.ceylon_steel.R;
 import com.xfinity.ceylon_steel.activity.HomeActivity;
+import com.xfinity.ceylon_steel.controller.CategoryController;
 import com.xfinity.ceylon_steel.controller.OutletController;
+import com.xfinity.ceylon_steel.model.Category;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -38,8 +40,10 @@ public class OutletWiseSaleReport extends Activity {
 	private ArrayList<JSONObject> outletWiseSales = new ArrayList<JSONObject>();
 	private BaseAdapter adapter;
 	private NumberFormat currencyFormat;
+	private NumberFormat numberFormat;
 	private String from = "";
 	private String to = "";
+	private String categoryId = "";
 	private Runnable runnable = new Runnable() {
 		private Handler handler = new Handler();
 		private ProgressDialog progressDialog;
@@ -53,7 +57,7 @@ public class OutletWiseSaleReport extends Activity {
 						progressDialog = ProgressDialog.show(OutletWiseSaleReport.this, null, "Downloading Data...");
 					}
 				});
-				JSONArray confirmationDetails = OutletController.getDistributorOutletWiseSaleDetails(OutletWiseSaleReport.this, from, to);
+				JSONArray confirmationDetails = OutletController.getDistributorOutletWiseSaleDetails(OutletWiseSaleReport.this, from, to, categoryId);
 				outletWiseSales.clear();
 				for (int i = 0; i < confirmationDetails.length(); i++) {
 					outletWiseSales.add(confirmationDetails.getJSONObject(i));
@@ -77,6 +81,9 @@ public class OutletWiseSaleReport extends Activity {
 	private EditText inputFromDate;
 	private EditText inputToDate;
 	private Button btnSearch;
+	private TextView txtTotalAmount;
+	private TextView txtTotalQuantity;
+	private AutoCompleteTextView categoryAuto;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -92,8 +99,37 @@ public class OutletWiseSaleReport extends Activity {
 		inputFromDate = (EditText) findViewById(R.id.inputFromDate);
 		inputToDate = (EditText) findViewById(R.id.inputToDate);
 		btnSearch = (Button) findViewById(R.id.btnSearch);
+		txtTotalAmount = (TextView) findViewById(R.id.txtTotalAmount);
+		txtTotalQuantity = (TextView) findViewById(R.id.txtTotalQuantity);
+		categoryAuto = (AutoCompleteTextView) findViewById(R.id.categoryAuto);
+
+		categoryAuto.setAdapter(new ArrayAdapter<Category>(OutletWiseSaleReport.this, android.R.layout.simple_dropdown_item_1line, CategoryController.getCategoriesWithoutItems(OutletWiseSaleReport.this)));
+		categoryAuto.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				categoryId = String.valueOf(((Category) parent.getAdapter().getItem(position)).getCategoryId());
+			}
+		});
 
 		adapter = new BaseAdapter() {
+
+			@Override
+			public void notifyDataSetChanged() {
+				super.notifyDataSetChanged();
+				double totalQuantity = 0, totalAmount = 0;
+				for (int i = 0, LENGTH = outletWiseSales.size(); i < LENGTH; i++) {
+					JSONObject json = outletWiseSales.get(i);
+					try {
+						totalQuantity += json.isNull("quantity") ? 0 : Double.parseDouble(json.getString("quantity"));
+						totalAmount += json.isNull("amount") ? 0 : Double.parseDouble(json.getString("amount"));
+					} catch (JSONException e) {
+						e.printStackTrace();
+					}
+				}
+				txtTotalAmount.setText("Rs " + currencyFormat.format(totalAmount));
+				txtTotalQuantity.setText(numberFormat.format(totalQuantity));
+			}
+
 			@Override
 			public int getCount() {
 				return outletWiseSales.size();
@@ -147,6 +183,9 @@ public class OutletWiseSaleReport extends Activity {
 		currencyFormat.setMinimumFractionDigits(2);
 		currencyFormat.setMaximumFractionDigits(2);
 		currencyFormat.setGroupingUsed(true);
+
+		numberFormat = NumberFormat.getNumberInstance();
+		numberFormat.setGroupingUsed(true);
 
 		btnReturnToHome.setOnClickListener(new View.OnClickListener() {
 			@Override

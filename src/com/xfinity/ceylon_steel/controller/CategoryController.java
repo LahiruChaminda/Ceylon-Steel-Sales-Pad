@@ -148,4 +148,20 @@ public class CategoryController extends AbstractController {
 			}
 		}.execute();
 	}
+
+	public static ArrayList<Category> getCategoriesWithoutItems(Context context) {
+		ArrayList<Category> categories = new ArrayList<Category>();
+		SQLiteDatabaseHelper databaseInstance = SQLiteDatabaseHelper.getDatabaseInstance(context);
+		SQLiteDatabase database = databaseInstance.getWritableDatabase();
+		Cursor categoryCursor = database.rawQuery("select categoryId,categoryDescription from tbl_category", null);
+		for (categoryCursor.moveToFirst(); !categoryCursor.isAfterLast(); categoryCursor.moveToNext()) {
+			int categoryId = categoryCursor.getInt(0);
+			String categoryDescription = categoryCursor.getString(1);
+			Category category = new Category(categoryId, categoryDescription, null);
+			categories.add(category);
+		}
+		categoryCursor.close();
+		databaseInstance.close();
+		return categories;
+	}
 }

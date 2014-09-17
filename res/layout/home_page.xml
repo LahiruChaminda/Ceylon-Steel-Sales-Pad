@@ -34,11 +34,11 @@
                 android:layout_height="wrap_content"
                 android:text="Payment"
                 android:id="@+id/btnPayment" android:textSize="25dp"/>
-        <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Outstanding Invoices"
-                android:id="@+id/btnPendingInvoices" android:textSize="25dp"/>
+        <!--<Button-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Outstanding Invoices"-->
+        <!--android:id="@+id/btnPendingInvoices" android:textSize="25dp"/>-->
         <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

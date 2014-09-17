@@ -121,7 +121,6 @@ public class PaymentActivity extends Activity {
 		Intent homeActivity = new Intent(PaymentActivity.this, HomeActivity.class);
 		startActivity(homeActivity);
 		finish();
-		Toast.makeText(this, "Payments Saved Successfully", Toast.LENGTH_LONG).show();
 	}
 
 	private void btnOkClicked(View view) {

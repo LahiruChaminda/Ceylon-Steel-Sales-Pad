@@ -392,11 +392,12 @@ public class OutletController extends AbstractController {
 		return getJsonArray(OutletURL.getChequeRealizationDetails, parameters, context);
 	}
 
-	public static JSONArray getDistributorOutletWiseSaleDetails(Context context, String from, String to) throws JSONException, IOException {
+	public static JSONArray getDistributorOutletWiseSaleDetails(Context context, String from, String to, String categoryId) throws JSONException, IOException {
 		HashMap<String, Object> parameters = new HashMap<String, Object>();
 		parameters.put("userId", UserController.getAuthorizedUser(context).getUserId());
 		parameters.put("from", from);
 		parameters.put("to", to);
+		parameters.put("categoryId", categoryId);
 		return getJsonArray(OutletURL.getDistributorOutletWiseSaleDetails, parameters, context);
 	}
 }

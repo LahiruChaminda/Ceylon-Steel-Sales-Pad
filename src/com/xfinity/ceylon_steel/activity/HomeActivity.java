@@ -18,7 +18,6 @@ import com.xfinity.ceylon_steel.activity.attendance.CheckInCheckOutHistory;
 import com.xfinity.ceylon_steel.activity.make_sales_order.MakeSalesOrderActivity;
 import com.xfinity.ceylon_steel.activity.payment.PaymentActivity;
 import com.xfinity.ceylon_steel.activity.report.ChequeRealizationReport;
-import com.xfinity.ceylon_steel.activity.report.DailyReportActivity;
 import com.xfinity.ceylon_steel.activity.report.OutletWiseSaleReport;
 import com.xfinity.ceylon_steel.activity.report.PaymentConfirmationReport;
 import com.xfinity.ceylon_steel.activity.unproductive_call.UnProductiveCallActivity;
@@ -40,7 +39,7 @@ public class HomeActivity extends Activity {
 	private Button btnAttendanceHistory;
 	private Button btnUnProductiveCall;
 	private Button btnPayment;
-	private Button btnPendingInvoices;
+	//	private Button btnPendingInvoices;
 	private Button btnReloadData;
 	private Button btnLogout;
 	private Button btnPaymentConfirmationReport;
@@ -74,7 +73,7 @@ public class HomeActivity extends Activity {
 		btnReloadData = (Button) findViewById(R.id.btnReloadData);
 		btnLogout = (Button) findViewById(R.id.btnLogout);
 		btnPayment = (Button) findViewById(R.id.btnPayment);
-		btnPendingInvoices = (Button) findViewById(R.id.btnPendingInvoices);
+//		btnPendingInvoices = (Button) findViewById(R.id.btnPendingInvoices);
 		btnAttendanceHistory = (Button) findViewById(R.id.btnCheckInCheckoutHistory);
 		btnPaymentConfirmationReport = (Button) findViewById(R.id.btnPaymentConfirmationReport);
 		btnChequeStatusReport = (Button) findViewById(R.id.btnChequeStatusReport);
@@ -92,7 +91,7 @@ public class HomeActivity extends Activity {
 		});
 		btnAttendance.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View view) {
-				btnAttendenceClicked(view);
+				btnAttendanceClicked(view);
 			}
 		});
 		btnUnProductiveCall.setOnClickListener(new View.OnClickListener() {
@@ -115,11 +114,11 @@ public class HomeActivity extends Activity {
 				btnPaymentClicked(view);
 			}
 		});
-		btnPendingInvoices.setOnClickListener(new View.OnClickListener() {
-			public void onClick(View view) {
-				btnPendingInvoicesClicked(view);
-			}
-		});
+//		btnPendingInvoices.setOnClickListener(new View.OnClickListener() {
+//			public void onClick(View view) {
+//				btnPendingInvoicesClicked(view);
+//			}
+//		});
 		btnLogout.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View view) {
 				btnLogoutClicked(view);
@@ -150,11 +149,11 @@ public class HomeActivity extends Activity {
 		finish();
 	}
 
-	private void btnPendingInvoicesClicked(View view) {
-		Intent dailyReportActivity = new Intent(this, DailyReportActivity.class);
-		startActivity(dailyReportActivity);
-		finish();
-	}
+//	private void btnPendingInvoicesClicked(View view) {
+//		Intent dailyReportActivity = new Intent(this, DailyReportActivity.class);
+//		startActivity(dailyReportActivity);
+//		finish();
+//	}
 
 	private void btnPaymentClicked(View view) {
 		Intent paymentActivity = new Intent(this, PaymentActivity.class);
@@ -174,9 +173,9 @@ public class HomeActivity extends Activity {
 		finish();
 	}
 
-	private void btnAttendenceClicked(View view) {
-		Intent attendenceActivity = new Intent(this, AttendanceActivity.class);
-		startActivity(attendenceActivity);
+	private void btnAttendanceClicked(View view) {
+		Intent attendanceActivity = new Intent(this, AttendanceActivity.class);
+		startActivity(attendanceActivity);
 		finish();
 	}
 
