@@ -6,14 +6,16 @@
 package com.xfinity.ceylon_steel.activity.attendance;
 
 import android.app.Activity;
-import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.*;
+import android.widget.Button;
+import android.widget.Filter;
+import android.widget.ListView;
+import android.widget.TextView;
 import com.xfinity.ceylon_steel.R;
 import com.xfinity.ceylon_steel.activity.HomeActivity;
 import com.xfinity.ceylon_steel.controller.UserController;
@@ -33,11 +35,12 @@ public class CheckInCheckOutHistory extends Activity {
 	private final Calendar calendar = Calendar.getInstance();
 	private ListView listView;
 	private Button btnBack;
-	private EditText inputFromDate;
-	private EditText inputToDate;
+	//private EditText inputFromDate;
+	//private EditText inputToDate;
 	private FilterableBaseAdapter adapter;
 	private String fromDate = "";
 	private String toDate = "";
+	//private Button btnSearch;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -58,26 +61,33 @@ public class CheckInCheckOutHistory extends Activity {
 	private void initialize() {
 		listView = (ListView) findViewById(R.id.listView);
 		btnBack = (Button) findViewById(R.id.btnBack);
-		inputFromDate = (EditText) findViewById(R.id.inputFromDate);
-		inputToDate = (EditText) findViewById(R.id.inputToDate);
-		inputFromDate.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				inputFromDateClicked(v);
-			}
-		});
-		inputToDate.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				inputToDateClicked(v);
-			}
-		});
+//		inputFromDate = (EditText) findViewById(R.id.inputFromDate);
+//		inputToDate = (EditText) findViewById(R.id.inputToDate);
+//		inputFromDate.setOnClickListener(new View.OnClickListener() {
+//			@Override
+//			public void onClick(View v) {
+//				inputFromDateClicked(v);
+//			}
+//		});
+//		inputToDate.setOnClickListener(new View.OnClickListener() {
+//			@Override
+//			public void onClick(View v) {
+//				inputToDateClicked(v);
+//			}
+//		});
 		btnBack.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				onBackPressed();
 			}
 		});
+//		btnSearch = (Button) findViewById(R.id.btnSearch);
+//		btnSearch.setOnClickListener(new View.OnClickListener() {
+//			@Override
+//			public void onClick(View v) {
+//				btnSearchClicked(v);
+//			}
+//		});
 		listView.setAdapter(adapter = new FilterableBaseAdapter() {
 			@Override
 			public int getCount() {
@@ -123,29 +133,29 @@ public class CheckInCheckOutHistory extends Activity {
 		});
 	}
 
-	private void btnSearchClicked(View view) {
-		attendanceRecords.clear();
-		attendanceRecords.addAll(UserController.getAttendanceHistory(CheckInCheckOutHistory.this, fromDate.trim(), toDate.trim()));
-		adapter.notifyDataSetChanged();
-	}
+//	private void btnSearchClicked(View view) {
+//		attendanceRecords.clear();
+//		attendanceRecords.addAll(UserController.getAttendanceHistory(CheckInCheckOutHistory.this, fromDate.trim(), toDate.trim()));
+//		adapter.notifyDataSetChanged();
+//	}
 
-	private void inputToDateClicked(View view) {
-		new DatePickerDialog(CheckInCheckOutHistory.this, new DatePickerDialog.OnDateSetListener() {
-			@Override
-			public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-				inputToDate.setText(toDate = year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
-			}
-		}, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
-	}
-
-	private void inputFromDateClicked(View view) {
-		new DatePickerDialog(CheckInCheckOutHistory.this, new DatePickerDialog.OnDateSetListener() {
-			@Override
-			public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-				inputFromDate.setText(fromDate = year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
-			}
-		}, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
-	}
+//	private void inputToDateClicked(View view) {
+//		new DatePickerDialog(CheckInCheckOutHistory.this, new DatePickerDialog.OnDateSetListener() {
+//			@Override
+//			public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+//				inputToDate.setText(toDate = year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
+//			}
+//		}, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
+//	}
+//
+//	private void inputFromDateClicked(View view) {
+//		new DatePickerDialog(CheckInCheckOutHistory.this, new DatePickerDialog.OnDateSetListener() {
+//			@Override
+//			public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+//				inputFromDate.setText(fromDate = year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
+//			}
+//		}, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
+//	}
 
 	private class ViewHolder {
 		TextView txtDate;
